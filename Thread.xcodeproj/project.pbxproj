@@ -10,9 +10,9 @@
 		047A2A4DEADCCCC1006F080F /* Pods_ThreadUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE3BD1DB1BADDF10CDC9F8B /* Pods_ThreadUITests.framework */; };
 		0C6686D8773E8AE3E1E0D72A /* Pods_Thread.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9560FB66ADAA3C0318ED7771 /* Pods_Thread.framework */; };
 		3535199162A3752B698A930C /* Pods_ThreadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB2183E2AAEB7F63B3BAF82 /* Pods_ThreadTests.framework */; };
-		B18430681E2D152800EED632 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B18430671E2D152800EED632 /* GoogleService-Info.plist */; };
+		B18430731E2D43E300EED632 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B18430721E2D43E300EED632 /* GoogleService-Info.plist */; };
 		B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A8E1E2C66730036E559 /* AppDelegate.swift */; };
-		B1C96A911E2C66730036E559 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A901E2C66730036E559 /* ViewController.swift */; };
+		B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A901E2C66730036E559 /* LoginViewController.swift */; };
 		B1C96A941E2C66730036E559 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C96A921E2C66730036E559 /* Main.storyboard */; };
 		B1C96A961E2C66730036E559 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1C96A951E2C66730036E559 /* Assets.xcassets */; };
 		B1C96A991E2C66730036E559 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C96A971E2C66730036E559 /* LaunchScreen.storyboard */; };
@@ -44,10 +44,11 @@
 		7D290579FCFE88FA818A8002 /* Pods-Thread.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thread.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thread/Pods-Thread.debug.xcconfig"; sourceTree = "<group>"; };
 		8976F182E6528772898954DF /* Pods-ThreadUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadUITests/Pods-ThreadUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9560FB66ADAA3C0318ED7771 /* Pods_Thread.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thread.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B18430671E2D152800EED632 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B18430701E2D3D6A00EED632 /* Thread.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Thread.entitlements; sourceTree = "<group>"; };
+		B18430721E2D43E300EED632 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B1C96A8B1E2C66730036E559 /* Thread.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thread.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C96A8E1E2C66730036E559 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B1C96A901E2C66730036E559 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B1C96A901E2C66730036E559 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B1C96A931E2C66730036E559 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B1C96A951E2C66730036E559 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B1C96A981E2C66730036E559 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -114,6 +115,47 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B184306A1E2D2EEB00EED632 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		B184306C1E2D2F4D00EED632 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				B1C96A8E1E2C66730036E559 /* AppDelegate.swift */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		B184306D1E2D2F6B00EED632 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B18430721E2D43E300EED632 /* GoogleService-Info.plist */,
+				B1C96A9A1E2C66730036E559 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B184306E1E2D2FD200EED632 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		B184306F1E2D2FEF00EED632 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				B1C96A971E2C66730036E559 /* LaunchScreen.storyboard */,
+				B1C96A921E2C66730036E559 /* Main.storyboard */,
+			);
+			name = Layouts;
+			sourceTree = "<group>";
+		};
 		B1C96A821E2C66730036E559 = {
 			isa = PBXGroup;
 			children = (
@@ -139,13 +181,13 @@
 		B1C96A8D1E2C66730036E559 /* Thread */ = {
 			isa = PBXGroup;
 			children = (
-				B1C96A8E1E2C66730036E559 /* AppDelegate.swift */,
-				B1C96A901E2C66730036E559 /* ViewController.swift */,
-				B1C96A921E2C66730036E559 /* Main.storyboard */,
+				B18430701E2D3D6A00EED632 /* Thread.entitlements */,
+				B184306E1E2D2FD200EED632 /* Models */,
+				B184306A1E2D2EEB00EED632 /* Controllers */,
 				B1C96A951E2C66730036E559 /* Assets.xcassets */,
-				B1C96A971E2C66730036E559 /* LaunchScreen.storyboard */,
-				B1C96A9A1E2C66730036E559 /* Info.plist */,
-				B18430671E2D152800EED632 /* GoogleService-Info.plist */,
+				B184306F1E2D2FEF00EED632 /* Layouts */,
+				B184306C1E2D2F4D00EED632 /* Other */,
+				B184306D1E2D2F6B00EED632 /* Supporting Files */,
 			);
 			path = Thread;
 			sourceTree = "<group>";
@@ -247,6 +289,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = KC3NF5E248;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					B1C96A9E1E2C66730036E559 = {
 						CreatedOnToolsVersion = 8.0;
@@ -288,7 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1C96A991E2C66730036E559 /* LaunchScreen.storyboard in Resources */,
-				B18430681E2D152800EED632 /* GoogleService-Info.plist in Resources */,
+				B18430731E2D43E300EED632 /* GoogleService-Info.plist in Resources */,
 				B1C96A961E2C66730036E559 /* Assets.xcassets in Resources */,
 				B1C96A941E2C66730036E559 /* Main.storyboard in Resources */,
 			);
@@ -453,7 +500,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1C96A911E2C66730036E559 /* ViewController.swift in Sources */,
+				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
 				B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -605,6 +652,7 @@
 			baseConfigurationReference = 7D290579FCFE88FA818A8002 /* Pods-Thread.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Thread/Thread.entitlements;
 				DEVELOPMENT_TEAM = KC3NF5E248;
 				INFOPLIST_FILE = Thread/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -619,6 +667,7 @@
 			baseConfigurationReference = B315754A20752E20A13E984D /* Pods-Thread.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Thread/Thread.entitlements;
 				DEVELOPMENT_TEAM = KC3NF5E248;
 				INFOPLIST_FILE = Thread/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
