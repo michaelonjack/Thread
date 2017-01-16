@@ -11,6 +11,7 @@
 		0C6686D8773E8AE3E1E0D72A /* Pods_Thread.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9560FB66ADAA3C0318ED7771 /* Pods_Thread.framework */; };
 		3535199162A3752B698A930C /* Pods_ThreadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB2183E2AAEB7F63B3BAF82 /* Pods_ThreadTests.framework */; };
 		B18430731E2D43E300EED632 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B18430721E2D43E300EED632 /* GoogleService-Info.plist */; };
+		B18430751E2D4BF200EED632 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18430741E2D4BF200EED632 /* MainViewController.swift */; };
 		B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A8E1E2C66730036E559 /* AppDelegate.swift */; };
 		B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A901E2C66730036E559 /* LoginViewController.swift */; };
 		B1C96A941E2C66730036E559 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C96A921E2C66730036E559 /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 		9560FB66ADAA3C0318ED7771 /* Pods_Thread.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thread.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B18430701E2D3D6A00EED632 /* Thread.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Thread.entitlements; sourceTree = "<group>"; };
 		B18430721E2D43E300EED632 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B18430741E2D4BF200EED632 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B1C96A8B1E2C66730036E559 /* Thread.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thread.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C96A8E1E2C66730036E559 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1C96A901E2C66730036E559 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
+				B18430741E2D4BF200EED632 /* MainViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B18430751E2D4BF200EED632 /* MainViewController.swift in Sources */,
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
 				B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */,
 			);
