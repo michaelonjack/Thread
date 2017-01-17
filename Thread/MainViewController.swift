@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class MainViewController: UIViewController {
+    
+    let logoutToLogin = "LogoutToLogin"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +24,23 @@ class MainViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func meDidTouch(_ sender: AnyObject) {
+        
+    }
 
+    @IBAction func aroundMeDidTouch(_ sender: AnyObject) {
+        
+    }
+    
+    @IBAction func logOutDidTouch(_ sender: AnyObject) {
+        do {
+            try FIRAuth.auth()?.signOut()
+            self.performSegue(withIdentifier: self.logoutToLogin, sender: nil)
+        } catch {
+            print("Error while signing out")
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

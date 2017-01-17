@@ -56,6 +56,14 @@ class LoginViewController: UIViewController {
                     
                     self.present(verifyEmailAlert, animated: true, completion: nil)
                 }
+            } else {
+                let errorAlert = UIAlertController(title: "login error",
+                                                   message: error?.localizedDescription,
+                                                   preferredStyle: .alert)
+                
+                let okayAction = UIAlertAction(title: "okay", style: .default)
+                errorAlert.addAction(okayAction)
+                self.present(errorAlert, animated: true, completion:nil)
             }
         }
     }
