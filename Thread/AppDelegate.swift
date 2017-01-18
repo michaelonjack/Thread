@@ -18,6 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FIRApp.configure()
+        
+        // Make navigation bar transparent
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().isTranslucent = true
+        
+        // Make navigation bar text tangerine
+        UINavigationBar.appearance().tintColor = UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
+
         return true
     }
 

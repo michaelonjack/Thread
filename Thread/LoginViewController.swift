@@ -56,7 +56,9 @@ class LoginViewController: UIViewController {
                     
                     self.present(verifyEmailAlert, animated: true, completion: nil)
                 }
-            } else {
+            }
+            // If the login fails, display the error message to the user
+            else {
                 let errorAlert = UIAlertController(title: "login error",
                                                    message: error?.localizedDescription,
                                                    preferredStyle: .alert)

@@ -1,17 +1,14 @@
 //
-//  MainViewController.swift
+//  AroundMeViewController.swift
 //  Thread
 //
-//  Created by Michael Onjack on 1/16/17.
+//  Created by Michael Onjack on 1/17/17.
 //  Copyright © 2017 Michael Onjack. All rights reserved.
 //
 
 import UIKit
-import FirebaseAuth
 
-class MainViewController: UIViewController {
-    
-    let logoutToLogin = "LogoutToLogin"
+class AroundMeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,24 +21,7 @@ class MainViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func meDidTouch(_ sender: AnyObject) {
-        
-    }
 
-    @IBAction func aroundMeDidTouch(_ sender: AnyObject) {
-        
-    }
-    
-    // Logs the user out and brings them back to the login page
-    @IBAction func logOutDidTouch(_ sender: AnyObject) {
-        do {
-            try FIRAuth.auth()?.signOut()
-            self.performSegue(withIdentifier: self.logoutToLogin, sender: nil)
-        } catch {
-            print("Error while signing out")
-        }
-    }
-    
     /*
     // MARK: - Navigation
 
