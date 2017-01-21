@@ -15,6 +15,7 @@
 		B18430751E2D4BF200EED632 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18430741E2D4BF200EED632 /* MainViewController.swift */; };
 		B18430791E2EED7300EED632 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18430781E2EED7300EED632 /* MeViewController.swift */; };
 		B184307F1E2F0C8A00EED632 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B184307E1E2F0C8A00EED632 /* Assets.xcassets */; };
+		B18430861E33B03A00EED632 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18430851E33B03A00EED632 /* User.swift */; };
 		B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A8E1E2C66730036E559 /* AppDelegate.swift */; };
 		B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A901E2C66730036E559 /* LoginViewController.swift */; };
 		B1C96A941E2C66730036E559 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C96A921E2C66730036E559 /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 		B18430781E2EED7300EED632 /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		B184307E1E2F0C8A00EED632 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B18430821E3362EF00EED632 /* Thread-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Thread-Bridging-Header.h"; sourceTree = "<group>"; };
+		B18430851E33B03A00EED632 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B1C96A8B1E2C66730036E559 /* Thread.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thread.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C96A8E1E2C66730036E559 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1C96A901E2C66730036E559 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		B184306E1E2D2FD200EED632 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B18430851E33B03A00EED632 /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 			files = (
 				B18430751E2D4BF200EED632 /* MainViewController.swift in Sources */,
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
+				B18430861E33B03A00EED632 /* User.swift in Sources */,
 				B163FA3F1E3051EC00EF399D /* AroundMeTableViewController.swift in Sources */,
 				B18430791E2EED7300EED632 /* MeViewController.swift in Sources */,
 				B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */,
