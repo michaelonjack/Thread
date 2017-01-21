@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationUsageDescription</key>
+	<string>Thread will use your location to find other users near you so you can see what they&apos;re wearing.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Thread will use your location to find other users near you so you can see what they&apos;re wearing.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Thread will use your location to find other users near you so you can see what they&apos;re wearing.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>

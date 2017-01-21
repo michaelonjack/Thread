@@ -7,20 +7,44 @@
 //
 
 import UIKit
+import CoreLocation
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     let logoutToLogin = "LogoutToLogin"
+    let locationManager = CLLocationManager()
+    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.locationManager.delegate = self
+        // Request location authorization for the app
+        self.locationManager.requestWhenInUseAuthorization()
+        // Request a location update
+        self.locationManager.requestLocation()
+        print("HELLO")
+        print((FIRAuth.auth()?.currentUser?.uid)!)
+        print("HELLO")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // Process the received location update
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Grab latitude and longitude
+        let locValue:CLLocationCoordinate2D = (manager.location?.coordinate)!
+        
+        // Update the user's location in the database
+        currentUserRef.updateChildValues(["latitude": locValue.latitude, "longitude": locValue.longitude])
+    }
+    
+    // Process any errors that may occur when gathering location
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
     }
     
     @IBAction func meDidTouch(_ sender: AnyObject) {
@@ -40,6 +64,18 @@ class MainViewController: UIViewController {
             print("Error while signing out")
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     /*
     // MARK: - Navigation
