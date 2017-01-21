@@ -53,6 +53,7 @@
 		B18430741E2D4BF200EED632 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B18430781E2EED7300EED632 /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		B184307E1E2F0C8A00EED632 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B18430821E3362EF00EED632 /* Thread-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Thread-Bridging-Header.h"; sourceTree = "<group>"; };
 		B1C96A8B1E2C66730036E559 /* Thread.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thread.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C96A8E1E2C66730036E559 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1C96A901E2C66730036E559 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +144,7 @@
 		B184306D1E2D2F6B00EED632 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B18430821E3362EF00EED632 /* Thread-Bridging-Header.h */,
 				B18430721E2D43E300EED632 /* GoogleService-Info.plist */,
 				B1C96A9A1E2C66730036E559 /* Info.plist */,
 			);
@@ -297,6 +299,7 @@
 					B1C96A8A1E2C66730036E559 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = KC3NF5E248;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -664,12 +667,15 @@
 			baseConfigurationReference = 7D290579FCFE88FA818A8002 /* Pods-Thread.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Thread/Thread.entitlements;
 				DEVELOPMENT_TEAM = KC3NF5E248;
 				INFOPLIST_FILE = Thread/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelonjack.Thread;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Thread/Thread-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -679,12 +685,14 @@
 			baseConfigurationReference = B315754A20752E20A13E984D /* Pods-Thread.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Thread/Thread.entitlements;
 				DEVELOPMENT_TEAM = KC3NF5E248;
 				INFOPLIST_FILE = Thread/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelonjack.Thread;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Thread/Thread-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

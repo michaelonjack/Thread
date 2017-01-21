@@ -10,6 +10,8 @@ import UIKit
 
 class AroundMeTableViewController: UITableViewController {
 
+    let ref = FIRDatabase.database().reference(withPath: "")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Give table VC mocha colored background
