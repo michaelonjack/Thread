@@ -56,6 +56,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func logOutDidTouch(_ sender: AnyObject) {
         do {
             try FIRAuth.auth()?.signOut()
+            
+            // Blank out the user's location
+            currentUserRef.updateChildValues(["latitude": 0.0, "longitude": 0.0])
+            
             self.performSegue(withIdentifier: self.logoutToLogin, sender: nil)
         } catch {
             print("Error while signing out")

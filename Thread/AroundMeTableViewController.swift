@@ -9,12 +9,14 @@
 import UIKit
 import CoreLocation
 
-class AroundMeTableViewController: UITableViewController {
+class AroundMeTableViewController: UITableViewController, CLLocationManagerDelegate {
 
     // Maximum number of meters another user can be away and show up on the app
     let MAX_ALLOWABLE_DISTANCE = 3000.0
+    
     let usersRef = FIRDatabase.database().reference(withPath: "users")
     let currentFIRUser = FIRAuth.auth()?.currentUser
+    let locationManager = CLLocationManager()
     
     var nearbyUsers: [User] = []
     
@@ -22,6 +24,10 @@ class AroundMeTableViewController: UITableViewController {
         super.viewDidLoad()
         // Give table VC mocha colored background
         self.tableView.backgroundColor = UIColor.init(red: 147.0/255.0, green: 82.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        
+        self.locationManager.delegate = self
+        // Request location authorization for the app
+        self.locationManager.requestWhenInUseAuthorization()
         
         // This listens for a .value event type which in turn listens for different types of changes to the database (add, remove, update)
         // The app is notified of the change via the second parameter closure 
@@ -59,6 +65,9 @@ class AroundMeTableViewController: UITableViewController {
             self.nearbyUsers = nearestUsers
             self.tableView.reloadData()
         })
+        
+        // Enable pull down to refresh
+        self.refreshControl?.addTarget(self, action: #selector(AroundMeTableViewController.handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -93,7 +102,25 @@ class AroundMeTableViewController: UITableViewController {
         return false
     }
 
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        // Request a location update
+        self.locationManager.requestLocation()
+        refreshControl.endRefreshing()
+    }
     
+    // Process the received location update
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Grab latitude and longitude
+        let locValue:CLLocationCoordinate2D = (manager.location?.coordinate)!
+        
+        // Update the user's location in the database
+        usersRef.child((currentFIRUser?.uid)!).updateChildValues(["latitude": locValue.latitude, "longitude": locValue.longitude])
+    }
+    
+    // Process any errors that may occur when gathering location
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
     
     
     
