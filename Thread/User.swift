@@ -26,10 +26,10 @@ struct User {
     let firstName: String
     let lastName: String
     let email: String
-    let latitude: Float
-    let longitude: Float
+    let latitude: Double
+    let longitude: Double
     
-    init(uid: String, firstName: String, lastName: String, email: String, latitude: Float, longitude: Float) {
+    init(uid: String, firstName: String, lastName: String, email: String, latitude: Double, longitude: Double) {
         self.uid = uid
         self.firstName = firstName
         self.lastName = lastName
@@ -45,6 +45,16 @@ struct User {
         self.lastName = lastName
         self.latitude = 0
         self.longitude = 0
+    }
+    
+    init(snapshot: FIRDataSnapshot) {
+        uid = snapshot.key
+        let snapshotValue = snapshot.value as! [String: AnyObject]
+        firstName = snapshotValue["firstName"] as! String
+        lastName = snapshotValue["lastName"] as! String
+        email = snapshotValue["email"] as! String
+        latitude = snapshotValue["latitude"] as! Double
+        longitude = snapshotValue["longitude"] as! Double
     }
     
     func toAnyObject() -> Any {

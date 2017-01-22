@@ -7,15 +7,58 @@
 //
 
 import UIKit
+import CoreLocation
 
 class AroundMeTableViewController: UITableViewController {
 
-    let ref = FIRDatabase.database().reference(withPath: "")
+    // Maximum number of meters another user can be away and show up on the app
+    let MAX_ALLOWABLE_DISTANCE = 3000.0
+    let usersRef = FIRDatabase.database().reference(withPath: "users")
+    let currentFIRUser = FIRAuth.auth()?.currentUser
+    
+    var nearbyUsers: [User] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Give table VC mocha colored background
         self.tableView.backgroundColor = UIColor.init(red: 147.0/255.0, green: 82.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        
+        // This listens for a .value event type which in turn listens for different types of changes to the database (add, remove, update)
+        // The app is notified of the change via the second parameter closure 
+        // The snapshot represents the data at the moment in time
+        usersRef.observe(.value, with: { snapshot in
+            var nearestUsers: [User] = []
+            
+            for user in snapshot.children {
+                // Create instance of the potentially nearby user
+                let nearbyUser = User(snapshot: user as! FIRDataSnapshot)
+                print(nearbyUser)
+                
+                // Create a database snapshot for the currently logged in user
+                let currentUserSnapshot = snapshot.childSnapshot(forPath: (self.currentFIRUser?.uid)!)
+                let currentUserSnapshotValue = currentUserSnapshot.value as! [String : AnyObject]
+                
+                // Get the currently logged in user's position using the database snapshot
+                let latitude = currentUserSnapshotValue["latitude"] as? Double
+                let longitude = currentUserSnapshotValue["longitude"] as? Double
+                print("latitude: " + String(describing: latitude))
+                print("longitude: " + String(describing: longitude))
+                
+                // Get the current user's location using their latitude and longitude
+                let currentUserLocation = CLLocation(latitude: latitude!, longitude: longitude!)
+                // Get the potentially nearby user's location using their latitude and longitudde
+                let nearbyUserLocation = CLLocation(latitude: nearbyUser.latitude, longitude: nearbyUser.longitude)
+                
+                // Determine if user is near the current user, if so add to list
+                print("Distance between: " + String(currentUserLocation.distance(from: nearbyUserLocation)))
+                if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
+                    nearestUsers.append(nearbyUser)
+                }
+            }
+            
+            self.nearbyUsers = nearestUsers
+            self.tableView.reloadData()
+        })
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -24,45 +67,47 @@ class AroundMeTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return nearbyUsers.count
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.contentView.backgroundColor = UIColor.init(red: 147.0/255.0, green: 82.0/255.0, blue: 0.0/255.0, alpha: 1.0)
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath)
+        let user = nearbyUsers[indexPath.row]
+        
+        cell.textLabel?.text = user.firstName + " " + user.lastName
+        cell.detailTextLabel?.text = user.email
 
         return cell
     }
-    */
 
-    /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        return false
     }
-    */
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

@@ -23,9 +23,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         self.locationManager.requestWhenInUseAuthorization()
         // Request a location update
         self.locationManager.requestLocation()
-        print("HELLO")
-        print((FIRAuth.auth()?.currentUser?.uid)!)
-        print("HELLO")
     }
 
     override func didReceiveMemoryWarning() {

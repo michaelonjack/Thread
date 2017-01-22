@@ -90,8 +90,10 @@ class LoginViewController: UIViewController {
         
         // Register action handles when the user chooses to register
         let registerAction = UIAlertAction(title: "Register", style: .default) { action in
-            let emailField = alert.textFields![0]
-            let passwordField = alert.textFields![1]
+            let firstNameField = alert.textFields![0]
+            let lastNameField = alert.textFields![1]
+            let emailField = alert.textFields![2]
+            let passwordField = alert.textFields![3]
             
             // Create a user using the user's provided email and password
             FIRAuth.auth()!.createUser(withEmail: emailField.text!, password: passwordField.text!) { user, error in
@@ -99,8 +101,8 @@ class LoginViewController: UIViewController {
                 if error == nil {
                     
                     let newUser = User(user: user!,
-                                       firstName: "Michael",
-                                       lastName: "Onjack")
+                                       firstName: firstNameField.text!,
+                                       lastName: lastNameField.text!)
                     let newUserRef = self.usersRef.child((user?.uid)!)
                     
                     
@@ -136,6 +138,16 @@ class LoginViewController: UIViewController {
         
         // Cancel action handles when user wishes to cancel registration
         let cancelAction = UIAlertAction(title:"Cancel", style: .default)
+        
+        // Text field on the pop-up alert for the user's first name
+        alert.addTextField { textFirstName in
+            textFirstName.placeholder = "first name"
+        }
+        
+        // Text field on the pop-up alert for the user's last name
+        alert.addTextField { textLastName in
+                textLastName.placeholder = "last name"
+        }
         
         // Text field on the pop-up alert for the user's email
         alert.addTextField { textEmail in
