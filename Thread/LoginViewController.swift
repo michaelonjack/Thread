@@ -91,7 +91,7 @@ class LoginViewController: UIViewController {
     @IBAction func signUpDidTouch(_ sender: AnyObject) {
         
         // Create pop-up alert requesting the user's registration information
-        let alert = UIAlertController(title: "sign up for thread",
+        let alert = UIAlertController(title: "Sign Up for Thread",
                                       message: "",
                                       preferredStyle: .alert)
         
@@ -120,12 +120,12 @@ class LoginViewController: UIViewController {
                     user?.sendEmailVerification(completion: nil)
                     
                     // Create a new pop-up action notifying the user that their registration was successful and a verification email has been sent
-                    let verifyEmailAlert = UIAlertController(title: "verify email",
+                    let verifyEmailAlert = UIAlertController(title: "Verify Email",
                                                              message: "Verification sent! Login with your new email/password after verifying.",
                                                              preferredStyle: .alert)
                     
                     // Okay action to close out of the pop-up alert
-                    let okayAction = UIAlertAction(title: "Okay", style:.default)
+                    let okayAction = UIAlertAction(title: "OK", style:.default)
                     
                     // Resend action which will resend the verification email
                     let resendAction = UIAlertAction(title: "Resend", style: .default) { action in
@@ -139,7 +139,15 @@ class LoginViewController: UIViewController {
                     verifyEmailAlert.addAction(resendAction)
                     
                     self.present(verifyEmailAlert, animated: true, completion: nil)
-                } else { print(error?.localizedDescription) }
+                } else {
+                    let errorAlert = UIAlertController(title: "Sign Up Error",
+                                                       message: error?.localizedDescription,
+                                                       preferredStyle: .alert)
+                    
+                    let okayAction = UIAlertAction(title: "OK", style: .default)
+                    errorAlert.addAction(okayAction)
+                    self.present(errorAlert, animated: true, completion:nil)
+                }
             }
         }
         

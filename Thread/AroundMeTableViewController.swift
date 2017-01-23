@@ -60,6 +60,12 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
                 if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
                     nearestUsers.append(nearbyUser)
                 }
+                
+                // If a user's longitude and latitude are set to 0.0 then their location is not known so show no nearby users
+                if( floor(latitude!)==0 && floor(longitude!)==0 ) {
+                    nearestUsers.removeAll()
+                }
+                
             }
             
             self.nearbyUsers = nearestUsers
