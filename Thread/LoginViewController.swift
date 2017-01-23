@@ -18,6 +18,13 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // If a user is already logged in, skip login view and continue to the main view
+        FIRAuth.auth()?.addStateDidChangeListener() { auth, user in
+            if user != nil && (user?.isEmailVerified)! {
+                self.performSegue(withIdentifier: self.loginToMain, sender: nil)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
