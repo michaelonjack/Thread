@@ -22,14 +22,26 @@ class MeViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        switch segue.identifier! {
+            case "topToClothingItem":
+                let topVC: ClothingItemViewController = segue.destination as! ClothingItemViewController
+                topVC.clothingType = ClothingType.Top
+            case "bottomToClothingItem":
+                let bottomVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
+                bottomVC.clothingType = ClothingType.Bottom
+            case "shoeToClothingItem":
+                let shoeVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
+                shoeVC.clothingType = ClothingType.Shoes
+            case "accessoryToClothingItem":
+                let accessoryVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
+                accessoryVC.clothingType = ClothingType.Accessories
+        default:
+            let defaultVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
+            defaultVC.clothingType = nil
+        }
     }
-    */
 
 }

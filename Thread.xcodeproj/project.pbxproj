@@ -13,6 +13,9 @@
 		B163FA3F1E3051EC00EF399D /* AroundMeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B163FA3E1E3051EC00EF399D /* AroundMeTableViewController.swift */; };
 		B174D0261E36C8E900218590 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B174D0251E36C8E900218590 /* APIKeys.plist */; };
 		B174D0281E36CAC700218590 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0271E36CAC700218590 /* APIKeys.swift */; };
+		B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0291E36D2A300218590 /* ClothingItem.swift */; };
+		B174D02C1E36D8BF00218590 /* ClothingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D02B1E36D8BF00218590 /* ClothingItemViewController.swift */; };
+		B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D02D1E36DE0B00218590 /* ClothingType.swift */; };
 		B18430731E2D43E300EED632 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B18430721E2D43E300EED632 /* GoogleService-Info.plist */; };
 		B18430751E2D4BF200EED632 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18430741E2D4BF200EED632 /* MainViewController.swift */; };
 		B18430791E2EED7300EED632 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18430781E2EED7300EED632 /* MeViewController.swift */; };
@@ -53,6 +56,9 @@
 		B163FA3E1E3051EC00EF399D /* AroundMeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AroundMeTableViewController.swift; sourceTree = "<group>"; };
 		B174D0251E36C8E900218590 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		B174D0271E36CAC700218590 /* APIKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
+		B174D0291E36D2A300218590 /* ClothingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
+		B174D02B1E36D8BF00218590 /* ClothingItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingItemViewController.swift; sourceTree = "<group>"; };
+		B174D02D1E36DE0B00218590 /* ClothingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingType.swift; sourceTree = "<group>"; };
 		B18430701E2D3D6A00EED632 /* Thread.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Thread.entitlements; sourceTree = "<group>"; };
 		B18430721E2D43E300EED632 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B18430741E2D4BF200EED632 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +141,7 @@
 				B18430781E2EED7300EED632 /* MeViewController.swift */,
 				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
 				B18430741E2D4BF200EED632 /* MainViewController.swift */,
+				B174D02B1E36D8BF00218590 /* ClothingItemViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -163,6 +170,8 @@
 			isa = PBXGroup;
 			children = (
 				B18430851E33B03A00EED632 /* User.swift */,
+				B174D0291E36D2A300218590 /* ClothingItem.swift */,
+				B174D02D1E36DE0B00218590 /* ClothingType.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -204,10 +213,10 @@
 				B18430701E2D3D6A00EED632 /* Thread.entitlements */,
 				B184306E1E2D2FD200EED632 /* Models */,
 				B184306A1E2D2EEB00EED632 /* Controllers */,
-				B184307E1E2F0C8A00EED632 /* Assets.xcassets */,
 				B184306F1E2D2FEF00EED632 /* Layouts */,
 				B184306C1E2D2F4D00EED632 /* Other */,
 				B184306D1E2D2F6B00EED632 /* Supporting Files */,
+				B184307E1E2F0C8A00EED632 /* Assets.xcassets */,
 			);
 			path = Thread;
 			sourceTree = "<group>";
@@ -523,9 +532,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B18430751E2D4BF200EED632 /* MainViewController.swift in Sources */,
+				B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */,
+				B174D02C1E36D8BF00218590 /* ClothingItemViewController.swift in Sources */,
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
 				B174D0281E36CAC700218590 /* APIKeys.swift in Sources */,
 				B18430861E33B03A00EED632 /* User.swift in Sources */,
+				B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */,
 				B163FA3F1E3051EC00EF399D /* AroundMeTableViewController.swift in Sources */,
 				B18430791E2EED7300EED632 /* MeViewController.swift in Sources */,
 				B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */,
@@ -678,6 +690,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7D290579FCFE88FA818A8002 /* Pods-Thread.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Thread/Thread.entitlements;
@@ -700,6 +713,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B315754A20752E20A13E984D /* Pods-Thread.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Thread/Thread.entitlements;
