@@ -13,4 +13,17 @@ enum ClothingType {
     case Bottom
     case Shoes
     case Accessories
+    
+    var description:String {
+        switch self {
+        case .Top:
+            return "Top"
+        case .Bottom:
+            return "Bottom"
+        case .Shoes:
+            return "Shoes"
+        case .Accessories:
+            return "Accessories"
+        }
+    }
 }

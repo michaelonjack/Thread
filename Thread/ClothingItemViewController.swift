@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class ClothingItemViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -17,6 +18,8 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var imageViewClothingPicture: UIImageView!
     
     let picker = UIImagePickerController()
+    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
+    let currentUserClothingImagesRef = FIRStorage.storage().reference(withPath: "images/" + (FIRAuth.auth()?.currentUser?.uid)!)
     
     var clothingType: ClothingType!
     
@@ -24,6 +27,7 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         super.viewDidLoad()
         picker.delegate = self
         
+        // Set the title of the view according to which button they've pressed
         switch clothingType! {
             case .Top:
                 labelViewTitle.text = "shirt"
@@ -34,8 +38,6 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
             case .Accessories:
                 labelViewTitle.text = "accessories"
         }
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,6 +45,38 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         // Dispose of any resources that can be recreated.
     }
     
+    // Action to handle when the user wants to save the data in the view
+    @IBAction func saveDidTouch(_ sender: Any) {
+        let clothingItemName = textFieldItemName.text
+        let clothingItemBrand = textFieldItemBrand.text
+        let clothingItemLink = textFieldItemLink.text
+        
+        let newClothingItem = ClothingItem(name: clothingItemName!, type: clothingType, brand: clothingItemBrand!, itemUrl: clothingItemLink!)
+        
+        let currentUserClothingTypeRef = currentUserRef.child(clothingType.description)
+        currentUserClothingTypeRef.setValue(newClothingItem.toAnyObject())
+        
+        if imageViewClothingPicture.image != nil {
+            let imageMetaData = FIRStorageMetadata()
+            imageMetaData.contentType = "image/png"
+        
+            var imageData = Data()
+            imageData = UIImagePNGRepresentation(imageViewClothingPicture.image!)!
+        
+            let currentUserClothingTypeImagesRef = currentUserClothingImagesRef.child(clothingType.description)
+            currentUserClothingTypeImagesRef.put(imageData, metadata: imageMetaData) { (metaData, error) in
+                if error == nil {
+                    let downloadUrl = metaData?.downloadURL()?.absoluteString
+                    currentUserClothingTypeRef.updateChildValues(["pictureUrl": downloadUrl!])
+                } else {
+                    print(error?.localizedDescription ?? "Error uploading data to storage")
+                }
+            }
+        }
+    }
+    
+    // Action to handle when the user selects the camera button
+    // Uses the user's camera to take a picture
     @IBAction func cameraDidTouch(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             picker.sourceType = UIImagePickerControllerSourceType.camera;
@@ -53,6 +87,8 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         }
     }
     
+    // Action to handle when the user selects the photo library
+    // Allows the user to select a photo from their phone library
     @IBAction func photoLibraryDidTouch(_ sender: Any) {
         picker.allowsEditing = false
         picker.sourceType = .photoLibrary
@@ -60,13 +96,14 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         present(picker, animated: true, completion: nil)
     }
     
+    // Sets the select image as the ImageView's image
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
-        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
-        imageViewClothingPicture.contentMode = .scaleAspectFit //3
-        imageViewClothingPicture.image = chosenImage //4
-        dismiss(animated:true, completion: nil) //5
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        imageViewClothingPicture.contentMode = .scaleAspectFit
+        imageViewClothingPicture.image = chosenImage
+        dismiss(animated:true, completion: nil)
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
