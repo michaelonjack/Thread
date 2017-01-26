@@ -16,6 +16,7 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var textFieldItemBrand: UITextField!
     @IBOutlet weak var textFieldItemLink: UITextField!
     @IBOutlet weak var imageViewClothingPicture: UIImageView!
+    @IBOutlet weak var bottonConstraint: NSLayoutConstraint!
     
     let picker = UIImagePickerController()
     let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
@@ -23,9 +24,13 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     
     var clothingType: ClothingType!
     var imageDidChange: Bool! = false
+    var keyboardShowing: Bool! = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+        
         picker.delegate = self
         
         // Set the title of the view according to which button they've pressed
@@ -160,6 +165,39 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
             }
         })
     }
-
+    
+    func keyboardWillShow(_ notification: NSNotification) {
+        if keyboardShowing == false {
+            keyboardShowing = true
+            self.imageViewClothingPicture.isHidden = true
+            adjustingHeight(show: true, notification: notification)
+        }
+    }
+    
+    func keyboardWillHide(_ notifcation: NSNotification) {
+        keyboardShowing = false
+        adjustingHeight(show: false, notification: notifcation)
+        self.imageViewClothingPicture.isHidden = false
+    }
+    
+    func adjustingHeight(show:Bool, notification:NSNotification) {
+        // 1
+        var userInfo = notification.userInfo!
+        // 2
+        let keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        // 3
+        let animationDurarion = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
+        // 4
+        let changeInHeight = (keyboardFrame.height-50) * (show ? 1 : -1)
+        //5
+        UIView.animate(withDuration: animationDurarion, animations: { () -> Void in
+            self.bottonConstraint.constant += changeInHeight
+        })
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 
 }
