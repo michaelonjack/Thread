@@ -16,7 +16,6 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var textFieldItemBrand: UITextField!
     @IBOutlet weak var textFieldItemLink: UITextField!
     @IBOutlet weak var imageViewClothingPicture: UIImageView!
-    @IBOutlet weak var bottonConstraint: NSLayoutConstraint!
     
     let picker = UIImagePickerController()
     let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
@@ -160,42 +159,37 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
             if snapshot.hasChild("pictureUrl") {
                 self.currentUserClothingImagesRef.child(self.clothingType.description).data(withMaxSize: 20*1024*1024, completion: {(data, error) in
                     let clothingImage = UIImage(data:data!)
+                    
+                    //self.imageViewClothingPicture.contentMode = .scaleAspectFit
                     self.imageViewClothingPicture.image = clothingImage
                 })
             }
         })
     }
     
+    // Move the view up when the keyboard shows so text fields won't be hidden
     func keyboardWillShow(_ notification: NSNotification) {
-        if keyboardShowing == false {
-            keyboardShowing = true
-            self.imageViewClothingPicture.isHidden = true
-            adjustingHeight(show: true, notification: notification)
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            imageViewClothingPicture.isHidden = true
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
         }
     }
     
-    func keyboardWillHide(_ notifcation: NSNotification) {
-        keyboardShowing = false
-        adjustingHeight(show: false, notification: notifcation)
-        self.imageViewClothingPicture.isHidden = false
+    // Move the view down when the keyboard hides
+    func keyboardWillHide(_ notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            imageViewClothingPicture.isHidden = false
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
     }
     
-    func adjustingHeight(show:Bool, notification:NSNotification) {
-        // 1
-        var userInfo = notification.userInfo!
-        // 2
-        let keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        // 3
-        let animationDurarion = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
-        // 4
-        let changeInHeight = (keyboardFrame.height-50) * (show ? 1 : -1)
-        //5
-        UIView.animate(withDuration: animationDurarion, animations: { () -> Void in
-            self.bottonConstraint.constant += changeInHeight
-        })
-        
-    }
-    
+    // Hide the keyboard when the user selects a non-textfield area
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
