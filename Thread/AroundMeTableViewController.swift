@@ -19,6 +19,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     let locationManager = CLLocationManager()
     
     var nearbyUsers: [User] = []
+    var refresher: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,11 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         // The snapshot represents the data at the moment in time
         usersRef.observe(.value, with: { snapshot in
             var nearestUsers: [User] = []
+            
+            // End refreshing the table once the user location is retrieved
+            if self.refresher != nil {
+                self.refresher.endRefreshing()
+            }
             
             for user in snapshot.children {
                 // Create instance of the potentially nearby user
@@ -110,8 +116,8 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
 
     func handleRefresh(refreshControl: UIRefreshControl) {
         // Request a location update
+        refresher = refreshControl
         self.locationManager.requestLocation()
-        refreshControl.endRefreshing()
     }
     
     // Process the received location update
