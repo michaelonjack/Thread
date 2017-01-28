@@ -83,9 +83,6 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     // MARK: - Table view data source
@@ -112,6 +109,10 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return false
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("section: \(nearbyUsers[indexPath.section])")
     }
 
     func handleRefresh(refreshControl: UIRefreshControl) {

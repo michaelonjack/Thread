@@ -7,6 +7,7 @@ target 'Thread' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
+  pod 'NVActivityIndicatorView'
 
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!

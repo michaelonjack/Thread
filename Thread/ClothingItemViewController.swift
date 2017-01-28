@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseStorage
+import NVActivityIndicatorView
 
 class ClothingItemViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -16,10 +17,11 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var textFieldItemBrand: UITextField!
     @IBOutlet weak var textFieldItemLink: UITextField!
     @IBOutlet weak var imageViewClothingPicture: UIImageView!
+    @IBOutlet weak var loadingAnimationView: NVActivityIndicatorView!
     
     let picker = UIImagePickerController()
     let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
-    let currentUserClothingImagesRef = FIRStorage.storage().reference(withPath: "images/" + (FIRAuth.auth()?.currentUser?.uid)!)
+    let currentUserStorageRef = FIRStorage.storage().reference(withPath: "images/" + (FIRAuth.auth()?.currentUser?.uid)!)
     
     var clothingType: ClothingType!
     var imageDidChange: Bool! = false
@@ -27,8 +29,12 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+        
+        loadingAnimationView.type = .ballScaleMultiple
+        loadingAnimationView.startAnimating()
         
         picker.delegate = self
         
@@ -78,7 +84,7 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
             imageData = UIImagePNGRepresentation(imageViewClothingPicture.image!)!
         
             // Get reference to the user's clothing type in Firebase Storage
-            let currentUserClothingTypeImagesRef = currentUserClothingImagesRef.child(clothingType.description)
+            let currentUserClothingTypeImagesRef = currentUserStorageRef.child(clothingType.description)
             
             // Add the image to Firebase Storage if it has changed
             if imageDidChange == true {
@@ -157,10 +163,11 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
             self.textFieldItemLink.text = storedData?["link"] as? String ?? ""
             
             if snapshot.hasChild("pictureUrl") {
-                self.currentUserClothingImagesRef.child(self.clothingType.description).data(withMaxSize: 20*1024*1024, completion: {(data, error) in
+                self.currentUserStorageRef.child(self.clothingType.description).data(withMaxSize: 20*1024*1024, completion: {(data, error) in
                     let clothingImage = UIImage(data:data!)
                     
-                    //self.imageViewClothingPicture.contentMode = .scaleAspectFit
+                    self.imageViewClothingPicture.contentMode = .scaleAspectFit
+                    self.loadingAnimationView.stopAnimating()
                     self.imageViewClothingPicture.image = clothingImage
                 })
             }
