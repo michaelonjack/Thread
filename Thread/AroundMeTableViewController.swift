@@ -13,6 +13,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
 
     // Maximum number of meters another user can be away and show up on the app
     let MAX_ALLOWABLE_DISTANCE = 3000.0
+    let aroundMeToOtherUser = "aroundMeToOtherUser"
     
     let usersRef = FIRDatabase.database().reference(withPath: "users")
     let currentFIRUser = FIRAuth.auth()?.currentUser
@@ -92,7 +93,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.contentView.backgroundColor = UIColor.init(red: 147.0/255.0, green: 82.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        cell.contentView.backgroundColor = ((indexPath.row % 2) == 0) ? UIColor.init(red: 147.0/255.0, green: 82.0/255.0, blue: 0.0/255.0, alpha: 1.0) : UIColor.white
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,8 +112,9 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         return false
     }
     
+    // What to do when a row is selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("section: \(nearbyUsers[indexPath.section])")
+        self.performSegue(withIdentifier: self.aroundMeToOtherUser, sender: nearbyUsers[indexPath.section])
     }
 
     func handleRefresh(refreshControl: UIRefreshControl) {
@@ -175,14 +177,12 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let otherUserVC: OtherUserViewController = segue.destination as! OtherUserViewController
+        otherUserVC.otherUser = sender as! User
     }
-    */
 
 }

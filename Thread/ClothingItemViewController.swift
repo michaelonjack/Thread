@@ -194,6 +194,8 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
                     self.loadingAnimationView.stopAnimating()
                     self.imageViewClothingPicture.image = clothingImage
                 })
+            } else {
+                self.loadingAnimationView.stopAnimating()
             }
         })
     }

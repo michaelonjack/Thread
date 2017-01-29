@@ -195,6 +195,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
+                    <connections>
+                        <segue destination="Ct4-vK-VxL" kind="show" identifier="aroundMeToOtherUser" id="VI3-OV-tDP"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CIR-HA-K0C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -349,6 +352,123 @@
             </objects>
             <point key="canvasLocation" x="3437.5999999999999" y="-177.66116941529236"/>
         </scene>
+        <!--Other User View Controller-->
+        <scene sceneID="vXz-0q-dnk">
+            <objects>
+                <viewController id="Ct4-vK-VxL" customClass="OtherUserViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vgu-1w-3qx"/>
+                        <viewControllerLayoutGuide type="bottom" id="xc0-tw-NXk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="v5q-Cf-AMH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buc-yL-Uj5">
+                                <rect key="frame" x="36" y="174" width="122" height="114"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Shirt"/>
+                                <connections>
+                                    <segue destination="yUe-gp-dJI" kind="show" identifier="TopToClothingItem" id="zi9-Jf-VWI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IYe-at-rPn">
+                                <rect key="frame" x="217" y="174" width="122" height="114"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Pants"/>
+                                <connections>
+                                    <segue destination="yUe-gp-dJI" kind="show" identifier="BottomToClothingItem" id="gLM-5X-FwU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paU-kv-HWu">
+                                <rect key="frame" x="36" y="430" width="122" height="109"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Shoes"/>
+                                <connections>
+                                    <segue destination="yUe-gp-dJI" kind="show" identifier="ShoeToClothingItem" id="25a-Eo-keZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bS4-D7-GLv">
+                                <rect key="frame" x="217" y="425" width="122" height="114"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Accessories"/>
+                                <connections>
+                                    <segue destination="yUe-gp-dJI" kind="show" identifier="AccessoryToClothingItem" id="ha3-Nr-ntE"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vvf-Un-Bk9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3438" y="489"/>
+        </scene>
+        <!--Other User Clothing Item View Controller-->
+        <scene sceneID="htq-OR-4XA">
+            <objects>
+                <viewController id="yUe-gp-dJI" customClass="OtherUserClothingItemViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bHU-GT-Ba9"/>
+                        <viewControllerLayoutGuide type="bottom" id="d4w-Kz-3fy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="n7A-9E-PVW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wkc-vB-v5d">
+                                <rect key="frame" x="56" y="139" width="263" height="308"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wV6-Ii-WqG" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                <rect key="frame" x="123" y="198" width="128" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J9q-pG-z7a">
+                                <rect key="frame" x="38" y="455" width="298" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="anO-qw-xTj">
+                                <rect key="frame" x="38" y="493" width="298" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMU-AD-nyF">
+                                <rect key="frame" x="38" y="531" width="298" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfp-uB-rNx">
+                                <rect key="frame" x="41" y="72" width="293" height="59"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="45"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageViewClothingPicture" destination="Wkc-vB-v5d" id="Nt1-j8-fax"/>
+                        <outlet property="labelItemBrand" destination="anO-qw-xTj" id="Q1L-Z1-SYI"/>
+                        <outlet property="labelItemLink" destination="tMU-AD-nyF" id="2mX-7E-5IO"/>
+                        <outlet property="labelItemName" destination="J9q-pG-z7a" id="bOX-xN-M9F"/>
+                        <outlet property="labelViewTitle" destination="cfp-uB-rNx" id="o1X-oA-gRM"/>
+                        <outlet property="loadingAnimationView" destination="wV6-Ii-WqG" id="y8h-9I-MxQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bb6-fm-aJ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4202" y="489"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Xee-4W-ZnT">
             <objects>
@@ -379,6 +499,7 @@
         <image name="Shoes" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CcR-7v-AIq"/>
+        <segue reference="iUv-i4-M33"/>
+        <segue reference="ha3-Nr-ntE"/>
     </inferredMetricsTieBreakers>
 </document>
