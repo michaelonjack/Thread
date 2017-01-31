@@ -7,21 +7,146 @@
 //
 
 import UIKit
+import FirebaseStorage
 
-class MeViewController: UIViewController {
+class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet weak var buttonProfilePicture: UIButton!
+    @IBOutlet weak var labelGreeting: UILabel!
+    
+    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
+    let currentUserStorageRef = FIRStorage.storage().reference(withPath: "images/" + (FIRAuth.auth()?.currentUser?.uid)!)
+    
+    let imagePicker = UIImagePickerController()
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        imagePicker.delegate = self
 
-        // Do any additional setup after loading the view.
+        // Makes the profile picture button circular
+        buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
+        buttonProfilePicture.layer.cornerRadius = 0.5 * buttonProfilePicture.bounds.size.width
+        buttonProfilePicture.clipsToBounds = true
+        
+        // Loads the user's profile picture from the database
+        loadProfilePicture()
     }
 
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    
+    /*
+        Handles the action when the profile picture button is pressed.
+        Launches the user's camera so they can take a new picture and then saves that image to the database
+    */
+    @IBAction func profilePictureDidTouch(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        } else {
+            print("not availableeeeeeeeeeeee")
+        }
+    }
+    
+    
+    
+    /*
+     Pulls the image chosen by the user (via their camera) and sets that as their profile picture in the view
+     Called by profilePictureDidTouch
+     */
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : AnyObject])
+    {
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        buttonProfilePicture.setImage(chosenImage, for: .normal)
+        buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
+        
+        let imageMetaData = FIRStorageMetadata()
+        imageMetaData.contentType = "image/png"
+            
+        // Create a Data object to represent the image as a PNG
+        var imageData = Data()
+        imageData = UIImagePNGRepresentation(chosenImage)!
+            
+        // Get reference to the user's clothing type in Firebase Storage
+        let currentUserProfilePictureRef = currentUserStorageRef.child("ProfilePicture")
+            
+        // Add the image to Firebase Storage
+        currentUserProfilePictureRef.put(imageData, metadata: imageMetaData) { (metaData, error) in
+            if error == nil {
+                    // Add the image's url to the Firebase database
+                let downloadUrl = metaData?.downloadURL()?.absoluteString
+                self.currentUserRef.updateChildValues(["profilePictureUrl": downloadUrl!])
+                if (chosenImage.size.width.isLess(than: (chosenImage.size.height))) {
+                    self.currentUserRef.updateChildValues(["profilePictureOrientation": "portrait"])
+                }
+                else {
+                    self.currentUserRef.updateChildValues(["profilePictureOrientation": "landscape"])
+                }
+                
+                    
+            } else {
+                print(error?.localizedDescription ?? "Error uploading data to storage")
+            }
+        }
+        
+        dismiss(animated:true, completion: nil)
+        
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
 
+    
+    
+    /*
+        Pulls the user's profile picture from the database if it exists
+    */
+    func loadProfilePicture() {
+        // Load the stored image
+        currentUserRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let storedData = snapshot.value as? NSDictionary
+            
+            let pictureOrientation = storedData?["profilePictureOrientation"] as? String ?? ""
+            let firstName = storedData?["firstName"] as? String ?? ""
+            
+            self.labelGreeting.text = "Hi, " + firstName
+            
+            // Load profile picture if it exists
+            if snapshot.hasChild("profilePictureUrl") {
+                self.currentUserStorageRef.child("ProfilePicture").data(withMaxSize: 20*1024*1024, completion: {(data, error) in
+                    var profilePicture = UIImage(data:data!)
+                    
+                    if(profilePicture?.size.width.isLess(than: (profilePicture?.size.height)!))! {
+                        if (pictureOrientation == "landscape") {
+                            profilePicture = profilePicture?.rotated(by: Measurement(value: -90.0, unit: .degrees))
+                        }
+                    } else {
+                        if (pictureOrientation == "portrait") {
+                            profilePicture = profilePicture?.rotated(by: Measurement(value: 90.0, unit: .degrees))
+                        }
+                    }
+                    
+                    self.buttonProfilePicture.setImage(profilePicture, for: .normal)
+                    self.buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
+                })
+            } else {
+                print("blah")
+            }
+        })
+    }
+    
+    
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
