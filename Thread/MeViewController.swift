@@ -75,7 +75,7 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
             
         // Create a Data object to represent the image as a PNG
         var imageData = Data()
-        imageData = UIImagePNGRepresentation(chosenImage)!
+        imageData = UIImageJPEGRepresentation(chosenImage, 1.0)!
             
         // Get reference to the user's clothing type in Firebase Storage
         let currentUserProfilePictureRef = currentUserStorageRef.child("ProfilePicture")
@@ -86,13 +86,6 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
                     // Add the image's url to the Firebase database
                 let downloadUrl = metaData?.downloadURL()?.absoluteString
                 self.currentUserRef.updateChildValues(["profilePictureUrl": downloadUrl!])
-                if (chosenImage.size.width.isLess(than: (chosenImage.size.height))) {
-                    self.currentUserRef.updateChildValues(["profilePictureOrientation": "portrait"])
-                }
-                else {
-                    self.currentUserRef.updateChildValues(["profilePictureOrientation": "landscape"])
-                }
-                
                     
             } else {
                 print(error?.localizedDescription ?? "Error uploading data to storage")
@@ -117,7 +110,6 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
             
             let storedData = snapshot.value as? NSDictionary
             
-            let pictureOrientation = storedData?["profilePictureOrientation"] as? String ?? ""
             let firstName = storedData?["firstName"] as? String ?? ""
             
             self.labelGreeting.text = "Hi, " + firstName
@@ -125,17 +117,7 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
             // Load profile picture if it exists
             if snapshot.hasChild("profilePictureUrl") {
                 self.currentUserStorageRef.child("ProfilePicture").data(withMaxSize: 20*1024*1024, completion: {(data, error) in
-                    var profilePicture = UIImage(data:data!)
-                    
-                    if(profilePicture?.size.width.isLess(than: (profilePicture?.size.height)!))! {
-                        if (pictureOrientation == "landscape") {
-                            profilePicture = profilePicture?.rotated(by: Measurement(value: -90.0, unit: .degrees))
-                        }
-                    } else {
-                        if (pictureOrientation == "portrait") {
-                            profilePicture = profilePicture?.rotated(by: Measurement(value: 90.0, unit: .degrees))
-                        }
-                    }
+                    let profilePicture = UIImage(data:data!)
                     
                     self.buttonProfilePicture.setImage(profilePicture, for: .normal)
                     self.buttonProfilePicture.imageView?.contentMode = .scaleAspectFill

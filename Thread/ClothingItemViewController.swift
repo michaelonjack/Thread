@@ -80,11 +80,11 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         // Enter the user's image into the database
         if imageViewClothingPicture.image != nil && imageDidChange == true {
             let imageMetaData = FIRStorageMetadata()
-            imageMetaData.contentType = "image/png"
+            imageMetaData.contentType = "image/jpeg"
         
             // Create a Data object to represent the image as a PNG
             var imageData = Data()
-            imageData = UIImagePNGRepresentation(imageViewClothingPicture.image!)!
+            imageData = UIImageJPEGRepresentation(imageViewClothingPicture.image!, 1.0)!
         
             // Get reference to the user's clothing type in Firebase Storage
             let currentUserClothingTypeImagesRef = currentUserStorageRef.child(clothingType.description)
@@ -95,12 +95,6 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
                     // Add the image's url to the Firebase database
                     let downloadUrl = metaData?.downloadURL()?.absoluteString
                     currentUserClothingTypeRef.updateChildValues(["pictureUrl": downloadUrl!])
-                    if (self.imageViewClothingPicture.image?.size.width.isLess(than: (self.imageViewClothingPicture.image?.size.height)!))! {
-                        currentUserClothingTypeRef.updateChildValues(["pictureOrientation": "portrait"])
-                    }
-                    else {
-                        currentUserClothingTypeRef.updateChildValues(["pictureOrientation": "landscape"])
-                    }
                     
                     self.loadingAnimationView.stopAnimating()
                         
@@ -171,24 +165,13 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
             
             let storedData = snapshot.value as? NSDictionary
             
-            let pictureOrientation = storedData?["pictureOrientation"] as? String ?? ""
             self.textFieldItemName.text = storedData?["name"] as? String ?? ""
             self.textFieldItemBrand.text = storedData?["brand"] as? String ?? ""
             self.textFieldItemLink.text = storedData?["link"] as? String ?? ""
             
             if snapshot.hasChild("pictureUrl") {
                 self.currentUserStorageRef.child(self.clothingType.description).data(withMaxSize: 20*1024*1024, completion: {(data, error) in
-                    var clothingImage = UIImage(data:data!)
-                    
-                    if(clothingImage?.size.width.isLess(than: (clothingImage?.size.height)!))! {
-                        if (pictureOrientation == "landscape") {
-                            clothingImage = clothingImage?.rotated(by: Measurement(value: -90.0, unit: .degrees))
-                        }
-                    } else {
-                        if (pictureOrientation == "portrait") {
-                            clothingImage = clothingImage?.rotated(by: Measurement(value: 90.0, unit: .degrees))
-                        }
-                    }
+                    let clothingImage = UIImage(data:data!)
                     
                     self.imageViewClothingPicture.contentMode = .scaleAspectFit
                     self.loadingAnimationView.stopAnimating()
