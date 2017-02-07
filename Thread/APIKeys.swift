@@ -10,7 +10,7 @@ import Foundation
 
 func valueForAPIKey(keyname:String) -> String {
     
-    let filePath = Bundle.main.path(forResource: "ApiKeys", ofType:"plist")
+    let filePath = Bundle.main.path(forResource: "APIKeys", ofType:"plist")
     let plist = NSDictionary(contentsOfFile:filePath!)
     
     let value:String = plist?.object(forKey: keyname) as! String

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -216,7 +217,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9p-IL-Ly5">
-                                <rect key="frame" x="36" y="276" width="122" height="114"/>
+                                <rect key="frame" x="36" y="249" width="122" height="114"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Shirt"/>
                                 <connections>
@@ -224,7 +225,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78j-YL-hyQ">
-                                <rect key="frame" x="36" y="462" width="122" height="109"/>
+                                <rect key="frame" x="36" y="433" width="122" height="109"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Shoes"/>
                                 <connections>
@@ -232,7 +233,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zb8-Sw-nAQ">
-                                <rect key="frame" x="217" y="459" width="122" height="114"/>
+                                <rect key="frame" x="217" y="430" width="122" height="114"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Accessories"/>
                                 <connections>
@@ -240,7 +241,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2m-bz-fYz">
-                                <rect key="frame" x="217" y="276" width="122" height="114"/>
+                                <rect key="frame" x="217" y="247" width="122" height="114"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Pants"/>
                                 <connections>
@@ -248,7 +249,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-oh-qzy">
-                                <rect key="frame" x="132" y="93" width="110" height="110"/>
+                                <rect key="frame" x="132" y="64" width="110" height="110"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Avatar"/>
                                 <connections>
@@ -256,7 +257,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ma-lh-Na0">
-                                <rect key="frame" x="99" y="211" width="176" height="21"/>
+                                <rect key="frame" x="99" y="182" width="176" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                 <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -323,6 +324,9 @@
                                 <rect key="frame" x="286" y="597" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Search"/>
+                                <connections>
+                                    <segue destination="2R7-xH-aNl" kind="show" identifier="ClothingItemToSearch" id="v8S-z8-GwB"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aIA-yS-6cX">
                                 <rect key="frame" x="205" y="597" width="50" height="50"/>
@@ -371,6 +375,91 @@
             </objects>
             <point key="canvasLocation" x="3437.5999999999999" y="-177.66116941529236"/>
         </scene>
+        <!--Clothing Search View Controller-->
+        <scene sceneID="k2O-Fd-V6V">
+            <objects>
+                <viewController id="2R7-xH-aNl" customClass="ClothingSearchViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4Cv-kf-ZEa"/>
+                        <viewControllerLayoutGuide type="bottom" id="dbC-G6-sZo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="x0B-b4-bND">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xBz-Rj-XRM">
+                                <rect key="frame" x="314" y="64" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="dWK-ai-OJd"/>
+                                </constraints>
+                                <state key="normal" image="Search"/>
+                                <connections>
+                                    <action selector="searchDidTouch:" destination="2R7-xH-aNl" eventType="touchUpInside" id="27L-ut-qV4"/>
+                                </connections>
+                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dTv-AW-Yhm">
+                                <rect key="frame" x="0.0" y="157" width="375" height="510"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="o5a-lc-7H7">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
+                                        <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="sectionIndexColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="o5a-lc-7H7" secondAttribute="bottom" id="8aI-bb-BeX"/>
+                                    <constraint firstItem="o5a-lc-7H7" firstAttribute="centerX" secondItem="dTv-AW-Yhm" secondAttribute="centerX" id="DyM-8I-ubH"/>
+                                    <constraint firstAttribute="trailing" secondItem="o5a-lc-7H7" secondAttribute="trailing" id="Unw-O3-g66"/>
+                                    <constraint firstItem="o5a-lc-7H7" firstAttribute="centerY" secondItem="dTv-AW-Yhm" secondAttribute="centerY" id="X0R-Gc-SsP"/>
+                                    <constraint firstItem="o5a-lc-7H7" firstAttribute="leading" secondItem="dTv-AW-Yhm" secondAttribute="leading" id="ilz-0q-avV"/>
+                                    <constraint firstItem="o5a-lc-7H7" firstAttribute="top" secondItem="dTv-AW-Yhm" secondAttribute="top" id="jza-dS-FZO"/>
+                                </constraints>
+                            </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5p3-FJ-slG" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                <rect key="frame" x="101" y="109" width="173" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="BallScaleMultiple"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="search term (ex. levi's jeans)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pxq-Wt-bWs">
+                                <rect key="frame" x="16" y="71" width="290" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="w3f-wf-Mkx"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Pxq-Wt-bWs" firstAttribute="top" secondItem="4Cv-kf-ZEa" secondAttribute="bottom" constant="7" id="2Gu-el-vDV"/>
+                            <constraint firstItem="5p3-FJ-slG" firstAttribute="centerX" secondItem="dTv-AW-Yhm" secondAttribute="centerX" id="2Ip-ME-WfW"/>
+                            <constraint firstItem="Pxq-Wt-bWs" firstAttribute="leading" secondItem="x0B-b4-bND" secondAttribute="leadingMargin" id="3Pd-sq-6OM"/>
+                            <constraint firstItem="dTv-AW-Yhm" firstAttribute="leading" secondItem="x0B-b4-bND" secondAttribute="leading" id="BLz-mt-vnp"/>
+                            <constraint firstItem="dTv-AW-Yhm" firstAttribute="top" secondItem="5p3-FJ-slG" secondAttribute="bottom" constant="8" symbolic="YES" id="Hzu-CW-8aq"/>
+                            <constraint firstItem="xBz-Rj-XRM" firstAttribute="top" secondItem="4Cv-kf-ZEa" secondAttribute="bottom" id="Ikn-e2-YPr"/>
+                            <constraint firstItem="5p3-FJ-slG" firstAttribute="leading" secondItem="x0B-b4-bND" secondAttribute="leadingMargin" constant="85" id="NN4-m7-EYe"/>
+                            <constraint firstItem="5p3-FJ-slG" firstAttribute="top" secondItem="Pxq-Wt-bWs" secondAttribute="bottom" constant="8" symbolic="YES" id="THE-HJ-DqW"/>
+                            <constraint firstItem="Pxq-Wt-bWs" firstAttribute="centerY" secondItem="xBz-Rj-XRM" secondAttribute="centerY" id="dqF-Wj-UpL"/>
+                            <constraint firstItem="xBz-Rj-XRM" firstAttribute="leading" secondItem="Pxq-Wt-bWs" secondAttribute="trailing" constant="8" symbolic="YES" id="gY5-tA-4l4"/>
+                            <constraint firstItem="xBz-Rj-XRM" firstAttribute="trailing" secondItem="x0B-b4-bND" secondAttribute="trailingMargin" id="hfD-NQ-hIU"/>
+                            <constraint firstAttribute="trailing" secondItem="dTv-AW-Yhm" secondAttribute="trailing" id="iMc-gy-0F5"/>
+                            <constraint firstItem="dTv-AW-Yhm" firstAttribute="top" secondItem="xBz-Rj-XRM" secondAttribute="bottom" constant="48" id="l1Y-AS-JjT"/>
+                            <constraint firstItem="dTv-AW-Yhm" firstAttribute="bottom" secondItem="dbC-G6-sZo" secondAttribute="top" id="zav-Eg-OTI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loadingAnimationView" destination="5p3-FJ-slG" id="iFX-KC-Npu"/>
+                        <outlet property="tableviewResults" destination="o5a-lc-7H7" id="Vvn-G5-BuI"/>
+                        <outlet property="textFieldQuery" destination="Pxq-Wt-bWs" id="czm-rh-8hN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HWj-ay-Je3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4200.8000000000002" y="-177.66116941529236"/>
+        </scene>
         <!--Other User View Controller-->
         <scene sceneID="vXz-0q-dnk">
             <objects>
@@ -384,7 +473,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buc-yL-Uj5">
-                                <rect key="frame" x="36" y="276" width="122" height="114"/>
+                                <rect key="frame" x="36" y="249" width="122" height="114"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Shirt"/>
                                 <connections>
@@ -392,7 +481,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IYe-at-rPn">
-                                <rect key="frame" x="217" y="276" width="122" height="114"/>
+                                <rect key="frame" x="217" y="247" width="122" height="114"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Pants"/>
                                 <connections>
@@ -400,7 +489,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paU-kv-HWu">
-                                <rect key="frame" x="36" y="462" width="122" height="109"/>
+                                <rect key="frame" x="36" y="433" width="122" height="109"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Shoes"/>
                                 <connections>
@@ -408,24 +497,24 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bS4-D7-GLv">
-                                <rect key="frame" x="217" y="459" width="122" height="114"/>
+                                <rect key="frame" x="217" y="430" width="122" height="114"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Accessories"/>
                                 <connections>
                                     <segue destination="yUe-gp-dJI" kind="show" identifier="AccessoryToClothingItem" id="ha3-Nr-ntE"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="AXy-wZ-LGP">
-                                <rect key="frame" x="132" y="93" width="110" height="110"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaO-JR-JvS">
-                                <rect key="frame" x="99" y="211" width="176" height="21"/>
+                                <rect key="frame" x="99" y="182" width="176" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                 <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="AXy-wZ-LGP">
+                                <rect key="frame" x="132" y="64" width="110" height="110"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -534,7 +623,7 @@
         <image name="Shoes" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iUv-i4-M33"/>
         <segue reference="ha3-Nr-ntE"/>
+        <segue reference="qcO-9A-bHk"/>
     </inferredMetricsTieBreakers>
 </document>

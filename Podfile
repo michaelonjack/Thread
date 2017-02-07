@@ -8,6 +8,7 @@ target 'Thread' do
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'NVActivityIndicatorView'
+  pod 'SwiftyJSON'
 
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
