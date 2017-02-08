@@ -16,10 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Move firebase configuration to init to avoid race conditions with the database instantiation on the login page
     override init() {
         super.init()
+        
         FIRApp.configure()
+        // Allow Firebase database to work offline
+        FIRDatabase.database().persistenceEnabled = true
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
         // Make navigation bar transparent
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().shadowImage = UIImage()
