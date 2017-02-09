@@ -16,7 +16,7 @@ class OtherUserClothingItemViewController: UIViewController {
     @IBOutlet weak var labelViewTitle: UILabel!
     @IBOutlet weak var labelItemName: UILabel!
     @IBOutlet weak var labelItemBrand: UILabel!
-    @IBOutlet weak var labelItemLink: UILabel!
+    @IBOutlet weak var textViewItemLink: UITextView!
     @IBOutlet weak var loadingAnimationView: NVActivityIndicatorView!
     
     var userRef: FIRDatabaseReference!
@@ -34,9 +34,9 @@ class OtherUserClothingItemViewController: UIViewController {
         // Set the title of the view according to which button they've pressed
         switch clothingType! {
         case .Top:
-            labelViewTitle.text = user.firstName + "'s shirt"
+            labelViewTitle.text = user.firstName + "'s top"
         case .Bottom:
-            labelViewTitle.text = user.firstName + "'s pants"
+            labelViewTitle.text = user.firstName + "'s bottom"
         case .Shoes:
             labelViewTitle.text = user.firstName + "'s shoes"
         case .Accessories:
@@ -69,7 +69,7 @@ class OtherUserClothingItemViewController: UIViewController {
             let pictureOrientation = storedData?["pictureOrientation"] as? String ?? ""
             self.labelItemName.text = storedData?["name"] as? String ?? ""
             self.labelItemBrand.text = storedData?["brand"] as? String ?? ""
-            self.labelItemLink.text = storedData?["link"] as? String ?? ""
+            self.textViewItemLink.text = storedData?["link"] as? String ?? ""
             
             if snapshot.hasChild("pictureUrl") {
                 self.userStorageRef.child(self.clothingType.description).data(withMaxSize: 20*1024*1024, completion: {(data, error) in

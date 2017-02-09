@@ -33,6 +33,8 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
         // Dispose of any resources that can be recreated.
     }
     
+    // Handle the action when the user presses the Search button
+    // Makes the API call and modifies the table view
     @IBAction func searchDidTouch(_ sender: Any) {
         loadingAnimationView.type = .ballBeat
         loadingAnimationView.startAnimating()
@@ -77,6 +79,17 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "td")
         cell.textLabel?.text = clothingSearchResults[indexPath.row].name
         return cell
+    }
+    
+    // Override to support conditional editing of the table view.
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return false
+    }
+    
+    // What to do when a row is selected
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //self.performSegue(withIdentifier: self.aroundMeToOtherUser, sender: nearbyUsers[indexPath.section])
     }
 
     /*

@@ -41,9 +41,9 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         // Set the title of the view according to which button they've pressed
         switch clothingType! {
             case .Top:
-                labelViewTitle.text = "shirt"
+                labelViewTitle.text = "top"
             case .Bottom:
-                labelViewTitle.text = "pants"
+                labelViewTitle.text = "bottom"
             case .Shoes:
                 labelViewTitle.text = "shoes"
             case .Accessories:

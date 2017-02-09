@@ -27,9 +27,13 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         // Give table VC mocha colored background
         self.tableView.backgroundColor = UIColor.init(red: 147.0/255.0, green: 82.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         
+        
+        
         self.locationManager.delegate = self
         // Request location authorization for the app
         self.locationManager.requestWhenInUseAuthorization()
+        
+        
         
         // This listens for a .value event type which in turn listens for different types of changes to the database (add, remove, update)
         // The app is notified of the change via the second parameter closure 
@@ -42,6 +46,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
                 self.refresher.endRefreshing()
             }
             
+            // Iterate through the list of users
             for user in snapshot.children {
                 // Create instance of the potentially nearby user
                 let nearbyUser = User(snapshot: user as! FIRDataSnapshot)
@@ -79,6 +84,8 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
             self.tableView.reloadData()
         })
         
+        
+        
         // Enable pull down to refresh
         self.refreshControl?.addTarget(self, action: #selector(AroundMeTableViewController.handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
 
@@ -88,14 +95,21 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
 
     // MARK: - Table view data source
 
+    
+    
+    // Return number of rows in table view
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nearbyUsers.count
     }
+    
+   
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.contentView.backgroundColor = ((indexPath.row % 2) == 0) ? UIColor.init(red: 147.0/255.0, green: 82.0/255.0, blue: 0.0/255.0, alpha: 1.0) : UIColor.white
     }
 
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath)
         let user = nearbyUsers[indexPath.row]
@@ -106,22 +120,29 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         return cell
     }
 
+    
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return false
     }
     
+    
+    
     // What to do when a row is selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: self.aroundMeToOtherUser, sender: nearbyUsers[indexPath.section])
     }
 
+    
     func handleRefresh(refreshControl: UIRefreshControl) {
         // Request a location update
         refresher = refreshControl
         self.locationManager.requestLocation()
     }
+    
+    
     
     // Process the received location update
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
