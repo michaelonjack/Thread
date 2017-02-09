@@ -5,6 +5,13 @@
 //  Created by Michael Onjack on 1/17/17.
 //  Copyright © 2017 Michael Onjack. All rights reserved.
 //
+//
+//
+//
+// Me View Controller
+//      -View that represents the current user's "profile"
+//      -Users can navigate to and edit their different clothing options from this view
+//      -Users can update their profile picture from this view by pressing their profile picture
 
 import UIKit
 import FirebaseStorage
@@ -21,6 +28,12 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
     
     
     
+    /////////////////////////////////////////////////////
+    //
+    //  viewDidLoad
+    //
+    //  Shapes the user's profile picture into a circle and loads it from storage
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,53 +47,60 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
         // Loads the user's profile picture from the database
         loadProfilePicture()
     }
-
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     
-    /*
-        Handles the action when the profile picture button is pressed.
-        Launches the user's camera so they can take a new picture and then saves that image to the database
-    */
+    
+    /////////////////////////////////////////////////////
+    //
+    //  profilePictureDidTouch
+    //
+    //  Handles the action when the profile picture button is pressed.
+    //  Launches the user's camera so they can take a new picture and then saves that image to the database
+    //
     @IBAction func profilePictureDidTouch(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         } else {
-            print("not availableeeeeeeeeeeee")
+            print("Error -- Camera")
         }
     }
     
     
     
-    /*
-     Pulls the image chosen by the user (via their camera) and sets that as their profile picture in the view
-     Called by profilePictureDidTouch
-     */
+    /////////////////////////////////////////////////////
+    //
+    //  imagePickerController
+    //
+    //  Pulls the image chosen by the user (via their camera) and sets it as their profile picture in the view
+    //  Called by profilePictureDidTouch
+    //
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
+        // The image taken by the user's camera
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        // Sets the user's profile picture to be this image
         buttonProfilePicture.setImage(chosenImage, for: .normal)
         buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
         
+        // Creates the image metadata for Firebase Storage
         let imageMetaData = FIRStorageMetadata()
-        imageMetaData.contentType = "image/png"
+        imageMetaData.contentType = "image/jpeg"
             
-        // Create a Data object to represent the image as a PNG
+        // Create a Data object to represent the image as a JPEG
         var imageData = Data()
         imageData = UIImageJPEGRepresentation(chosenImage, 1.0)!
             
-        // Get reference to the user's clothing type in Firebase Storage
+        // Get reference to the user's profile picture in Firebase Storage
         let currentUserProfilePictureRef = currentUserStorageRef.child("ProfilePicture")
             
-        // Add the image to Firebase Storage
+        // Add the selected image to Firebase Storage
         currentUserProfilePictureRef.put(imageData, metadata: imageMetaData) { (metaData, error) in
             if error == nil {
                     // Add the image's url to the Firebase database
@@ -100,10 +120,13 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
     }
 
     
-    
-    /*
-        Pulls the user's profile picture from the database if it exists
-    */
+
+    /////////////////////////////////////////////////////
+    //
+    // loadProfilePicture
+    //
+    //  Pulls the user's profile picture from the database if it exists
+    //
     func loadProfilePicture() {
         // Load the stored image
         currentUserRef.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -112,25 +135,32 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
             
             let firstName = storedData?["firstName"] as? String ?? ""
             
+            // Set the view's greeting label
             self.labelGreeting.text = "Hi, " + firstName
             
-            // Load profile picture if it exists
+            // Load user's profile picture from Firebase Storage if it exists (exists if the user has a profPic URL in the database)
             if snapshot.hasChild("profilePictureUrl") {
                 self.currentUserStorageRef.child("ProfilePicture").data(withMaxSize: 20*1024*1024, completion: {(data, error) in
                     let profilePicture = UIImage(data:data!)
                     
+                    // Sets the user's profile picture to the loaded image
                     self.buttonProfilePicture.setImage(profilePicture, for: .normal)
                     self.buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
                 })
             } else {
-                print("blah")
+                print("Error -- Loading Profile Picture")
             }
         })
     }
     
     
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    /////////////////////////////////////////////////////
+    //
+    //  prepareForSegue
+    //
+    //  Segues to the selected ClothingItem view controller (could be Top, Bottom, Shoes, Accessories depending on which button was pressed)
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier! {
             case "topToClothingItem":
@@ -152,3 +182,5 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
     }
 
 }
+
+

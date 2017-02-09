@@ -15,6 +15,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
 
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  viewDidLoad
+    //
+    //
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,6 +38,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  locationManager
+    //
+    //
+    //
     // Process the received location update
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // Grab latitude and longitude
@@ -38,21 +54,20 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         // Update the user's location in the database
         currentUserRef.updateChildValues(["latitude": locValue.latitude, "longitude": locValue.longitude])
     }
-    
     // Process any errors that may occur when gathering location
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
     }
     
-    @IBAction func meDidTouch(_ sender: AnyObject) {
-        
-    }
-
-    @IBAction func aroundMeDidTouch(_ sender: AnyObject) {
-        
-    }
     
-    // Logs the user out and brings them back to the login page
+    
+    /////////////////////////////////////////////////////
+    //
+    //  logOutDidTouch
+    //
+    //  Handles when the log out button is pressed
+    //  Logs the user out and brings them back to the login page
+    //
     @IBAction func logOutDidTouch(_ sender: AnyObject) {
         do {
             try FIRAuth.auth()?.signOut()

@@ -5,34 +5,53 @@
 //  Created by Michael Onjack on 1/18/17.
 //  Copyright © 2017 Michael Onjack. All rights reserved.
 //
+//
+//
+//
+// Around Me View Controller
+//      -Table view that lists all Thread users that are in a 2 mile radius of you
+//      -Clicking on a user in the table segues you to that user's profile
+//      -Pulling down on the table view reloads your current location and refreshes the table view
 
 import UIKit
 import CoreLocation
 
 class AroundMeTableViewController: UITableViewController, CLLocationManagerDelegate {
 
-    // Maximum number of meters another user can be away and show up on the app
+    // Maximum number of meters another user can be away and still show up in the table (roughly 2 miles)
     let MAX_ALLOWABLE_DISTANCE = 3000.0
+    // Name of the segue that's used when the current user selects another user in the table
     let aroundMeToOtherUser = "aroundMeToOtherUser"
     
+    // Reference to the app's users data in the Firebase database
     let usersRef = FIRDatabase.database().reference(withPath: "users")
+    // FIRUser instance that represents the current user
     let currentFIRUser = FIRAuth.auth()?.currentUser
+    // LocationManager instance used to update the current user's location
     let locationManager = CLLocationManager()
     
+    // Array of app users -- the data source of the table
     var nearbyUsers: [User] = []
+    // Table refresher used to implement the pull-down-to-refresh functionality in the table view
     var refresher: UIRefreshControl!
     
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  viewDidLoad
+    //
+    //  Listens for changes to the Users database and refreshes the table when the data is altered
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         // Give table VC mocha colored background
         self.tableView.backgroundColor = UIColor.init(red: 147.0/255.0, green: 82.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         
         
-        
         self.locationManager.delegate = self
         // Request location authorization for the app
         self.locationManager.requestWhenInUseAuthorization()
-        
         
         
         // This listens for a .value event type which in turn listens for different types of changes to the database (add, remove, update)
@@ -85,7 +104,6 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         })
         
         
-        
         // Enable pull down to refresh
         self.refreshControl?.addTarget(self, action: #selector(AroundMeTableViewController.handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
 
@@ -93,23 +111,39 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         // self.clearsSelectionOnViewWillAppear = false
     }
 
-    // MARK: - Table view data source
-
     
     
-    // Return number of rows in table view
+    /////////////////////////////////////////////////////
+    //
+    //  tableView - numberOfRowsInSection
+    //
+    //  Returns the number of rows in the table (uses the nearbyUsers array)
+    //
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nearbyUsers.count
     }
     
    
     
+    /////////////////////////////////////////////////////
+    //
+    //  tableView - willDisplay
+    //
+    //  Sets the background color of the table to match the color of other view controllers (Mocha)
+    //
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.contentView.backgroundColor = ((indexPath.row % 2) == 0) ? UIColor.init(red: 147.0/255.0, green: 82.0/255.0, blue: 0.0/255.0, alpha: 1.0) : UIColor.white
     }
 
     
     
+    /////////////////////////////////////////////////////
+    //
+    //  tableView - cellForRowAt
+    //
+    //  Determines what information is to be displayed in each table cell
+    //  Uses the User at the matching index of nearbyUsers to set the cell text to the user's name and the cell subtitle to their email
+    //
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath)
         let user = nearbyUsers[indexPath.row]
@@ -122,7 +156,12 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
 
     
     
-    // Override to support conditional editing of the table view.
+    //////////////////////////////////////////////////////
+    //
+    //  tableView - canEditRowAt
+    //
+    //  Determines if a table row can be edited -- For this table, no rows are editable
+    //
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return false
@@ -130,12 +169,25 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     
     
     
+    /////////////////////////////////////////////////////
+    //
+    //  tableView - didSelectRowAt
+    //
+    //  Segues the selected user's profile view controller (OtherUserViewController)
+    //
     // What to do when a row is selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: self.aroundMeToOtherUser, sender: nearbyUsers[indexPath.section])
     }
 
     
+    
+    /////////////////////////////////////////////////////
+    //
+    //  handleRefresh
+    //
+    //  Updates the current user's location when the table is refreshed
+    //
     func handleRefresh(refreshControl: UIRefreshControl) {
         // Request a location update
         refresher = refreshControl
@@ -144,7 +196,15 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     
     
     
-    // Process the received location update
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  locationManager
+    //
+    //  Processes the user's location update by saving the user's coordinates to the database
+    //  Called implicitly by locationManager.requestWhenInUseAuthorization()
+    //
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // Grab latitude and longitude
         let locValue:CLLocationCoordinate2D = (manager.location?.coordinate)!
@@ -152,53 +212,12 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         // Update the user's location in the database
         usersRef.child((currentFIRUser?.uid)!).updateChildValues(["latitude": locValue.latitude, "longitude": locValue.longitude])
     }
-    
     // Process any errors that may occur when gathering location
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

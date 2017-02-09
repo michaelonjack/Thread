@@ -16,6 +16,7 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var textFieldQuery: UITextField!
     @IBOutlet weak var tableviewResults: UITableView!
     
+    let unwindToClothingItem = "UnwindToClothingItem"
     let shopStyleAPIKey = valueForAPIKey(keyname: "ShopStyle")
     let shopStlyeEndpoint = "https://api.shopstyle.com/api/v2/products?pid="
     
@@ -31,7 +32,7 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
         tableviewResults.estimatedRowHeight = 300
         
         //Looks for single or multiple taps and hides keyboard
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ClothingSearchViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
@@ -122,7 +123,7 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
     
     // What to do when a row is selected
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //self.performSegue(withIdentifier: self.aroundMeToOtherUser, sender: nearbyUsers[indexPath.section])
+        self.performSegue(withIdentifier: self.unwindToClothingItem, sender: clothingSearchResults[indexPath.row])
     }
     
     func downloadImageFromUrl(url: String, index: Int) {
@@ -131,8 +132,7 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
         let session = URLSession(configuration: .default)
         let downloadTask = session.dataTask(with: clothingPictureURL!) { (data, response, error) in
             if error == nil {
-                if let res = response as? HTTPURLResponse {
-                    print("Download image with response code \(res.statusCode)")
+                if (response as? HTTPURLResponse) != nil {
                     if let imageData = data {
                         self.clothingSearchResults[index].itemImage = UIImage(data: imageData)
                     }
@@ -150,14 +150,26 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
         view.endEditing(true)
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == self.unwindToClothingItem {
+            let clothingItemVC = segue.destination as! ClothingItemViewController
+            let selectedItem = sender as! ClothingItem
+            
+            print(self.clothingSearchResults)
+            print("---------------------")
+            print(selectedItem)
+            
+            clothingItemVC.textFieldItemName.text = selectedItem.name
+            clothingItemVC.textFieldItemBrand.text = selectedItem.brand
+            clothingItemVC.textFieldItemLink.text = selectedItem.itemUrl
+            clothingItemVC.imageViewClothingPicture.image = selectedItem.itemImage
+            clothingItemVC.imageViewClothingPicture.contentMode = .scaleAspectFit
+            clothingItemVC.imageDidChange = true
+            
+        }
     }
-    */
+ 
 
 }

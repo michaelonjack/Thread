@@ -49,10 +49,34 @@ class OtherUserClothingItemViewController: UIViewController {
         loadUserData()
     }
 
+    
+    
+    /*
+        Action to handle when the user likes (hearts another user's clothing item
+    */
+    @IBAction func likeDidTouch(_ sender: Any) {
+        
+        /*
+        let likeButton = sender as! UIButton
+        
+        if likeButton.image(for: UIControlState.normal)?.accessibilityIdentifier == "Love" {
+            likeButton.setImage(UIImage(named: "LoveClicked"), for: UIControlState.normal)
+        } else {
+            likeButton.setImage(UIImage(named:"Love"), for: UIControlState.normal)
+        }
+        */
+    }
+    
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    
     
     
     /*

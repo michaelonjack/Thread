@@ -65,6 +65,7 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     @IBAction func saveDidTouch(_ sender: Any) {
         loadingAnimationView.type = .ballBeat
         loadingAnimationView.startAnimating()
+        print("hello")
         
         let clothingItemName = textFieldItemName.text
         let clothingItemBrand = textFieldItemBrand.text
@@ -208,6 +209,12 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     // Hide the keyboard when the user selects a non-textfield area
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    
+    
+    @IBAction func unwindToClothingItemViewController(segue: UIStoryboardSegue) {
+        
     }
 
 }

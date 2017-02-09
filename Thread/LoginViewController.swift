@@ -5,6 +5,12 @@
 //  Created by Michael Onjack on 1/15/17.
 //  Copyright © 2017 Michael Onjack. All rights reserved.
 //
+//
+//
+//
+// Login View Controller
+//      -
+//
 
 import UIKit
 
@@ -16,6 +22,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var textFieldLoginEmail: UITextField!
     @IBOutlet weak var textFieldLoginPassword: UITextField!
     
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  viewDidLoad
+    //
+    //  Checks if a user is already logged into the app. If so, skip the Me View Controller
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,8 +48,13 @@ class LoginViewController: UIViewController {
     
     
     
-    
-    // Login user with given password and email
+    /////////////////////////////////////////////////////
+    //
+    //  loginDidTouch
+    //
+    //  Handles the action when the login button is pressed
+    //  Uses the supplied email and password to give access to the current user to the app
+    //
     @IBAction func loginDidTouch(_ sender: AnyObject) {
         FIRAuth.auth()!.signIn(withEmail: textFieldLoginEmail.text!, password: textFieldLoginPassword.text!) {user,  error in
             if let user = FIRAuth.auth()?.currentUser {
@@ -44,6 +63,7 @@ class LoginViewController: UIViewController {
                 if user.isEmailVerified {
                     self.performSegue(withIdentifier: self.loginToMain, sender: nil)
                 }
+                    
                     
                 // Prompt user to verify their email in order to login
                 else {
@@ -85,9 +105,13 @@ class LoginViewController: UIViewController {
     
     
     
-    
-    
-    // Sign up the user with the requested email/password
+    /////////////////////////////////////////////////////
+    //
+    //  signUpDidTouch
+    //
+    //  Handles the action when the sign up button is pressed
+    //  Attempts to sign the user up using the provided information and prompts them to verify their email if successful
+    //
     @IBAction func signUpDidTouch(_ sender: AnyObject) {
         
         // Create pop-up alert requesting the user's registration information
@@ -179,10 +203,6 @@ class LoginViewController: UIViewController {
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
-    }
-    
-    func loadGif( fileName: String ) {
-        
     }
 
 
