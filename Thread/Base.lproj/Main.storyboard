@@ -404,6 +404,56 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                         <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="sectionIndexColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="sectionIndexBackgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="200" id="StV-dw-M2U" customClass="ClothingItemTableViewCell" customModule="Thread" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="200"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="StV-dw-M2U" id="n6y-1Z-lZu">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IkE-Ru-0u4">
+                                                            <rect key="frame" x="67" y="8" width="240" height="128"/>
+                                                        </imageView>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" text="url" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="f7a-NR-Fy8">
+                                                            <rect key="frame" x="34" y="169" width="307" height="30"/>
+                                                            <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                            <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                        </textView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMK-ug-Qul">
+                                                            <rect key="frame" x="34" y="144" width="307" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="iMK-ug-Qul" firstAttribute="centerX" secondItem="n6y-1Z-lZu" secondAttribute="centerX" id="3g4-hU-b4v"/>
+                                                        <constraint firstAttribute="bottom" secondItem="f7a-NR-Fy8" secondAttribute="bottom" id="I7K-lh-lNr"/>
+                                                        <constraint firstAttribute="trailing" secondItem="f7a-NR-Fy8" secondAttribute="trailing" constant="8" id="NKu-BF-Bnj"/>
+                                                        <constraint firstItem="iMK-ug-Qul" firstAttribute="width" secondItem="IkE-Ru-0u4" secondAttribute="width" id="Vwx-gI-Ppu"/>
+                                                        <constraint firstItem="f7a-NR-Fy8" firstAttribute="leading" secondItem="n6y-1Z-lZu" secondAttribute="leading" constant="8" id="YWD-d9-br5"/>
+                                                        <constraint firstItem="f7a-NR-Fy8" firstAttribute="top" secondItem="iMK-ug-Qul" secondAttribute="bottom" constant="8" id="bOx-3H-XiP"/>
+                                                        <constraint firstItem="iMK-ug-Qul" firstAttribute="top" secondItem="IkE-Ru-0u4" secondAttribute="bottom" constant="8" id="bnw-fN-VOJ"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="IkE-Ru-0u4" secondAttribute="trailing" constant="8" id="moC-3y-Yio"/>
+                                                        <constraint firstItem="IkE-Ru-0u4" firstAttribute="leading" secondItem="n6y-1Z-lZu" secondAttribute="leadingMargin" constant="8" id="q5m-wo-t88"/>
+                                                        <constraint firstItem="IkE-Ru-0u4" firstAttribute="top" secondItem="n6y-1Z-lZu" secondAttribute="topMargin" id="yM3-al-oEE"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <outlet property="imageViewClothingPic" destination="IkE-Ru-0u4" id="OEk-vz-ONe"/>
+                                                    <outlet property="labelInfo" destination="iMK-ug-Qul" id="tdQ-3a-kco"/>
+                                                    <outlet property="labelLink" destination="f7a-NR-Fy8" id="k8A-zS-bF1"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
                                     </tableView>
                                 </subviews>
                                 <constraints>
@@ -569,6 +619,11 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGM-Vj-tCa">
+                                <rect key="frame" x="160" y="592" width="55" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Love"/>
+                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="R2C-e6-1hJ">
                                 <rect key="frame" x="41" y="531" width="298" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -579,11 +634,6 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGM-Vj-tCa">
-                                <rect key="frame" x="160" y="612" width="55" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Love"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>

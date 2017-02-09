@@ -10,20 +10,27 @@ import Foundation
 
 struct ClothingItem {
     let name: String
-    let type: ClothingType
     let price: Double
     let brand: String
     let itemUrl: String
-    let pictureUrl: String
+    var itemImage: UIImage?
     
-    init(name:String, type: ClothingType, brand: String, itemUrl:String) {
+    init(name:String, brand: String, itemUrl:String) {
         self.name = name
-        self.type = type
         self.brand = brand
         self.itemUrl = itemUrl
         
         self.price = 0.0
-        self.pictureUrl = ""
+        self.itemImage = nil
+    }
+    
+    init(name:String, brand: String, itemUrl:String, itemImage:UIImage) {
+        self.name = name
+        self.brand = brand
+        self.itemUrl = itemUrl
+        
+        self.price = 0.0
+        self.itemImage = itemImage
     }
     
     func toAnyObject() -> Any {

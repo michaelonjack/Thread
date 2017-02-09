@@ -71,7 +71,7 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         let clothingItemLink = textFieldItemLink.text
         
         // Create a new ClothingItem object to represent the new data
-        let newClothingItem = ClothingItem(name: clothingItemName!, type: clothingType, brand: clothingItemBrand!, itemUrl: clothingItemLink!)
+        let newClothingItem = ClothingItem(name: clothingItemName!, brand: clothingItemBrand!, itemUrl: clothingItemLink!)
         
         // Add the data to the database for the current user
         let currentUserClothingTypeRef = currentUserRef.child(clothingType.description)

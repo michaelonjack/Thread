@@ -26,6 +26,14 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
         
         tableviewResults.delegate = self
         tableviewResults.dataSource = self
+        
+        tableviewResults.rowHeight = UITableViewAutomaticDimension
+        tableviewResults.estimatedRowHeight = 300
+        
+        //Looks for single or multiple taps and hides keyboard
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,9 +46,13 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func searchDidTouch(_ sender: Any) {
         loadingAnimationView.type = .ballBeat
         loadingAnimationView.startAnimating()
+        view.endEditing(true)
         
         let query = textFieldQuery.text
         if query != nil && query != "" {
+            
+            clothingSearchResults.removeAll()
+            tableviewResults.reloadData()
             
             // Session Configuration
             let config = URLSessionConfiguration.default
@@ -57,13 +69,29 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
                 if error == nil {
                     
                     let jsonResponse = JSON(data: data!)
-                    print(jsonResponse.rawString() ?? "Error with swifty")
+                    
+                    for (key, subJson):(String, JSON) in jsonResponse["products"] {
+                        let itemName = subJson["name"].string
+                        let itemUrl = subJson["clickUrl"].string?.replacingOccurrences(of: "\\/", with: "/")
+                        let description = subJson["description"].string
+                        let picUrl =  subJson["image"]["sizes"]["IPhone"]["url"].string?.replacingOccurrences(of: "\\/", with: "/")
+                        
+                        
+                        self.clothingSearchResults.append( ClothingItem(name: itemName!, brand: description!, itemUrl: itemUrl!) )
+                        self.downloadImageFromUrl(url: picUrl!, index: Int(key)!)
+                        
+                    }
                     
                 } else {
                     print(error!.localizedDescription)
                 }
+                
+                DispatchQueue.main.async {
+                    self.tableviewResults.reloadData()
+                    self.loadingAnimationView.stopAnimating()
+                }
+                
             })
-            self.loadingAnimationView.stopAnimating()
             task.resume()
         } else {
             loadingAnimationView.stopAnimating()
@@ -76,8 +104,13 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "td")
-        cell.textLabel?.text = clothingSearchResults[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ClothingItemTableViewCell
+        
+        cell.labelInfo.text = clothingSearchResults[indexPath.row].name
+        cell.labelLink.text = clothingSearchResults[indexPath.row].itemUrl
+        let clothingPic = clothingSearchResults[indexPath.row].itemImage == nil ? UIImage(named: "Placeholder") : clothingSearchResults[indexPath.row].itemImage!
+        cell.imageViewClothingPic.image = clothingPic
+        
         return cell
     }
     
@@ -90,6 +123,31 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
     // What to do when a row is selected
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //self.performSegue(withIdentifier: self.aroundMeToOtherUser, sender: nearbyUsers[indexPath.section])
+    }
+    
+    func downloadImageFromUrl(url: String, index: Int) {
+        
+        let clothingPictureURL = URL(string:url)
+        let session = URLSession(configuration: .default)
+        let downloadTask = session.dataTask(with: clothingPictureURL!) { (data, response, error) in
+            if error == nil {
+                if let res = response as? HTTPURLResponse {
+                    print("Download image with response code \(res.statusCode)")
+                    if let imageData = data {
+                        self.clothingSearchResults[index].itemImage = UIImage(data: imageData)
+                    }
+                }
+            } else {
+                print(error?.localizedDescription ?? "Error downloading image")
+            }
+        }
+        downloadTask.resume()
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
 
     /*

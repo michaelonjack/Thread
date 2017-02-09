@@ -31,6 +31,7 @@
 		B1C96AA41E2C66730036E559 /* ThreadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96AA31E2C66730036E559 /* ThreadTests.swift */; };
 		B1C96AAF1E2C66730036E559 /* ThreadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96AAE1E2C66730036E559 /* ThreadUITests.swift */; };
 		B1D04E521E3C492D00031FF4 /* UIImageRotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D04E511E3C492D00031FF4 /* UIImageRotation.swift */; };
+		B1DE12311E4BEDCC00DF724F /* ClothingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE12301E4BEDCC00DF724F /* ClothingItemTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		B1C96AAE1E2C66730036E559 /* ThreadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadUITests.swift; sourceTree = "<group>"; };
 		B1C96AB01E2C66730036E559 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1D04E511E3C492D00031FF4 /* UIImageRotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageRotation.swift; sourceTree = "<group>"; };
+		B1DE12301E4BEDCC00DF724F /* ClothingItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingItemTableViewCell.swift; sourceTree = "<group>"; };
 		B315754A20752E20A13E984D /* Pods-Thread.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thread.release.xcconfig"; path = "Pods/Target Support Files/Pods-Thread/Pods-Thread.release.xcconfig"; sourceTree = "<group>"; };
 		BEED098888EFE05ADEE3966C /* Pods-ThreadUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadUITests/Pods-ThreadUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CB1E9B1CE232603724C5E794 /* Pods-ThreadTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadTests/Pods-ThreadTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				B193C7CF1E3E97A300054C78 /* OtherUserViewController.swift */,
 				B193C7D11E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift */,
 				B1878ADC1E49486900847326 /* ClothingSearchViewController.swift */,
+				B1DE12301E4BEDCC00DF724F /* ClothingItemTableViewCell.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */,
 				B1D04E521E3C492D00031FF4 /* UIImageRotation.swift in Sources */,
 				B174D02C1E36D8BF00218590 /* ClothingItemViewController.swift in Sources */,
+				B1DE12311E4BEDCC00DF724F /* ClothingItemTableViewCell.swift in Sources */,
 				B193C7D01E3E97A300054C78 /* OtherUserViewController.swift in Sources */,
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
 				B174D0281E36CAC700218590 /* APIKeys.swift in Sources */,
