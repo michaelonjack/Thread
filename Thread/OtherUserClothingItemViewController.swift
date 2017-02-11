@@ -25,6 +25,16 @@ class OtherUserClothingItemViewController: UIViewController {
     var clothingType: ClothingType!
     var user: User!
     
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  viewDidLoad
+    //
+    //  Begins the loading animation to show a picture is being loaded into view
+    //  Sets the view's title
+    //  Loads the user's data into view
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,12 +58,20 @@ class OtherUserClothingItemViewController: UIViewController {
         
         loadUserData()
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 
     
     
-    /*
-        Action to handle when the user likes (hearts another user's clothing item
-    */
+    /////////////////////////////////////////////////////
+    //
+    //  likeDidTouch
+    //
+    //  Action to handle when the user likes (hearts another user's clothing item
+    //
     @IBAction func likeDidTouch(_ sender: Any) {
         
         /*
@@ -69,20 +87,13 @@ class OtherUserClothingItemViewController: UIViewController {
     
     
     
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    
-    
-    
-    /*
-     Retrieves the user's data from the database and fills the view fields
-     Called when view loads
-     */
+    /////////////////////////////////////////////////////
+    //
+    //  loadUserData
+    //
+    //  Retrieves the user's data from the database and fills the view fields
+    //  Called when view loads
+    //
     func loadUserData() {
         
         // Load the stored image
@@ -90,28 +101,21 @@ class OtherUserClothingItemViewController: UIViewController {
             
             let storedData = snapshot.value as? NSDictionary
             
-            let pictureOrientation = storedData?["pictureOrientation"] as? String ?? ""
             self.labelItemName.text = storedData?["name"] as? String ?? ""
             self.labelItemBrand.text = storedData?["brand"] as? String ?? ""
             self.textViewItemLink.text = storedData?["link"] as? String ?? ""
             
             if snapshot.hasChild("pictureUrl") {
                 self.userStorageRef.child(self.clothingType.description).data(withMaxSize: 20*1024*1024, completion: {(data, error) in
-                    var clothingImage = UIImage(data:data!)
+                    if error == nil {
+                        let clothingImage = UIImage(data:data!)
                     
-                    if(clothingImage?.size.width.isLess(than: (clothingImage?.size.height)!))! {
-                        if (pictureOrientation == "landscape") {
-                            clothingImage = clothingImage?.rotated(by: Measurement(value: -90.0, unit: .degrees))
-                        }
+                        self.imageViewClothingPicture.contentMode = .scaleAspectFit
+                        self.loadingAnimationView.stopAnimating()
+                        self.imageViewClothingPicture.image = clothingImage
                     } else {
-                        if (pictureOrientation == "portrait") {
-                            clothingImage = clothingImage?.rotated(by: Measurement(value: 90.0, unit: .degrees))
-                        }
+                        print(error?.localizedDescription ?? "Error loading clothing image")
                     }
-                    
-                    self.imageViewClothingPicture.contentMode = .scaleAspectFit
-                    self.loadingAnimationView.stopAnimating()
-                    self.imageViewClothingPicture.image = clothingImage
                 })
             } else {
                 self.loadingAnimationView.stopAnimating()

@@ -17,9 +17,17 @@ class OtherUserViewController: UIViewController {
     
     var userRef: FIRDatabaseReference!
     var userStorageRef: FIRStorageReference!
-    
     var otherUser: User!
     
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  viewDidLoad
+    //
+    //  Shapes the user's profile picture into a circle
+    //  Loads the user's profile picture into the view
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,18 +42,19 @@ class OtherUserViewController: UIViewController {
         loadProfilePicture()
 
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
     
-    
-    /*
-     Pulls the user's profile picture from the database if it exists
-     */
+    /////////////////////////////////////////////////////
+    //
+    //  loadProfilePicture
+    //
+    //  Pulls the user's profile picture from the database if it exists and sets it as the imageView's image
+    //
     func loadProfilePicture() {
         // Load the stored image
         userRef.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -78,15 +87,19 @@ class OtherUserViewController: UIViewController {
                     self.imageViewProfilePicture.contentMode = .scaleAspectFill
                 })
             } else {
-                print("blah")
+                print("Error loading user image")
             }
         })
     }
     
     
     
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    /////////////////////////////////////////////////////
+    //
+    //  prepareForSegue
+    //
+    //  Segues to the other user's selected clothing type
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier! {
         case "TopToClothingItem":

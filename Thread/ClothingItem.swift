@@ -14,12 +14,14 @@ struct ClothingItem {
     let brand: String
     let itemUrl: String
     var itemImage: UIImage?
+    var isExpanded: Bool
     
     init(name:String, brand: String, itemUrl:String) {
         self.name = name
         self.brand = brand
         self.itemUrl = itemUrl
         
+        self.isExpanded = false
         self.price = 0.0
         self.itemImage = nil
     }
@@ -29,6 +31,7 @@ struct ClothingItem {
         self.brand = brand
         self.itemUrl = itemUrl
         
+        self.isExpanded = false
         self.price = 0.0
         self.itemImage = itemImage
     }

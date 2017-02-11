@@ -27,6 +27,17 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     var imageDidChange: Bool! = false
     var keyboardShowing: Bool! = false
     
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  viewDidLoad
+    //
+    //  Adds observers to watch for keyboard events (when keyboard will show/hide call keyboardWillShow/keyboardWillHide)
+    //  Starts the loading animation to show that the clothing image is loading
+    //  Sets the top label view to describe the type of Clothing Item that is being displayed
+    //  Loads the user's data to be displayed in the view
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,9 +70,13 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     
-    /*
-        Action to handle when the user wants to save the data in the view
-    */
+    
+    /////////////////////////////////////////////////////
+    //
+    //  saveDidTouch
+    //
+    //  Action to handle when the user wants to save the data in the view
+    //
     @IBAction func saveDidTouch(_ sender: Any) {
         loadingAnimationView.type = .ballBeat
         loadingAnimationView.startAnimating()
@@ -110,10 +125,14 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     
-    /*
-        Action to handle when the user selects the camera button
-        Uses the user's camera to take a picture
-    */
+    
+    /////////////////////////////////////////////////////
+    //
+    //  cameraDidTouch
+    //
+    //  Action to handle when the user selects the camera button
+    //  Uses the user's camera to take a picture
+    //
     @IBAction func cameraDidTouch(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             picker.sourceType = UIImagePickerControllerSourceType.camera;
@@ -125,10 +144,14 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     
-    /*
-        Action to handle when the user selects the photo library button
-        Allows the user to select a photo from their phone library
-    */
+    
+    /////////////////////////////////////////////////////
+    //
+    //  photoLibraryDidTouch
+    //
+    //  Action to handle when the user selects the photo library button
+    //  Allows the user to select a photo from their phone library
+    //
     @IBAction func photoLibraryDidTouch(_ sender: Any) {
         picker.allowsEditing = false
         picker.sourceType = .photoLibrary
@@ -137,10 +160,14 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     
-    /*
-        Pulls the image chosen by the user (via their photo library or camera) and sets that as the view's image
-        Called by cameraDidTouch and photoLibraryDidTouch
-    */
+    
+    /////////////////////////////////////////////////////
+    //
+    //  imagePickController
+    //
+    //  Pulls the image chosen by the user (via their photo library or camera) and sets that as the view's image
+    //  Called by cameraDidTouch and photoLibraryDidTouch
+    //
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
@@ -155,10 +182,14 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     
-    /*
-        Retrieves the current user's data from the database and fills the view fields
-        Called when view loads
-    */
+    
+    /////////////////////////////////////////////////////
+    //
+    //  loadUserData
+    //
+    //  Retrieves the current user's data from the database and fills the view fields
+    //  Called when view loads
+    //
     func loadUserData() {
         
         // Load the stored image
@@ -172,11 +203,15 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
             
             if snapshot.hasChild("pictureUrl") {
                 self.currentUserStorageRef.child(self.clothingType.description).data(withMaxSize: 20*1024*1024, completion: {(data, error) in
-                    let clothingImage = UIImage(data:data!)
+                    if error == nil {
+                        let clothingImage = UIImage(data:data!)
                     
-                    self.imageViewClothingPicture.contentMode = .scaleAspectFit
-                    self.loadingAnimationView.stopAnimating()
-                    self.imageViewClothingPicture.image = clothingImage
+                        self.imageViewClothingPicture.contentMode = .scaleAspectFit
+                        self.loadingAnimationView.stopAnimating()
+                        self.imageViewClothingPicture.image = clothingImage
+                    } else {
+                        print(error?.localizedDescription ?? "Error loading image")
+                    }
                 })
             } else {
                 self.loadingAnimationView.stopAnimating()
@@ -184,7 +219,14 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         })
     }
     
-    // Move the view up when the keyboard shows so text fields won't be hidden
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  keyboardWillShow
+    //
+    //  Moves the view up when the keyboard shows so that text fields won't be hidden
+    //
     func keyboardWillShow(_ notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             
@@ -195,7 +237,14 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         }
     }
     
-    // Move the view down when the keyboard hides
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  keyboardWillHide
+    //
+    //  Moves the wiew back down when the keyboard is hiden
+    //
     func keyboardWillHide(_ notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             
@@ -206,7 +255,14 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         }
     }
     
-    // Hide the keyboard when the user selects a non-textfield area
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  touchesBegan
+    //
+    //  Hides the keyboard when the user selects a non-textfield area
+    //
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }

@@ -15,12 +15,12 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    
-    let loginToMain = "LoginToMain"
-    let usersRef = FIRDatabase.database().reference(withPath: "users")
 
     @IBOutlet weak var textFieldLoginEmail: UITextField!
     @IBOutlet weak var textFieldLoginPassword: UITextField!
+    
+    let loginToMain = "LoginToMain"
+    let usersRef = FIRDatabase.database().reference(withPath: "users")
     
     
     

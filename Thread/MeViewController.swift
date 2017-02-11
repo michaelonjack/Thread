@@ -23,7 +23,6 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
     
     let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
     let currentUserStorageRef = FIRStorage.storage().reference(withPath: "images/" + (FIRAuth.auth()?.currentUser?.uid)!)
-    
     let imagePicker = UIImagePickerController()
     
     

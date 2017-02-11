@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Thread/MeViewController.swift"
-            timestampString = "507690318.558884"
+            timestampString = "508475490.60257"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "loadProfilePicture()"
             landmarkType = "7">
             <Locations>

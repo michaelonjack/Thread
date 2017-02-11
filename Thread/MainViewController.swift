@@ -11,8 +11,11 @@ import CoreLocation
 
 class MainViewController: UIViewController, CLLocationManagerDelegate {
     
+    // Name of segue used when the user selects the logout button (goes back to the login screen)
     let logoutToLogin = "LogoutToLogin"
+    // LocationManager instance used to update the current user's location
     let locationManager = CLLocationManager()
+    // Reference to the current user's information in the database
     let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
 
     
@@ -21,7 +24,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     //
     //  viewDidLoad
     //
-    //
+    //  Requests the user's locations
     //
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +47,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     //
     //  locationManager
     //
-    //
+    //  Updates the user's latitude and longitude values in the Firebase database
+    //  Implicitly called by viewDidLoad when requesting the location
     //
     // Process the received location update
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -82,25 +86,5 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
