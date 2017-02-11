@@ -21,6 +21,7 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
     let shopStlyeEndpoint = "https://api.shopstyle.com/api/v2/products?pid="
     
     var clothingSearchResults: [ClothingItem] = []
+    var totalNumberOfProductsFound: Int = 0
     
     
     
@@ -85,28 +86,23 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
                 if error == nil {
                     
                     let jsonResponse = JSON(data: data!)
-                    //print(jsonResponse.rawValue)
+                    self.totalNumberOfProductsFound = jsonResponse["metadata"]["total"].int! > 25 ? 25 : jsonResponse["metadata"]["total"].int!
+                    
                     for (key, subJson):(String, JSON) in jsonResponse["products"] {
-                        let itemName = subJson["name"].string
-                        let itemUrl = subJson["clickUrl"].string?.replacingOccurrences(of: "\\/", with: "/")
-                        
-                        let itemBrand = subJson["brand"]["name"].string
+                        let itemName = subJson["name"].string ?? ""
+                        let itemUrl = subJson["clickUrl"].string?.replacingOccurrences(of: "\\/", with: "/") ?? ""
+                        let itemBrand = subJson["brand"]["name"].string ?? ""
                         //let description = subJson["description"].string
                         let picUrl =  subJson["image"]["sizes"]["IPhone"]["url"].string?.replacingOccurrences(of: "\\/", with: "/")
                         
                         
-                        self.clothingSearchResults.append( ClothingItem(name: itemName!, brand: itemBrand!, itemUrl: itemUrl!) )
+                        self.clothingSearchResults.append( ClothingItem(name: itemName, brand: itemBrand, itemUrl: itemUrl) )
                         self.downloadImageFromUrl(url: picUrl!, index: Int(key)!)
                         
                     }
                     
                 } else {
                     print(error!.localizedDescription)
-                }
-                
-                DispatchQueue.main.async {
-                    self.tableviewResults.reloadData()
-                    self.loadingAnimationView.stopAnimating()
                 }
                 
             })
@@ -221,8 +217,17 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
             } else {
                 print(error?.localizedDescription ?? "Error downloading image")
             }
+            
+            // Once all of the images have been downloaded and set, refresh the table view
+            if self.totalNumberOfProductsFound-1 == index {
+                DispatchQueue.main.async {
+                    self.tableviewResults.reloadData()
+                    self.loadingAnimationView.stopAnimating()
+                }
+            }
         }
         downloadTask.resume()
+        
     }
     
     //Calls this function when the tap is recognized.
