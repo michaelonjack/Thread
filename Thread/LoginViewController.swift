@@ -13,14 +13,19 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var textFieldLoginEmail: UITextField!
     @IBOutlet weak var textFieldLoginPassword: UITextField!
+    @IBOutlet weak var buttonTouchID: UIButton!
     
     let loginToMain = "LoginToMain"
     let usersRef = FIRDatabase.database().reference(withPath: "users")
+    let threadKeychainWrapper = KeychainWrapper()
+    
+    var authContext = LAContext()
     
     
     
@@ -33,11 +38,18 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        buttonTouchID.isHidden = true
+        
         // If a user is already logged in, skip login view and continue to the main view
         FIRAuth.auth()?.addStateDidChangeListener() { auth, user in
             if user != nil && (user?.isEmailVerified)! {
                 self.performSegue(withIdentifier: self.loginToMain, sender: nil)
             }
+        }
+        
+        // If the user's device supports touch ID and their login is stored in the keychain, show the touch ID button
+        if authContext.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: nil) && UserDefaults.standard.bool(forKey: "hasLoginKey"){
+            buttonTouchID.isHidden = false
         }
     }
 
@@ -61,6 +73,19 @@ class LoginViewController: UIViewController {
                 
                 // Check if user has already verified their email address
                 if user.isEmailVerified {
+                    
+                    // Check if the user has already supplied their credentials to keychain
+                    let hasLoginKey = UserDefaults.standard.bool(forKey: "hasLoginKey")
+                    if hasLoginKey == false {
+                        // If not, store their email and password to the keychain
+                        UserDefaults.standard.setValue(self.textFieldLoginEmail.text, forKey: "userEmail")
+                        
+                        self.threadKeychainWrapper.mySetObject(self.textFieldLoginPassword.text, forKey:kSecValueData)
+                        self.threadKeychainWrapper.writeToKeychain()
+                        UserDefaults.standard.set(true, forKey: "hasLoginKey")
+                        UserDefaults.standard.synchronize()
+                    }
+                    
                     self.performSegue(withIdentifier: self.loginToMain, sender: nil)
                 }
                     
@@ -92,11 +117,11 @@ class LoginViewController: UIViewController {
             }
             // If the login fails, display the error message to the user
             else {
-                let errorAlert = UIAlertController(title: "login error",
+                let errorAlert = UIAlertController(title: "Login Error",
                                                    message: error?.localizedDescription,
                                                    preferredStyle: .alert)
                 
-                let okayAction = UIAlertAction(title: "okay", style: .default)
+                let okayAction = UIAlertAction(title: "Close", style: .default)
                 errorAlert.addAction(okayAction)
                 self.present(errorAlert, animated: true, completion:nil)
             }
@@ -204,7 +229,53 @@ class LoginViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
-
+    
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  touchIDDidTouch
+    //
+    //  Authenitcates the user via touch ID
+    //  Uses their email/password stored in keychain
+    //
+    @IBAction func touchIDDidTouch(_ sender: Any) {
+        // Check to be sure the user's device supports touch ID
+        if authContext.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+            authContext.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Logging in with Touch ID", reply: { (success, error) in
+                
+                DispatchQueue.main.async {
+                    if success {
+                        if UserDefaults.standard.bool(forKey: "hasLoginKey") {
+                            let userEmail = UserDefaults.standard.value(forKey: "userEmail") as! String
+                            let userPassword = self.threadKeychainWrapper.myObject(forKey: "v_Data") as! String
+    
+                            FIRAuth.auth()!.signIn(withEmail: userEmail, password: userPassword) { user, error in
+                                if let user = FIRAuth.auth()?.currentUser {
+                                    // Check if user has already verified their email address
+                                    if user.isEmailVerified {
+                                        self.performSegue(withIdentifier: self.loginToMain, sender: nil)
+                                    }
+                                }
+                                // If the login fails, display the error message to the user
+                                else {
+                                    let errorAlert = UIAlertController(title: "Login Error",
+                                                                       message: error?.localizedDescription,
+                                                                       preferredStyle: .alert)
+                                    
+                                    let okayAction = UIAlertAction(title: "Close", style: .default)
+                                    errorAlert.addAction(okayAction)
+                                    self.present(errorAlert, animated: true, completion:nil)
+                                }
+                            }
+                        } else {
+                            print("login not saved in keychain")
+                        }
+                    }
+                }
+            })
+        }
+    }
 
 }
 
