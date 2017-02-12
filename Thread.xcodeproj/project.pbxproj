@@ -24,6 +24,7 @@
 		B1878ADD1E49486900847326 /* ClothingSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1878ADC1E49486900847326 /* ClothingSearchViewController.swift */; };
 		B193C7D01E3E97A300054C78 /* OtherUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B193C7CF1E3E97A300054C78 /* OtherUserViewController.swift */; };
 		B193C7D21E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B193C7D11E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift */; };
+		B1A089AA1E4FE4DD00FC7C65 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B1A089A91E4FE4DD00FC7C65 /* KeychainWrapper.m */; };
 		B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A8E1E2C66730036E559 /* AppDelegate.swift */; };
 		B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A901E2C66730036E559 /* LoginViewController.swift */; };
 		B1C96A941E2C66730036E559 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C96A921E2C66730036E559 /* Main.storyboard */; };
@@ -74,6 +75,8 @@
 		B1878ADC1E49486900847326 /* ClothingSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingSearchViewController.swift; sourceTree = "<group>"; };
 		B193C7CF1E3E97A300054C78 /* OtherUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserViewController.swift; sourceTree = "<group>"; };
 		B193C7D11E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserClothingItemViewController.swift; sourceTree = "<group>"; };
+		B1A089A81E4FE4DD00FC7C65 /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
+		B1A089A91E4FE4DD00FC7C65 /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
 		B1C96A8B1E2C66730036E559 /* Thread.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thread.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C96A8E1E2C66730036E559 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1C96A901E2C66730036E559 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +168,8 @@
 			children = (
 				B1C96A8E1E2C66730036E559 /* AppDelegate.swift */,
 				B174D0271E36CAC700218590 /* APIKeys.swift */,
+				B1A089A81E4FE4DD00FC7C65 /* KeychainWrapper.h */,
+				B1A089A91E4FE4DD00FC7C65 /* KeychainWrapper.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -555,6 +560,7 @@
 				B193C7D01E3E97A300054C78 /* OtherUserViewController.swift in Sources */,
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
 				B174D0281E36CAC700218590 /* APIKeys.swift in Sources */,
+				B1A089AA1E4FE4DD00FC7C65 /* KeychainWrapper.m in Sources */,
 				B18430861E33B03A00EED632 /* User.swift in Sources */,
 				B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */,
 				B163FA3F1E3051EC00EF399D /* AroundMeTableViewController.swift in Sources */,
