@@ -132,7 +132,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     //  Sets the background color of the table to match the color of other view controllers (Mocha)
     //
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.contentView.backgroundColor = ((indexPath.row % 2) == 0) ? UIColor.init(red: 147.0/255.0, green: 82.0/255.0, blue: 0.0/255.0, alpha: 1.0) : UIColor.white
+        cell.contentView.backgroundColor = UIColor.init(red: 147.0/255.0, green: 82.0/255.0, blue: 0.0/255.0, alpha: 1.0)
     }
 
     
@@ -177,7 +177,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     //
     // What to do when a row is selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: self.aroundMeToOtherUser, sender: nearbyUsers[indexPath.section])
+        self.performSegue(withIdentifier: self.aroundMeToOtherUser, sender: nearbyUsers[indexPath.row])
     }
 
     
