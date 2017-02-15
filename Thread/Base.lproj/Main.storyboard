@@ -390,48 +390,65 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9p-IL-Ly5">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9p-IL-Ly5">
                                 <rect key="frame" x="36" y="247" width="122" height="114"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="122" id="WN3-Qe-j8j"/>
+                                    <constraint firstAttribute="height" constant="114" id="v3s-fb-OMu"/>
+                                </constraints>
                                 <state key="normal" image="Shirt"/>
                                 <connections>
                                     <segue destination="k5d-ze-k3f" kind="show" identifier="topToClothingItem" id="8rV-wC-94a"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zb8-Sw-nAQ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zb8-Sw-nAQ">
                                 <rect key="frame" x="217" y="428" width="122" height="114"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="122" id="Htf-Wq-OKw"/>
+                                    <constraint firstAttribute="height" constant="114" id="NmT-RS-RiW"/>
+                                </constraints>
                                 <state key="normal" image="Accessories"/>
                                 <connections>
                                     <segue destination="k5d-ze-k3f" kind="show" identifier="accessoryToClothingItem" id="CcR-7v-AIq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2m-bz-fYz">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2m-bz-fYz">
                                 <rect key="frame" x="217" y="247" width="122" height="114"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="114" id="DYl-bO-gtr"/>
+                                    <constraint firstAttribute="width" constant="122" id="OYP-Fv-jIn"/>
+                                </constraints>
                                 <state key="normal" image="Pants"/>
                                 <connections>
                                     <segue destination="k5d-ze-k3f" kind="show" identifier="bottomToClothingItem" id="qcO-9A-bHk"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-oh-qzy">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-oh-qzy">
                                 <rect key="frame" x="132" y="64" width="110" height="110"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="BrJ-tE-BCR"/>
+                                    <constraint firstAttribute="width" constant="110" id="gcD-Zp-eNL"/>
+                                </constraints>
                                 <state key="normal" image="Avatar"/>
                                 <connections>
                                     <action selector="profilePictureDidTouch:" destination="nhK-sL-opV" eventType="touchUpInside" id="vyP-SY-ayb"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ma-lh-Na0">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ma-lh-Na0">
                                 <rect key="frame" x="99" y="182" width="176" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="axf-DN-2Mo"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                 <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78j-YL-hyQ">
-                                <rect key="frame" x="36" y="433" width="122" height="109"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78j-YL-hyQ">
+                                <rect key="frame" x="36" y="428" width="122" height="114"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="122" id="Uzw-Ad-MtF"/>
+                                    <constraint firstAttribute="height" constant="114" id="XMN-38-qhI"/>
+                                </constraints>
                                 <state key="normal" image="Shoes"/>
                                 <connections>
                                     <segue destination="k5d-ze-k3f" kind="show" identifier="shoeToClothingItem" id="iUv-i4-M33"/>
@@ -439,6 +456,23 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="9ma-lh-Na0" firstAttribute="leading" secondItem="B9p-IL-Ly5" secondAttribute="trailing" constant="-59" id="1A3-Oh-eml"/>
+                            <constraint firstItem="9ma-lh-Na0" firstAttribute="leading" secondItem="voD-b7-Q14" secondAttribute="leadingMargin" constant="83" id="2DL-Ce-3sl"/>
+                            <constraint firstItem="zb8-Sw-nAQ" firstAttribute="leading" secondItem="T2m-bz-fYz" secondAttribute="leading" id="2Xd-mG-Xay"/>
+                            <constraint firstItem="xd4-oh-qzy" firstAttribute="top" secondItem="0VL-AJ-v9e" secondAttribute="bottom" id="4Sl-H5-B7D"/>
+                            <constraint firstItem="xd4-oh-qzy" firstAttribute="centerX" secondItem="9ma-lh-Na0" secondAttribute="centerX" id="7hc-UT-Okv"/>
+                            <constraint firstItem="xd4-oh-qzy" firstAttribute="centerX" secondItem="voD-b7-Q14" secondAttribute="centerX" id="G9T-yj-5li"/>
+                            <constraint firstItem="zb8-Sw-nAQ" firstAttribute="bottom" secondItem="78j-YL-hyQ" secondAttribute="bottom" id="RzU-wp-UGc"/>
+                            <constraint firstItem="T2m-bz-fYz" firstAttribute="top" secondItem="9ma-lh-Na0" secondAttribute="bottom" constant="44" id="TQh-b0-mwe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="T2m-bz-fYz" secondAttribute="trailing" constant="20" id="Tdx-Ht-Wvv"/>
+                            <constraint firstItem="9ma-lh-Na0" firstAttribute="top" secondItem="xd4-oh-qzy" secondAttribute="bottom" constant="8" symbolic="YES" id="bZo-B8-HCY"/>
+                            <constraint firstItem="9ma-lh-Na0" firstAttribute="leading" secondItem="78j-YL-hyQ" secondAttribute="trailing" constant="-59" id="eRC-67-RvR"/>
+                            <constraint firstItem="T2m-bz-fYz" firstAttribute="top" secondItem="B9p-IL-Ly5" secondAttribute="top" id="l0r-qn-Gvt"/>
+                            <constraint firstItem="T2m-bz-fYz" firstAttribute="bottom" secondItem="B9p-IL-Ly5" secondAttribute="bottom" id="lfz-5X-3n1"/>
+                            <constraint firstItem="zb8-Sw-nAQ" firstAttribute="top" secondItem="T2m-bz-fYz" secondAttribute="bottom" constant="67" id="lq7-1f-Pk5"/>
+                            <constraint firstItem="zb8-Sw-nAQ" firstAttribute="trailing" secondItem="T2m-bz-fYz" secondAttribute="trailing" id="tv0-qJ-obh"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="buttonProfilePicture" destination="xd4-oh-qzy" id="vxh-Ex-Ydu"/>
@@ -700,44 +734,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buc-yL-Uj5">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buc-yL-Uj5">
                                 <rect key="frame" x="36" y="247" width="122" height="114"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="122" id="JLl-5a-kWU"/>
+                                    <constraint firstAttribute="height" constant="114" id="ViD-gf-WcX"/>
+                                </constraints>
                                 <state key="normal" image="Shirt"/>
                                 <connections>
                                     <segue destination="yUe-gp-dJI" kind="show" identifier="TopToClothingItem" id="zi9-Jf-VWI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IYe-at-rPn">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IYe-at-rPn">
                                 <rect key="frame" x="217" y="247" width="122" height="114"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="114" id="FWq-bn-Bjy"/>
+                                    <constraint firstAttribute="width" constant="122" id="cE6-UV-Jn6"/>
+                                </constraints>
                                 <state key="normal" image="Pants"/>
                                 <connections>
                                     <segue destination="yUe-gp-dJI" kind="show" identifier="BottomToClothingItem" id="gLM-5X-FwU"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paU-kv-HWu">
-                                <rect key="frame" x="36" y="433" width="122" height="109"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paU-kv-HWu">
+                                <rect key="frame" x="36" y="433" width="122" height="114"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="114" id="60i-we-hHM"/>
+                                    <constraint firstAttribute="width" constant="122" id="sN3-va-PD5"/>
+                                </constraints>
                                 <state key="normal" image="Shoes"/>
                                 <connections>
                                     <segue destination="yUe-gp-dJI" kind="show" identifier="ShoeToClothingItem" id="25a-Eo-keZ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaO-JR-JvS">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaO-JR-JvS">
                                 <rect key="frame" x="99" y="182" width="176" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="moJ-Op-toI"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                 <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="AXy-wZ-LGP">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="AXy-wZ-LGP">
                                 <rect key="frame" x="132" y="64" width="110" height="110"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="EJ1-5O-EQ9"/>
+                                    <constraint firstAttribute="width" constant="110" id="d1Z-a7-sfO"/>
+                                </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bS4-D7-GLv">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bS4-D7-GLv">
                                 <rect key="frame" x="217" y="430" width="122" height="114"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="122" id="r6S-z0-zfY"/>
+                                    <constraint firstAttribute="height" constant="114" id="spU-sw-64C"/>
+                                </constraints>
                                 <state key="normal" image="Accessories"/>
                                 <connections>
                                     <segue destination="yUe-gp-dJI" kind="show" identifier="AccessoryToClothingItem" id="ha3-Nr-ntE"/>
@@ -745,6 +796,24 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="AXy-wZ-LGP" firstAttribute="centerX" secondItem="JaO-JR-JvS" secondAttribute="centerX" id="2vV-OD-gSZ"/>
+                            <constraint firstItem="paU-kv-HWu" firstAttribute="leading" secondItem="buc-yL-Uj5" secondAttribute="leading" id="4rz-8s-REP"/>
+                            <constraint firstItem="AXy-wZ-LGP" firstAttribute="top" secondItem="vgu-1w-3qx" secondAttribute="bottom" id="83y-yz-R7p"/>
+                            <constraint firstItem="IYe-at-rPn" firstAttribute="bottom" secondItem="buc-yL-Uj5" secondAttribute="bottom" id="99d-WB-YC8"/>
+                            <constraint firstItem="IYe-at-rPn" firstAttribute="top" secondItem="JaO-JR-JvS" secondAttribute="bottom" constant="44" id="CGJ-Cb-YFg"/>
+                            <constraint firstItem="paU-kv-HWu" firstAttribute="trailing" secondItem="buc-yL-Uj5" secondAttribute="trailing" id="COm-zm-ykU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IYe-at-rPn" secondAttribute="trailing" constant="20" id="CvR-V5-5CW"/>
+                            <constraint firstItem="JaO-JR-JvS" firstAttribute="leading" secondItem="buc-yL-Uj5" secondAttribute="trailing" constant="-59" id="Jgv-1b-xJQ"/>
+                            <constraint firstItem="bS4-D7-GLv" firstAttribute="top" secondItem="IYe-at-rPn" secondAttribute="bottom" constant="69" id="NAW-OY-GOe"/>
+                            <constraint firstItem="IYe-at-rPn" firstAttribute="top" secondItem="buc-yL-Uj5" secondAttribute="top" id="NM7-ZJ-XTq"/>
+                            <constraint firstItem="JaO-JR-JvS" firstAttribute="top" secondItem="AXy-wZ-LGP" secondAttribute="bottom" constant="8" symbolic="YES" id="ZQ1-2f-5vU"/>
+                            <constraint firstItem="IYe-at-rPn" firstAttribute="leading" secondItem="bS4-D7-GLv" secondAttribute="leading" id="hF6-bE-zBm"/>
+                            <constraint firstItem="IYe-at-rPn" firstAttribute="trailing" secondItem="bS4-D7-GLv" secondAttribute="trailing" id="hs2-nr-eW7"/>
+                            <constraint firstItem="AXy-wZ-LGP" firstAttribute="centerX" secondItem="v5q-Cf-AMH" secondAttribute="centerX" id="vKn-yf-P5v"/>
+                            <constraint firstItem="paU-kv-HWu" firstAttribute="top" secondItem="buc-yL-Uj5" secondAttribute="bottom" constant="72" id="wBA-sO-i8L"/>
+                            <constraint firstItem="JaO-JR-JvS" firstAttribute="leading" secondItem="v5q-Cf-AMH" secondAttribute="leadingMargin" constant="83" id="yQn-Vu-1le"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="imageViewProfilePicture" destination="AXy-wZ-LGP" id="pVo-lK-gb3"/>
