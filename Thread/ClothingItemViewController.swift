@@ -200,6 +200,7 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
                     
                         self.imageViewClothingPicture.contentMode = .scaleAspectFit
                         self.loadingAnimationView.stopAnimating()
+                        self.imageViewClothingPicture.backgroundColor = UIColor.white
                         self.imageViewClothingPicture.image = clothingImage
                     } else {
                         print(error?.localizedDescription ?? "Error loading image")
@@ -278,7 +279,7 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     
     
     @IBAction func unwindToClothingItemViewController(segue: UIStoryboardSegue) {
-        
+        print(self.clothingItem.toAnyObject())
     }
 
 }

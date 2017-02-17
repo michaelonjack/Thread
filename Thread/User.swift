@@ -28,6 +28,8 @@ struct User {
     let email: String
     let latitude: Double
     let longitude: Double
+    var profilePicture: UIImage?
+    var profilePictureUrl: String?
     
     init(uid: String, firstName: String, lastName: String, email: String, latitude: Double, longitude: Double) {
         self.uid = uid
@@ -55,6 +57,7 @@ struct User {
         email = snapshotValue["email"] as! String
         latitude = snapshotValue["latitude"] as! Double
         longitude = snapshotValue["longitude"] as! Double
+        profilePictureUrl = snapshotValue["profilePictureUrl"] as? String
     }
     
     func toAnyObject() -> Any {

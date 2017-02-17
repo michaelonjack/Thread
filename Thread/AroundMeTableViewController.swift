@@ -25,6 +25,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     
     // Reference to the app's users data in the Firebase database
     let usersRef = FIRDatabase.database().reference(withPath: "users")
+    let usersStorageRef = FIRStorage.storage().reference(withPath: "images")
     // FIRUser instance that represents the current user
     let currentFIRUser = FIRAuth.auth()?.currentUser
     // LocationManager instance used to update the current user's location
@@ -48,6 +49,9 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         // Give table VC mocha colored background
         self.tableView.backgroundColor = UIColor.init(red: 147.0/255.0, green: 82.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 100
+        
         
         self.locationManager.delegate = self
         // Request location authorization for the app
@@ -58,7 +62,6 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         // The app is notified of the change via the second parameter closure 
         // The snapshot represents the data at the moment in time
         usersRef.observe(.value, with: { snapshot in
-            var nearestUsers: [User] = []
             
             // End refreshing the table once the user location is retrieved
             if self.refresher != nil {
@@ -67,9 +70,9 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
             
             // Iterate through the list of users
             for user in snapshot.children {
+                
                 // Create instance of the potentially nearby user
                 let nearbyUser = User(snapshot: user as! FIRDataSnapshot)
-                print(nearbyUser)
                 
                 // Create a database snapshot for the currently logged in user
                 let currentUserSnapshot = snapshot.childSnapshot(forPath: (self.currentFIRUser?.uid)!)
@@ -78,8 +81,8 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
                 // Get the currently logged in user's position using the database snapshot
                 let latitude = currentUserSnapshotValue["latitude"] as? Double
                 let longitude = currentUserSnapshotValue["longitude"] as? Double
-                print("latitude: " + String(describing: latitude))
-                print("longitude: " + String(describing: longitude))
+                //print("latitude: " + String(describing: latitude))
+                //print("longitude: " + String(describing: longitude))
                 
                 // Get the current user's location using their latitude and longitude
                 let currentUserLocation = CLLocation(latitude: latitude!, longitude: longitude!)
@@ -89,17 +92,20 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
                 // Determine if user is near the current user, if so add to list
                 print("Distance between: " + String(currentUserLocation.distance(from: nearbyUserLocation)))
                 //if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
-                    nearestUsers.append(nearbyUser)
+                    self.nearbyUsers.append(nearbyUser)
+                
+                    if (nearbyUser.profilePictureUrl != nil && nearbyUser.profilePictureUrl != "") {
+                        self.loadProfilePicture(userId: nearbyUser.uid, index: self.nearbyUsers.count-1)
+                    }
                 //}
                 
                 // If a user's longitude and latitude are set to 0.0 then their location is not known so show no nearby users
                 if( floor(latitude!)==0 && floor(longitude!)==0 ) {
-                    nearestUsers.removeAll()
+                    self.nearbyUsers.removeAll()
                 }
                 
             }
             
-            self.nearbyUsers = nearestUsers
             self.tableView.reloadData()
         })
         
@@ -120,6 +126,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     //  Returns the number of rows in the table (uses the nearbyUsers array)
     //
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return nearbyUsers.count
     }
     
@@ -132,6 +139,8 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     //  Sets the background color of the table to match the color of other view controllers (Mocha)
     //
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserTableViewCell
+        
         cell.contentView.backgroundColor = UIColor.init(red: 147.0/255.0, green: 82.0/255.0, blue: 0.0/255.0, alpha: 1.0)
     }
 
@@ -145,11 +154,20 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     //  Uses the User at the matching index of nearbyUsers to set the cell text to the user's name and the cell subtitle to their email
     //
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserTableViewCell
         let user = nearbyUsers[indexPath.row]
         
-        cell.textLabel?.text = user.firstName + " " + user.lastName
-        cell.detailTextLabel?.text = user.email
+        cell.labelUserName.text = user.firstName + " " + user.lastName
+        
+        print("refreshing")
+        if user.profilePicture != nil {
+            cell.imageViewProfilePicture.image = user.profilePicture
+        }
+        
+        // Makes the profile picture view circular
+        cell.imageViewProfilePicture.contentMode = .scaleAspectFill
+        cell.imageViewProfilePicture.layer.cornerRadius = 0.5 * cell.imageViewProfilePicture.bounds.width
+        cell.imageViewProfilePicture.clipsToBounds = true
 
         return cell
     }
@@ -196,8 +214,6 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     
     
     
-    
-    
     /////////////////////////////////////////////////////
     //
     //  locationManager
@@ -215,6 +231,39 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     // Process any errors that may occur when gathering location
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
+    }
+    
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    // loadProfilePicture
+    //
+    //  Pulls the user's profile picture from the database if it exists
+    //
+    func loadProfilePicture(userId: String, index: Int) {
+        // Load the stored image
+        usersRef.child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            // Load user's profile picture from Firebase Storage if it exists (exists if the user has a profPic URL in the database)
+            if snapshot.hasChild("profilePictureUrl") {
+                self.usersStorageRef.child(userId + "/ProfilePicture").data(withMaxSize: 20*1024*1024, completion: {(data, error) in
+                    let storagePicture = UIImage(data:data!)
+                    print(index)
+                    // Sets the user's profile picture to the loaded image
+                    self.nearbyUsers[index].profilePicture = storagePicture
+                    print(self.nearbyUsers[index])
+                })
+            } else {
+                print("Error -- Loading Profile Picture")
+            }
+            
+            DispatchQueue.main.async {
+                print("Dispatching main")
+                self.tableView.reloadData()
+            }
+            
+        })
     }
     
     
