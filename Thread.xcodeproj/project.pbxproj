@@ -10,6 +10,7 @@
 		047A2A4DEADCCCC1006F080F /* Pods_ThreadUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE3BD1DB1BADDF10CDC9F8B /* Pods_ThreadUITests.framework */; };
 		0C6686D8773E8AE3E1E0D72A /* Pods_Thread.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9560FB66ADAA3C0318ED7771 /* Pods_Thread.framework */; };
 		3535199162A3752B698A930C /* Pods_ThreadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB2183E2AAEB7F63B3BAF82 /* Pods_ThreadTests.framework */; };
+		B162021F1E5699D90099D3D7 /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162021E1E5699D90099D3D7 /* MoreInfoViewController.swift */; };
 		B163FA3F1E3051EC00EF399D /* AroundMeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B163FA3E1E3051EC00EF399D /* AroundMeTableViewController.swift */; };
 		B174D0261E36C8E900218590 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B174D0251E36C8E900218590 /* APIKeys.plist */; };
 		B174D0281E36CAC700218590 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0271E36CAC700218590 /* APIKeys.swift */; };
@@ -60,6 +61,7 @@
 		7D290579FCFE88FA818A8002 /* Pods-Thread.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thread.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thread/Pods-Thread.debug.xcconfig"; sourceTree = "<group>"; };
 		8976F182E6528772898954DF /* Pods-ThreadUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadUITests/Pods-ThreadUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9560FB66ADAA3C0318ED7771 /* Pods_Thread.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thread.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B162021E1E5699D90099D3D7 /* MoreInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
 		B163FA3E1E3051EC00EF399D /* AroundMeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AroundMeTableViewController.swift; sourceTree = "<group>"; };
 		B174D0251E36C8E900218590 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		B174D0271E36CAC700218590 /* APIKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 		B184306A1E2D2EEB00EED632 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B162021E1E5699D90099D3D7 /* MoreInfoViewController.swift */,
 				B163FA3E1E3051EC00EF399D /* AroundMeTableViewController.swift */,
 				B18430781E2EED7300EED632 /* MeViewController.swift */,
 				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
@@ -569,6 +572,7 @@
 				B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */,
 				B163FA3F1E3051EC00EF399D /* AroundMeTableViewController.swift in Sources */,
 				B18430791E2EED7300EED632 /* MeViewController.swift in Sources */,
+				B162021F1E5699D90099D3D7 /* MoreInfoViewController.swift in Sources */,
 				B193C7D21E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift in Sources */,
 				B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */,
 			);

@@ -249,8 +249,9 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
             let clothingItemVC = segue.destination as! ClothingItemViewController
             let selectedItem = sender as! ClothingItem
             
-            clothingItemVC.textFieldItemName.text = selectedItem.name
-            clothingItemVC.textFieldItemLink.text = selectedItem.itemUrl
+            clothingItemVC.clothingItem.setName(name: selectedItem.name)
+            clothingItemVC.clothingItem.setBrand(brand: selectedItem.brand)
+            clothingItemVC.clothingItem.setItemUrl(url: selectedItem.itemUrl)
             clothingItemVC.imageViewClothingPicture.image = selectedItem.itemImage
             clothingItemVC.imageViewClothingPicture.contentMode = .scaleAspectFit
             clothingItemVC.imageDidChange = true

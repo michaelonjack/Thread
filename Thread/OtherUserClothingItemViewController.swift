@@ -21,6 +21,7 @@ class OtherUserClothingItemViewController: UIViewController {
     var userRef: FIRDatabaseReference!
     var userStorageRef: FIRStorageReference!
     
+    var clothingItem: ClothingItem!
     var clothingType: ClothingType!
     var user: User!
     
@@ -36,6 +37,8 @@ class OtherUserClothingItemViewController: UIViewController {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        clothingItem = ClothingItem()
 
         loadingAnimationView.type = .ballScaleMultiple
         loadingAnimationView.startAnimating()
@@ -100,8 +103,9 @@ class OtherUserClothingItemViewController: UIViewController {
             
             let storedData = snapshot.value as? NSDictionary
             
-            self.labelItemName.text = storedData?["name"] as? String ?? ""
-            self.textViewItemLink.text = storedData?["link"] as? String ?? ""
+            self.clothingItem.setName(name: storedData?["name"] as? String ?? "")
+            self.clothingItem.setBrand(brand: storedData?["brand"] as? String ?? "")
+            self.clothingItem.setItemUrl(url: storedData?["link"] as? String ?? "")
             
             if snapshot.hasChild("pictureUrl") {
                 self.userStorageRef.child(self.clothingType.description).data(withMaxSize: 20*1024*1024, completion: {(data, error) in
@@ -119,6 +123,23 @@ class OtherUserClothingItemViewController: UIViewController {
                 self.loadingAnimationView.stopAnimating()
             }
         })
+    }
+    
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  prepareForSegue
+    //
+    //
+    //
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowMoreSegue" {
+            let infoVC: MoreInfoViewController = segue.destination as! MoreInfoViewController
+            
+            infoVC.clothingItem = self.clothingItem
+            infoVC.canEdit = false
+        }
     }
 
 }

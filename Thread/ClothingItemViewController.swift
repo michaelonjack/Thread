@@ -10,11 +10,9 @@ import UIKit
 import FirebaseStorage
 import NVActivityIndicatorView
 
-class ClothingItemViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ClothingItemViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet weak var labelViewTitle: UILabel!
-    @IBOutlet weak var textFieldItemName: UITextField!
-    @IBOutlet weak var textFieldItemLink: UITextField!
     @IBOutlet weak var imageViewClothingPicture: UIImageView!
     @IBOutlet weak var loadingAnimationView: NVActivityIndicatorView!
     
@@ -22,6 +20,7 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
     let currentUserStorageRef = FIRStorage.storage().reference(withPath: "images/" + (FIRAuth.auth()?.currentUser?.uid)!)
     
+    var clothingItem: ClothingItem!
     var clothingType: ClothingType!
     var imageDidChange: Bool! = false
     var keyboardShowing: Bool! = false
@@ -42,6 +41,8 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+        
+        clothingItem = ClothingItem()
         
         loadingAnimationView.type = .ballScaleMultiple
         loadingAnimationView.startAnimating()
@@ -79,17 +80,10 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     @IBAction func saveDidTouch(_ sender: Any) {
         loadingAnimationView.type = .ballBeat
         loadingAnimationView.startAnimating()
-        print("hello")
-        
-        let clothingItemName = textFieldItemName.text
-        let clothingItemLink = textFieldItemLink.text
-        
-        // Create a new ClothingItem object to represent the new data
-        let newClothingItem = ClothingItem(name: clothingItemName!, brand: "", itemUrl: clothingItemLink!)
         
         // Add the data to the database for the current user
         let currentUserClothingTypeRef = currentUserRef.child(clothingType.description)
-        currentUserClothingTypeRef.updateChildValues(newClothingItem.toAnyObject() as! [AnyHashable : Any])
+        currentUserClothingTypeRef.updateChildValues(self.clothingItem.toAnyObject() as! [AnyHashable : Any])
         
         // Enter the user's image into the database
         if imageViewClothingPicture.image != nil && imageDidChange == true {
@@ -195,8 +189,9 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
             
             let storedData = snapshot.value as? NSDictionary
             
-            self.textFieldItemName.text = storedData?["name"] as? String ?? ""
-            self.textFieldItemLink.text = storedData?["link"] as? String ?? ""
+            self.clothingItem.setName(name: storedData?["name"] as? String ?? "")
+            self.clothingItem.setBrand(brand: storedData?["brand"] as? String ?? "")
+            self.clothingItem.setItemUrl(url: storedData?["link"] as? String ?? "")
             
             if snapshot.hasChild("pictureUrl") {
                 self.currentUserStorageRef.child(self.clothingType.description).data(withMaxSize: 20*1024*1024, completion: {(data, error) in
@@ -264,6 +259,22 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         self.view.endEditing(true)
     }
     
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  prepareForSegue
+    //
+    //
+    //
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowMoreSegue" {
+            let infoVC: MoreInfoViewController = segue.destination as! MoreInfoViewController
+            
+            infoVC.clothingItem = self.clothingItem
+            infoVC.canEdit = true
+        }
+    }
     
     
     @IBAction func unwindToClothingItemViewController(segue: UIStoryboardSegue) {
