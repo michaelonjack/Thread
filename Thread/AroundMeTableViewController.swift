@@ -88,9 +88,9 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
                 
                 // Determine if user is near the current user, if so add to list
                 print("Distance between: " + String(currentUserLocation.distance(from: nearbyUserLocation)))
-                if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
+                //if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
                     nearestUsers.append(nearbyUser)
-                }
+                //}
                 
                 // If a user's longitude and latitude are set to 0.0 then their location is not known so show no nearby users
                 if( floor(latitude!)==0 && floor(longitude!)==0 ) {

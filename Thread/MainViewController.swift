@@ -34,6 +34,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         self.locationManager.requestWhenInUseAuthorization()
         // Request a location update
         self.locationManager.requestLocation()
+        
     }
 
     override func didReceiveMemoryWarning() {

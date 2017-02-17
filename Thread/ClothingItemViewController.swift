@@ -14,7 +14,6 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
 
     @IBOutlet weak var labelViewTitle: UILabel!
     @IBOutlet weak var textFieldItemName: UITextField!
-    @IBOutlet weak var textFieldItemBrand: UITextField!
     @IBOutlet weak var textFieldItemLink: UITextField!
     @IBOutlet weak var imageViewClothingPicture: UIImageView!
     @IBOutlet weak var loadingAnimationView: NVActivityIndicatorView!
@@ -83,11 +82,10 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         print("hello")
         
         let clothingItemName = textFieldItemName.text
-        let clothingItemBrand = textFieldItemBrand.text
         let clothingItemLink = textFieldItemLink.text
         
         // Create a new ClothingItem object to represent the new data
-        let newClothingItem = ClothingItem(name: clothingItemName!, brand: clothingItemBrand!, itemUrl: clothingItemLink!)
+        let newClothingItem = ClothingItem(name: clothingItemName!, brand: "", itemUrl: clothingItemLink!)
         
         // Add the data to the database for the current user
         let currentUserClothingTypeRef = currentUserRef.child(clothingType.description)
@@ -198,7 +196,6 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
             let storedData = snapshot.value as? NSDictionary
             
             self.textFieldItemName.text = storedData?["name"] as? String ?? ""
-            self.textFieldItemBrand.text = storedData?["brand"] as? String ?? ""
             self.textFieldItemLink.text = storedData?["link"] as? String ?? ""
             
             if snapshot.hasChild("pictureUrl") {

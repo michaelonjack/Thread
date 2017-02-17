@@ -15,7 +15,6 @@ class OtherUserClothingItemViewController: UIViewController {
     @IBOutlet weak var imageViewClothingPicture: UIImageView!
     @IBOutlet weak var labelViewTitle: UILabel!
     @IBOutlet weak var labelItemName: UILabel!
-    @IBOutlet weak var labelItemBrand: UILabel!
     @IBOutlet weak var textViewItemLink: UITextView!
     @IBOutlet weak var loadingAnimationView: NVActivityIndicatorView!
     
@@ -102,7 +101,6 @@ class OtherUserClothingItemViewController: UIViewController {
             let storedData = snapshot.value as? NSDictionary
             
             self.labelItemName.text = storedData?["name"] as? String ?? ""
-            self.labelItemBrand.text = storedData?["brand"] as? String ?? ""
             self.textViewItemLink.text = storedData?["link"] as? String ?? ""
             
             if snapshot.hasChild("pictureUrl") {

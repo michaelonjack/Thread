@@ -250,7 +250,6 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
             let selectedItem = sender as! ClothingItem
             
             clothingItemVC.textFieldItemName.text = selectedItem.name
-            clothingItemVC.textFieldItemBrand.text = selectedItem.brand
             clothingItemVC.textFieldItemLink.text = selectedItem.itemUrl
             clothingItemVC.imageViewClothingPicture.image = selectedItem.itemImage
             clothingItemVC.imageViewClothingPicture.contentMode = .scaleAspectFit
