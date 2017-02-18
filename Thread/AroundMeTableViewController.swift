@@ -15,6 +15,7 @@
 
 import UIKit
 import CoreLocation
+import FirebaseStorage
 
 class AroundMeTableViewController: UITableViewController, CLLocationManagerDelegate {
 
@@ -35,6 +36,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     var nearbyUsers: [User] = []
     // Table refresher used to implement the pull-down-to-refresh functionality in the table view
     var refresher: UIRefreshControl!
+    var numUsersWithProfPic = 0
     
     
     
@@ -95,6 +97,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
                     self.nearbyUsers.append(nearbyUser)
                 
                     if (nearbyUser.profilePictureUrl != nil && nearbyUser.profilePictureUrl != "") {
+                        self.numUsersWithProfPic += 1
                         self.loadProfilePicture(userId: nearbyUser.uid, index: self.nearbyUsers.count-1)
                     }
                 //}
@@ -159,7 +162,6 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         
         cell.labelUserName.text = user.firstName + " " + user.lastName
         
-        print("refreshing")
         if user.profilePicture != nil {
             cell.imageViewProfilePicture.image = user.profilePicture
         }
@@ -249,20 +251,19 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
             if snapshot.hasChild("profilePictureUrl") {
                 self.usersStorageRef.child(userId + "/ProfilePicture").data(withMaxSize: 20*1024*1024, completion: {(data, error) in
                     let storagePicture = UIImage(data:data!)
-                    print(index)
+                    
                     // Sets the user's profile picture to the loaded image
                     self.nearbyUsers[index].profilePicture = storagePicture
-                    print(self.nearbyUsers[index])
+                    
+                        DispatchQueue.main.async {
+                            let indexPath = IndexPath(item: index, section: 0)
+                            self.tableView.reloadRows(at: [indexPath], with: .fade)
+                        }
+                    
                 })
             } else {
                 print("Error -- Loading Profile Picture")
             }
-            
-            DispatchQueue.main.async {
-                print("Dispatching main")
-                self.tableView.reloadData()
-            }
-            
         })
     }
     

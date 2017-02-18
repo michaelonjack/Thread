@@ -114,6 +114,7 @@ class OtherUserClothingItemViewController: UIViewController {
                     
                         self.imageViewClothingPicture.contentMode = .scaleAspectFit
                         self.loadingAnimationView.stopAnimating()
+                        self.imageViewClothingPicture.backgroundColor = UIColor.white
                         self.imageViewClothingPicture.image = clothingImage
                     } else {
                         print(error?.localizedDescription ?? "Error loading clothing image")
