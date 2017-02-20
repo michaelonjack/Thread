@@ -99,7 +99,7 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
             
         // Create a Data object to represent the image as a JPEG
         var imageData = Data()
-        imageData = UIImageJPEGRepresentation(chosenImage, 1.0)!
+        imageData = UIImageJPEGRepresentation(chosenImage, 0.05)!
             
         // Get reference to the user's profile picture in Firebase Storage
         let currentUserProfilePictureRef = currentUserStorageRef.child("ProfilePicture")
