@@ -80,7 +80,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             // Blank out the user's location
             currentUserRef.updateChildValues(["latitude": 0.0, "longitude": 0.0])
             
-            self.performSegue(withIdentifier: self.logoutToLogin, sender: nil)
+            self.dismiss(animated: true, completion: nil)
         } catch {
             print("Error while signing out")
         }

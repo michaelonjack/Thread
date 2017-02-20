@@ -36,7 +36,6 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     var nearbyUsers: [User] = []
     // Table refresher used to implement the pull-down-to-refresh functionality in the table view
     var refresher: UIRefreshControl!
-    var numUsersWithProfPic = 0
     
     
     
@@ -83,28 +82,20 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
                 // Get the currently logged in user's position using the database snapshot
                 let latitude = currentUserSnapshotValue["latitude"] as? Double
                 let longitude = currentUserSnapshotValue["longitude"] as? Double
-                //print("latitude: " + String(describing: latitude))
-                //print("longitude: " + String(describing: longitude))
-                
-                // Get the current user's location using their latitude and longitude
-                let currentUserLocation = CLLocation(latitude: latitude!, longitude: longitude!)
-                // Get the potentially nearby user's location using their latitude and longitudde
-                let nearbyUserLocation = CLLocation(latitude: nearbyUser.latitude, longitude: nearbyUser.longitude)
-                
-                // Determine if user is near the current user, if so add to list
-                print("Distance between: " + String(currentUserLocation.distance(from: nearbyUserLocation)))
-                //if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
-                    self.nearbyUsers.append(nearbyUser)
-                
-                    if (nearbyUser.profilePictureUrl != nil && nearbyUser.profilePictureUrl != "") {
-                        self.numUsersWithProfPic += 1
-                        self.loadProfilePicture(userId: nearbyUser.uid, index: self.nearbyUsers.count-1)
-                    }
-                //}
                 
                 // If a user's longitude and latitude are set to 0.0 then their location is not known so show no nearby users
-                if( floor(latitude!)==0 && floor(longitude!)==0 ) {
-                    self.nearbyUsers.removeAll()
+                if( floor(latitude!) != 0 && floor(longitude!) != 0 ) {
+                
+                    // Get the current user's location using their latitude and longitude
+                    let currentUserLocation = CLLocation(latitude: latitude!, longitude: longitude!)
+                    // Get the potentially nearby user's location using their latitude and longitudde
+                    let nearbyUserLocation = CLLocation(latitude: nearbyUser.latitude, longitude: nearbyUser.longitude)
+                
+                    // Determine if user is near the current user, if so add to list
+                    print("Distance between: " + String(currentUserLocation.distance(from: nearbyUserLocation)))
+                    //if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
+                        self.nearbyUsers.append(nearbyUser)
+                    //}
                 }
                 
             }
@@ -160,10 +151,27 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserTableViewCell
         let user = nearbyUsers[indexPath.row]
         
+        // Set the user's name as the cell's label
         cell.labelUserName.text = user.firstName + " " + user.lastName
         
-        if user.profilePicture != nil {
-            cell.imageViewProfilePicture.image = user.profilePicture
+        // Load the user's profile picture asynchronously
+        if user.profilePictureUrl != nil {
+            usersRef.child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                // Load user's profile picture from Firebase Storage if it exists (exists if the user has a profPic URL in the database)
+                if snapshot.hasChild("profilePictureUrl") {
+                    self.usersStorageRef.child(user.uid + "/ProfilePicture").data(withMaxSize: 20*1024*1024, completion: {(data, error) in
+                        let storagePicture = UIImage(data:data!)
+                        
+                        DispatchQueue.main.async {
+                            cell.imageViewProfilePicture.image = storagePicture
+                        }
+                        
+                    })
+                } else {
+                    print("Error -- Loading Profile Picture")
+                }
+            })
         }
         
         // Makes the profile picture view circular
@@ -233,38 +241,6 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     // Process any errors that may occur when gathering location
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
-    }
-    
-    
-    
-    /////////////////////////////////////////////////////
-    //
-    // loadProfilePicture
-    //
-    //  Pulls the user's profile picture from the database if it exists
-    //
-    func loadProfilePicture(userId: String, index: Int) {
-        // Load the stored image
-        usersRef.child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            // Load user's profile picture from Firebase Storage if it exists (exists if the user has a profPic URL in the database)
-            if snapshot.hasChild("profilePictureUrl") {
-                self.usersStorageRef.child(userId + "/ProfilePicture").data(withMaxSize: 20*1024*1024, completion: {(data, error) in
-                    let storagePicture = UIImage(data:data!)
-                    
-                    // Sets the user's profile picture to the loaded image
-                    self.nearbyUsers[index].profilePicture = storagePicture
-                    
-                        DispatchQueue.main.async {
-                            let indexPath = IndexPath(item: index, section: 0)
-                            self.tableView.reloadRows(at: [indexPath], with: .fade)
-                        }
-                    
-                })
-            } else {
-                print("Error -- Loading Profile Picture")
-            }
-        })
     }
     
     

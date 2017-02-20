@@ -312,9 +312,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="36C-tl-jA7"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="LogoutToLogin" id="AbP-xb-QQN"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WaE-jI-O3L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
