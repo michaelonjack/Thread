@@ -28,6 +28,15 @@ class MoreInfoViewController: UIViewController {
         textViewBrand.isEditable = canEdit
         textViewLink.isEditable = canEdit
         
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        // Determines how blurred the view is
+        blurEffectView.alpha = 0.9
+        // Places the blur view behind the other UI components
+        self.view.insertSubview(blurEffectView, at: 0)
+        
         let swipeToDismiss = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeDown(_:)))
         swipeToDismiss.direction = UISwipeGestureRecognizerDirection.down
         self.view.addGestureRecognizer(swipeToDismiss)
