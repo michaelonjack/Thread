@@ -50,5 +50,17 @@ class MoreInfoViewController: UIViewController {
     func swipeDown(_ gesture: UIGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  touchesBegan
+    //
+    //  Hides the keyboard when the user selects a non-textfield area
+    //
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 
 }

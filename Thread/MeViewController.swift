@@ -43,11 +43,6 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
         buttonProfilePicture.layer.cornerRadius = 0.5 * buttonProfilePicture.bounds.size.width
         buttonProfilePicture.clipsToBounds = true
         
-        // Set up the swipe down recognizer
-        let swipeDownRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeDown(_:)))
-        swipeDownRecognizer.direction = .down
-        self.view .addGestureRecognizer(swipeDownRecognizer)
-        
         // Loads the user's profile picture from the database
         loadProfilePicture()
     }
@@ -155,18 +150,6 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
                 print("Error -- Loading Profile Picture")
             }
         })
-    }
-    
-    
-    
-    /////////////////////////////////////////////////////
-    //
-    //  swipeDown
-    //
-    //  Handles the action of the user swiping down by seguing to new view
-    func swipeDown(_ gesture: UIGestureRecognizer) {
-        print("hello")
-        //self.performSegue(withIdentifier: "MySegue", sender: self)
     }
     
     

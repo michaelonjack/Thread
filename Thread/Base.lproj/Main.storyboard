@@ -242,7 +242,7 @@
         <!--Main View Controller-->
         <scene sceneID="Muq-io-FpK">
             <objects>
-                <viewController id="JB2-5X-Yi7" customClass="MainViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController definesPresentationContext="YES" id="JB2-5X-Yi7" customClass="MainViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RZF-jp-tfr"/>
                         <viewControllerLayoutGuide type="bottom" id="3oh-7a-oBZ"/>
@@ -312,6 +312,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="36C-tl-jA7"/>
+                    <connections>
+                        <segue destination="8kp-j1-EqZ" kind="custom" identifier="MainToAccount" customClass="TopDownSegue" customModule="Thread" customModuleProvider="target" id="AtL-ED-Yz7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WaE-jI-O3L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -380,6 +383,66 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CIR-HA-K0C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2688.8000000000002" y="488.90554722638683"/>
+        </scene>
+        <!--Account View Controller-->
+        <scene sceneID="2kH-do-NWH">
+            <objects>
+                <viewController storyboardIdentifier="AccountViewController" modalPresentationStyle="overCurrentContext" id="8kp-j1-EqZ" customClass="AccountViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MnN-1E-5on"/>
+                        <viewControllerLayoutGuide type="bottom" id="oYh-Uz-iw4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GID-os-M4w">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8MJ-8v-JNj">
+                                <rect key="frame" x="67" y="65" width="240" height="240"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9l-mE-hGu">
+                                <rect key="frame" x="16" y="313" width="343" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKI-2s-L4E">
+                                <rect key="frame" x="16" y="341" width="343" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ufk-hl-dEg">
+                                <rect key="frame" x="72" y="424" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Following"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Sz-Dc-2aB">
+                                <rect key="frame" x="262" y="424" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Settings"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JQz-Jo-mfB">
+                                <rect key="frame" x="167" y="424" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Loved"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageViewProfilePicture" destination="8MJ-8v-JNj" id="lf2-EB-GBi"/>
+                        <outlet property="labelEmail" destination="qKI-2s-L4E" id="xOt-ZM-DIt"/>
+                        <outlet property="labelName" destination="c9l-mE-hGu" id="wen-d8-kxZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n4u-Qt-8u1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1908" y="-652.62368815592208"/>
         </scene>
         <!--Me View Controller-->
         <scene sceneID="ElV-SG-Zdk">
@@ -981,11 +1044,14 @@
         <image name="Accessories" width="256" height="256"/>
         <image name="Avatar" width="512" height="512"/>
         <image name="Camera" width="256" height="256"/>
+        <image name="Following" width="256" height="256"/>
         <image name="Love" width="256" height="256"/>
+        <image name="Loved" width="256" height="256"/>
         <image name="Pants" width="256" height="256"/>
         <image name="PhotoLibrary" width="256" height="256"/>
         <image name="Save" width="256" height="256"/>
         <image name="Search" width="256" height="256"/>
+        <image name="Settings" width="256" height="256"/>
         <image name="Shirt" width="256" height="256"/>
         <image name="Shoes" width="256" height="256"/>
         <image name="ShowMore" width="256" height="256"/>
@@ -994,6 +1060,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="qcO-9A-bHk"/>
         <segue reference="ha3-Nr-ntE"/>
-        <segue reference="ggu-xg-HQb"/>
+        <segue reference="beV-B1-aCh"/>
     </inferredMetricsTieBreakers>
 </document>

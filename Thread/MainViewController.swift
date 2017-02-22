@@ -13,6 +13,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     // Name of segue used when the user selects the logout button (goes back to the login screen)
     let logoutToLogin = "LogoutToLogin"
+    let mainToAccount = "MainToAccount"
     // LocationManager instance used to update the current user's location
     let locationManager = CLLocationManager()
     // Reference to the current user's information in the database
@@ -35,6 +36,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         // Request a location update
         self.locationManager.requestLocation()
         
+        let swipeToShowAccount = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeDown(_:)))
+        swipeToShowAccount.direction = UISwipeGestureRecognizerDirection.down
+        self.view.addGestureRecognizer(swipeToShowAccount)
     }
 
     override func didReceiveMemoryWarning() {
@@ -87,5 +91,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
+    
+    func swipeDown(_ gesture: UIGestureRecognizer) {
+        self.performSegue(withIdentifier: mainToAccount, sender: nil)
+    }
 
 }
