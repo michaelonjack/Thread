@@ -161,12 +161,13 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
                 // Load user's profile picture from Firebase Storage if it exists (exists if the user has a profPic URL in the database)
                 if snapshot.hasChild("profilePictureUrl") {
                     self.usersStorageRef.child(user.uid + "/ProfilePicture").data(withMaxSize: 20*1024*1024, completion: {(data, error) in
-                        let storagePicture = UIImage(data:data!)
-                        
-                        DispatchQueue.main.async {
-                            cell.imageViewProfilePicture.image = storagePicture
+                        if data != nil {
+                            let storagePicture = UIImage(data:data!)
+                            
+                            DispatchQueue.main.async {
+                                cell.imageViewProfilePicture.image = storagePicture
+                            }
                         }
-                        
                     })
                 } else {
                     print("Error -- Loading Profile Picture")

@@ -71,10 +71,20 @@ class OtherUserViewController: UIViewController {
             // Load profile picture if it exists
             if snapshot.hasChild("profilePictureUrl") {
                 self.userStorageRef.child("ProfilePicture").data(withMaxSize: 20*1024*1024, completion: {(data, error) in
-                    let profilePicture = UIImage(data:data!)
-                    
-                    self.imageViewProfilePicture.image = profilePicture
-                    self.imageViewProfilePicture.contentMode = .scaleAspectFill
+                    if data != nil {
+                        let profilePicture = UIImage(data:data!)
+                        
+                        self.imageViewProfilePicture.image = profilePicture
+                        self.imageViewProfilePicture.contentMode = .scaleAspectFill
+                    } else {
+                        let errorAlert = UIAlertController(title: "Uh oh!",
+                                                           message: "Unable to retrieve information.",
+                                                           preferredStyle: .alert)
+                        
+                        let closeAction = UIAlertAction(title: "Close", style: .default)
+                        errorAlert.addAction(closeAction)
+                        self.present(errorAlert, animated: true, completion:nil)
+                    }
                 })
             } else {
                 print("Error loading user image")

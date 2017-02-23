@@ -140,11 +140,21 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
             // Load user's profile picture from Firebase Storage if it exists (exists if the user has a profPic URL in the database)
             if snapshot.hasChild("profilePictureUrl") {
                 self.currentUserStorageRef.child("ProfilePicture").data(withMaxSize: 20*1024*1024, completion: {(data, error) in
-                    let profilePicture = UIImage(data:data!)
-                    
-                    // Sets the user's profile picture to the loaded image
-                    self.buttonProfilePicture.setImage(profilePicture, for: .normal)
-                    self.buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
+                    if data != nil {
+                        let profilePicture = UIImage(data:data!)
+                        
+                        // Sets the user's profile picture to the loaded image
+                        self.buttonProfilePicture.setImage(profilePicture, for: .normal)
+                        self.buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
+                    } else {
+                        let errorAlert = UIAlertController(title: "Uh oh!",
+                                                           message: "Unable to retrieve information.",
+                                                           preferredStyle: .alert)
+                        
+                        let closeAction = UIAlertAction(title: "Close", style: .default)
+                        errorAlert.addAction(closeAction)
+                        self.present(errorAlert, animated: true, completion:nil)
+                    }
                 })
             } else {
                 print("Error -- Loading Profile Picture")
