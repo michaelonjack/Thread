@@ -22,7 +22,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     // Maximum number of meters another user can be away and still show up in the table (roughly 2 miles)
     let MAX_ALLOWABLE_DISTANCE = 3000.0
     // Name of the segue that's used when the current user selects another user in the table
-    let aroundMeToOtherUser = "aroundMeToOtherUser"
+    let aroundMeToOtherUser = "AroundMeToOtherUser"
     
     // Reference to the app's users data in the Firebase database
     let usersRef = FIRDatabase.database().reference(withPath: "users")
@@ -248,7 +248,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let otherUserVC: OtherUserViewController = segue.destination as! OtherUserViewController
+        let otherUserVC: OtherUserContainerViewController = segue.destination as! OtherUserContainerViewController
         otherUserVC.otherUser = sender as! User
     }
 

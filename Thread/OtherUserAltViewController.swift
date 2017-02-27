@@ -1,21 +1,21 @@
 //
-//  OtherUserViewController.swift
+//  OtherUserAltViewController.swift
 //  Thread
 //
-//  Created by Michael Onjack on 1/29/17.
+//  Created by Michael Onjack on 2/26/17.
 //  Copyright © 2017 Michael Onjack. All rights reserved.
 //
 
 import UIKit
-import FirebaseStorage
 
-class OtherUserViewController: UIViewController {
-
+class OtherUserAltViewController: UIViewController {
     
-    @IBOutlet weak var imageViewProfilePicture: UIImageView!
     @IBOutlet weak var labelName: UILabel!
-    @IBOutlet weak var mainView: UIView!
-    @IBOutlet weak var imgButton: UIButton!
+    @IBOutlet weak var imageViewProfilePicture: UIImageView!
+    @IBOutlet weak var buttonTop: UIButton!
+    @IBOutlet weak var buttonBottom: UIButton!
+    @IBOutlet weak var buttonShoes: UIButton!
+    @IBOutlet weak var buttonAccessories: UIButton!
     
     var userRef: FIRDatabaseReference!
     var userStorageRef: FIRStorageReference!
@@ -29,7 +29,7 @@ class OtherUserViewController: UIViewController {
     //  viewDidLoad
     //
     //  Shapes the user's profile picture into a circle
-    //  Loads the user's profile picture into the view
+    //  Loads the user's pictures into the view
     //
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +37,13 @@ class OtherUserViewController: UIViewController {
         userRef = FIRDatabase.database().reference(withPath: "users/" + otherUser.uid)
         userStorageRef = FIRStorage.storage().reference(withPath: "images/" + otherUser.uid)
         
-        loadProfilePicture()
-
+        loadData()
+        
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     override func viewDidLayoutSubviews() {
@@ -59,11 +60,11 @@ class OtherUserViewController: UIViewController {
     
     /////////////////////////////////////////////////////
     //
-    //  loadProfilePicture
+    //  loadData
     //
-    //  Pulls the user's profile picture from the database if it exists and sets it as the imageView's image
+    //  Pulls the user's info from the database and sets them in the view
     //
-    func loadProfilePicture() {
+    func loadData() {
         // Load the stored image
         userRef.observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -96,13 +97,44 @@ class OtherUserViewController: UIViewController {
                 print("Error loading user image")
             }
         })
+        
+        loadImage(named: "Top", button: self.buttonTop)
+        loadImage(named: "Bottom", button: self.buttonBottom)
+        loadImage(named: "Shoes", button: self.buttonShoes)
+        loadImage(named: "Accessories", button: self.buttonAccessories)
     }
     
     
     
-    @IBAction func switchViewDidTouch(_ sender: UIButton) {
-        
-        self.containerViewController?.cycle(from: self, to: (self.containerViewController?.imageViewController)!, direction: UIViewAnimationOptions.transitionFlipFromRight)
+    /////////////////////////////////////////////////////
+    //
+    //  loadImage
+    //
+    //  Loads the image specified by the 'name' parameter into the button specified by the 'button' parameter
+    //
+    func loadImage(named: String, button: UIButton) {
+        self.userStorageRef.child(named).data(withMaxSize: 20*1024*1024, completion: {(data, error) in
+            if data != nil {
+                let topPicture = UIImage(data:data!)
+                
+                button.imageView?.contentMode = .scaleAspectFit
+                button.setImage(topPicture, for: .normal)
+            } else {
+                let errorAlert = UIAlertController(title: "Uh oh!",
+                                                   message: "Unable to retrieve information.",
+                                                   preferredStyle: .alert)
+                
+                let closeAction = UIAlertAction(title: "Close", style: .default)
+                errorAlert.addAction(closeAction)
+                self.present(errorAlert, animated: true, completion:nil)
+            }
+        })
+    }
+
+    
+    
+    @IBAction func switchViewDidTouch(_ sender: Any) {
+        self.containerViewController?.cycle(from: self, to: (self.containerViewController?.iconViewController)!, direction: UIViewAnimationOptions.transitionFlipFromLeft)
     }
     
     
@@ -137,5 +169,5 @@ class OtherUserViewController: UIViewController {
             defaultVC.user = nil
         }
     }
-
+    
 }
