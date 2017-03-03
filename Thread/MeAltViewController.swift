@@ -1,25 +1,21 @@
 //
-//  MeViewController.swift
+//  MeAltViewController.swift
 //  Thread
 //
-//  Created by Michael Onjack on 1/17/17.
+//  Created by Michael Onjack on 2/27/17.
 //  Copyright © 2017 Michael Onjack. All rights reserved.
 //
-//
-//
-//
-// Me View Controller
-//      -View that represents the current user's "profile"
-//      -Users can navigate to and edit their different clothing options from this view
-//      -Users can update their profile picture from this view by pressing their profile picture
 
 import UIKit
-import FirebaseStorage
 
-class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MeAltViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var buttonProfilePicture: UIButton!
     @IBOutlet weak var labelGreeting: UILabel!
+    @IBOutlet weak var buttonTop: UIButton!
+    @IBOutlet weak var buttonBottom: UIButton!
+    @IBOutlet weak var buttonShoes: UIButton!
+    @IBOutlet weak var buttonAccessories: UIButton!
     
     let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
     let currentUserStorageRef = FIRStorage.storage().reference(withPath: "images/" + (FIRAuth.auth()?.currentUser?.uid)!)
@@ -28,26 +24,19 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
     var containerViewController: MeContainerViewController?
     
     
-    
-    /////////////////////////////////////////////////////
-    //
-    //  viewDidLoad
-    //
-    //  Shapes the user's profile picture into a circle and loads it from storage
-    //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        imagePicker.delegate = self
 
+        imagePicker.delegate = self
+        
         // Makes the profile picture button circular
         buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
         buttonProfilePicture.layer.cornerRadius = 0.5 * buttonProfilePicture.bounds.size.width
         buttonProfilePicture.clipsToBounds = true
         
-        // Loads the user's profile picture from the database
-        loadProfilePicture()
+        loadData()
     }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -93,21 +82,21 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
         // Creates the image metadata for Firebase Storage
         let imageMetaData = FIRStorageMetadata()
         imageMetaData.contentType = "image/jpeg"
-            
+        
         // Create a Data object to represent the image as a JPEG
         var imageData = Data()
         imageData = UIImageJPEGRepresentation(chosenImage, 0.05)!
-            
+        
         // Get reference to the user's profile picture in Firebase Storage
         let currentUserProfilePictureRef = currentUserStorageRef.child("ProfilePicture")
-            
+        
         // Add the selected image to Firebase Storage
         currentUserProfilePictureRef.put(imageData, metadata: imageMetaData) { (metaData, error) in
             if error == nil {
-                    // Add the image's url to the Firebase database
+                // Add the image's url to the Firebase database
                 let downloadUrl = metaData?.downloadURL()?.absoluteString
                 self.currentUserRef.updateChildValues(["profilePictureUrl": downloadUrl!])
-                    
+                
             } else {
                 print(error?.localizedDescription ?? "Error uploading data to storage")
             }
@@ -119,16 +108,16 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-
     
-
+    
+    
     /////////////////////////////////////////////////////
     //
-    // loadProfilePicture
+    // loadData
     //
-    //  Pulls the user's profile picture from the database if it exists
+    //  
     //
-    func loadProfilePicture() {
+    func loadData() {
         // Load the stored image
         currentUserRef.observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -162,16 +151,47 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
                 print("Error -- Loading Profile Picture")
             }
         })
-    }
-    
-    
-    
-    @IBAction func switchViewDidTouch(_ sender: UIButton) {
         
-        self.containerViewController?.cycle(from: self, to: (self.containerViewController?.imageViewController)!, direction: UIViewAnimationOptions.transitionFlipFromRight)
+        loadImage(named: "Top", button: self.buttonTop)
+        loadImage(named: "Bottom", button: self.buttonBottom)
+        loadImage(named: "Shoes", button: self.buttonShoes)
+        loadImage(named: "Accessories", button: self.buttonAccessories)
     }
     
     
+    
+    /////////////////////////////////////////////////////
+    //
+    //  loadImage
+    //
+    //  Loads the image specified by the 'name' parameter into the button specified by the 'button' parameter
+    //
+    func loadImage(named: String, button: UIButton) {
+        self.currentUserStorageRef.child(named).data(withMaxSize: 20*1024*1024, completion: {(data, error) in
+            if data != nil {
+                let topPicture = UIImage(data:data!)
+                
+                button.imageView?.contentMode = .scaleAspectFit
+                button.setImage(topPicture, for: .normal)
+            } else {
+                let errorAlert = UIAlertController(title: "Uh oh!",
+                                                   message: "Unable to retrieve information.",
+                                                   preferredStyle: .alert)
+                
+                let closeAction = UIAlertAction(title: "Close", style: .default)
+                errorAlert.addAction(closeAction)
+                self.present(errorAlert, animated: true, completion:nil)
+            }
+        })
+    }
+    
+    
+    
+    @IBAction func switchViewDidTouch(_ sender: Any) {
+        self.containerViewController?.cycle(from: self, to: (self.containerViewController?.iconViewController)!, direction: UIViewAnimationOptions.transitionFlipFromLeft)
+    }
+    
+
     
     /////////////////////////////////////////////////////
     //
@@ -181,26 +201,23 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier! {
-            case "topToClothingItem":
-                let topVC: ClothingItemViewController = segue.destination as! ClothingItemViewController
-                topVC.clothingType = ClothingType.Top
-            case "bottomToClothingItem":
-                let bottomVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
-                bottomVC.clothingType = ClothingType.Bottom
-            case "shoeToClothingItem":
-                let shoeVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
-                shoeVC.clothingType = ClothingType.Shoes
-            case "accessoryToClothingItem":
-                let accessoryVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
-                accessoryVC.clothingType = ClothingType.Accessories
-            case "MeToAccount":
-                var _ = 0
+        case "topToClothingItem":
+            let topVC: ClothingItemViewController = segue.destination as! ClothingItemViewController
+            topVC.clothingType = ClothingType.Top
+        case "bottomToClothingItem":
+            let bottomVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
+            bottomVC.clothingType = ClothingType.Bottom
+        case "shoeToClothingItem":
+            let shoeVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
+            shoeVC.clothingType = ClothingType.Shoes
+        case "accessoryToClothingItem":
+            let accessoryVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
+            accessoryVC.clothingType = ClothingType.Accessories
+        case "MeToAccount":
+            var _ = 0
         default:
             let defaultVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
             defaultVC.clothingType = nil
         }
     }
-
 }
-
-

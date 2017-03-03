@@ -47,7 +47,6 @@ class OtherUserViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         // Makes the profile picture button circular
-        print("in layout subviews")
         if imageViewProfilePicture != nil {
             imageViewProfilePicture.contentMode = .scaleAspectFill
             imageViewProfilePicture.layer.cornerRadius = 0.5 * imageViewProfilePicture.layer.bounds.width
@@ -82,15 +81,7 @@ class OtherUserViewController: UIViewController {
                         
                         self.imageViewProfilePicture.image = profilePicture
                         self.imageViewProfilePicture.contentMode = .scaleAspectFill
-                    } else {
-                        let errorAlert = UIAlertController(title: "Uh oh!",
-                                                           message: "Unable to retrieve information.",
-                                                           preferredStyle: .alert)
-                        
-                        let closeAction = UIAlertAction(title: "Close", style: .default)
-                        errorAlert.addAction(closeAction)
-                        self.present(errorAlert, animated: true, completion:nil)
-                    }
+                    } 
                 })
             } else {
                 print("Error loading user image")

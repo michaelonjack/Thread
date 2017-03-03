@@ -33,13 +33,14 @@
 		B1C96A991E2C66730036E559 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C96A971E2C66730036E559 /* LaunchScreen.storyboard */; };
 		B1C96AA41E2C66730036E559 /* ThreadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96AA31E2C66730036E559 /* ThreadTests.swift */; };
 		B1C96AAF1E2C66730036E559 /* ThreadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96AAE1E2C66730036E559 /* ThreadUITests.swift */; };
-		B1D04E521E3C492D00031FF4 /* UIImageRotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D04E511E3C492D00031FF4 /* UIImageRotation.swift */; };
 		B1DE12311E4BEDCC00DF724F /* ClothingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE12301E4BEDCC00DF724F /* ClothingItemTableViewCell.swift */; };
 		B1E08ADA1E50DB7E0011B1EA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E08AD91E50DB7E0011B1EA /* SignUpViewController.swift */; };
 		B1E837401E5BF5C300789BC2 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8373F1E5BF5C300789BC2 /* AccountViewController.swift */; };
 		B1E837421E5C6FDA00789BC2 /* TopDownSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E837411E5C6FDA00789BC2 /* TopDownSegue.swift */; };
 		B1E8374A1E63534000789BC2 /* OtherUserContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E837491E63534000789BC2 /* OtherUserContainerViewController.swift */; };
 		B1E8374C1E63554F00789BC2 /* OtherUserAltViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8374B1E63554F00789BC2 /* OtherUserAltViewController.swift */; };
+		B1E8374E1E64BD9000789BC2 /* MeContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8374D1E64BD9000789BC2 /* MeContainerViewController.swift */; };
+		B1E837501E64BDAC00789BC2 /* MeAltViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8374F1E64BDAC00789BC2 /* MeAltViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,13 +99,14 @@
 		B1C96AAA1E2C66730036E559 /* ThreadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C96AAE1E2C66730036E559 /* ThreadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadUITests.swift; sourceTree = "<group>"; };
 		B1C96AB01E2C66730036E559 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B1D04E511E3C492D00031FF4 /* UIImageRotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageRotation.swift; sourceTree = "<group>"; };
 		B1DE12301E4BEDCC00DF724F /* ClothingItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingItemTableViewCell.swift; sourceTree = "<group>"; };
 		B1E08AD91E50DB7E0011B1EA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B1E8373F1E5BF5C300789BC2 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		B1E837411E5C6FDA00789BC2 /* TopDownSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopDownSegue.swift; sourceTree = "<group>"; };
 		B1E837491E63534000789BC2 /* OtherUserContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserContainerViewController.swift; sourceTree = "<group>"; };
 		B1E8374B1E63554F00789BC2 /* OtherUserAltViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserAltViewController.swift; sourceTree = "<group>"; };
+		B1E8374D1E64BD9000789BC2 /* MeContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeContainerViewController.swift; sourceTree = "<group>"; };
+		B1E8374F1E64BDAC00789BC2 /* MeAltViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeAltViewController.swift; sourceTree = "<group>"; };
 		B315754A20752E20A13E984D /* Pods-Thread.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thread.release.xcconfig"; path = "Pods/Target Support Files/Pods-Thread/Pods-Thread.release.xcconfig"; sourceTree = "<group>"; };
 		BEED098888EFE05ADEE3966C /* Pods-ThreadUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadUITests/Pods-ThreadUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CB1E9B1CE232603724C5E794 /* Pods-ThreadTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadTests/Pods-ThreadTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -167,7 +169,9 @@
 				B1E8373F1E5BF5C300789BC2 /* AccountViewController.swift */,
 				B162021E1E5699D90099D3D7 /* MoreInfoViewController.swift */,
 				B163FA3E1E3051EC00EF399D /* AroundMeTableViewController.swift */,
+				B1E8374D1E64BD9000789BC2 /* MeContainerViewController.swift */,
 				B18430781E2EED7300EED632 /* MeViewController.swift */,
+				B1E8374F1E64BDAC00789BC2 /* MeAltViewController.swift */,
 				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
 				B1E08AD91E50DB7E0011B1EA /* SignUpViewController.swift */,
 				B18430741E2D4BF200EED632 /* MainViewController.swift */,
@@ -202,7 +206,6 @@
 				B18430721E2D43E300EED632 /* GoogleService-Info.plist */,
 				B1C96A9A1E2C66730036E559 /* Info.plist */,
 				B174D0251E36C8E900218590 /* APIKeys.plist */,
-				B1D04E511E3C492D00031FF4 /* UIImageRotation.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -575,7 +578,7 @@
 				B1878ADD1E49486900847326 /* ClothingSearchViewController.swift in Sources */,
 				B18430751E2D4BF200EED632 /* MainViewController.swift in Sources */,
 				B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */,
-				B1D04E521E3C492D00031FF4 /* UIImageRotation.swift in Sources */,
+				B1E837501E64BDAC00789BC2 /* MeAltViewController.swift in Sources */,
 				B174D02C1E36D8BF00218590 /* ClothingItemViewController.swift in Sources */,
 				B1E08ADA1E50DB7E0011B1EA /* SignUpViewController.swift in Sources */,
 				B1E837401E5BF5C300789BC2 /* AccountViewController.swift in Sources */,
@@ -586,6 +589,7 @@
 				B174D0281E36CAC700218590 /* APIKeys.swift in Sources */,
 				B1A089AA1E4FE4DD00FC7C65 /* KeychainWrapper.m in Sources */,
 				B18430861E33B03A00EED632 /* User.swift in Sources */,
+				B1E8374E1E64BD9000789BC2 /* MeContainerViewController.swift in Sources */,
 				B16202211E5759D10099D3D7 /* UserTableViewCell.swift in Sources */,
 				B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */,
 				B163FA3F1E3051EC00EF399D /* AroundMeTableViewController.swift in Sources */,
