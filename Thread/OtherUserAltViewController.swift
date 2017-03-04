@@ -17,6 +17,8 @@ class OtherUserAltViewController: UIViewController {
     @IBOutlet weak var buttonShoes: UIButton!
     @IBOutlet weak var buttonAccessories: UIButton!
     
+    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
+    
     var userRef: FIRDatabaseReference!
     var userStorageRef: FIRStorageReference!
     var otherUser: User!
@@ -110,14 +112,48 @@ class OtherUserAltViewController: UIViewController {
                 
                 button.imageView?.contentMode = .scaleAspectFit
                 button.setImage(topPicture, for: .normal)
-            } 
+            } else {
+                let errorAlert = UIAlertController(title: "Uh oh!",
+                                                   message: "Unable to retrieve information.",
+                                                   preferredStyle: .alert)
+                
+                let closeAction = UIAlertAction(title: "Close", style: .default)
+                errorAlert.addAction(closeAction)
+                self.present(errorAlert, animated: true, completion:nil)
+            }
         })
     }
 
     
     
+    /////////////////////////////////////////////////////
+    //
+    //  switchViewDidTouch
+    //
+    //
+    //
     @IBAction func switchViewDidTouch(_ sender: Any) {
         self.containerViewController?.cycle(from: self, to: (self.containerViewController?.iconViewController)!, direction: UIViewAnimationOptions.transitionFlipFromLeft)
+    }
+    
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  followUserDidTouch
+    //
+    //
+    //
+    @IBAction func followUserDidTouch(_ sender: Any) {
+        currentUserRef.child("Following").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            // Add the user to their Following list if they are following less than 6 users and have not already
+            //      added this user
+            if snapshot.childrenCount < 6 && !snapshot.hasChild(self.otherUser.uid) {
+                self.currentUserRef.child("Following").updateChildValues( [self.otherUser.uid : true] )
+                
+            }
+        })
     }
     
     

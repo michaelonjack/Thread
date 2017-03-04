@@ -16,6 +16,9 @@ class OtherUserViewController: UIViewController {
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var imgButton: UIButton!
+    @IBOutlet weak var buttonFollowUser: UIButton!
+    
+    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
     
     var userRef: FIRDatabaseReference!
     var userStorageRef: FIRStorageReference!
@@ -37,6 +40,7 @@ class OtherUserViewController: UIViewController {
         userRef = FIRDatabase.database().reference(withPath: "users/" + otherUser.uid)
         userStorageRef = FIRStorage.storage().reference(withPath: "images/" + otherUser.uid)
         
+        setFollowButton()
         loadProfilePicture()
 
     }
@@ -54,6 +58,24 @@ class OtherUserViewController: UIViewController {
         }
     }
     
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  isFollowing
+    //
+    //  Returns true if the current user is following this user
+    //
+    func setFollowButton() {
+        currentUserRef.child("Following").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if snapshot.hasChild(self.otherUser.uid) {
+                DispatchQueue.main.async {
+                    self.buttonFollowUser.setImage(UIImage(named: "Unfollow"), for: .normal)
+                }
+            }
+        })
+    }
     
     
     /////////////////////////////////////////////////////
@@ -91,12 +113,50 @@ class OtherUserViewController: UIViewController {
     
     
     
+    /////////////////////////////////////////////////////
+    //
+    //  switchViewDidTouch
+    //
+    //
+    //
     @IBAction func switchViewDidTouch(_ sender: UIButton) {
         
         self.containerViewController?.cycle(from: self, to: (self.containerViewController?.imageViewController)!, direction: UIViewAnimationOptions.transitionFlipFromRight)
     }
     
     
+    
+    /////////////////////////////////////////////////////
+    //
+    //  followUserDidTouch
+    //
+    //
+    //
+    @IBAction func followUserDidTouch(_ sender: Any) {
+        currentUserRef.child("Following").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            // Add the user to their Following list if they are following less than 6 users and have not already
+            //      added this user
+            if snapshot.childrenCount < 6 && !snapshot.hasChild(self.otherUser.uid) {
+                self.currentUserRef.child("Following").updateChildValues( [self.otherUser.uid : true] )
+                
+                DispatchQueue.main.async {
+                    self.buttonFollowUser.setImage( UIImage(named: "Unfollow"), for: .normal )
+                }
+                
+            } else if snapshot.childrenCount == 6 {
+                
+            } else if snapshot.hasChild(self.otherUser.uid) {
+                
+                self.currentUserRef.child("Following/" + self.otherUser.uid).removeValue()
+                
+                DispatchQueue.main.async {
+                    self.buttonFollowUser.setImage( UIImage(named: "Follow"), for: .normal )
+                }
+                
+            }
+        })
+    }
     
     /////////////////////////////////////////////////////
     //
