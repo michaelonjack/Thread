@@ -1246,7 +1246,7 @@
                                 </constraints>
                                 <state key="normal" image="Follow"/>
                                 <connections>
-                                    <action selector="followUserDidTouch:" destination="4jf-AK-Sf8" eventType="touchUpInside" id="wfi-US-ik8"/>
+                                    <action selector="followUserDidTouch:" destination="4jf-AK-Sf8" eventType="touchUpInside" id="cnl-a0-2uo"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOt-mL-EVQ">
@@ -1339,9 +1339,9 @@
                     <connections>
                         <outlet property="buttonAccessories" destination="Vxl-Xk-Y6j" id="Qnc-4R-Aee"/>
                         <outlet property="buttonBottom" destination="TpQ-13-Vil" id="zKQ-zl-YKD"/>
+                        <outlet property="buttonFollowUser" destination="mf5-G7-Jgj" id="IzX-J2-NbM"/>
                         <outlet property="buttonShoes" destination="eki-CE-xIG" id="CZb-Ob-zqH"/>
                         <outlet property="buttonTop" destination="iSE-A9-Dha" id="WuY-tA-qJc"/>
-                        <outlet property="followUserDidTouch" destination="mf5-G7-Jgj" id="ti3-WN-7wH"/>
                         <outlet property="imageViewProfilePicture" destination="SZf-EC-5qE" id="rfy-vd-vfM"/>
                         <outlet property="labelName" destination="IKg-oz-Toa" id="rvb-IL-12V"/>
                     </connections>
@@ -1484,9 +1484,10 @@
         <image name="TouchID" width="138" height="137"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qcO-9A-bHk"/>
-        <segue reference="wmk-2P-4IE"/>
-        <segue reference="YZd-E7-TGh"/>
         <segue reference="ggu-xg-HQb"/>
+        <segue reference="zi9-Jf-VWI"/>
+        <segue reference="wmk-2P-4IE"/>
+        <segue reference="qcO-9A-bHk"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

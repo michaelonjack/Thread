@@ -59,48 +59,51 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         self.locationManager.requestWhenInUseAuthorization()
         
         
-        // This listens for a .value event type which in turn listens for different types of changes to the database (add, remove, update)
-        // The app is notified of the change via the second parameter closure 
         // The snapshot represents the data at the moment in time
-        usersRef.observe(.value, with: { snapshot in
-            
-            // End refreshing the table once the user location is retrieved
-            if self.refresher != nil {
-                self.refresher.endRefreshing()
-            }
-            
-            // Iterate through the list of users
-            for user in snapshot.children {
-                
-                // Create instance of the potentially nearby user
-                let nearbyUser = User(snapshot: user as! FIRDataSnapshot)
-                
-                // Create a database snapshot for the currently logged in user
-                let currentUserSnapshot = snapshot.childSnapshot(forPath: (self.currentFIRUser?.uid)!)
-                let currentUserSnapshotValue = currentUserSnapshot.value as! [String : AnyObject]
-                
-                // Get the currently logged in user's position using the database snapshot
-                let latitude = currentUserSnapshotValue["latitude"] as? Double
-                let longitude = currentUserSnapshotValue["longitude"] as? Double
-                
-                // If a user's longitude and latitude are set to 0.0 then their location is not known so show no nearby users
-                if( floor(latitude!) != 0 && floor(longitude!) != 0 ) {
-                
-                    // Get the current user's location using their latitude and longitude
-                    let currentUserLocation = CLLocation(latitude: latitude!, longitude: longitude!)
-                    // Get the potentially nearby user's location using their latitude and longitudde
-                    let nearbyUserLocation = CLLocation(latitude: nearbyUser.latitude, longitude: nearbyUser.longitude)
-                
-                    // Determine if user is near the current user, if so add to list
-                    print("Distance between: " + String(currentUserLocation.distance(from: nearbyUserLocation)))
-                    //if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
-                        self.nearbyUsers.append(nearbyUser)
-                    //}
+        usersRef.child((currentFIRUser?.uid)! + "/latitude").observe(.value, with: { snapshot in
+            print(snapshot.ref)
+            self.usersRef.observeSingleEvent(of: .value, with: { parentSnapshot in
+                // End refreshing the table once the user location is retrieved
+                if self.refresher != nil {
+                    self.refresher.endRefreshing()
                 }
                 
-            }
+                // Iterate through the list of users
+                for user in parentSnapshot.children {
+                    
+                    // Create instance of the potentially nearby user
+                    let nearbyUser = User(snapshot: user as! FIRDataSnapshot)
+                    
+                    // Create a database snapshot for the currently logged in user
+                    let currentUserSnapshot = parentSnapshot.childSnapshot(forPath: (self.currentFIRUser?.uid)!)
+                    let currentUserSnapshotValue = currentUserSnapshot.value as! [String : AnyObject]
+                    
+                    // Get the currently logged in user's position using the database snapshot
+                    let latitude = currentUserSnapshotValue["latitude"] as? Double
+                    let longitude = currentUserSnapshotValue["longitude"] as? Double
+                    
+                    // If a user's longitude and latitude are set to 0.0 then their location is not known so show no nearby users
+                    if( floor(latitude!) != 0 && floor(longitude!) != 0 ) {
+                        
+                        // Get the current user's location using their latitude and longitude
+                        let currentUserLocation = CLLocation(latitude: latitude!, longitude: longitude!)
+                        // Get the potentially nearby user's location using their latitude and longitudde
+                        let nearbyUserLocation = CLLocation(latitude: nearbyUser.latitude, longitude: nearbyUser.longitude)
+                        
+                        // Determine if user is near the current user, if so add to list
+                        print("Distance between: " + String(currentUserLocation.distance(from: nearbyUserLocation)))
+                        //if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
+                        self.nearbyUsers.append(nearbyUser)
+                        //}
+                    }
+                    
+                }
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             
-            self.tableView.reloadData()
+            })
         })
         
         
@@ -173,6 +176,8 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
                     print("Error -- Loading Profile Picture")
                 }
             })
+        } else {
+            cell.imageViewProfilePicture.image = UIImage(named: "Avatar")
         }
         
         // Makes the profile picture view circular
@@ -220,6 +225,11 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     func handleRefresh(refreshControl: UIRefreshControl) {
         // Request a location update
         refresher = refreshControl
+        
+        DispatchQueue.main.async {
+            self.nearbyUsers.removeAll()
+        }
+        
         self.locationManager.requestLocation()
     }
     

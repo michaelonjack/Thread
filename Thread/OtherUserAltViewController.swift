@@ -16,6 +16,7 @@ class OtherUserAltViewController: UIViewController {
     @IBOutlet weak var buttonBottom: UIButton!
     @IBOutlet weak var buttonShoes: UIButton!
     @IBOutlet weak var buttonAccessories: UIButton!
+    @IBOutlet weak var buttonFollowUser: UIButton!
     
     let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
     
@@ -39,6 +40,7 @@ class OtherUserAltViewController: UIViewController {
         userRef = FIRDatabase.database().reference(withPath: "users/" + otherUser.uid)
         userStorageRef = FIRStorage.storage().reference(withPath: "images/" + otherUser.uid)
         
+        setFollowButton()
         loadData()
         
     }
@@ -55,6 +57,24 @@ class OtherUserAltViewController: UIViewController {
             imageViewProfilePicture.layer.cornerRadius = 0.5 * imageViewProfilePicture.layer.bounds.width
             imageViewProfilePicture.clipsToBounds = true
         }
+    }
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  isFollowing
+    //
+    //  Returns true if the current user is following this user
+    //
+    func setFollowButton() {
+        currentUserRef.child("Following").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if snapshot.hasChild(self.otherUser.uid) {
+                DispatchQueue.main.async {
+                    self.buttonFollowUser.setImage(UIImage(named: "Unfollow"), for: .normal)
+                }
+            }
+        })
     }
     
     
@@ -151,6 +171,20 @@ class OtherUserAltViewController: UIViewController {
             //      added this user
             if snapshot.childrenCount < 6 && !snapshot.hasChild(self.otherUser.uid) {
                 self.currentUserRef.child("Following").updateChildValues( [self.otherUser.uid : true] )
+                
+                DispatchQueue.main.async {
+                    self.buttonFollowUser.setImage( UIImage(named: "Unfollow"), for: .normal )
+                }
+                
+            } else if snapshot.childrenCount == 6 {
+                
+            } else if snapshot.hasChild(self.otherUser.uid) {
+                
+                self.currentUserRef.child("Following/" + self.otherUser.uid).removeValue()
+                
+                DispatchQueue.main.async {
+                    self.buttonFollowUser.setImage( UIImage(named: "Follow"), for: .normal )
+                }
                 
             }
         })

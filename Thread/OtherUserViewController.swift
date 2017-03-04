@@ -62,7 +62,7 @@ class OtherUserViewController: UIViewController {
     
     /////////////////////////////////////////////////////
     //
-    //  isFollowing
+    //  setFollowButton
     //
     //  Returns true if the current user is following this user
     //
