@@ -132,14 +132,6 @@ class OtherUserAltViewController: UIViewController {
                 
                 button.imageView?.contentMode = .scaleAspectFit
                 button.setImage(topPicture, for: .normal)
-            } else {
-                let errorAlert = UIAlertController(title: "Uh oh!",
-                                                   message: "Unable to retrieve information.",
-                                                   preferredStyle: .alert)
-                
-                let closeAction = UIAlertAction(title: "Close", style: .default)
-                errorAlert.addAction(closeAction)
-                self.present(errorAlert, animated: true, completion:nil)
             }
         })
     }

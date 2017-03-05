@@ -95,5 +95,20 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     func swipeDown(_ gesture: UIGestureRecognizer) {
         self.performSegue(withIdentifier: mainToAccount, sender: nil)
     }
+    
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  prepareForSegue
+    //
+    //
+    //
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MainToFollowing" {
+            let followingVC: AroundMeTableViewController = segue.destination as! AroundMeTableViewController
+            followingVC.forAroundMe = false
+        }
+    }
 
 }

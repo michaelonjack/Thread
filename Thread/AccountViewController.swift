@@ -19,6 +19,12 @@ class AccountViewController: UIViewController {
     
     
     
+    /////////////////////////////////////////////////////
+    //
+    // viewDidLoad
+    //
+    //
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -52,7 +58,7 @@ class AccountViewController: UIViewController {
     
     /////////////////////////////////////////////////////
     //
-    // loadProfilePicture
+    // loadProfileData
     //
     //  Pulls the user's profile picture from the database if it exists
     //
@@ -96,6 +102,32 @@ class AccountViewController: UIViewController {
     
     
     
+    /////////////////////////////////////////////////////
+    //
+    // followingDidTouch
+    //
+    // Segues the user to the table view containing all the users they're following
+    //
+    @IBAction func followingDidTouch(_ sender: Any) {
+        
+        if let presentingVC = self.presentingViewController as? MainViewController {
+            presentingVC.performSegue(withIdentifier: "MainToFollowing", sender: nil)
+        } else if let presentingVC = self.presentingViewController as? MeViewController {
+            presentingVC.performSegue(withIdentifier: "MeToFollowing", sender: nil)
+        } else if let presentingVC = self.presentingViewController as? MeAltViewController {
+            presentingVC.performSegue(withIdentifier: "MeToFollowing", sender: nil)
+        }
+    }
+    
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    // swipeUpAction
+    //
+    // Handles the action of the user swiping up on the screen
+    // Dismisses the Account view controller and returns to the
+    //
     func swipeUpAction(_ gesture: UIGestureRecognizer) {
         let transition: CATransition = CATransition()
         transition.duration = 0.5
@@ -105,5 +137,9 @@ class AccountViewController: UIViewController {
         self.view.window!.layer.add(transition, forKey: nil)
         self.dismiss(animated: false, completion: nil)
     }
+    
+    
+    
+    
 
 }

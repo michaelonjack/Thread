@@ -137,14 +137,6 @@ class MeAltViewController: UIViewController, UIImagePickerControllerDelegate, UI
                         // Sets the user's profile picture to the loaded image
                         self.buttonProfilePicture.setImage(profilePicture, for: .normal)
                         self.buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
-                    } else {
-                        let errorAlert = UIAlertController(title: "Uh oh!",
-                                                           message: "Unable to retrieve information.",
-                                                           preferredStyle: .alert)
-                        
-                        let closeAction = UIAlertAction(title: "Close", style: .default)
-                        errorAlert.addAction(closeAction)
-                        self.present(errorAlert, animated: true, completion:nil)
                     }
                 })
             } else {
@@ -173,14 +165,6 @@ class MeAltViewController: UIViewController, UIImagePickerControllerDelegate, UI
                 
                 button.imageView?.contentMode = .scaleAspectFit
                 button.setImage(topPicture, for: .normal)
-            } else {
-                let errorAlert = UIAlertController(title: "Uh oh!",
-                                                   message: "Unable to retrieve information.",
-                                                   preferredStyle: .alert)
-                
-                let closeAction = UIAlertAction(title: "Close", style: .default)
-                errorAlert.addAction(closeAction)
-                self.present(errorAlert, animated: true, completion:nil)
             }
         })
     }
@@ -213,6 +197,9 @@ class MeAltViewController: UIViewController, UIImagePickerControllerDelegate, UI
         case "accessoryToClothingItem":
             let accessoryVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
             accessoryVC.clothingType = ClothingType.Accessories
+        case "MeToFollowing":
+            let followingVC: AroundMeTableViewController = segue.destination as! AroundMeTableViewController
+            followingVC.forAroundMe = false
         case "MeToAccount":
             var _ = 0
         default:

@@ -24,6 +24,8 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     // Name of the segue that's used when the current user selects another user in the table
     let aroundMeToOtherUser = "AroundMeToOtherUser"
     
+    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
+    
     // Reference to the app's users data in the Firebase database
     let usersRef = FIRDatabase.database().reference(withPath: "users")
     let usersStorageRef = FIRStorage.storage().reference(withPath: "images")
@@ -32,8 +34,9 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     // LocationManager instance used to update the current user's location
     let locationManager = CLLocationManager()
     
+    var forAroundMe = true
     // Array of app users -- the data source of the table
-    var nearbyUsers: [User] = []
+    var displayUsers: [User] = []
     // Table refresher used to implement the pull-down-to-refresh functionality in the table view
     var refresher: UIRefreshControl!
     
@@ -59,52 +62,87 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         self.locationManager.requestWhenInUseAuthorization()
         
         
-        // The snapshot represents the data at the moment in time
-        usersRef.child((currentFIRUser?.uid)! + "/latitude").observe(.value, with: { snapshot in
-            print(snapshot.ref)
-            self.usersRef.observeSingleEvent(of: .value, with: { parentSnapshot in
-                // End refreshing the table once the user location is retrieved
-                if self.refresher != nil {
-                    self.refresher.endRefreshing()
-                }
-                
-                // Iterate through the list of users
-                for user in parentSnapshot.children {
-                    
-                    // Create instance of the potentially nearby user
-                    let nearbyUser = User(snapshot: user as! FIRDataSnapshot)
-                    
-                    // Create a database snapshot for the currently logged in user
-                    let currentUserSnapshot = parentSnapshot.childSnapshot(forPath: (self.currentFIRUser?.uid)!)
-                    let currentUserSnapshotValue = currentUserSnapshot.value as! [String : AnyObject]
-                    
-                    // Get the currently logged in user's position using the database snapshot
-                    let latitude = currentUserSnapshotValue["latitude"] as? Double
-                    let longitude = currentUserSnapshotValue["longitude"] as? Double
-                    
-                    // If a user's longitude and latitude are set to 0.0 then their location is not known so show no nearby users
-                    if( floor(latitude!) != 0 && floor(longitude!) != 0 ) {
-                        
-                        // Get the current user's location using their latitude and longitude
-                        let currentUserLocation = CLLocation(latitude: latitude!, longitude: longitude!)
-                        // Get the potentially nearby user's location using their latitude and longitudde
-                        let nearbyUserLocation = CLLocation(latitude: nearbyUser.latitude, longitude: nearbyUser.longitude)
-                        
-                        // Determine if user is near the current user, if so add to list
-                        print("Distance between: " + String(currentUserLocation.distance(from: nearbyUserLocation)))
-                        //if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
-                        self.nearbyUsers.append(nearbyUser)
-                        //}
-                    }
-                    
-                }
+        // If the table is meant to be used to display the nearby users, go through this control path
+        if forAroundMe == true {
+            // The snapshot represents the data at the moment in time
+            usersRef.child((currentFIRUser?.uid)! + "/latitude").observe(.value, with: { snapshot in
                 
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self.displayUsers.removeAll()
                 }
-            
+                
+                self.usersRef.observeSingleEvent(of: .value, with: { parentSnapshot in
+                    // End refreshing the table once the user location is retrieved
+                    if self.refresher != nil {
+                        self.refresher.endRefreshing()
+                    }
+                    
+                    // Iterate through the list of users
+                    for user in parentSnapshot.children {
+                        
+                        // Create instance of the potentially nearby user
+                        let nearbyUser = User(snapshot: user as! FIRDataSnapshot)
+                        
+                        // Create a database snapshot for the currently logged in user
+                        let currentUserSnapshot = parentSnapshot.childSnapshot(forPath: (self.currentFIRUser?.uid)!)
+                        let currentUserSnapshotValue = currentUserSnapshot.value as! [String : AnyObject]
+                        
+                        // Get the currently logged in user's position using the database snapshot
+                        let latitude = currentUserSnapshotValue["latitude"] as? Double
+                        let longitude = currentUserSnapshotValue["longitude"] as? Double
+                        
+                        // If a user's longitude and latitude are set to 0.0 then their location is not known so show no nearby users
+                        if( floor(latitude!) != 0 && floor(longitude!) != 0 ) {
+                            
+                            // Get the current user's location using their latitude and longitude
+                            let currentUserLocation = CLLocation(latitude: latitude!, longitude: longitude!)
+                            // Get the potentially nearby user's location using their latitude and longitudde
+                            let nearbyUserLocation = CLLocation(latitude: nearbyUser.latitude, longitude: nearbyUser.longitude)
+                            
+                            // Determine if user is near the current user, if so add to list
+                            print("Distance between: " + String(currentUserLocation.distance(from: nearbyUserLocation)))
+                            //if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
+                            self.displayUsers.append(nearbyUser)
+                            //}
+                        }
+                        
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                
+                })
             })
-        })
+        }
+        
+        // If the table is meant to be used to display the followed users, go through this control path
+        else {
+            // Get the list of users that the current user follows
+            usersRef.child((currentFIRUser?.uid)! + "/Following").observe(.value, with: { snapshot in
+                
+                // Remove all the users from the list before continuing (this gets called every time a user
+                // is followed or unfollowed so there would be duplicate rows if we didn't delete)
+                DispatchQueue.main.async {
+                    self.displayUsers.removeAll()
+                }
+                
+                self.usersRef.observeSingleEvent(of: .value, with: { parentSnapshot in
+                    
+                    for user in snapshot.children {
+                        let userSnapshot = user as! FIRDataSnapshot
+                        let userId = userSnapshot.key
+                        
+                        let followedUser = User(snapshot: parentSnapshot.childSnapshot(forPath: userId))
+                        self.displayUsers.append(followedUser)
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                })
+            })
+        }
         
         
         // Enable pull down to refresh
@@ -120,11 +158,11 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     //
     //  tableView - numberOfRowsInSection
     //
-    //  Returns the number of rows in the table (uses the nearbyUsers array)
+    //  Returns the number of rows in the table (uses the displayUsers array)
     //
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return nearbyUsers.count
+        return displayUsers.count
     }
     
    
@@ -148,11 +186,11 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     //  tableView - cellForRowAt
     //
     //  Determines what information is to be displayed in each table cell
-    //  Uses the User at the matching index of nearbyUsers to set the cell text to the user's name and the cell subtitle to their email
+    //  Uses the User at the matching index of displayUsers to set the cell text to the user's name and the cell subtitle to their email
     //
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserTableViewCell
-        let user = nearbyUsers[indexPath.row]
+        let user = displayUsers[indexPath.row]
         
         // Set the user's name as the cell's label
         cell.labelUserName.text = user.firstName + " " + user.lastName
@@ -197,8 +235,20 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     //  Determines if a table row can be edited -- For this table, no rows are editable
     //
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return false
+        if forAroundMe {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            self.currentUserRef.child("Following/" + displayUsers[indexPath.row].uid).removeValue()
+            
+            tableView.reloadData()
+        }
     }
     
     
@@ -211,7 +261,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     //
     // What to do when a row is selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: self.aroundMeToOtherUser, sender: nearbyUsers[indexPath.row])
+        self.performSegue(withIdentifier: self.aroundMeToOtherUser, sender: displayUsers[indexPath.row])
     }
 
     
@@ -226,11 +276,11 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         // Request a location update
         refresher = refreshControl
         
-        DispatchQueue.main.async {
-            self.nearbyUsers.removeAll()
+        if forAroundMe == true {
+            self.locationManager.requestLocation()
+        } else {
+            refreshControl.endRefreshing()
         }
-        
-        self.locationManager.requestLocation()
     }
     
     

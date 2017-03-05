@@ -309,6 +309,7 @@
                     <navigationItem key="navigationItem" id="36C-tl-jA7"/>
                     <connections>
                         <segue destination="8kp-j1-EqZ" kind="custom" identifier="MainToAccount" customClass="TopDownSegue" customModule="Thread" customModuleProvider="target" id="AtL-ED-Yz7"/>
+                        <segue destination="XEN-Cr-d1U" kind="show" identifier="MainToFollowing" id="wxX-V3-uCJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WaE-jI-O3L" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -339,7 +340,7 @@
         <!--Around Me Table View Controller-->
         <scene sceneID="YHk-cv-bLM">
             <objects>
-                <tableViewController id="XEN-Cr-d1U" customClass="AroundMeTableViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController definesPresentationContext="YES" id="XEN-Cr-d1U" customClass="AroundMeTableViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="bMV-n5-sve">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -435,6 +436,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ufk-hl-dEg">
                                 <rect key="frame" x="72" y="424" width="40" height="40"/>
                                 <state key="normal" image="Following"/>
+                                <connections>
+                                    <action selector="followingDidTouch:" destination="8kp-j1-EqZ" eventType="touchUpInside" id="wO9-y8-mSP"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Sz-Dc-2aB">
                                 <rect key="frame" x="262" y="424" width="40" height="40"/>
@@ -480,7 +484,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n4u-Qt-8u1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2849" y="-1028"/>
+            <point key="canvasLocation" x="2848.8000000000002" y="-1028.6356821589206"/>
         </scene>
         <!--Me View Controller-->
         <scene sceneID="ElV-SG-Zdk">
@@ -595,6 +599,7 @@
                     <connections>
                         <outlet property="buttonProfilePicture" destination="xd4-oh-qzy" id="vxh-Ex-Ydu"/>
                         <outlet property="labelGreeting" destination="9ma-lh-Na0" id="C5f-2o-yxA"/>
+                        <segue destination="XEN-Cr-d1U" kind="show" identifier="MeToFollowing" id="SjQ-nW-NqM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zMC-gN-qPJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -634,7 +639,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="wY4-hh-0Ce" secondAttribute="height" multiplier="1:1" id="Hxf-YN-qfm"/>
                                 </constraints>
-                                <state key="normal" image="Picture"/>
+                                <state key="normal" image="Shirt"/>
                                 <connections>
                                     <action selector="switchViewDidTouch:" destination="amp-Mt-5xp" eventType="touchUpInside" id="B5a-R6-bvE"/>
                                 </connections>
@@ -734,6 +739,7 @@
                         <outlet property="buttonShoes" destination="Qni-CL-WeE" id="QgF-az-mR4"/>
                         <outlet property="buttonTop" destination="BgL-K1-CIr" id="lsF-J1-p7v"/>
                         <outlet property="labelGreeting" destination="Kw8-UP-pGx" id="Lcf-KB-v2b"/>
+                        <segue destination="XEN-Cr-d1U" kind="show" identifier="MeToFollowing" id="gcS-4z-Q9q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J3E-wr-N9Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1484,10 +1490,11 @@
         <image name="TouchID" width="138" height="137"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ggu-xg-HQb"/>
+        <segue reference="gcS-4z-Q9q"/>
+        <segue reference="NZo-f1-ct1"/>
+        <segue reference="hpp-40-ay5"/>
         <segue reference="zi9-Jf-VWI"/>
-        <segue reference="wmk-2P-4IE"/>
-        <segue reference="qcO-9A-bHk"/>
+        <segue reference="ggu-xg-HQb"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
