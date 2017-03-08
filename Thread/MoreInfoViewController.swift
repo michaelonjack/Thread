@@ -52,7 +52,6 @@ class MoreInfoViewController: UIViewController {
     }
     
     
-    
     /////////////////////////////////////////////////////
     //
     //  touchesBegan

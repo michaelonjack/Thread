@@ -39,9 +39,6 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
-        
         clothingItem = ClothingItem()
         
         loadingAnimationView.type = .ballScaleMultiple
@@ -210,54 +207,6 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
                 self.loadingAnimationView.stopAnimating()
             }
         })
-    }
-    
-    
-    
-    /////////////////////////////////////////////////////
-    //
-    //  keyboardWillShow
-    //
-    //  Moves the view up when the keyboard shows so that text fields won't be hidden
-    //
-    func keyboardWillShow(_ notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            
-            imageViewClothingPicture.isHidden = true
-            if self.view.frame.origin.y == 0{
-                self.view.frame.origin.y -= keyboardSize.height
-            }
-        }
-    }
-    
-    
-    
-    /////////////////////////////////////////////////////
-    //
-    //  keyboardWillHide
-    //
-    //  Moves the wiew back down when the keyboard is hiden
-    //
-    func keyboardWillHide(_ notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            
-            imageViewClothingPicture.isHidden = false
-            if self.view.frame.origin.y != 0{
-                self.view.frame.origin.y += keyboardSize.height
-            }
-        }
-    }
-    
-    
-    
-    /////////////////////////////////////////////////////
-    //
-    //  touchesBegan
-    //
-    //  Hides the keyboard when the user selects a non-textfield area
-    //
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
     }
     
     

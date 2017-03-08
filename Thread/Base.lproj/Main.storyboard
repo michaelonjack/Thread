@@ -979,7 +979,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="dWK-ai-OJd"/>
                                 </constraints>
-                                <state key="normal" image="Search"/>
+                                <state key="normal" image="SearchAlt"/>
                                 <connections>
                                     <action selector="searchDidTouch:" destination="2R7-xH-aNl" eventType="touchUpInside" id="27L-ut-qV4"/>
                                 </connections>
@@ -989,9 +989,9 @@
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="o5a-lc-7H7">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
-                                        <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="sectionIndexColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="sectionIndexBackgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="200" id="StV-dw-M2U" customClass="ClothingItemTableViewCell" customModule="Thread" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="200"/>
@@ -1005,9 +1005,9 @@
                                                         </imageView>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Select For Link &gt;" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="f7a-NR-Fy8">
                                                             <rect key="frame" x="8" y="159.5" width="359" height="39.5"/>
-                                                            <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                             <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -1015,11 +1015,11 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMK-ug-Qul">
                                                             <rect key="frame" x="16" y="130.5" width="343" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="f7a-NR-Fy8" secondAttribute="bottom" id="1P5-bB-0dm"/>
                                                         <constraint firstItem="iMK-ug-Qul" firstAttribute="top" secondItem="IkE-Ru-0u4" secondAttribute="bottom" constant="8" id="BLz-MC-qER"/>
@@ -1035,7 +1035,7 @@
                                                         <constraint firstItem="IkE-Ru-0u4" firstAttribute="leading" secondItem="n6y-1Z-lZu" secondAttribute="leadingMargin" constant="8" id="yZe-3l-PXa"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
-                                                <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
                                                     <outlet property="imageViewClothingPic" destination="IkE-Ru-0u4" id="OEk-vz-ONe"/>
                                                     <outlet property="labelInfo" destination="iMK-ug-Qul" id="tdQ-3a-kco"/>
@@ -1071,7 +1071,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
-                        <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Pxq-Wt-bWs" firstAttribute="top" secondItem="4Cv-kf-ZEa" secondAttribute="bottom" constant="7" id="2Gu-el-vDV"/>
                             <constraint firstItem="5p3-FJ-slG" firstAttribute="centerX" secondItem="dTv-AW-Yhm" secondAttribute="centerX" id="2Ip-ME-WfW"/>
@@ -1483,6 +1483,7 @@
         <image name="Picture" width="128" height="128"/>
         <image name="Save" width="256" height="256"/>
         <image name="Search" width="256" height="256"/>
+        <image name="SearchAlt" width="256" height="256"/>
         <image name="Settings" width="256" height="256"/>
         <image name="Shirt" width="256" height="256"/>
         <image name="Shoes" width="256" height="256"/>

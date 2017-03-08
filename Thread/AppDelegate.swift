@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Make navigation bar text tangerine
         UINavigationBar.appearance().tintColor = UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
+        
+        // Enable the IQKeyboard
+        IQKeyboardManager.sharedManager().enable = true
 
         return true
     }
