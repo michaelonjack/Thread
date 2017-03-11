@@ -392,6 +392,7 @@
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="KZf-GW-e7b">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle"/>
                     </refreshControl>
                     <connections>
                         <segue destination="EhG-Ap-wAL" kind="show" identifier="AroundMeToOtherUser" id="SIy-1H-oVL"/>
@@ -1059,6 +1060,9 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="BallScaleMultiple"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="search term (ex. levi's jeans)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pxq-Wt-bWs">
@@ -1491,11 +1495,11 @@
         <image name="TouchID" width="138" height="137"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gcS-4z-Q9q"/>
-        <segue reference="NZo-f1-ct1"/>
-        <segue reference="hpp-40-ay5"/>
         <segue reference="zi9-Jf-VWI"/>
-        <segue reference="ggu-xg-HQb"/>
+        <segue reference="gcS-4z-Q9q"/>
+        <segue reference="hpp-40-ay5"/>
+        <segue reference="NZo-f1-ct1"/>
+        <segue reference="beV-B1-aCh"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -55,6 +55,16 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 100
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSFontAttributeName: UIFont(name: "Avenir-Book", size: 20)!,
+            NSForegroundColorAttributeName: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
+        ]
+        
+        if (forAroundMe == true) {
+            self.title = "Around Me"
+        } else {
+            self.title = "Following"
+        }
         
         
         self.locationManager.delegate = self
