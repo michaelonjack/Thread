@@ -1371,7 +1371,7 @@
                                         <rect key="frame" x="181" y="210" width="160" height="189"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <segue destination="yUe-gp-dJI" kind="show" id="KaA-60-1Rz"/>
+                                            <segue destination="yUe-gp-dJI" kind="show" identifier="AccessoryToClothingItem" id="KaA-60-1Rz"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eki-CE-xIG">
@@ -1584,12 +1584,12 @@
         <image name="UpArrow" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="AtL-ED-Yz7"/>
         <segue reference="hpp-40-ay5"/>
-        <segue reference="NZo-f1-ct1"/>
         <segue reference="gcS-4z-Q9q"/>
         <segue reference="agw-cD-mfk"/>
         <segue reference="beV-B1-aCh"/>
-        <segue reference="zi9-Jf-VWI"/>
+        <segue reference="KaA-60-1Rz"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

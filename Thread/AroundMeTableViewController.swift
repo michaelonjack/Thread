@@ -211,7 +211,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         let user = displayUsers[indexPath.row]
         
         // Set the user's name as the cell's label
-        cell.imageViewProfilePicture.image = nil
+        cell.imageViewProfilePicture.image = UIImage(named: "Avatar")
         cell.labelUserName.text = user.firstName + " " + user.lastName
         
         // Load the user's profile picture asynchronously

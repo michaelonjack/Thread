@@ -48,6 +48,16 @@ class MoreInfoViewController: UIViewController {
     
 
     func swipeDown(_ gesture: UIGestureRecognizer) {
+        
+        // Pass back the new information to the presenting view controller
+        if self.canEdit == true {
+            if let presentingVC = self.presentingViewController as! ClothingItemViewController? {
+                presentingVC.clothingItem.name = self.textViewName.text
+                presentingVC.clothingItem.brand = self.textViewBrand.text
+                presentingVC.clothingItem.itemUrl = self.textViewLink.text
+            }
+        }
+        
         self.dismiss(animated: true, completion: nil)
     }
     

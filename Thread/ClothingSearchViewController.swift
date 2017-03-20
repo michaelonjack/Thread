@@ -251,7 +251,6 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
             let selectedItem = sender as! ClothingItem
             
             clothingItemVC.clothingItem.setName(name: selectedItem.name)
-            print(selectedItem.name)
             clothingItemVC.clothingItem.setBrand(brand: selectedItem.brand)
             clothingItemVC.clothingItem.setItemUrl(url: selectedItem.itemUrl)
             clothingItemVC.imageViewClothingPicture.image = selectedItem.itemImage
