@@ -129,7 +129,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         // If the table is meant to be used to display the followed users, go through this control path
         else {
             // Get the list of users that the current user follows
-            usersRef.child((currentFIRUser?.uid)! + "/Following").observe(.value, with: { snapshot in
+            usersRef.child((currentFIRUser?.uid)! + "/Following").observe(.value, with: { followedUsersSnapshot in
                 
                 // Remove all the users from the list before continuing (this gets called every time a user
                 // is followed or unfollowed so there would be duplicate rows if we didn't delete)
@@ -137,14 +137,22 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
                     self.displayUsers.removeAll()
                 }
                 
-                self.usersRef.observeSingleEvent(of: .value, with: { parentSnapshot in
+                self.usersRef.observeSingleEvent(of: .value, with: { usersSnapshot in
                     
-                    for user in snapshot.children {
+                    for user in followedUsersSnapshot.children {
                         let userSnapshot = user as! FIRDataSnapshot
                         let userId = userSnapshot.key
                         
-                        let followedUser = User(snapshot: parentSnapshot.childSnapshot(forPath: userId))
-                        self.displayUsers.append(followedUser)
+                        // Check to be sure the followed user still exists in the system
+                        if usersSnapshot.hasChild(userId) {
+                            let followedUser = User(snapshot: usersSnapshot.childSnapshot(forPath: userId))
+                            self.displayUsers.append(followedUser)
+                        }
+                            
+                        // If the user no longer exists, remove it from the Following list
+                        else {
+                            self.usersRef.child((self.currentFIRUser?.uid)! + "/Following/" + userId).removeValue()
+                        }
                     }
                     
                     DispatchQueue.main.async {
@@ -203,6 +211,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         let user = displayUsers[indexPath.row]
         
         // Set the user's name as the cell's label
+        cell.imageViewProfilePicture.image = nil
         cell.labelUserName.text = user.firstName + " " + user.lastName
         
         // Load the user's profile picture asynchronously

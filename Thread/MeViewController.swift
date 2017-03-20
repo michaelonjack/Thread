@@ -196,11 +196,8 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
             case "MeToFollowing":
                 let followingVC: AroundMeTableViewController = segue.destination as! AroundMeTableViewController
                 followingVC.forAroundMe = false
-            case "MeToAccount":
+            default:
                 var _ = 0
-        default:
-            let defaultVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
-            defaultVC.clothingType = nil
         }
     }
 

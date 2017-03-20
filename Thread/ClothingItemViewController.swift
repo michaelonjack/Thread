@@ -165,6 +165,11 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         imageViewClothingPicture.image = chosenImage
         dismiss(animated:true, completion: nil)
         self.imageDidChange = true
+        
+        self.clothingItem.name = ""
+        self.clothingItem.brand = ""
+        self.clothingItem.itemUrl = ""
+        
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)

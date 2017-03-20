@@ -25,13 +25,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        let tangerine = UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
+        
         // Make navigation bar transparent
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().isTranslucent = true
         
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UINavigationBar.classForCoder() as! UIAppearanceContainer.Type]).setTitleTextAttributes([NSForegroundColorAttributeName: tangerine, NSFontAttributeName: UIFont(name: "Avenir-Book", size: 20)!], for: .normal)
+        
         // Make navigation bar text tangerine
-        UINavigationBar.appearance().tintColor = UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
+        UINavigationBar.appearance().tintColor = tangerine
         
         // Enable the IQKeyboard
         IQKeyboardManager.sharedManager().enable = true

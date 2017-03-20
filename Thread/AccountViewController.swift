@@ -121,6 +121,37 @@ class AccountViewController: UIViewController {
     
     
     
+    @IBAction func settingsDidTouch(_ sender: Any) {
+        if let presentingVC = self.presentingViewController as? MainViewController {
+            presentingVC.performSegue(withIdentifier: "MainToSettings", sender: nil)
+        } else if let presentingVC = self.presentingViewController as? MeViewController {
+            presentingVC.performSegue(withIdentifier: "MeToSettings", sender: nil)
+        } else if let presentingVC = self.presentingViewController as? MeAltViewController {
+            presentingVC.performSegue(withIdentifier: "MeToSettings", sender: nil)
+        }
+    }
+    
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    // dismissDidTouch
+    //
+    // Performs same exact action as when user swipes up
+    //
+    @IBAction func dismissDidTouch(_ sender: Any) {
+        let transition: CATransition = CATransition()
+        transition.duration = 0.5
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.type = kCATransitionReveal
+        transition.subtype = kCATransitionFromTop
+        self.view.window!.layer.add(transition, forKey: nil)
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    
+    
+    
     /////////////////////////////////////////////////////
     //
     // swipeUpAction

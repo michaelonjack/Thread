@@ -185,26 +185,23 @@ class MeAltViewController: UIViewController, UIImagePickerControllerDelegate, UI
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier! {
-        case "topToClothingItem":
-            let topVC: ClothingItemViewController = segue.destination as! ClothingItemViewController
-            topVC.clothingType = ClothingType.Top
-        case "bottomToClothingItem":
-            let bottomVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
-            bottomVC.clothingType = ClothingType.Bottom
-        case "shoeToClothingItem":
-            let shoeVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
-            shoeVC.clothingType = ClothingType.Shoes
-        case "accessoryToClothingItem":
-            let accessoryVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
-            accessoryVC.clothingType = ClothingType.Accessories
-        case "MeToFollowing":
-            let followingVC: AroundMeTableViewController = segue.destination as! AroundMeTableViewController
-            followingVC.forAroundMe = false
-        case "MeToAccount":
-            var _ = 0
-        default:
-            let defaultVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
-            defaultVC.clothingType = nil
+            case "topToClothingItem":
+                let topVC: ClothingItemViewController = segue.destination as! ClothingItemViewController
+                topVC.clothingType = ClothingType.Top
+            case "bottomToClothingItem":
+                let bottomVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
+                bottomVC.clothingType = ClothingType.Bottom
+            case "shoeToClothingItem":
+                let shoeVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
+                shoeVC.clothingType = ClothingType.Shoes
+            case "accessoryToClothingItem":
+                let accessoryVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
+                accessoryVC.clothingType = ClothingType.Accessories
+            case "MeToFollowing":
+                let followingVC: AroundMeTableViewController = segue.destination as! AroundMeTableViewController
+                followingVC.forAroundMe = false
+            default:
+                var _ = 0
         }
     }
 }

@@ -27,6 +27,8 @@
 		B193C7D01E3E97A300054C78 /* OtherUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B193C7CF1E3E97A300054C78 /* OtherUserViewController.swift */; };
 		B193C7D21E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B193C7D11E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift */; };
 		B1A089AA1E4FE4DD00FC7C65 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B1A089A91E4FE4DD00FC7C65 /* KeychainWrapper.m */; };
+		B1A98C311E7464D700CF2497 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A98C301E7464D700CF2497 /* SettingsViewController.swift */; };
+		B1A98C331E747D0C00CF2497 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A98C321E747D0C00CF2497 /* SettingsTableViewCell.swift */; };
 		B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A8E1E2C66730036E559 /* AppDelegate.swift */; };
 		B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A901E2C66730036E559 /* LoginViewController.swift */; };
 		B1C96A941E2C66730036E559 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C96A921E2C66730036E559 /* Main.storyboard */; };
@@ -87,6 +89,8 @@
 		B193C7D11E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserClothingItemViewController.swift; sourceTree = "<group>"; };
 		B1A089A81E4FE4DD00FC7C65 /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
 		B1A089A91E4FE4DD00FC7C65 /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
+		B1A98C301E7464D700CF2497 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B1A98C321E747D0C00CF2497 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		B1C96A8B1E2C66730036E559 /* Thread.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thread.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C96A8E1E2C66730036E559 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1C96A901E2C66730036E559 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 		B184306A1E2D2EEB00EED632 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B1A98C301E7464D700CF2497 /* SettingsViewController.swift */,
 				B1E8373F1E5BF5C300789BC2 /* AccountViewController.swift */,
 				B162021E1E5699D90099D3D7 /* MoreInfoViewController.swift */,
 				B163FA3E1E3051EC00EF399D /* AroundMeTableViewController.swift */,
@@ -183,6 +188,7 @@
 				B1878ADC1E49486900847326 /* ClothingSearchViewController.swift */,
 				B1DE12301E4BEDCC00DF724F /* ClothingItemTableViewCell.swift */,
 				B16202201E5759D10099D3D7 /* UserTableViewCell.swift */,
+				B1A98C321E747D0C00CF2497 /* SettingsTableViewCell.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -583,6 +589,7 @@
 				B1E08ADA1E50DB7E0011B1EA /* SignUpViewController.swift in Sources */,
 				B1E837401E5BF5C300789BC2 /* AccountViewController.swift in Sources */,
 				B1DE12311E4BEDCC00DF724F /* ClothingItemTableViewCell.swift in Sources */,
+				B1A98C311E7464D700CF2497 /* SettingsViewController.swift in Sources */,
 				B193C7D01E3E97A300054C78 /* OtherUserViewController.swift in Sources */,
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
 				B1E8374A1E63534000789BC2 /* OtherUserContainerViewController.swift in Sources */,
@@ -592,6 +599,7 @@
 				B1E8374E1E64BD9000789BC2 /* MeContainerViewController.swift in Sources */,
 				B16202211E5759D10099D3D7 /* UserTableViewCell.swift in Sources */,
 				B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */,
+				B1A98C331E747D0C00CF2497 /* SettingsTableViewCell.swift in Sources */,
 				B163FA3F1E3051EC00EF399D /* AroundMeTableViewController.swift in Sources */,
 				B18430791E2EED7300EED632 /* MeViewController.swift in Sources */,
 				B162021F1E5699D90099D3D7 /* MoreInfoViewController.swift in Sources */,
