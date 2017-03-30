@@ -36,12 +36,14 @@
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eox-mS-8BJ">
                                 <rect key="frame" x="70" y="247" width="235" height="30"/>
+                                <color key="tintColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="any-GN-6yl">
                                 <rect key="frame" x="70" y="285" width="235" height="30"/>
+                                <color key="tintColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -276,32 +278,17 @@
                                     <segue destination="XEN-Cr-d1U" kind="show" id="7u0-QD-gnC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PT9-R0-aDE">
-                                <rect key="frame" x="70" y="400" width="235" height="33"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                <state key="normal" title="log out">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="logOutDidTouch:" destination="JB2-5X-Yi7" eventType="touchUpInside" id="8W0-xx-6Y4"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="5ZO-91-nKN" firstAttribute="centerX" secondItem="0Wt-T6-IZW" secondAttribute="centerX" id="Bfm-ni-sjA"/>
                             <constraint firstItem="5ZO-91-nKN" firstAttribute="height" secondItem="0Wt-T6-IZW" secondAttribute="height" multiplier="0.089955" id="Knj-2u-wmP"/>
-                            <constraint firstItem="PT9-R0-aDE" firstAttribute="top" secondItem="8CV-JY-I0l" secondAttribute="bottom" constant="17" id="XvY-NR-Dag"/>
                             <constraint firstItem="nm1-S7-c2C" firstAttribute="top" secondItem="RZF-jp-tfr" secondAttribute="bottom" constant="8" id="ah7-CI-F8J"/>
                             <constraint firstItem="5ZO-91-nKN" firstAttribute="top" secondItem="nm1-S7-c2C" secondAttribute="bottom" constant="84.5" id="cgg-3e-1Ul"/>
                             <constraint firstItem="5ZO-91-nKN" firstAttribute="width" secondItem="0Wt-T6-IZW" secondAttribute="width" multiplier="0.626667" id="dfi-Vb-1Sd"/>
                             <constraint firstItem="8CV-JY-I0l" firstAttribute="top" secondItem="5ZO-91-nKN" secondAttribute="bottom" constant="19" id="elE-4R-nrp"/>
                             <constraint firstItem="8CV-JY-I0l" firstAttribute="height" secondItem="0Wt-T6-IZW" secondAttribute="height" multiplier="0.089955" id="hJk-Nh-NOq"/>
-                            <constraint firstItem="PT9-R0-aDE" firstAttribute="width" secondItem="0Wt-T6-IZW" secondAttribute="width" multiplier="0.626667" id="mtU-fy-3Rk"/>
-                            <constraint firstItem="PT9-R0-aDE" firstAttribute="centerX" secondItem="0Wt-T6-IZW" secondAttribute="centerX" id="ohf-lK-s1b"/>
                             <constraint firstItem="8CV-JY-I0l" firstAttribute="width" secondItem="0Wt-T6-IZW" secondAttribute="width" multiplier="0.626667" id="p8G-GT-LS3"/>
-                            <constraint firstItem="PT9-R0-aDE" firstAttribute="height" secondItem="0Wt-T6-IZW" secondAttribute="height" multiplier="0.0494753" id="wqq-DE-0yx"/>
                             <constraint firstItem="nm1-S7-c2C" firstAttribute="centerX" secondItem="0Wt-T6-IZW" secondAttribute="centerX" id="xFj-BA-hhN"/>
                             <constraint firstItem="8CV-JY-I0l" firstAttribute="centerX" secondItem="0Wt-T6-IZW" secondAttribute="centerX" id="zYH-7E-cnU"/>
                         </constraints>
@@ -1584,10 +1571,10 @@
         <image name="UpArrow" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="vwl-04-cEI"/>
+        <segue reference="wxX-V3-uCJ"/>
         <segue reference="AtL-ED-Yz7"/>
         <segue reference="hpp-40-ay5"/>
-        <segue reference="gcS-4z-Q9q"/>
-        <segue reference="agw-cD-mfk"/>
         <segue reference="beV-B1-aCh"/>
         <segue reference="KaA-60-1Rz"/>
     </inferredMetricsTieBreakers>

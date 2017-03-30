@@ -70,28 +70,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     
     
-    /////////////////////////////////////////////////////
-    //
-    //  logOutDidTouch
-    //
-    //  Handles when the log out button is pressed
-    //  Logs the user out and brings them back to the login page
-    //
-    @IBAction func logOutDidTouch(_ sender: AnyObject) {
-        do {
-            try FIRAuth.auth()?.signOut()
-            
-            // Blank out the user's location
-            currentUserRef.updateChildValues(["latitude": 0.0, "longitude": 0.0])
-            
-            self.dismiss(animated: true, completion: nil)
-        } catch {
-            print("Error while signing out")
-        }
-    }
-    
-    
-    
     func swipeDown(_ gesture: UIGestureRecognizer) {
         self.performSegue(withIdentifier: mainToAccount, sender: nil)
     }

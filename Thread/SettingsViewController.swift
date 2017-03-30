@@ -23,11 +23,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         ("Last Name", ""),
         ("Email", ""),
         ("Birthday", ""),
-        ("Password", "***"),
+        ("Password", ">"),
         ("ACCOUNT ACTIONS", "header"),
         ("Logout", ">"),
         ("SUPPORT", "header"),
-        ("Contact/Request", "mikeonjack@gmail.com")
+        ("Contact/Requests", "mikeonjack@gmail.com")
     ]
 
     override func viewDidLoad() {
@@ -71,6 +71,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             self.settings[2].value = storedData?["lastName"] as? String ?? ""
             self.settings[3].value = storedData?["email"] as? String ?? ""
             self.settings[4].value = storedData?["birthday"] as? String ?? ""
+            self.settings[4].value += " >"
             
             DispatchQueue.main.async {
                 self.tableViewSettings.reloadData()
@@ -111,9 +112,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             
             if settings[indexPath.row].value != "header" {
                 
-                if currentKey == "Password" {
-                    cell.textFieldValue.isSecureTextEntry = true
-                } else if currentKey == "Logout" || currentKey == "Contact/Request" {
+                let readOnlyRows = ["ACCOUNT", "Birthday", "Password", "ACCOUNT ACTIONS", "Logout", "Logout", "Contact/Requests"]
+                if readOnlyRows.contains(currentKey) {
                     cell.textFieldValue.isUserInteractionEnabled = false
                 }
                 
@@ -133,6 +133,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
+    
+    /////////////////////////////////////////////////////
+    //
+    //  settingsChanged
+    //
+    //
+    //
     @IBAction func settingChanged(_ sender: UITextField) {
         let parentCell = sender.superview?.superview! as! SettingsTableViewCell
         
@@ -202,10 +209,27 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     //
     //  tableView -- didSelectRowAt
     //
-    //  Segues the selected clothing item back to the user's profile and occupies the view with its data
+    //
     //
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentKey = settings[indexPath.row].key
         
+        switch currentKey {
+            case "Logout":
+                do {
+                    try FIRAuth.auth()?.signOut()
+                    
+                    // Blank out the user's location
+                    currentUserRef.updateChildValues(["latitude": 0.0, "longitude": 0.0])
+                    
+                    self.navigationController?.dismiss(animated: true, completion: nil)
+                } catch {
+                    print("Error while signing out")
+                }
+            
+            default:
+                var _ = 0
+        }
     }
 
 }
