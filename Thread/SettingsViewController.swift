@@ -16,19 +16,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     let currentUser = FIRAuth.auth()?.currentUser
     let threadKeychainWrapper = KeychainWrapper()
     
-    // Can't use dict because we need to obey this ordering
-    var settings: [(key: String, value: String)] = [
-        ("ACCOUNT", "header"),
-        ("First Name", ""),
-        ("Last Name", ""),
-        ("Email", ""),
-        ("Birthday", ""),
-        ("Password", ">"),
-        ("ACCOUNT ACTIONS", "header"),
-        ("Logout", ">"),
-        ("SUPPORT", "header"),
-        ("Contact/Requests", "mikeonjack@gmail.com")
+    let sections = ["ACCOUNT", "ACCOUNT ACTIONS", "SUPPORT"]
+    var items = [
+            [("First Name", ""), ("Last Name", ""), ("Email", ""), ("Birthday", "")],
+            [("Logout", ">"), ("Change Password", ">")],
+            [("Contact/Requests", "mikeonjack@gmail.com")]
     ]
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,16 +61,41 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             
             let storedData = snapshot.value as? NSDictionary
             
-            self.settings[1].value = storedData?["firstName"] as? String ?? ""
-            self.settings[2].value = storedData?["lastName"] as? String ?? ""
-            self.settings[3].value = storedData?["email"] as? String ?? ""
-            self.settings[4].value = storedData?["birthday"] as? String ?? ""
-            self.settings[4].value += " >"
+            self.items[0][0].1 = storedData?["firstName"] as? String ?? ""
+            self.items[0][1].1 = storedData?["lastName"] as? String ?? ""
+            self.items[0][2].1 = storedData?["email"] as? String ?? ""
+            self.items[0][3].1 = storedData?["birthday"] as? String ?? ""
+            self.items[0][3].1 += " >"
             
             DispatchQueue.main.async {
                 self.tableViewSettings.reloadData()
             }
         })
+    }
+    
+    
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        return self.sections[section]
+        
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
+        returnedView.backgroundColor = UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
+        
+        let label = UILabel(frame: CGRect(x: 10, y: 10, width: view.frame.size.width, height: 25))
+        label.text = self.sections[section]
+        label.textColor = UIColor.white
+        label.font = UIFont(name: "Avenir-Book", size: 15)!
+        returnedView.addSubview(label)
+        
+        return returnedView
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.sections.count
     }
     
     
@@ -88,7 +107,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     //  Returns the number of rows in the table (uses the clothingSearchResults array as data source)
     //
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settings.count
+        return self.items[section].count
     }
     
     
@@ -104,29 +123,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SettingsTableViewCell
+        let currentKey = self.items[indexPath.section][indexPath.row].0
+        let currentValue = self.items[indexPath.section][indexPath.row].1
         
-        // Convoluted way of making sure the table only loads once so the 'header' rows don't get dequeued and reused as "non-header" rows
-        if self.settings[1].value != "" {
-            let currentKey = settings[indexPath.row].key
-            let currentValue = settings[indexPath.row].value
-            
-            if settings[indexPath.row].value != "header" {
-                
-                let readOnlyRows = ["ACCOUNT", "Birthday", "Password", "ACCOUNT ACTIONS", "Logout", "Logout", "Contact/Requests"]
-                if readOnlyRows.contains(currentKey) {
-                    cell.textFieldValue.isUserInteractionEnabled = false
-                }
-                
-                cell.labelKey.text = currentKey
-                cell.textFieldValue.text = currentValue
-            }
-            else {
-                cell.labelKey.text = currentKey
-                cell.labelKey.textColor = UIColor.white
-                cell.textFieldValue.text = ""
-                cell.textFieldValue.isUserInteractionEnabled = false
-                cell.backgroundColor = UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
-            }
+        cell.labelKey.text = currentKey
+        cell.textFieldValue.text = currentValue
+        
+        let readOnly = ["Birthday", "Change Password", "Logout", "Contact/Requests"]
+        if readOnly.contains(currentKey) {
+            cell.textFieldValue.isUserInteractionEnabled = false
         }
         
         return cell
@@ -167,8 +172,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                         }
                     })
                 }
-            case "Birthday":
-                currentUserRef.updateChildValues(["birthday": parentCell.textFieldValue.text ?? ""])
             case "Password":
                 if let newPassword = parentCell.textFieldValue.text {
                     currentUser?.updatePassword(newPassword, completion: { (error) in
@@ -212,7 +215,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     //
     //
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let currentKey = settings[indexPath.row].key
+        let currentKey = self.items[indexPath.section][indexPath.row].0
         
         switch currentKey {
             case "Logout":
@@ -227,8 +230,37 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     print("Error while signing out")
                 }
             
+            case "Birthday":
+                self.performSegue(withIdentifier: "SettingsToDatePicker", sender: nil)
+            
             default:
                 var _ = 0
+        }
+    }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier! {
+        case "SettingsToDatePicker":
+            let dateVC: DatePickerViewController = segue.destination as! DatePickerViewController
+            dateVC.presentingVC = self
+            
+            var birthdayStr = self.items[0][3].1
+            let index = birthdayStr.index(birthdayStr.startIndex, offsetBy: birthdayStr.characters.count-2)
+            birthdayStr = birthdayStr.substring(to: index)
+            dateVC.birthdayStr = birthdayStr
+            
+            if birthdayStr != "" {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateStyle = .long
+                let birthdayDate = dateFormatter.date(from: birthdayStr)
+                
+                dateVC.birthdayDate = birthdayDate!
+            }
+            
+        default:
+            var _ = 0
         }
     }
 

@@ -23,6 +23,7 @@
 		B18430791E2EED7300EED632 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18430781E2EED7300EED632 /* MeViewController.swift */; };
 		B184307F1E2F0C8A00EED632 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B184307E1E2F0C8A00EED632 /* Assets.xcassets */; };
 		B18430861E33B03A00EED632 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18430851E33B03A00EED632 /* User.swift */; };
+		B18575651E8F3A5500A62507 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18575641E8F3A5500A62507 /* DatePickerViewController.swift */; };
 		B1878ADD1E49486900847326 /* ClothingSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1878ADC1E49486900847326 /* ClothingSearchViewController.swift */; };
 		B193C7D01E3E97A300054C78 /* OtherUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B193C7CF1E3E97A300054C78 /* OtherUserViewController.swift */; };
 		B193C7D21E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B193C7D11E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift */; };
@@ -84,6 +85,7 @@
 		B184307E1E2F0C8A00EED632 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B18430821E3362EF00EED632 /* Thread-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Thread-Bridging-Header.h"; sourceTree = "<group>"; };
 		B18430851E33B03A00EED632 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B18575641E8F3A5500A62507 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		B1878ADC1E49486900847326 /* ClothingSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingSearchViewController.swift; sourceTree = "<group>"; };
 		B193C7CF1E3E97A300054C78 /* OtherUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserViewController.swift; sourceTree = "<group>"; };
 		B193C7D11E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserClothingItemViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 		B184306A1E2D2EEB00EED632 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B18575641E8F3A5500A62507 /* DatePickerViewController.swift */,
 				B1A98C301E7464D700CF2497 /* SettingsViewController.swift */,
 				B1E8373F1E5BF5C300789BC2 /* AccountViewController.swift */,
 				B162021E1E5699D90099D3D7 /* MoreInfoViewController.swift */,
@@ -583,6 +586,7 @@
 			files = (
 				B1878ADD1E49486900847326 /* ClothingSearchViewController.swift in Sources */,
 				B18430751E2D4BF200EED632 /* MainViewController.swift in Sources */,
+				B18575651E8F3A5500A62507 /* DatePickerViewController.swift in Sources */,
 				B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */,
 				B1E837501E64BDAC00789BC2 /* MeAltViewController.swift in Sources */,
 				B174D02C1E36D8BF00218590 /* ClothingItemViewController.swift in Sources */,
