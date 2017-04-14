@@ -39,6 +39,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     var displayUsers: [User] = []
     // Table refresher used to implement the pull-down-to-refresh functionality in the table view
     var refresher: UIRefreshControl!
+    var currentUserCoordinates:CLLocationCoordinate2D?
     
     
     
@@ -74,7 +75,8 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         
         // If the table is meant to be used to display the nearby users, go through this control path
         if forAroundMe == true {
-            // The snapshot represents the data at the moment in time
+            
+            // This will run every time the current user's latitude changes
             usersRef.child((currentFIRUser?.uid)! + "/latitude").observe(.value, with: { snapshot in
                 
                 DispatchQueue.main.async {
@@ -108,6 +110,8 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
                             let currentUserLocation = CLLocation(latitude: latitude!, longitude: longitude!)
                             // Get the potentially nearby user's location using their latitude and longitudde
                             let nearbyUserLocation = CLLocation(latitude: nearbyUser.latitude, longitude: nearbyUser.longitude)
+                            
+                            self.currentUserCoordinates = currentUserLocation.coordinate
                             
                             // Determine if user is near the current user, if so add to list
                             print("Distance between: " + String(currentUserLocation.distance(from: nearbyUserLocation)))
@@ -261,6 +265,14 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         }
     }
     
+    
+    
+    //////////////////////////////////////////////////////
+    //
+    //
+    //
+    //
+    //
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
@@ -315,8 +327,17 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         // Grab latitude and longitude
         let locValue:CLLocationCoordinate2D = (manager.location?.coordinate)!
         
-        // Update the user's location in the database
-        usersRef.child((currentFIRUser?.uid)!).updateChildValues(["latitude": locValue.latitude, "longitude": locValue.longitude])
+        // Update the user's location in the database if it has changed
+        if self.currentUserCoordinates != nil
+            && self.currentUserCoordinates?.latitude == locValue.latitude
+            && self.currentUserCoordinates?.longitude == locValue.longitude {
+            
+            if self.refresher != nil {
+                self.refresher.endRefreshing()
+            }
+        } else {
+            currentUserRef.updateChildValues(["latitude": locValue.latitude, "longitude": locValue.longitude])
+        }
     }
     // Process any errors that may occur when gathering location
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
