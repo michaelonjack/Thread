@@ -233,6 +233,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             case "Birthday":
                 self.performSegue(withIdentifier: "SettingsToDatePicker", sender: nil)
             
+            case "Change Password":
+                self.performSegue(withIdentifier: "SettingsToPassword", sender: nil)
+            
             default:
                 var _ = 0
         }

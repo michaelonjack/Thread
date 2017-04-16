@@ -86,7 +86,6 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
                 if error == nil {
                     
                     let jsonResponse = JSON(data: data!)
-                    print(jsonResponse)
                     self.totalNumberOfProductsFound = jsonResponse["metadata"]["total"].int! > 25 ? 25 : jsonResponse["metadata"]["total"].int!
                     
                     for (key, subJson):(String, JSON) in jsonResponse["products"] {

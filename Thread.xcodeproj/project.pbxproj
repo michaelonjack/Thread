@@ -44,6 +44,7 @@
 		B1E8374C1E63554F00789BC2 /* OtherUserAltViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8374B1E63554F00789BC2 /* OtherUserAltViewController.swift */; };
 		B1E8374E1E64BD9000789BC2 /* MeContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8374D1E64BD9000789BC2 /* MeContainerViewController.swift */; };
 		B1E837501E64BDAC00789BC2 /* MeAltViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8374F1E64BDAC00789BC2 /* MeAltViewController.swift */; };
+		B1EDE1081EA286040042FB15 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EDE1071EA286040042FB15 /* PasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,7 @@
 		B1E8374B1E63554F00789BC2 /* OtherUserAltViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserAltViewController.swift; sourceTree = "<group>"; };
 		B1E8374D1E64BD9000789BC2 /* MeContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeContainerViewController.swift; sourceTree = "<group>"; };
 		B1E8374F1E64BDAC00789BC2 /* MeAltViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeAltViewController.swift; sourceTree = "<group>"; };
+		B1EDE1071EA286040042FB15 /* PasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		B315754A20752E20A13E984D /* Pods-Thread.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thread.release.xcconfig"; path = "Pods/Target Support Files/Pods-Thread/Pods-Thread.release.xcconfig"; sourceTree = "<group>"; };
 		BEED098888EFE05ADEE3966C /* Pods-ThreadUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadUITests/Pods-ThreadUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CB1E9B1CE232603724C5E794 /* Pods-ThreadTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadTests/Pods-ThreadTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 		B184306A1E2D2EEB00EED632 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B1EDE1071EA286040042FB15 /* PasswordViewController.swift */,
 				B18575641E8F3A5500A62507 /* DatePickerViewController.swift */,
 				B1A98C301E7464D700CF2497 /* SettingsViewController.swift */,
 				B1E8373F1E5BF5C300789BC2 /* AccountViewController.swift */,
@@ -601,6 +604,7 @@
 				B1A089AA1E4FE4DD00FC7C65 /* KeychainWrapper.m in Sources */,
 				B18430861E33B03A00EED632 /* User.swift in Sources */,
 				B1E8374E1E64BD9000789BC2 /* MeContainerViewController.swift in Sources */,
+				B1EDE1081EA286040042FB15 /* PasswordViewController.swift in Sources */,
 				B16202211E5759D10099D3D7 /* UserTableViewCell.swift in Sources */,
 				B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */,
 				B1A98C331E747D0C00CF2497 /* SettingsTableViewCell.swift in Sources */,
