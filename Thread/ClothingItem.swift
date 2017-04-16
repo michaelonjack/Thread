@@ -9,6 +9,7 @@
 import Foundation
 
 struct ClothingItem {
+    var id: String
     var name: String
     var price: Double
     var brand: String
@@ -17,6 +18,7 @@ struct ClothingItem {
     var isExpanded: Bool
     
     init() {
+        self.id = "-1"
         self.name = ""
         self.brand = ""
         self.itemUrl = ""
@@ -26,7 +28,8 @@ struct ClothingItem {
         self.itemImage = nil
     }
     
-    init(name:String, brand: String, itemUrl:String) {
+    init(id:String, name:String, brand: String, itemUrl:String) {
+        self.id = id
         self.name = name
         self.brand = brand
         self.itemUrl = itemUrl
@@ -36,7 +39,8 @@ struct ClothingItem {
         self.itemImage = nil
     }
     
-    init(name:String, brand: String, itemUrl:String, itemImage:UIImage) {
+    init(id: String, name:String, brand: String, itemUrl:String, itemImage:UIImage) {
+        self.id = id
         self.name = name
         self.brand = brand
         self.itemUrl = itemUrl
@@ -58,8 +62,13 @@ struct ClothingItem {
         self.itemUrl = url
     }
     
+    mutating func setItemId(id: String) {
+        self.id = id
+    }
+    
     func toAnyObject() -> Any {
         return [
+            "id": id,
             "name": name,
             "brand": brand,
             "link": itemUrl

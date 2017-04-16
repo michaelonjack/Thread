@@ -325,6 +325,34 @@
             </objects>
             <point key="canvasLocation" x="2849" y="-179"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="g4e-Ad-7KD">
+            <objects>
+                <tableViewController id="z2r-Na-Dgn" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="kfu-1C-n2j">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="JXN-U2-GVm">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JXN-U2-GVm" id="icn-XH-RvA">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="z2r-Na-Dgn" id="Ikh-nf-1gX"/>
+                            <outlet property="delegate" destination="z2r-Na-Dgn" id="vlE-cK-UcR"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fKM-6X-R8o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1514" y="1129"/>
+        </scene>
         <!--Around Me Table View Controller-->
         <scene sceneID="YHk-cv-bLM">
             <objects>
@@ -1657,9 +1685,9 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGM-Vj-tCa">
                                 <rect key="frame" x="162" y="597" width="50" height="50"/>
-                                <state key="normal" image="Love"/>
+                                <state key="normal" image="Favorite"/>
                                 <connections>
-                                    <action selector="likeDidTouch:" destination="yUe-gp-dJI" eventType="touchUpInside" id="a98-kd-vvT"/>
+                                    <action selector="favoriteDidTouch:" destination="yUe-gp-dJI" eventType="touchUpInside" id="cul-Xa-XqB"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cfp-uB-rNx">
@@ -1701,6 +1729,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonFavoriteClothingItem" destination="QGM-Vj-tCa" id="wIz-gv-NRp"/>
                         <outlet property="imageViewClothingPicture" destination="Wkc-vB-v5d" id="Nt1-j8-fax"/>
                         <outlet property="labelViewTitle" destination="cfp-uB-rNx" id="o1X-oA-gRM"/>
                         <outlet property="loadingAnimationView" destination="wV6-Ii-WqG" id="y8h-9I-MxQ"/>
@@ -1733,9 +1762,9 @@
         <image name="Accessories" width="256" height="256"/>
         <image name="Avatar" width="512" height="512"/>
         <image name="Camera" width="256" height="256"/>
+        <image name="Favorite" width="256" height="256"/>
         <image name="Follow" width="256" height="256"/>
         <image name="Following" width="256" height="256"/>
-        <image name="Love" width="256" height="256"/>
         <image name="Loved" width="256" height="256"/>
         <image name="Pants" width="256" height="256"/>
         <image name="PhotoLibrary" width="256" height="256"/>
@@ -1751,12 +1780,12 @@
         <image name="UpArrow" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vwl-04-cEI"/>
-        <segue reference="wxX-V3-uCJ"/>
-        <segue reference="AtL-ED-Yz7"/>
         <segue reference="hpp-40-ay5"/>
-        <segue reference="KaA-60-1Rz"/>
+        <segue reference="agw-cD-mfk"/>
+        <segue reference="NZo-f1-ct1"/>
+        <segue reference="7u0-QD-gnC"/>
         <segue reference="ggu-xg-HQb"/>
+        <segue reference="YZd-E7-TGh"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

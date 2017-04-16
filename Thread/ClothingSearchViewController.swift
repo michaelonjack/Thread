@@ -89,14 +89,18 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
                     self.totalNumberOfProductsFound = jsonResponse["metadata"]["total"].int! > 25 ? 25 : jsonResponse["metadata"]["total"].int!
                     
                     for (key, subJson):(String, JSON) in jsonResponse["products"] {
+                        let itemId = String(subJson["id"].int64 ?? -1)
+                        
                         let itemName = subJson["name"].string ?? ""
+                        
                         let itemUrl = subJson["clickUrl"].string?.replacingOccurrences(of: "\\/", with: "/") ?? ""
+                        
                         let itemBrand = subJson["brand"]["name"].string ?? ""
-                        //let description = subJson["description"].string
+                        
                         let picUrl =  subJson["image"]["sizes"]["IPhone"]["url"].string?.replacingOccurrences(of: "\\/", with: "/")
                         
                         
-                        self.clothingSearchResults.append( ClothingItem(name: itemName, brand: itemBrand, itemUrl: itemUrl) )
+                        self.clothingSearchResults.append( ClothingItem(id: itemId, name: itemName, brand: itemBrand, itemUrl: itemUrl) )
                         self.downloadImageFromUrl(url: picUrl!, index: Int(key)!)
                         
                     }

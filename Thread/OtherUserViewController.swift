@@ -146,6 +146,12 @@ class OtherUserViewController: UIViewController {
                 
             } else if snapshot.childrenCount == 6 {
                 
+                let followFailedAlert = UIAlertController(title: "Cannot Follow User", message: "You can only follow six users at a time. Remove someone from your follow list to follow this user.", preferredStyle: .alert)
+                
+                let closeAction = UIAlertAction(title: "Close", style: .default)
+                followFailedAlert.addAction(closeAction)
+                self.present(followFailedAlert, animated: true, completion:nil)
+                
             } else if snapshot.hasChild(self.otherUser.uid) {
                 
                 self.currentUserRef.child("Following/" + self.otherUser.uid).removeValue()

@@ -16,7 +16,10 @@ class OtherUserClothingItemViewController: UIViewController {
     @IBOutlet weak var labelViewTitle: UILabel!
     @IBOutlet weak var labelItemName: UILabel!
     @IBOutlet weak var textViewItemLink: UITextView!
+    @IBOutlet weak var buttonFavoriteClothingItem: UIButton!
     @IBOutlet weak var loadingAnimationView: NVActivityIndicatorView!
+    
+    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
     
     var userRef: FIRDatabaseReference!
     var userStorageRef: FIRStorageReference!
@@ -65,27 +68,6 @@ class OtherUserClothingItemViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    
-    
-    /////////////////////////////////////////////////////
-    //
-    //  likeDidTouch
-    //
-    //  Action to handle when the user likes (hearts another user's clothing item
-    //
-    @IBAction func likeDidTouch(_ sender: Any) {
-        
-        /*
-        let likeButton = sender as! UIButton
-        
-        if likeButton.image(for: UIControlState.normal)?.accessibilityIdentifier == "Love" {
-            likeButton.setImage(UIImage(named: "LoveClicked"), for: UIControlState.normal)
-        } else {
-            likeButton.setImage(UIImage(named:"Love"), for: UIControlState.normal)
-        }
-        */
-    }
     
     
     
@@ -103,6 +85,7 @@ class OtherUserClothingItemViewController: UIViewController {
             
             let storedData = snapshot.value as? NSDictionary
             
+            self.clothingItem.setItemId(id: storedData?["id"] as? String ?? "-1")
             self.clothingItem.setName(name: storedData?["name"] as? String ?? "")
             self.clothingItem.setBrand(brand: storedData?["brand"] as? String ?? "")
             self.clothingItem.setItemUrl(url: storedData?["link"] as? String ?? "")
@@ -122,6 +105,38 @@ class OtherUserClothingItemViewController: UIViewController {
                 })
             } else {
                 self.loadingAnimationView.stopAnimating()
+            }
+        })
+    }
+    
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  favoriteDidTouch
+    //
+    //  Action to handle when the user favorites (hearts) another user's clothing item
+    //
+    @IBAction func favoriteDidTouch(_ sender: Any) {
+        
+        currentUserRef.child("Favorites").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            // Add the clothing item to their Favorites list if they have not already added the item
+            if !snapshot.hasChild(self.clothingItem.id) {
+                self.currentUserRef.child("Favorites").updateChildValues( [self.clothingItem.id : self.clothingItem.toAnyObject()] )
+                
+                DispatchQueue.main.async {
+                    self.buttonFavoriteClothingItem.setImage( UIImage(named: "FavoriteClicked"), for: .normal )
+                }
+                
+            } else {
+                
+                self.currentUserRef.child("Favorites/" + self.clothingItem.id).removeValue()
+                
+                DispatchQueue.main.async {
+                    self.buttonFavoriteClothingItem.setImage( UIImage(named: "Favorite"), for: .normal )
+                }
+                
             }
         })
     }

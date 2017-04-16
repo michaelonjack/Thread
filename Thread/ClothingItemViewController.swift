@@ -78,6 +78,11 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         loadingAnimationView.type = .ballBeat
         loadingAnimationView.startAnimating()
         
+        // Create a new id for the item if it does not currently have one
+        if self.clothingItem.id == "-1" {
+            self.clothingItem.setItemId(id: generateRandomId())
+        }
+        
         // Add the data to the database for the current user
         let currentUserClothingTypeRef = currentUserRef.child(clothingType.description)
         currentUserClothingTypeRef.updateChildValues(self.clothingItem.toAnyObject() as! [AnyHashable : Any])
@@ -191,6 +196,7 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
             
             let storedData = snapshot.value as? NSDictionary
             
+            self.clothingItem.setItemId(id: storedData?["id"] as? String ?? "-1")
             self.clothingItem.setName(name: storedData?["name"] as? String ?? "")
             self.clothingItem.setBrand(brand: storedData?["brand"] as? String ?? "")
             self.clothingItem.setItemUrl(url: storedData?["link"] as? String ?? "")
@@ -212,6 +218,17 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
                 self.loadingAnimationView.stopAnimating()
             }
         })
+    }
+    
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  generateRandomId
+    //
+    //
+    func generateRandomId() -> String {
+        return String(arc4random_uniform(UInt32(UInt32.max)))
     }
     
     
