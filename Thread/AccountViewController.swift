@@ -77,23 +77,12 @@ class AccountViewController: UIViewController {
             
             // Load user's profile picture from Firebase Storage if it exists (exists if the user has a profPic URL in the database)
             if snapshot.hasChild("profilePictureUrl") {
-                self.currentUserStorageRef.child("ProfilePicture").data(withMaxSize: 20*1024*1024, completion: {(data, error) in
-                    if data != nil {
-                        let profilePicture = UIImage(data:data!)
-                    
-                        // Sets the user's profile picture to the loaded image
-                        self.imageViewProfilePicture.image = profilePicture
-                        self.imageViewProfilePicture.contentMode = .scaleAspectFill
-                    } else {
-                        let errorAlert = UIAlertController(title: "Uh oh!",
-                                                           message: "Unable to retrieve information.",
-                                                           preferredStyle: .alert)
-                        
-                        let closeAction = UIAlertAction(title: "Close", style: .default)
-                        errorAlert.addAction(closeAction)
-                        self.present(errorAlert, animated: true, completion:nil)
-                    }
-                })
+                let picUrlStr = storedData?["profilePictureUrl"] as? String ?? ""
+                if picUrlStr != "" {
+                    let picUrl = URL(string: picUrlStr)
+                    self.imageViewProfilePicture.sd_setImage(with: picUrl, placeholderImage: UIImage(named: "Avatar"))
+                    self.imageViewProfilePicture.contentMode = .scaleAspectFill
+                }
             } else {
                 print("Error -- Loading Profile Picture")
             }
@@ -121,6 +110,31 @@ class AccountViewController: UIViewController {
     
     
     
+    /////////////////////////////////////////////////////
+    //
+    // favoritesDidTouch
+    //
+    // Segues the user to the table view containing all the clothes they've favorited
+    //
+    @IBAction func favoritesDidTouch(_ sender: Any) {
+        
+        if let presentingVC = self.presentingViewController as? MainViewController {
+            presentingVC.performSegue(withIdentifier: "MainToFavorites", sender: nil)
+        } else if let presentingVC = self.presentingViewController as? MeViewController {
+            presentingVC.performSegue(withIdentifier: "MeToFavorites", sender: nil)
+        } else if let presentingVC = self.presentingViewController as? MeAltViewController {
+            presentingVC.performSegue(withIdentifier: "MeToFavorites", sender: nil)
+        }
+    }
+    
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    // settingsDidTouch
+    //
+    // Segues the user to the Settings view controller
+    //
     @IBAction func settingsDidTouch(_ sender: Any) {
         if let presentingVC = self.presentingViewController as? MainViewController {
             presentingVC.performSegue(withIdentifier: "MainToSettings", sender: nil)

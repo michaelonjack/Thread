@@ -64,7 +64,7 @@ class OtherUserViewController: UIViewController {
     //
     //  setFollowButton
     //
-    //  Returns true if the current user is following this user
+    //  Sets the follow button to the correct image depending on its state
     //
     func setFollowButton() {
         currentUserRef.child("Following").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -97,14 +97,11 @@ class OtherUserViewController: UIViewController {
             
             // Load profile picture if it exists
             if snapshot.hasChild("profilePictureUrl") {
-                self.userStorageRef.child("ProfilePicture").data(withMaxSize: 20*1024*1024, completion: {(data, error) in
-                    if data != nil {
-                        let profilePicture = UIImage(data:data!)
-                        
-                        self.imageViewProfilePicture.image = profilePicture
-                        self.imageViewProfilePicture.contentMode = .scaleAspectFill
-                    } 
-                })
+                let picUrlStr = storedData?["profilePictureUrl"] as? String ?? ""
+                if picUrlStr != "" {
+                    let picUrl = URL(string: picUrlStr)
+                    self.imageViewProfilePicture.sd_setImage(with: picUrl, placeholderImage: UIImage(named: "Avatar"))
+                }
             } else {
                 print("Error loading user image")
             }

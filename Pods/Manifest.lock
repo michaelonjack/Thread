@@ -40,7 +40,10 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.9)
   - IQKeyboardManagerSwift (4.0.9)
-  - NVActivityIndicatorView (3.6.0)
+  - NVActivityIndicatorView (3.6.1)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
@@ -50,6 +53,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - IQKeyboardManagerSwift
   - NVActivityIndicatorView
+  - SDWebImage
   - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -63,9 +67,10 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   IQKeyboardManagerSwift: 2eefe6c429b86aa08bfbc1b5c891164d754adf91
-  NVActivityIndicatorView: c7c1c4300b418bd9ed06459e78d4df859ddbe31f
+  NVActivityIndicatorView: 9f52a7f84bf5c6a798722c450fe3c198e01c56ed
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: b22906860746c6f7eee6e7b59b24f1decf2186c2
+PODFILE CHECKSUM: c012112da68a81683fcd2627b00eda8d5ea0b50c
 
 COCOAPODS: 1.1.1

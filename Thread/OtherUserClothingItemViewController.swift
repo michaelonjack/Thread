@@ -62,11 +62,30 @@ class OtherUserClothingItemViewController: UIViewController {
         userStorageRef = FIRStorage.storage().reference(withPath: "images/" + user.uid)
         
         loadUserData()
+        setFavoriteButton()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  setFavoritesButton
+    //
+    //  Sets the favorite button to the correct image depending on its state
+    //
+    func setFavoriteButton() {
+        currentUserRef.child("Favorites").observeSingleEvent(of: .value, with: { (snapshot) in
+            print(self.clothingItem.id)
+            if snapshot.hasChild(self.clothingItem.id) {
+                DispatchQueue.main.async {
+                    self.buttonFavoriteClothingItem.setImage(UIImage(named: "FavoriteClicked"), for: .normal)
+                }
+            }
+        })
     }
     
     
@@ -89,6 +108,7 @@ class OtherUserClothingItemViewController: UIViewController {
             self.clothingItem.setName(name: storedData?["name"] as? String ?? "")
             self.clothingItem.setBrand(brand: storedData?["brand"] as? String ?? "")
             self.clothingItem.setItemUrl(url: storedData?["link"] as? String ?? "")
+            self.clothingItem.setItemPictureUrl(url: storedData?["pictureUrl"] as? String ?? "")
             
             if snapshot.hasChild("pictureUrl") {
                 self.userStorageRef.child(self.clothingType.description).data(withMaxSize: 20*1024*1024, completion: {(data, error) in

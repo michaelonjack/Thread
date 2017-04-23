@@ -85,7 +85,6 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         
         // Add the data to the database for the current user
         let currentUserClothingTypeRef = currentUserRef.child(clothingType.description)
-        currentUserClothingTypeRef.updateChildValues(self.clothingItem.toAnyObject() as! [AnyHashable : Any])
         
         // Enter the user's image into the database
         if imageViewClothingPicture.image != nil && imageDidChange == true {
@@ -106,6 +105,8 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
                     let downloadUrl = metaData?.downloadURL()?.absoluteString
                     currentUserClothingTypeRef.updateChildValues(["pictureUrl": downloadUrl!])
                     
+                    self.clothingItem.itemPictureUrl = downloadUrl!
+                    
                     self.loadingAnimationView.stopAnimating()
                         
                 } else {
@@ -116,6 +117,8 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         } else {
             self.loadingAnimationView.stopAnimating()
         }
+        
+        currentUserClothingTypeRef.updateChildValues(self.clothingItem.toAnyObject() as! [AnyHashable : Any])
     }
     
     
@@ -163,7 +166,7 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     //  Called by cameraDidTouch and photoLibraryDidTouch
     //
     func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : AnyObject])
+                               didFinishPickingMediaWithInfo info: [String : Any])
     {
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         imageViewClothingPicture.contentMode = .scaleAspectFit
@@ -200,6 +203,7 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
             self.clothingItem.setName(name: storedData?["name"] as? String ?? "")
             self.clothingItem.setBrand(brand: storedData?["brand"] as? String ?? "")
             self.clothingItem.setItemUrl(url: storedData?["link"] as? String ?? "")
+            self.clothingItem.setItemPictureUrl(url: storedData?["pictureUrl"] as? String ?? "")
             
             if snapshot.hasChild("pictureUrl") {
                 self.currentUserStorageRef.child(self.clothingType.description).data(withMaxSize: 20*1024*1024, completion: {(data, error) in

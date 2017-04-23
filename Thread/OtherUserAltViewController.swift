@@ -98,14 +98,11 @@ class OtherUserAltViewController: UIViewController {
             
             // Load profile picture if it exists
             if snapshot.hasChild("profilePictureUrl") {
-                self.userStorageRef.child("ProfilePicture").data(withMaxSize: 20*1024*1024, completion: {(data, error) in
-                    if data != nil {
-                        let profilePicture = UIImage(data:data!)
-                        
-                        self.imageViewProfilePicture.image = profilePicture
-                        self.imageViewProfilePicture.contentMode = .scaleAspectFill
-                    }
-                })
+                let picUrlStr = storedData?["profilePictureUrl"] as? String ?? ""
+                if picUrlStr != "" {
+                    let picUrl = URL(string: picUrlStr)
+                    self.imageViewProfilePicture.sd_setImage(with: picUrl, placeholderImage: UIImage(named: "Avatar"))
+                }
             } else {
                 print("Error loading user image")
             }

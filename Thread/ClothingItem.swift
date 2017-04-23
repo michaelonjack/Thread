@@ -14,6 +14,7 @@ struct ClothingItem {
     var price: Double
     var brand: String
     var itemUrl: String
+    var itemPictureUrl: String
     var itemImage: UIImage?
     var isExpanded: Bool
     
@@ -22,10 +23,10 @@ struct ClothingItem {
         self.name = ""
         self.brand = ""
         self.itemUrl = ""
+        self.itemPictureUrl = ""
         
         self.isExpanded = false
         self.price = 0.0
-        self.itemImage = nil
     }
     
     init(id:String, name:String, brand: String, itemUrl:String) {
@@ -34,20 +35,26 @@ struct ClothingItem {
         self.brand = brand
         self.itemUrl = itemUrl
         
+        self.itemPictureUrl = ""
         self.isExpanded = false
         self.price = 0.0
-        self.itemImage = nil
     }
     
-    init(id: String, name:String, brand: String, itemUrl:String, itemImage:UIImage) {
-        self.id = id
-        self.name = name
-        self.brand = brand
-        self.itemUrl = itemUrl
+    init(snapshot: FIRDataSnapshot) {
+        id = snapshot.key
+        let snapshotValue = snapshot.value as! [String: AnyObject]
+        name = snapshotValue["name"] as! String
+        brand = snapshotValue["brand"] as! String
+        itemUrl = snapshotValue["link"] as! String
+        itemPictureUrl = snapshotValue["pictureUrl"] as! String
         
         self.isExpanded = false
         self.price = 0.0
-        self.itemImage = itemImage
+        
+    }
+    
+    mutating func setItemId(id: String) {
+        self.id = id
     }
     
     mutating func setName(name:String) {
@@ -62,8 +69,8 @@ struct ClothingItem {
         self.itemUrl = url
     }
     
-    mutating func setItemId(id: String) {
-        self.id = id
+    mutating func setItemPictureUrl(url: String) {
+        self.itemPictureUrl = url
     }
     
     func toAnyObject() -> Any {
@@ -71,7 +78,8 @@ struct ClothingItem {
             "id": id,
             "name": name,
             "brand": brand,
-            "link": itemUrl
+            "link": itemUrl,
+            "pictureUrl": itemPictureUrl
         ]
     }
 }

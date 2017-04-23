@@ -15,6 +15,7 @@
 
 import UIKit
 import FirebaseStorage
+import SDWebImage
 
 class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -82,7 +83,7 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
     //  Called by profilePictureDidTouch
     //
     func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : AnyObject])
+                               didFinishPickingMediaWithInfo info: [String : Any])
     {
         // The image taken by the user's camera
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
@@ -141,23 +142,11 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
             
             // Load user's profile picture from Firebase Storage if it exists (exists if the user has a profPic URL in the database)
             if snapshot.hasChild("profilePictureUrl") {
-                self.currentUserStorageRef.child("ProfilePicture").data(withMaxSize: 20*1024*1024, completion: {(data, error) in
-                    if data != nil {
-                        let profilePicture = UIImage(data:data!)
-                        
-                        // Sets the user's profile picture to the loaded image
-                        self.buttonProfilePicture.setImage(profilePicture, for: .normal)
-                        self.buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
-                    } else {
-                        let errorAlert = UIAlertController(title: "Uh oh!",
-                                                           message: "Unable to retrieve information.",
-                                                           preferredStyle: .alert)
-                        
-                        let closeAction = UIAlertAction(title: "Close", style: .default)
-                        errorAlert.addAction(closeAction)
-                        self.present(errorAlert, animated: true, completion:nil)
-                    }
-                })
+                let picUrlStr = storedData?["profilePictureUrl"] as? String ?? ""
+                if picUrlStr != "" {
+                    let picUrl = URL(string: picUrlStr)
+                    self.buttonProfilePicture.sd_setImage(with: picUrl, for: .normal, placeholderImage: UIImage(named: "Avatar"))
+                }
             } else {
                 print("Error -- Loading Profile Picture")
             }

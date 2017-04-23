@@ -219,24 +219,14 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         cell.labelUserName.text = user.firstName + " " + user.lastName
         
         // Load the user's profile picture asynchronously
-        if user.profilePictureUrl != nil {
-            usersRef.child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                // Load user's profile picture from Firebase Storage if it exists (exists if the user has a profPic URL in the database)
-                if snapshot.hasChild("profilePictureUrl") {
-                    self.usersStorageRef.child(user.uid + "/ProfilePicture").data(withMaxSize: 20*1024*1024, completion: {(data, error) in
-                        if data != nil {
-                            let storagePicture = UIImage(data:data!)
-                            
-                            DispatchQueue.main.async {
-                                cell.imageViewProfilePicture.image = storagePicture
-                            }
-                        }
-                    })
-                } else {
-                    print("Error -- Loading Profile Picture")
-                }
-            })
+        if user.profilePictureUrl != nil && user.profilePictureUrl != "" {
+            
+            let picUrlStr = user.profilePictureUrl!
+            
+            let picUrl = URL(string: picUrlStr)
+            
+            cell.imageViewProfilePicture.sd_setImage(with: picUrl, placeholderImage: UIImage(named: "Avatar"))
+            
         } else {
             cell.imageViewProfilePicture.image = UIImage(named: "Avatar")
         }

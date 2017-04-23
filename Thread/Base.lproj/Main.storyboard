@@ -298,6 +298,7 @@
                         <segue destination="8kp-j1-EqZ" kind="custom" identifier="MainToAccount" customClass="TopDownSegue" customModule="Thread" customModuleProvider="target" id="AtL-ED-Yz7"/>
                         <segue destination="XEN-Cr-d1U" kind="show" identifier="MainToFollowing" id="wxX-V3-uCJ"/>
                         <segue destination="IQq-nM-PGq" kind="show" identifier="MainToSettings" id="vwl-04-cEI"/>
+                        <segue destination="z2r-Na-Dgn" kind="show" identifier="MainToFavorites" id="ekr-Ci-Msh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WaE-jI-O3L" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -325,22 +326,49 @@
             </objects>
             <point key="canvasLocation" x="2849" y="-179"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Favorites-->
         <scene sceneID="g4e-Ad-7KD">
             <objects>
-                <tableViewController id="z2r-Na-Dgn" sceneMemberID="viewController">
+                <tableViewController title="Favorites" id="z2r-Na-Dgn" customClass="FavoritesTableViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="kfu-1C-n2j">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="JXN-U2-GVm">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ClothingItemCell" rowHeight="170" id="JXN-U2-GVm" customClass="ClothingItemTableViewCell" customModule="Thread" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="170"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JXN-U2-GVm" id="icn-XH-RvA">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="169.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nFg-xx-SZH">
+                                            <rect key="frame" x="16" y="8" width="343" height="112"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F6j-fz-LxE">
+                                            <rect key="frame" x="16" y="127.5" width="343" height="23.5"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                            <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="F6j-fz-LxE" secondAttribute="bottom" priority="250" constant="10.5" id="1XV-fx-NHw"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="F6j-fz-LxE" secondAttribute="trailing" constant="8" id="22p-5n-eqm"/>
+                                        <constraint firstItem="F6j-fz-LxE" firstAttribute="leading" secondItem="icn-XH-RvA" secondAttribute="leadingMargin" constant="8" id="4om-or-bK7"/>
+                                        <constraint firstItem="nFg-xx-SZH" firstAttribute="width" secondItem="icn-XH-RvA" secondAttribute="width" multiplier="0.914667" id="D6r-M7-Lo4"/>
+                                        <constraint firstItem="F6j-fz-LxE" firstAttribute="top" secondItem="nFg-xx-SZH" secondAttribute="bottom" constant="7.5" id="DDp-vG-e8D"/>
+                                        <constraint firstItem="F6j-fz-LxE" firstAttribute="centerX" secondItem="nFg-xx-SZH" secondAttribute="centerX" id="J79-sX-M4D"/>
+                                        <constraint firstItem="nFg-xx-SZH" firstAttribute="top" secondItem="icn-XH-RvA" secondAttribute="topMargin" id="tde-Vk-lpd"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="imageViewClothingPic" destination="nFg-xx-SZH" id="pRq-dA-agG"/>
+                                    <outlet property="labelInfo" destination="F6j-fz-LxE" id="O6l-xa-X5f"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -351,7 +379,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fKM-6X-R8o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1514" y="1129"/>
+            <point key="canvasLocation" x="1824.8" y="1162.6686656671666"/>
         </scene>
         <!--Around Me Table View Controller-->
         <scene sceneID="YHk-cv-bLM">
@@ -714,6 +742,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JQz-Jo-mfB">
                                 <rect key="frame" x="167" y="424" width="40" height="40"/>
                                 <state key="normal" image="Loved"/>
+                                <connections>
+                                    <action selector="favoritesDidTouch:" destination="8kp-j1-EqZ" eventType="touchUpInside" id="TRJ-HU-rVb"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tA0-AF-3zZ">
                                 <rect key="frame" x="170" y="612" width="35" height="35"/>
@@ -881,6 +912,7 @@
                         <outlet property="labelGreeting" destination="9ma-lh-Na0" id="C5f-2o-yxA"/>
                         <segue destination="XEN-Cr-d1U" kind="show" identifier="MeToFollowing" id="SjQ-nW-NqM"/>
                         <segue destination="IQq-nM-PGq" kind="show" identifier="MeToSettings" id="gfk-di-0lr"/>
+                        <segue destination="z2r-Na-Dgn" kind="show" identifier="MeToFavorites" id="F8r-NO-sYT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zMC-gN-qPJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1022,6 +1054,7 @@
                         <outlet property="labelGreeting" destination="Kw8-UP-pGx" id="Lcf-KB-v2b"/>
                         <segue destination="XEN-Cr-d1U" kind="show" identifier="MeToFollowing" id="gcS-4z-Q9q"/>
                         <segue destination="IQq-nM-PGq" kind="show" identifier="MeToSettings" id="agw-cD-mfk"/>
+                        <segue destination="z2r-Na-Dgn" kind="show" identifier="MeToFavorites" id="DUY-O4-ptb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J3E-wr-N9Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1283,7 +1316,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IkE-Ru-0u4">
-                                                            <rect key="frame" x="16" y="8" width="343" height="114.5"/>
+                                                            <rect key="frame" x="16" y="8" width="343" height="112"/>
                                                         </imageView>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Select For Link &gt;" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="f7a-NR-Fy8">
                                                             <rect key="frame" x="8" y="159.5" width="359" height="39.5"/>
@@ -1295,8 +1328,8 @@
                                                             <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                         </textView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMK-ug-Qul">
-                                                            <rect key="frame" x="16" y="130.5" width="343" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <rect key="frame" x="16" y="128" width="343" height="23.5"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                             <color key="textColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -1386,7 +1419,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HWj-ay-Je3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="n4W-Ot-28g" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="6174" y="-250"/>
+            <point key="canvasLocation" x="6173.6000000000004" y="-250.52473763118442"/>
         </scene>
         <!--Other User View Controller-->
         <scene sceneID="vXz-0q-dnk">
@@ -1780,12 +1813,13 @@
         <image name="UpArrow" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hpp-40-ay5"/>
-        <segue reference="agw-cD-mfk"/>
-        <segue reference="NZo-f1-ct1"/>
-        <segue reference="7u0-QD-gnC"/>
+        <segue reference="gfk-di-0lr"/>
+        <segue reference="wmk-2P-4IE"/>
+        <segue reference="SjQ-nW-NqM"/>
+        <segue reference="F8r-NO-sYT"/>
+        <segue reference="qcO-9A-bHk"/>
+        <segue reference="zi9-Jf-VWI"/>
         <segue reference="ggu-xg-HQb"/>
-        <segue reference="YZd-E7-TGh"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

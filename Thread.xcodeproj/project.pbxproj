@@ -10,6 +10,7 @@
 		047A2A4DEADCCCC1006F080F /* Pods_ThreadUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE3BD1DB1BADDF10CDC9F8B /* Pods_ThreadUITests.framework */; };
 		0C6686D8773E8AE3E1E0D72A /* Pods_Thread.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9560FB66ADAA3C0318ED7771 /* Pods_Thread.framework */; };
 		3535199162A3752B698A930C /* Pods_ThreadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB2183E2AAEB7F63B3BAF82 /* Pods_ThreadTests.framework */; };
+		B11623A61EA3E65A00262617 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11623A51EA3E65A00262617 /* FavoritesTableViewController.swift */; };
 		B162021F1E5699D90099D3D7 /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162021E1E5699D90099D3D7 /* MoreInfoViewController.swift */; };
 		B16202211E5759D10099D3D7 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16202201E5759D10099D3D7 /* UserTableViewCell.swift */; };
 		B163FA3F1E3051EC00EF399D /* AroundMeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B163FA3E1E3051EC00EF399D /* AroundMeTableViewController.swift */; };
@@ -71,6 +72,7 @@
 		7D290579FCFE88FA818A8002 /* Pods-Thread.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thread.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thread/Pods-Thread.debug.xcconfig"; sourceTree = "<group>"; };
 		8976F182E6528772898954DF /* Pods-ThreadUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadUITests/Pods-ThreadUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9560FB66ADAA3C0318ED7771 /* Pods_Thread.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thread.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B11623A51EA3E65A00262617 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		B162021E1E5699D90099D3D7 /* MoreInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
 		B16202201E5759D10099D3D7 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		B163FA3E1E3051EC00EF399D /* AroundMeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AroundMeTableViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				B1E8373F1E5BF5C300789BC2 /* AccountViewController.swift */,
 				B162021E1E5699D90099D3D7 /* MoreInfoViewController.swift */,
 				B163FA3E1E3051EC00EF399D /* AroundMeTableViewController.swift */,
+				B11623A51EA3E65A00262617 /* FavoritesTableViewController.swift */,
 				B1E8374D1E64BD9000789BC2 /* MeContainerViewController.swift */,
 				B18430781E2EED7300EED632 /* MeViewController.swift */,
 				B1E8374F1E64BDAC00789BC2 /* MeAltViewController.swift */,
@@ -591,6 +594,7 @@
 				B18430751E2D4BF200EED632 /* MainViewController.swift in Sources */,
 				B18575651E8F3A5500A62507 /* DatePickerViewController.swift in Sources */,
 				B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */,
+				B11623A61EA3E65A00262617 /* FavoritesTableViewController.swift in Sources */,
 				B1E837501E64BDAC00789BC2 /* MeAltViewController.swift in Sources */,
 				B174D02C1E36D8BF00218590 /* ClothingItemViewController.swift in Sources */,
 				B1E08ADA1E50DB7E0011B1EA /* SignUpViewController.swift in Sources */,
