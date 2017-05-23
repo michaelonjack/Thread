@@ -22,8 +22,8 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
     @IBOutlet weak var buttonProfilePicture: UIButton!
     @IBOutlet weak var labelGreeting: UILabel!
     
-    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
-    let currentUserStorageRef = FIRStorage.storage().reference(withPath: "images/" + (FIRAuth.auth()?.currentUser?.uid)!)
+    let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
+    let currentUserStorageRef = Storage.storage().reference(withPath: "images/" + (Auth.auth().currentUser?.uid)!)
     let imagePicker = UIImagePickerController()
     
     var containerViewController: MeContainerViewController?
@@ -92,7 +92,7 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
         buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
         
         // Creates the image metadata for Firebase Storage
-        let imageMetaData = FIRStorageMetadata()
+        let imageMetaData = StorageMetadata()
         imageMetaData.contentType = "image/jpeg"
             
         // Create a Data object to represent the image as a JPEG
@@ -103,7 +103,7 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
         let currentUserProfilePictureRef = currentUserStorageRef.child("ProfilePicture")
             
         // Add the selected image to Firebase Storage
-        currentUserProfilePictureRef.put(imageData, metadata: imageMetaData) { (metaData, error) in
+        currentUserProfilePictureRef.putData(imageData, metadata: imageMetaData) { (metaData, error) in
             if error == nil {
                     // Add the image's url to the Firebase database
                 let downloadUrl = metaData?.downloadURL()?.absoluteString

@@ -17,8 +17,8 @@ class MeAltViewController: UIViewController, UIImagePickerControllerDelegate, UI
     @IBOutlet weak var buttonShoes: UIButton!
     @IBOutlet weak var buttonAccessories: UIButton!
     
-    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
-    let currentUserStorageRef = FIRStorage.storage().reference(withPath: "images/" + (FIRAuth.auth()?.currentUser?.uid)!)
+    let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
+    let currentUserStorageRef = Storage.storage().reference(withPath: "images/" + (Auth.auth().currentUser?.uid)!)
     let imagePicker = UIImagePickerController()
     
     var containerViewController: MeContainerViewController?
@@ -80,7 +80,7 @@ class MeAltViewController: UIViewController, UIImagePickerControllerDelegate, UI
         buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
         
         // Creates the image metadata for Firebase Storage
-        let imageMetaData = FIRStorageMetadata()
+        let imageMetaData = StorageMetadata()
         imageMetaData.contentType = "image/jpeg"
         
         // Create a Data object to represent the image as a JPEG
@@ -91,7 +91,7 @@ class MeAltViewController: UIViewController, UIImagePickerControllerDelegate, UI
         let currentUserProfilePictureRef = currentUserStorageRef.child("ProfilePicture")
         
         // Add the selected image to Firebase Storage
-        currentUserProfilePictureRef.put(imageData, metadata: imageMetaData) { (metaData, error) in
+        currentUserProfilePictureRef.putData(imageData, metadata: imageMetaData) { (metaData, error) in
             if error == nil {
                 // Add the image's url to the Firebase database
                 let downloadUrl = metaData?.downloadURL()?.absoluteString
@@ -155,7 +155,7 @@ class MeAltViewController: UIViewController, UIImagePickerControllerDelegate, UI
     //  Loads the image specified by the 'name' parameter into the button specified by the 'button' parameter
     //
     func loadImage(named: String, button: UIButton) {
-        self.currentUserStorageRef.child(named).data(withMaxSize: 20*1024*1024, completion: {(data, error) in
+        self.currentUserStorageRef.child(named).getData(maxSize: 20*1024*1024, completion: {(data, error) in
             if data != nil {
                 let topPicture = UIImage(data:data!)
                 

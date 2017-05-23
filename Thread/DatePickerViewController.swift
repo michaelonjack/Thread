@@ -14,7 +14,7 @@ class DatePickerViewController: UIViewController {
     @IBOutlet weak var buttonUpdate: UIButton!
     @IBOutlet weak var labelBirthday: UILabel!
     
-    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
+    let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     
     var birthdayStr: String = ""
     var birthdayDate: Date? = nil

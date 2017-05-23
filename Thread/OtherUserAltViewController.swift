@@ -18,10 +18,10 @@ class OtherUserAltViewController: UIViewController {
     @IBOutlet weak var buttonAccessories: UIButton!
     @IBOutlet weak var buttonFollowUser: UIButton!
     
-    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
+    let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     
-    var userRef: FIRDatabaseReference!
-    var userStorageRef: FIRStorageReference!
+    var userRef: DatabaseReference!
+    var userStorageRef: StorageReference!
     var otherUser: User!
     var containerViewController: OtherUserContainerViewController?
     
@@ -37,8 +37,8 @@ class OtherUserAltViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userRef = FIRDatabase.database().reference(withPath: "users/" + otherUser.uid)
-        userStorageRef = FIRStorage.storage().reference(withPath: "images/" + otherUser.uid)
+        userRef = Database.database().reference(withPath: "users/" + otherUser.uid)
+        userStorageRef = Storage.storage().reference(withPath: "images/" + otherUser.uid)
         
         setFollowButton()
         loadData()
@@ -123,7 +123,7 @@ class OtherUserAltViewController: UIViewController {
     //  Loads the image specified by the 'name' parameter into the button specified by the 'button' parameter
     //
     func loadImage(named: String, button: UIButton) {
-        self.userStorageRef.child(named).data(withMaxSize: 20*1024*1024, completion: {(data, error) in
+        self.userStorageRef.child(named).getData(maxSize: 20*1024*1024, completion: {(data, error) in
             if data != nil {
                 let topPicture = UIImage(data:data!)
                 

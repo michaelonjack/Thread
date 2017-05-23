@@ -10,10 +10,11 @@ import UIKit
 
 class FavoritesTableViewController: UITableViewController {
     
-    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
+    let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     
     var favoriteItems: [ClothingItem] = []
-    var numFavoritedItems: Int = 0;
+    var numFavoritedItems: Int = 0
+    var itemsProcessed: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,7 @@ class FavoritesTableViewController: UITableViewController {
             for (index, clothingItem) in snapshot.children.enumerated() {
                 
                 // Create instance of the favorited item
-                let currentItem = ClothingItem(snapshot: clothingItem as! FIRDataSnapshot)
+                let currentItem = ClothingItem(snapshot: clothingItem as! DataSnapshot)
                 // Download the item's image using the URL
                 self.downloadImageFromUrl(url: currentItem.itemPictureUrl, index: index)
                 
@@ -75,8 +76,10 @@ class FavoritesTableViewController: UITableViewController {
                 print(error?.localizedDescription ?? "Error downloading image")
             }
             
+            self.itemsProcessed += 1
+            
             // Once all of the images have been downloaded and set, refresh the table view
-            if self.numFavoritedItems-1 == index {
+            if self.numFavoritedItems == self.itemsProcessed {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -123,9 +126,11 @@ class FavoritesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let clothingItem = favoriteItems[indexPath.row]
-        let itemUrl = URL(string: clothingItem.itemUrl)!
         
-        UIApplication.shared.open(itemUrl)
+        if clothingItem.itemUrl != "" {
+            let itemUrl = URL(string: clothingItem.itemUrl)!
+            UIApplication.shared.open(itemUrl)
+        }
     }
     
     

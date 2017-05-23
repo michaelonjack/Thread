@@ -18,10 +18,10 @@ class OtherUserViewController: UIViewController {
     @IBOutlet weak var imgButton: UIButton!
     @IBOutlet weak var buttonFollowUser: UIButton!
     
-    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
+    let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     
-    var userRef: FIRDatabaseReference!
-    var userStorageRef: FIRStorageReference!
+    var userRef: DatabaseReference!
+    var userStorageRef: StorageReference!
     var otherUser: User!
     var containerViewController: OtherUserContainerViewController?
     
@@ -37,8 +37,8 @@ class OtherUserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userRef = FIRDatabase.database().reference(withPath: "users/" + otherUser.uid)
-        userStorageRef = FIRStorage.storage().reference(withPath: "images/" + otherUser.uid)
+        userRef = Database.database().reference(withPath: "users/" + otherUser.uid)
+        userStorageRef = Storage.storage().reference(withPath: "images/" + otherUser.uid)
         
         setFollowButton()
         loadProfilePicture()

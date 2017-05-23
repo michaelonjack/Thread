@@ -40,16 +40,16 @@ struct User {
         self.longitude = longitude
     }
     
-    init(user: FIRUser, firstName: String, lastName: String) {
+    init(user: User, firstName: String, lastName: String) {
         self.uid = user.uid
-        self.email = user.email!
+        self.email = user.email
         self.firstName = firstName
         self.lastName = lastName
         self.latitude = 0
         self.longitude = 0
     }
     
-    init(snapshot: FIRDataSnapshot) {
+    init(snapshot: DataSnapshot) {
         uid = snapshot.key
         let snapshotValue = snapshot.value as! [String: AnyObject]
         firstName = snapshotValue["firstName"] as! String

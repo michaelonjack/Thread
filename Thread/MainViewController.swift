@@ -17,7 +17,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     // LocationManager instance used to update the current user's location
     let locationManager = CLLocationManager()
     // Reference to the current user's information in the database
-    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
+    let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
 
     
     

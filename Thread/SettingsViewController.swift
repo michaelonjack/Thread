@@ -12,8 +12,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var tableViewSettings: UITableView!
     
-    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
-    let currentUser = FIRAuth.auth()?.currentUser
+    let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
+    let currentUser = Auth.auth().currentUser
     let threadKeychainWrapper = KeychainWrapper()
     
     let sections = ["ACCOUNT", "ACCOUNT ACTIONS", "SUPPORT"]
@@ -155,7 +155,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 currentUserRef.updateChildValues(["lastName": parentCell.textFieldValue.text ?? ""])
             case "Email":
                 if let newEmail = parentCell.textFieldValue.text {
-                    currentUser?.updateEmail(newEmail, completion: { (error) in
+                    currentUser?.updateEmail(to: newEmail, completion: { (error) in
                         if error == nil {
                             self.currentUserRef.updateChildValues(["email": newEmail])
                             
@@ -174,7 +174,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             case "Password":
                 if let newPassword = parentCell.textFieldValue.text {
-                    currentUser?.updatePassword(newPassword, completion: { (error) in
+                    currentUser?.updatePassword(to: newPassword, completion: { (error) in
                         if error == nil {
                             // Update password in keychain
                             self.threadKeychainWrapper.mySetObject(newPassword, forKey:kSecValueData)
@@ -220,7 +220,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         switch currentKey {
             case "Logout":
                 do {
-                    try FIRAuth.auth()?.signOut()
+                    try Auth.auth().signOut()
                     
                     // Blank out the user's location
                     currentUserRef.updateChildValues(["latitude": 0.0, "longitude": 0.0])

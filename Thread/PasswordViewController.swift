@@ -14,8 +14,8 @@ class PasswordViewController: UIViewController {
     @IBOutlet weak var textFieldNewPassword: UITextField!
     @IBOutlet weak var textFieldConfirmPassword: UITextField!
     
-    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
-    let currentUser = FIRAuth.auth()?.currentUser
+    let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
+    let currentUser = Auth.auth().currentUser
     let threadKeychainWrapper = KeychainWrapper()
     
     override func viewDidLoad() {
@@ -72,11 +72,11 @@ class PasswordViewController: UIViewController {
                 let userEmail = currentUserValue?["email"] as? String ?? ""
                 
                 // Use the signIn function to validate the current password
-                FIRAuth.auth()?.signIn(withEmail: userEmail, password: currentPassword!, completion: { (user, error) in
+                Auth.auth().signIn(withEmail: userEmail, password: currentPassword!, completion: { (user, error) in
                     
                     // If no error then the current password is correct so update to the new password
                     if error == nil {
-                        self.currentUser?.updatePassword(newPassword!, completion: { (error) in
+                        self.currentUser?.updatePassword(to: newPassword!, completion: { (error) in
                             
                             if error == nil {
                                 // Update password in keychain
@@ -128,7 +128,7 @@ class PasswordViewController: UIViewController {
             
             // If the user has an email saved, send a reset email
             if userEmail != "" {
-                FIRAuth.auth()?.sendPasswordReset(withEmail: userEmail, completion: { (error) in
+                Auth.auth().sendPasswordReset(withEmail: userEmail, completion: { (error) in
                     
                     // If no error, send a reset password email
                     if error == nil {

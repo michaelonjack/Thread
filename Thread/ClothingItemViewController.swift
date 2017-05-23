@@ -17,8 +17,8 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var loadingAnimationView: NVActivityIndicatorView!
     
     let picker = UIImagePickerController()
-    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
-    let currentUserStorageRef = FIRStorage.storage().reference(withPath: "images/" + (FIRAuth.auth()?.currentUser?.uid)!)
+    let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
+    let currentUserStorageRef = Storage.storage().reference(withPath: "images/" + (Auth.auth().currentUser?.uid)!)
     
     var clothingItem: ClothingItem!
     var clothingType: ClothingType!
@@ -88,7 +88,7 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         
         // Enter the user's image into the database
         if imageViewClothingPicture.image != nil && imageDidChange == true {
-            let imageMetaData = FIRStorageMetadata()
+            let imageMetaData = StorageMetadata()
             imageMetaData.contentType = "image/jpeg"
         
             // Create a Data object to represent the image as a PNG
@@ -99,7 +99,7 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
             let currentUserClothingTypeImagesRef = currentUserStorageRef.child(clothingType.description)
             
             // Add the image to Firebase Storage
-            currentUserClothingTypeImagesRef.put(imageData, metadata: imageMetaData) { (metaData, error) in
+            currentUserClothingTypeImagesRef.putData(imageData, metadata: imageMetaData) { (metaData, error) in
                 if error == nil {
                     // Add the image's url to the Firebase database
                     let downloadUrl = metaData?.downloadURL()?.absoluteString
@@ -206,7 +206,7 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
             self.clothingItem.setItemPictureUrl(url: storedData?["pictureUrl"] as? String ?? "")
             
             if snapshot.hasChild("pictureUrl") {
-                self.currentUserStorageRef.child(self.clothingType.description).data(withMaxSize: 20*1024*1024, completion: {(data, error) in
+                self.currentUserStorageRef.child(self.clothingType.description).getData(maxSize: 20*1024*1024, completion: {(data, error) in
                     if error == nil {
                         let clothingImage = UIImage(data:data!)
                     

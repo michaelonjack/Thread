@@ -18,9 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     override init() {
         super.init()
         
-        FIRApp.configure()
+        FirebaseApp.configure()
         // Allow Firebase database to work offline
-        FIRDatabase.database().persistenceEnabled = true
+        Database.database().isPersistenceEnabled = true
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

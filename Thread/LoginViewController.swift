@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var buttonTouchID: UIButton!
     
     let loginToMain = "LoginToMain"
-    let usersRef = FIRDatabase.database().reference(withPath: "users")
+    let usersRef = Database.database().reference(withPath: "users")
     let threadKeychainWrapper = KeychainWrapper()
     
     var authContext = LAContext()
@@ -41,7 +41,7 @@ class LoginViewController: UIViewController {
         buttonTouchID.isHidden = true
         
         // If a user is already logged in, skip login view and continue to the main view
-        FIRAuth.auth()?.addStateDidChangeListener() { auth, user in
+        Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil && (user?.isEmailVerified)! {
                 self.performSegue(withIdentifier: self.loginToMain, sender: nil)
             }
@@ -72,8 +72,8 @@ class LoginViewController: UIViewController {
         let email = textFieldLoginEmail.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let password = textFieldLoginPassword.text!
         
-        FIRAuth.auth()!.signIn(withEmail: email, password: password) {user,  error in
-            if let user = FIRAuth.auth()?.currentUser {
+        Auth.auth().signIn(withEmail: email, password: password) {user,  error in
+            if let user = Auth.auth().currentUser {
                 
                 // Check if user has already verified their email address
                 if user.isEmailVerified {
@@ -152,8 +152,8 @@ class LoginViewController: UIViewController {
                             let userEmail = UserDefaults.standard.value(forKey: "userEmail") as! String
                             let userPassword = self.threadKeychainWrapper.myObject(forKey: "v_Data") as! String
     
-                            FIRAuth.auth()!.signIn(withEmail: userEmail, password: userPassword) { user, error in
-                                if let user = FIRAuth.auth()?.currentUser {
+                            Auth.auth().signIn(withEmail: userEmail, password: userPassword) { user, error in
+                                if let user = Auth.auth().currentUser {
                                     // Check if user has already verified their email address
                                     if user.isEmailVerified {
                                         self.performSegue(withIdentifier: self.loginToMain, sender: nil)

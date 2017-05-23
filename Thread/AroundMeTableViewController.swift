@@ -24,13 +24,13 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     // Name of the segue that's used when the current user selects another user in the table
     let aroundMeToOtherUser = "AroundMeToOtherUser"
     
-    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
+    let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     
     // Reference to the app's users data in the Firebase database
-    let usersRef = FIRDatabase.database().reference(withPath: "users")
-    let usersStorageRef = FIRStorage.storage().reference(withPath: "images")
+    let usersRef = Database.database().reference(withPath: "users")
+    let usersStorageRef = Storage.storage().reference(withPath: "images")
     // FIRUser instance that represents the current user
-    let currentFIRUser = FIRAuth.auth()?.currentUser
+    let currentFIRUser = Auth.auth().currentUser
     // LocationManager instance used to update the current user's location
     let locationManager = CLLocationManager()
     
@@ -93,7 +93,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
                     for user in parentSnapshot.children {
                         
                         // Create instance of the potentially nearby user
-                        let nearbyUser = User(snapshot: user as! FIRDataSnapshot)
+                        let nearbyUser = User(snapshot: user as! DataSnapshot)
                         
                         // Create a database snapshot for the currently logged in user
                         let currentUserSnapshot = parentSnapshot.childSnapshot(forPath: (self.currentFIRUser?.uid)!)
@@ -144,7 +144,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
                 self.usersRef.observeSingleEvent(of: .value, with: { usersSnapshot in
                     
                     for user in followedUsersSnapshot.children {
-                        let userSnapshot = user as! FIRDataSnapshot
+                        let userSnapshot = user as! DataSnapshot
                         let userId = userSnapshot.key
                         
                         // Check to be sure the followed user still exists in the system

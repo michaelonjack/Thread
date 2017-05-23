@@ -22,7 +22,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var textFieldConfirmPassword: UITextField!
     
-    let usersRef = FIRDatabase.database().reference(withPath: "users")
+    let usersRef = Database.database().reference(withPath: "users")
     
     
     
@@ -75,7 +75,7 @@ class SignUpViewController: UIViewController {
         } else {
             
             // Create a user using the user's provided email and password
-            FIRAuth.auth()!.createUser(withEmail: email, password: password) { user, error in
+            Auth.auth().createUser(withEmail: email, password: password) { user, error in
                 
                 if error == nil {
                     

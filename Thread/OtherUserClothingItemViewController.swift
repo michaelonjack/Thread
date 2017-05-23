@@ -19,10 +19,10 @@ class OtherUserClothingItemViewController: UIViewController {
     @IBOutlet weak var buttonFavoriteClothingItem: UIButton!
     @IBOutlet weak var loadingAnimationView: NVActivityIndicatorView!
     
-    let currentUserRef = FIRDatabase.database().reference(withPath: "users/" + (FIRAuth.auth()?.currentUser?.uid)!)
+    let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     
-    var userRef: FIRDatabaseReference!
-    var userStorageRef: FIRStorageReference!
+    var userRef: DatabaseReference!
+    var userStorageRef: StorageReference!
     
     var clothingItem: ClothingItem!
     var clothingType: ClothingType!
@@ -58,8 +58,8 @@ class OtherUserClothingItemViewController: UIViewController {
             labelViewTitle.text = user.firstName + "'s accessories"
         }
         
-        userRef = FIRDatabase.database().reference(withPath: "users/" + user.uid)
-        userStorageRef = FIRStorage.storage().reference(withPath: "images/" + user.uid)
+        userRef = Database.database().reference(withPath: "users/" + user.uid)
+        userStorageRef = Storage.storage().reference(withPath: "images/" + user.uid)
         
         loadUserData()
         setFavoriteButton()
@@ -111,7 +111,7 @@ class OtherUserClothingItemViewController: UIViewController {
             self.clothingItem.setItemPictureUrl(url: storedData?["pictureUrl"] as? String ?? "")
             
             if snapshot.hasChild("pictureUrl") {
-                self.userStorageRef.child(self.clothingType.description).data(withMaxSize: 20*1024*1024, completion: {(data, error) in
+                self.userStorageRef.child(self.clothingType.description).getData(maxSize: 20*1024*1024, completion: {(data, error) in
                     if error == nil {
                         let clothingImage = UIImage(data:data!)
                     
