@@ -40,9 +40,9 @@ struct User {
         self.longitude = longitude
     }
     
-    init(user: User, firstName: String, lastName: String) {
+    init(user: Firebase.User, firstName: String, lastName: String) {
         self.uid = user.uid
-        self.email = user.email
+        self.email = user.email!
         self.firstName = firstName
         self.lastName = lastName
         self.latitude = 0
