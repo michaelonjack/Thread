@@ -52,13 +52,15 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         // Give table VC mocha colored background
+        /*
         self.tableView.backgroundColor = UIColor.init(red: 147.0/255.0, green: 82.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        */
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 100
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSFontAttributeName: UIFont(name: "Avenir-Book", size: 20)!,
-            NSForegroundColorAttributeName: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
+            /*NSForegroundColorAttributeName: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)*/
         ]
         
         if (forAroundMe == true) {

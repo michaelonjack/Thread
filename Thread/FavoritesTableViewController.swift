@@ -25,7 +25,7 @@ class FavoritesTableViewController: UITableViewController {
         // Set the font of the navigation bar's header
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSFontAttributeName: UIFont(name: "Avenir-Book", size: 20)!,
-            NSForegroundColorAttributeName: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
+            /*NSForegroundColorAttributeName: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)*/
         ]
         
         // Fetch the current user's favorited items
