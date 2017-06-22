@@ -59,6 +59,10 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         }
         
         loadUserData()
+        
+        let swipeToSwitchItem = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeLeft(_:)))
+        swipeToSwitchItem.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(swipeToSwitchItem)
     }
 
     override func didReceiveMemoryWarning() {
@@ -235,6 +239,26 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
         return String(arc4random_uniform(UInt32(UInt32.max)))
     }
     
+    
+    func swipeLeft(_ gesture: UIGestureRecognizer) {
+        let vc:ClothingItemViewController = storyboard?.instantiateViewController(withIdentifier: "ClothingItemViewController") as! ClothingItemViewController
+        
+        switch self.clothingType! {
+            case .Top:
+                vc.clothingType = ClothingType.Bottom
+            case .Bottom:
+                vc.clothingType = ClothingType.Shoes
+            case .Shoes:
+                vc.clothingType = ClothingType.Accessories
+            case .Accessories:
+                vc.clothingType = ClothingType.Top
+        }
+        
+        var currentControllers:[UIViewController] = (self.navigationController?.viewControllers)!
+        currentControllers.removeLast()
+        currentControllers.append(vc)
+        self.navigationController?.setViewControllers(currentControllers, animated: true)
+    }
     
     
     /////////////////////////////////////////////////////

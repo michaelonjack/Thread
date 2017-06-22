@@ -1229,7 +1229,7 @@
         <!--Clothing Item View Controller-->
         <scene sceneID="LeF-LR-ztw">
             <objects>
-                <viewController definesPresentationContext="YES" id="k5d-ze-k3f" customClass="ClothingItemViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ClothingItemViewController" definesPresentationContext="YES" id="k5d-ze-k3f" customClass="ClothingItemViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LAp-iY-O4o"/>
                         <viewControllerLayoutGuide type="bottom" id="qNq-jT-zvB"/>
@@ -1874,13 +1874,13 @@
         <image name="UpArrow" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="agw-cD-mfk"/>
-        <segue reference="gcS-4z-Q9q"/>
-        <segue reference="hpp-40-ay5"/>
-        <segue reference="DUY-O4-ptb"/>
-        <segue reference="NZo-f1-ct1"/>
-        <segue reference="YZd-E7-TGh"/>
-        <segue reference="ggu-xg-HQb"/>
+        <segue reference="gfk-di-0lr"/>
+        <segue reference="F8r-NO-sYT"/>
+        <segue reference="wmk-2P-4IE"/>
+        <segue reference="qcO-9A-bHk"/>
+        <segue reference="SjQ-nW-NqM"/>
+        <segue reference="beV-B1-aCh"/>
+        <segue reference="zi9-Jf-VWI"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
