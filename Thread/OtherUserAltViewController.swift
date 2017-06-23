@@ -123,12 +123,20 @@ class OtherUserAltViewController: UIViewController {
     //  Loads the image specified by the 'name' parameter into the button specified by the 'button' parameter
     //
     func loadImage(named: String, button: UIButton) {
-        self.userStorageRef.child(named).getData(maxSize: 20*1024*1024, completion: {(data, error) in
-            if data != nil {
-                let topPicture = UIImage(data:data!)
+        userRef.child(named).observeSingleEvent(of: .value, with: { (snapshot) in
+            let clothingData = snapshot.value as? NSDictionary
+            
+            // Check if the clothing item has a picture URL saved
+            if snapshot.hasChild("pictureUrl") {
                 
-                button.imageView?.contentMode = .scaleAspectFit
-                button.setImage(topPicture, for: .normal)
+                // If so, use that URL to load the image using SDWebImage
+                let picUrlStr = clothingData?["pictureUrl"] as? String ?? ""
+                if picUrlStr != "" {
+                    let picUrl = URL(string: picUrlStr)
+                    print("here")
+                    button.imageView?.contentMode = .scaleAspectFit
+                    button.sd_setImage(with: picUrl, for: .normal)
+                }
             }
         })
     }

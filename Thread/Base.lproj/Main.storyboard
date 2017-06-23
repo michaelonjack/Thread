@@ -1278,8 +1278,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ct7-d3-VOM" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
                                 <rect key="frame" x="123" y="134" width="128" height="128"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="BallScaleMultiple"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAC-a7-3HM">
@@ -1874,12 +1878,12 @@
         <image name="UpArrow" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gfk-di-0lr"/>
-        <segue reference="F8r-NO-sYT"/>
-        <segue reference="wmk-2P-4IE"/>
-        <segue reference="qcO-9A-bHk"/>
-        <segue reference="SjQ-nW-NqM"/>
         <segue reference="beV-B1-aCh"/>
+        <segue reference="qcO-9A-bHk"/>
+        <segue reference="wmk-2P-4IE"/>
+        <segue reference="SjQ-nW-NqM"/>
+        <segue reference="F8r-NO-sYT"/>
+        <segue reference="gfk-di-0lr"/>
         <segue reference="zi9-Jf-VWI"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

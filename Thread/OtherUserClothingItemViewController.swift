@@ -115,18 +115,17 @@ class OtherUserClothingItemViewController: UIViewController {
             self.clothingItem.setItemPictureUrl(url: storedData?["pictureUrl"] as? String ?? "")
             
             if snapshot.hasChild("pictureUrl") {
-                self.userStorageRef.child(self.clothingType.description).getData(maxSize: 20*1024*1024, completion: {(data, error) in
-                    if error == nil {
-                        let clothingImage = UIImage(data:data!)
+                let picUrlStr = storedData?["pictureUrl"] as? String ?? ""
+                
+                if (picUrlStr != "") {
+                    let picUrl = URL(string: picUrlStr)
                     
-                        self.imageViewClothingPicture.contentMode = .scaleAspectFit
-                        self.loadingAnimationView.stopAnimating()
-                        self.imageViewClothingPicture.backgroundColor = UIColor.white
-                        self.imageViewClothingPicture.image = clothingImage
-                    } else {
-                        print(error?.localizedDescription ?? "Error loading clothing image")
-                    }
-                })
+                    self.imageViewClothingPicture.contentMode = .scaleAspectFit
+                    self.imageViewClothingPicture.backgroundColor = UIColor.white
+                    self.imageViewClothingPicture.sd_setImage(with: picUrl)
+                }
+                
+                self.loadingAnimationView.stopAnimating()
             } else {
                 self.loadingAnimationView.stopAnimating()
             }
