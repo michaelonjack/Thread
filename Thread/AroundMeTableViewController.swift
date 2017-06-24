@@ -28,7 +28,6 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     
     // Reference to the app's users data in the Firebase database
     let usersRef = Database.database().reference(withPath: "users")
-    let usersStorageRef = Storage.storage().reference(withPath: "images")
     // FIRUser instance that represents the current user
     let currentFIRUser = Auth.auth().currentUser
     // LocationManager instance used to update the current user's location

@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Fusuma.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,17 +67,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>3E0D8640A124012AB6F0A9F775A38285</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3E51D531A93E694813DD50825D1916F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3EDFE4052B5DE7D509935AC0774CB135</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4C8AD91D4314AC0DCA79CAC35AB268C1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4DC059E04CBA98AEDDB5C34E02D551E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,17 +87,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>741CAB686E3F5117F664982DB14BDA65</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EA69E350F442501CA97A57A3DC38212B</key>
+		<key>C235F77E101E742652CCF98FFDFA5182</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FBBA0869A38B9C2A9EA040E3F909C7D1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FDF9B9227187A29CC6021EC2A5261B0C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

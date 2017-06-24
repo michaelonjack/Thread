@@ -13,5 +13,9 @@ class UserTableViewCell: UITableViewCell {
     @IBOutlet weak var imageViewProfilePicture: UIImageView!
     @IBOutlet weak var labelUserName: UILabel!
     
+    // UPDATED USER CELL
+    @IBOutlet weak var labelUserLocation: UILabel!
+    @IBOutlet weak var imageViewOutfitPicture: UIImageView!
+    @IBOutlet weak var buttonFollow: UIButton!
 
 }

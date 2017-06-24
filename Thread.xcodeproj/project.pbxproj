@@ -29,6 +29,8 @@
 		B193C7D01E3E97A300054C78 /* OtherUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B193C7CF1E3E97A300054C78 /* OtherUserViewController.swift */; };
 		B193C7D21E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B193C7D11E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift */; };
 		B1A089AA1E4FE4DD00FC7C65 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B1A089A91E4FE4DD00FC7C65 /* KeychainWrapper.m */; };
+		B1A11D3D1EFE7EDD00E16169 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A11D3C1EFE7EDD00E16169 /* UserTableViewController.swift */; };
+		B1A11D411EFEC4AB00E16169 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A11D401EFEC4AB00E16169 /* DatabaseHelper.swift */; };
 		B1A98C311E7464D700CF2497 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A98C301E7464D700CF2497 /* SettingsViewController.swift */; };
 		B1A98C331E747D0C00CF2497 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A98C321E747D0C00CF2497 /* SettingsTableViewCell.swift */; };
 		B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A8E1E2C66730036E559 /* AppDelegate.swift */; };
@@ -94,6 +96,8 @@
 		B193C7D11E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserClothingItemViewController.swift; sourceTree = "<group>"; };
 		B1A089A81E4FE4DD00FC7C65 /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
 		B1A089A91E4FE4DD00FC7C65 /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
+		B1A11D3C1EFE7EDD00E16169 /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
+		B1A11D401EFEC4AB00E16169 /* DatabaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
 		B1A98C301E7464D700CF2497 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B1A98C321E747D0C00CF2497 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		B1C96A8B1E2C66730036E559 /* Thread.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thread.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,13 +180,13 @@
 		B184306A1E2D2EEB00EED632 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B1A11D3F1EFE80B000E16169 /* TableViewControllers */,
+				B1A11D3E1EFE807300E16169 /* TableViewCells */,
 				B1EDE1071EA286040042FB15 /* PasswordViewController.swift */,
 				B18575641E8F3A5500A62507 /* DatePickerViewController.swift */,
 				B1A98C301E7464D700CF2497 /* SettingsViewController.swift */,
 				B1E8373F1E5BF5C300789BC2 /* AccountViewController.swift */,
 				B162021E1E5699D90099D3D7 /* MoreInfoViewController.swift */,
-				B163FA3E1E3051EC00EF399D /* AroundMeTableViewController.swift */,
-				B11623A51EA3E65A00262617 /* FavoritesTableViewController.swift */,
 				B1E8374D1E64BD9000789BC2 /* MeContainerViewController.swift */,
 				B18430781E2EED7300EED632 /* MeViewController.swift */,
 				B1E8374F1E64BDAC00789BC2 /* MeAltViewController.swift */,
@@ -196,8 +200,6 @@
 				B193C7D11E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift */,
 				B1878ADC1E49486900847326 /* ClothingSearchViewController.swift */,
 				B1DE12301E4BEDCC00DF724F /* ClothingItemTableViewCell.swift */,
-				B16202201E5759D10099D3D7 /* UserTableViewCell.swift */,
-				B1A98C321E747D0C00CF2497 /* SettingsTableViewCell.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -205,6 +207,7 @@
 		B184306C1E2D2F4D00EED632 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				B1A11D401EFEC4AB00E16169 /* DatabaseHelper.swift */,
 				B1C96A8E1E2C66730036E559 /* AppDelegate.swift */,
 				B174D0271E36CAC700218590 /* APIKeys.swift */,
 				B1A089A81E4FE4DD00FC7C65 /* KeychainWrapper.h */,
@@ -242,6 +245,25 @@
 				B1C96A921E2C66730036E559 /* Main.storyboard */,
 			);
 			name = Layouts;
+			sourceTree = "<group>";
+		};
+		B1A11D3E1EFE807300E16169 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				B16202201E5759D10099D3D7 /* UserTableViewCell.swift */,
+				B1A98C321E747D0C00CF2497 /* SettingsTableViewCell.swift */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		B1A11D3F1EFE80B000E16169 /* TableViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B11623A51EA3E65A00262617 /* FavoritesTableViewController.swift */,
+				B163FA3E1E3051EC00EF399D /* AroundMeTableViewController.swift */,
+				B1A11D3C1EFE7EDD00E16169 /* UserTableViewController.swift */,
+			);
+			name = TableViewControllers;
 			sourceTree = "<group>";
 		};
 		B1C96A821E2C66730036E559 = {
@@ -590,6 +612,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1A11D411EFEC4AB00E16169 /* DatabaseHelper.swift in Sources */,
 				B1878ADD1E49486900847326 /* ClothingSearchViewController.swift in Sources */,
 				B18430751E2D4BF200EED632 /* MainViewController.swift in Sources */,
 				B18575651E8F3A5500A62507 /* DatePickerViewController.swift in Sources */,
@@ -600,6 +623,7 @@
 				B1E08ADA1E50DB7E0011B1EA /* SignUpViewController.swift in Sources */,
 				B1E837401E5BF5C300789BC2 /* AccountViewController.swift in Sources */,
 				B1DE12311E4BEDCC00DF724F /* ClothingItemTableViewCell.swift in Sources */,
+				B1A11D3D1EFE7EDD00E16169 /* UserTableViewController.swift in Sources */,
 				B1A98C311E7464D700CF2497 /* SettingsViewController.swift in Sources */,
 				B193C7D01E3E97A300054C78 /* OtherUserViewController.swift in Sources */,
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,

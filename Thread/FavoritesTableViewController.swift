@@ -38,7 +38,7 @@ class FavoritesTableViewController: UITableViewController {
                 // Create instance of the favorited item
                 let currentItem = ClothingItem(snapshot: clothingItem as! DataSnapshot)
                 // Download the item's image using the URL
-                self.downloadImageFromUrl(url: currentItem.itemPictureUrl, index: index)
+                //self.downloadImageFromUrl(url: currentItem.itemPictureUrl, index: index)
                 
                 self.favoriteItems.append(currentItem)
             }
@@ -148,7 +148,7 @@ class FavoritesTableViewController: UITableViewController {
         
         cell.labelInfo.text = clothingItem.name
         
-        cell.imageViewClothingPic.image = clothingItem.itemImage == nil ? UIImage(named: "Favorite") : clothingItem.itemImage
+        cell.imageViewClothingPic.sd_setImage(with: URL(string:clothingItem.itemPictureUrl), placeholderImage: UIImage(named: "Favorite"))
         cell.imageViewClothingPic.contentMode = .scaleAspectFit
         
         return cell
