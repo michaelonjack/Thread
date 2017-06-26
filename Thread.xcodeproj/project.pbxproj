@@ -31,6 +31,8 @@
 		B1A089AA1E4FE4DD00FC7C65 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B1A089A91E4FE4DD00FC7C65 /* KeychainWrapper.m */; };
 		B1A11D3D1EFE7EDD00E16169 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A11D3C1EFE7EDD00E16169 /* UserTableViewController.swift */; };
 		B1A11D411EFEC4AB00E16169 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A11D401EFEC4AB00E16169 /* DatabaseHelper.swift */; };
+		B1A11D431EFF2F8000E16169 /* OtherUserOutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A11D421EFF2F8000E16169 /* OtherUserOutfitViewController.swift */; };
+		B1A11D471EFF3F9000E16169 /* MeOutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A11D461EFF3F9000E16169 /* MeOutfitViewController.swift */; };
 		B1A98C311E7464D700CF2497 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A98C301E7464D700CF2497 /* SettingsViewController.swift */; };
 		B1A98C331E747D0C00CF2497 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A98C321E747D0C00CF2497 /* SettingsTableViewCell.swift */; };
 		B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A8E1E2C66730036E559 /* AppDelegate.swift */; };
@@ -98,6 +100,8 @@
 		B1A089A91E4FE4DD00FC7C65 /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
 		B1A11D3C1EFE7EDD00E16169 /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
 		B1A11D401EFEC4AB00E16169 /* DatabaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
+		B1A11D421EFF2F8000E16169 /* OtherUserOutfitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserOutfitViewController.swift; sourceTree = "<group>"; };
+		B1A11D461EFF3F9000E16169 /* MeOutfitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeOutfitViewController.swift; sourceTree = "<group>"; };
 		B1A98C301E7464D700CF2497 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B1A98C321E747D0C00CF2497 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		B1C96A8B1E2C66730036E559 /* Thread.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thread.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +184,8 @@
 		B184306A1E2D2EEB00EED632 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B1A11D451EFF3E3A00E16169 /* Me */,
+				B1A11D441EFF3E1C00E16169 /* OtherUser */,
 				B1A11D3F1EFE80B000E16169 /* TableViewControllers */,
 				B1A11D3E1EFE807300E16169 /* TableViewCells */,
 				B1EDE1071EA286040042FB15 /* PasswordViewController.swift */,
@@ -187,17 +193,10 @@
 				B1A98C301E7464D700CF2497 /* SettingsViewController.swift */,
 				B1E8373F1E5BF5C300789BC2 /* AccountViewController.swift */,
 				B162021E1E5699D90099D3D7 /* MoreInfoViewController.swift */,
-				B1E8374D1E64BD9000789BC2 /* MeContainerViewController.swift */,
-				B18430781E2EED7300EED632 /* MeViewController.swift */,
-				B1E8374F1E64BDAC00789BC2 /* MeAltViewController.swift */,
 				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
 				B1E08AD91E50DB7E0011B1EA /* SignUpViewController.swift */,
 				B18430741E2D4BF200EED632 /* MainViewController.swift */,
 				B174D02B1E36D8BF00218590 /* ClothingItemViewController.swift */,
-				B1E837491E63534000789BC2 /* OtherUserContainerViewController.swift */,
-				B193C7CF1E3E97A300054C78 /* OtherUserViewController.swift */,
-				B1E8374B1E63554F00789BC2 /* OtherUserAltViewController.swift */,
-				B193C7D11E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift */,
 				B1878ADC1E49486900847326 /* ClothingSearchViewController.swift */,
 				B1DE12301E4BEDCC00DF724F /* ClothingItemTableViewCell.swift */,
 			);
@@ -264,6 +263,29 @@
 				B1A11D3C1EFE7EDD00E16169 /* UserTableViewController.swift */,
 			);
 			name = TableViewControllers;
+			sourceTree = "<group>";
+		};
+		B1A11D441EFF3E1C00E16169 /* OtherUser */ = {
+			isa = PBXGroup;
+			children = (
+				B1E837491E63534000789BC2 /* OtherUserContainerViewController.swift */,
+				B1A11D421EFF2F8000E16169 /* OtherUserOutfitViewController.swift */,
+				B193C7CF1E3E97A300054C78 /* OtherUserViewController.swift */,
+				B1E8374B1E63554F00789BC2 /* OtherUserAltViewController.swift */,
+				B193C7D11E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift */,
+			);
+			name = OtherUser;
+			sourceTree = "<group>";
+		};
+		B1A11D451EFF3E3A00E16169 /* Me */ = {
+			isa = PBXGroup;
+			children = (
+				B1A11D461EFF3F9000E16169 /* MeOutfitViewController.swift */,
+				B1E8374D1E64BD9000789BC2 /* MeContainerViewController.swift */,
+				B18430781E2EED7300EED632 /* MeViewController.swift */,
+				B1E8374F1E64BDAC00789BC2 /* MeAltViewController.swift */,
+			);
+			name = Me;
 			sourceTree = "<group>";
 		};
 		B1C96A821E2C66730036E559 = {
@@ -612,7 +634,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1A11D471EFF3F9000E16169 /* MeOutfitViewController.swift in Sources */,
 				B1A11D411EFEC4AB00E16169 /* DatabaseHelper.swift in Sources */,
+				B1A11D431EFF2F8000E16169 /* OtherUserOutfitViewController.swift in Sources */,
 				B1878ADD1E49486900847326 /* ClothingSearchViewController.swift in Sources */,
 				B18430751E2D4BF200EED632 /* MainViewController.swift in Sources */,
 				B18575651E8F3A5500A62507 /* DatePickerViewController.swift in Sources */,

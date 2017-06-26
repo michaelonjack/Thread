@@ -91,28 +91,7 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
         buttonProfilePicture.setImage(chosenImage, for: .normal)
         buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
         
-        // Creates the image metadata for Firebase Storage
-        let imageMetaData = StorageMetadata()
-        imageMetaData.contentType = "image/jpeg"
-            
-        // Create a Data object to represent the image as a JPEG
-        var imageData = Data()
-        imageData = UIImageJPEGRepresentation(chosenImage, 0.05)!
-            
-        // Get reference to the user's profile picture in Firebase Storage
-        let currentUserProfilePictureRef = currentUserStorageRef.child("ProfilePicture")
-            
-        // Add the selected image to Firebase Storage
-        currentUserProfilePictureRef.putData(imageData, metadata: imageMetaData) { (metaData, error) in
-            if error == nil {
-                    // Add the image's url to the Firebase database
-                let downloadUrl = metaData?.downloadURL()?.absoluteString
-                self.currentUserRef.updateChildValues(["profilePictureUrl": downloadUrl!])
-                    
-            } else {
-                print(error?.localizedDescription ?? "Error uploading data to storage")
-            }
-        }
+        uploadProfilePictureForUser(userid: (Auth.auth().currentUser?.uid)!, image: chosenImage)
         
         dismiss(animated:true, completion: nil)
         
@@ -183,7 +162,7 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
                 let accessoryVC:ClothingItemViewController = segue.destination as! ClothingItemViewController
                 accessoryVC.clothingType = ClothingType.Accessories
             case "MeToFollowing":
-                let followingVC: AroundMeTableViewController = segue.destination as! AroundMeTableViewController
+                let followingVC: UserTableViewController = segue.destination as! UserTableViewController
                 followingVC.forAroundMe = false
             default:
                 var _ = 0

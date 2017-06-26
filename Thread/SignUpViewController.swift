@@ -81,7 +81,8 @@ class SignUpViewController: UIViewController {
                     
                     let newUser = User(user: user!,
                                        firstName: firstName,
-                                       lastName: lastName)
+                                       lastName: lastName,
+                                       status: "")
                     let newUserRef = self.usersRef.child((user?.uid)!)
                     
                     

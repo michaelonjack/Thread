@@ -21,7 +21,6 @@ class OtherUserAltViewController: UIViewController {
     let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     
     var userRef: DatabaseReference!
-    var userStorageRef: StorageReference!
     var otherUser: User!
     var containerViewController: OtherUserContainerViewController?
     
@@ -38,7 +37,6 @@ class OtherUserAltViewController: UIViewController {
         super.viewDidLoad()
         
         userRef = Database.database().reference(withPath: "users/" + otherUser.uid)
-        userStorageRef = Storage.storage().reference(withPath: "images/" + otherUser.uid)
         
         setFollowButton()
         loadData()

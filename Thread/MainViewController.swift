@@ -84,7 +84,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "MainToFollowing" {
-            let followingVC: AroundMeTableViewController = segue.destination as! AroundMeTableViewController
+            let followingVC: UserTableViewController = segue.destination as! UserTableViewController
             followingVC.forAroundMe = false
         }
     }

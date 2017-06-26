@@ -37,7 +37,7 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
         super.viewDidLoad()
 
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 300
+        tableView.estimatedRowHeight = 210
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSFontAttributeName: UIFont(name: "Avenir-Book", size: 20)!,
@@ -202,6 +202,7 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
         
         // Set the user's name as the cell's label
         cell.imageViewProfilePicture.image = UIImage(named: "Avatar")
+        cell.imageViewOutfitPicture.image = UIImage(named: "PlaceholderIcon")
         cell.labelUserName.text = user.firstName + " " + user.lastName
         
         // Load the user's profile picture asynchronously
@@ -211,14 +212,35 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
             
             let picUrl = URL(string: picUrlStr)
             
-            cell.imageViewOutfitPicture.sd_setImage(with: picUrl, placeholderImage: UIImage(named: "Avatar"))
             cell.imageViewProfilePicture.sd_setImage(with: picUrl, placeholderImage: UIImage(named: "Avatar"))
             
         } else {
             cell.imageViewProfilePicture.image = UIImage(named: "Avatar")
         }
         
-        cell.labelUserLocation.text = "The Slate in Pen Argyl"
+        
+        if user.outfitPictureUrl != nil && user.outfitPictureUrl != "" {
+            
+            let picUrlStr = user.outfitPictureUrl!
+            let picUrl = URL(string: picUrlStr)
+            
+            cell.imageViewOutfitPicture.sd_setImage(with: picUrl, placeholderImage: UIImage(named: "PlaceholderIcon"))
+        }
+        
+        
+        getDataForUser(userid: user.uid, completion: { (userData) in
+            let status = userData["status"] as? String ?? "Killing the fucking club"
+            let lastCheckIn = userData["lastCheckIn"] as? String ?? ""
+            let city = userData["location"]?["city"] as? String ?? ""
+            let state = userData["location"]?["state"] as? String ?? ""
+            let locationStr = city + ", " + state == ", " ? "Hiding :)" : city + ", " + state
+            
+            DispatchQueue.main.async {
+                cell.labelUserLocation.text = locationStr
+                cell.labelStatus.text = status
+                cell.labelCheckIn.text = "Last checked in: " + lastCheckIn
+            }
+        })
         
         // Makes the profile picture view circular
         cell.imageViewProfilePicture.contentMode = .scaleAspectFill

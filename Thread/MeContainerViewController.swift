@@ -20,6 +20,7 @@ class MeContainerViewController: UIViewController {
         super.viewDidLoad()
         
         let sb = UIStoryboard(name: "Main", bundle: nil)
+        self.navigationController?.navigationBar.isTranslucent = true
         
         iconViewController = sb.instantiateViewController(withIdentifier: "MeIconVC") as? MeViewController
         iconViewController?.containerViewController = self

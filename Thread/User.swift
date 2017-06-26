@@ -28,23 +28,27 @@ struct User {
     let email: String
     let latitude: Double
     let longitude: Double
+    let status: String
     var profilePicture: UIImage?
     var profilePictureUrl: String?
+    var outfitPictureUrl: String?
     
-    init(uid: String, firstName: String, lastName: String, email: String, latitude: Double, longitude: Double) {
+    init(uid: String, firstName: String, lastName: String, email: String, status: String, latitude: Double, longitude: Double) {
         self.uid = uid
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
+        self.status = status
         self.latitude = latitude
         self.longitude = longitude
     }
     
-    init(user: Firebase.User, firstName: String, lastName: String) {
+    init(user: Firebase.User, firstName: String, lastName: String, status: String) {
         self.uid = user.uid
         self.email = user.email!
         self.firstName = firstName
         self.lastName = lastName
+        self.status = status
         self.latitude = 0
         self.longitude = 0
     }
@@ -55,9 +59,11 @@ struct User {
         firstName = snapshotValue["firstName"] as! String
         lastName = snapshotValue["lastName"] as! String
         email = snapshotValue["email"] as! String
+        status = snapshotValue["status"] as? String ?? ""
         latitude = snapshotValue["latitude"] as! Double
         longitude = snapshotValue["longitude"] as! Double
         profilePictureUrl = snapshotValue["profilePictureUrl"] as? String
+        outfitPictureUrl = snapshotValue["outfitPictureUrl"] as? String
     }
     
     func toAnyObject() -> Any {
@@ -65,6 +71,7 @@ struct User {
             "firstName": firstName,
             "lastName": lastName,
             "email": email,
+            "status": status,
             "latitude": latitude,
             "longitude": longitude
         ]
