@@ -156,6 +156,11 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
         // self.clearsSelectionOnViewWillAppear = false
         
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isTranslucent = true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -238,7 +243,7 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
             DispatchQueue.main.async {
                 cell.labelUserLocation.text = locationStr
                 cell.labelStatus.text = status
-                cell.labelCheckIn.text = "Last checked in: " + lastCheckIn
+                cell.labelCheckIn.text = "Last checked in " + self.getTimeElapsed(dateStr: lastCheckIn)
             }
         })
         
@@ -343,6 +348,37 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
     // Process any errors that may occur when gathering location
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
+    }
+    
+    
+    
+    func getTimeElapsed(dateStr: String) -> String {
+        
+        var timeElapsedStr = ""
+        
+        if dateStr != "" {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MM/dd/yyyy HH:mm"
+            
+            let d = formatter.date(from: dateStr)
+            if let date = d {
+                let secondsSince = Int(Date().timeIntervalSince(date))
+                let minutesSince = secondsSince / 60
+                let hoursSince = minutesSince / 60
+                let daysSince = hoursSince / 24
+                
+                if secondsSince / 60 == 0 {
+                    timeElapsedStr = String(secondsSince) + " seconds ago"
+                } else if minutesSince / 60 == 0 {
+                    timeElapsedStr = String(minutesSince) + " minutes ago"
+                } else if hoursSince / 24 == 0 {
+                    timeElapsedStr = String(hoursSince) + " hours ago"
+                } else {
+                    timeElapsedStr = String(daysSince) + " days ago"
+                }
+            }
+        }
+        return timeElapsedStr
     }
     
     
