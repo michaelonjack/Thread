@@ -418,6 +418,9 @@
                                             </constraints>
                                             <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" image="Follow"/>
+                                            <connections>
+                                                <action selector="followUserDidTouch:" destination="zHS-Pk-WQg" eventType="touchUpInside" id="jgx-eE-Mab"/>
+                                            </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlaceholderIcon" translatesAutoresizingMaskIntoConstraints="NO" id="IdA-pS-5Jk">
                                             <rect key="frame" x="0.0" y="71" width="375" height="375"/>
@@ -2065,13 +2068,13 @@
         <image name="UpArrow" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="E2V-HC-zp3"/>
-        <segue reference="agw-cD-mfk"/>
-        <segue reference="DUY-O4-ptb"/>
+        <segue reference="vwl-04-cEI"/>
+        <segue reference="vCf-u6-ush"/>
+        <segue reference="ekr-Ci-Msh"/>
+        <segue reference="AtL-ED-Yz7"/>
         <segue reference="hpp-40-ay5"/>
-        <segue reference="NZo-f1-ct1"/>
         <segue reference="beV-B1-aCh"/>
-        <segue reference="YZd-E7-TGh"/>
+        <segue reference="zi9-Jf-VWI"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

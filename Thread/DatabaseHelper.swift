@@ -122,6 +122,66 @@ func getDataForUser(userid:String, completion: @escaping ([String:AnyObject]) ->
 
 
 
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  isFollowingUser
+//
+//
+//
+func isFollowingUser(userid:String, completion: @escaping (Bool) -> ()) {
+    let followRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)! + "/Following")
+    followRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        if snapshot.hasChild(userid) {
+            completion(true)
+        } else {
+            completion(false)
+        }
+    })
+    
+}
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  followUser
+//
+//
+//
+func followUser(userid:String) {
+    let followRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)! + "/Following")
+    followRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        // Add the user to their Following list if they have not already added this user
+        if !snapshot.hasChild(userid) {
+            followRef.updateChildValues( [userid : true] )
+        }
+    })
+}
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  unfollowUser
+//
+//
+//
+func unfollowUser(userid:String) {
+    let followRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)! + "/Following")
+    followRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        // Remove the user from the follow list
+        if snapshot.hasChild(userid) {
+            followRef.child(userid).removeValue()
+        }
+    })
+}
+
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////
 //

@@ -65,9 +65,8 @@ class OtherUserAltViewController: UIViewController {
     //  Returns true if the current user is following this user
     //
     func setFollowButton() {
-        currentUserRef.child("Following").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            if snapshot.hasChild(self.otherUser.uid) {
+        isFollowingUser(userid: self.otherUser.uid, completion: { (isFollowing) in
+            if (isFollowing) {
                 DispatchQueue.main.async {
                     self.buttonFollowUser.setImage(UIImage(named: "Unfollow"), for: .normal)
                 }
@@ -160,35 +159,21 @@ class OtherUserAltViewController: UIViewController {
     //
     //
     @IBAction func followUserDidTouch(_ sender: Any) {
-        currentUserRef.child("Following").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            // Add the user to their Following list if they are following less than 6 users and have not already
-            //      added this user
-            if snapshot.childrenCount < 6 && !snapshot.hasChild(self.otherUser.uid) {
-                self.currentUserRef.child("Following").updateChildValues( [self.otherUser.uid : true] )
-                
-                DispatchQueue.main.async {
-                    self.buttonFollowUser.setImage( UIImage(named: "Unfollow"), for: .normal )
-                }
-                
-            } else if snapshot.childrenCount == 6 {
-                
-                let followFailedAlert = UIAlertController(title: "Cannot Follow User", message: "You can only follow six users at a time. Remove someone from your follow list to follow this user.", preferredStyle: .alert)
-                
-                let closeAction = UIAlertAction(title: "Close", style: .default)
-                followFailedAlert.addAction(closeAction)
-                self.present(followFailedAlert, animated: true, completion:nil)
-                
-            } else if snapshot.hasChild(self.otherUser.uid) {
-                
-                self.currentUserRef.child("Following/" + self.otherUser.uid).removeValue()
-                
+        
+        isFollowingUser(userid: self.otherUser.uid, completion: { (isFollowing) in
+            if isFollowing {
+                unfollowUser(userid: self.otherUser.uid)
                 DispatchQueue.main.async {
                     self.buttonFollowUser.setImage( UIImage(named: "Follow"), for: .normal )
                 }
-                
+            } else {
+                followUser(userid: self.otherUser.uid)
+                DispatchQueue.main.async {
+                    self.buttonFollowUser.setImage( UIImage(named: "Unfollow"), for: .normal )
+                }
             }
         })
+        
     }
     
     

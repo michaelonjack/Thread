@@ -41,7 +41,7 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSFontAttributeName: UIFont(name: "Avenir-Book", size: 20)!,
-            /*NSForegroundColorAttributeName: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)*/
+            NSForegroundColorAttributeName: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
         ]
         
         // Determine how the User table view will be used
@@ -205,10 +205,14 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserTableViewCell
         let user = displayUsers[indexPath.row]
         
-        // Set the user's name as the cell's label
+        // Reset the cell
         cell.imageViewProfilePicture.image = UIImage(named: "Avatar")
         cell.imageViewOutfitPicture.image = UIImage(named: "PlaceholderIcon")
+        cell.buttonFollow.setImage( UIImage(named: "Follow"), for: .normal )
         cell.labelUserName.text = user.firstName + " " + user.lastName
+        
+        // Determine if the current user is following the user in this cell
+        setFollowButtonForUser(userid: user.uid, followButton: cell.buttonFollow)
         
         // Load the user's profile picture asynchronously
         if user.profilePictureUrl != nil && user.profilePictureUrl != "" {
@@ -223,7 +227,7 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
             cell.imageViewProfilePicture.image = UIImage(named: "Avatar")
         }
         
-        
+        // Load the user's outfit picture asynchronously
         if user.outfitPictureUrl != nil && user.outfitPictureUrl != "" {
             
             let picUrlStr = user.outfitPictureUrl!
@@ -352,6 +356,67 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
     
     
     
+    
+    /////////////////////////////////////////////////////
+    //
+    //  followUserDidTouch
+    //
+    //
+    //
+    @IBAction func followUserDidTouch(_ sender: UIButton) {
+        // Get the cell the button comes from
+        guard let cell = sender.superview?.superview as? UserTableViewCell else {
+            print("error happened or something")
+            return 
+        }
+        let indexPath = self.tableView.indexPath(for: cell)
+        let user = displayUsers[(indexPath?.row)!]
+        
+        isFollowingUser(userid: user.uid, completion: { (isFollowing) in
+            if isFollowing {
+                unfollowUser(userid: user.uid)
+                DispatchQueue.main.async {
+                    sender.setImage( UIImage(named: "Follow"), for: .normal )
+                }
+            } else {
+                followUser(userid: user.uid)
+                DispatchQueue.main.async {
+                    sender.setImage( UIImage(named: "Unfollow"), for: .normal )
+                }
+            }
+        })
+    }
+    
+    
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  setFollowButton
+    //
+    //  Sets the follow button to the correct image depending on its state
+    //
+    func setFollowButtonForUser(userid:String, followButton: UIButton) {
+        
+        isFollowingUser(userid: userid, completion: { (isFollowing) in
+            if (isFollowing) {
+                DispatchQueue.main.async {
+                    followButton.setImage(UIImage(named: "Unfollow"), for: .normal)
+                }
+            }
+        })
+
+    }
+    
+    
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  getTimeElapsed
+    //
+    //
+    //
     func getTimeElapsed(dateStr: String) -> String {
         
         var timeElapsedStr = ""

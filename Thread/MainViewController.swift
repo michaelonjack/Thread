@@ -29,12 +29,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.locationManager.delegate = self
-        // Request location authorization for the app
-        self.locationManager.requestWhenInUseAuthorization()
-        // Request a location update
-        self.locationManager.requestLocation()
         
         let swipeToShowAccount = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeDown(_:)))
         swipeToShowAccount.direction = UISwipeGestureRecognizerDirection.down
@@ -44,28 +38,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    
-    
-    /////////////////////////////////////////////////////
-    //
-    //  locationManager
-    //
-    //  Updates the user's latitude and longitude values in the Firebase database
-    //  Implicitly called by viewDidLoad when requesting the location
-    //
-    // Process the received location update
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // Grab latitude and longitude
-        let locValue:CLLocationCoordinate2D = (manager.location?.coordinate)!
-        
-        // Update the user's location in the database
-        currentUserRef.updateChildValues(["latitude": locValue.latitude, "longitude": locValue.longitude])
-    }
-    // Process any errors that may occur when gathering location
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
     }
     
     
