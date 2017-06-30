@@ -109,11 +109,41 @@ class MeOutfitViewController: UIViewController, FusumaDelegate, CLLocationManage
     
     
     @IBAction func checkIn(_ sender: UIButton) {
-        self.locationManager.delegate = self
-        // Request location authorization for the app
-        self.locationManager.requestWhenInUseAuthorization()
-        // Request a location update
-        self.locationManager.requestLocation()
+        
+        if locationServiceIsEnabled() {
+            self.locationManager.delegate = self
+            // Request location authorization for the app
+            self.locationManager.requestWhenInUseAuthorization()
+            // Request a location update
+            self.locationManager.requestLocation()
+        }
+        
+        else {
+            let locationNotEnabledAlert = UIAlertController(title: "Location Services Disabled",
+                                                     message: "Location Services must be enabled to check in with Thread.",
+                                                     preferredStyle: .alert)
+            // Close action closes the pop-up alert
+            let closeAction = UIAlertAction(title: "Close", style:.default)
+            
+            locationNotEnabledAlert.addAction(closeAction)
+            
+            self.present(locationNotEnabledAlert, animated: true, completion: nil)
+        }
+    }
+    
+    
+    
+    func locationServiceIsEnabled() -> Bool {
+        if CLLocationManager.locationServicesEnabled() {
+            switch(CLLocationManager.authorizationStatus()) {
+                case .notDetermined, .restricted, .denied:
+                    return false
+                case .authorizedAlways, .authorizedWhenInUse:
+                    return true
+            }
+        } else {
+            return false
+        }
     }
     
     
