@@ -9,6 +9,7 @@
 import UIKit
 import Fusuma
 import CoreLocation
+import AudioToolbox
 
 class MeOutfitViewController: UIViewController, FusumaDelegate, CLLocationManagerDelegate {
     
@@ -108,6 +109,12 @@ class MeOutfitViewController: UIViewController, FusumaDelegate, CLLocationManage
     
     
     
+    /////////////////////////////////////////////////////
+    //
+    //  checkIn
+    //
+    //  Checks in the user's current location
+    //
     @IBAction func checkIn(_ sender: UIButton) {
         
         if locationServiceIsEnabled() {
@@ -133,6 +140,12 @@ class MeOutfitViewController: UIViewController, FusumaDelegate, CLLocationManage
     
     
     
+    /////////////////////////////////////////////////////
+    //
+    //  locationServiceIsEnabled
+    //
+    //  Returns true if the user has location services enabled, false otherwise
+    //
     func locationServiceIsEnabled() -> Bool {
         if CLLocationManager.locationServicesEnabled() {
             switch(CLLocationManager.authorizationStatus()) {
@@ -173,6 +186,9 @@ class MeOutfitViewController: UIViewController, FusumaDelegate, CLLocationManage
         let minutes = calendar.component(.minute, from: date)
         let dateStr = formatter.string(from: date) + " " + String(hour) + ":" + String(minutes)
          updateDataForUser(userid: (Auth.auth().currentUser?.uid)!, key: "lastCheckIn", value: dateStr as AnyObject)
+        
+        // Vibrate the phone to signify a successful check-in
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
     // Process any errors that may occur when gathering location
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
