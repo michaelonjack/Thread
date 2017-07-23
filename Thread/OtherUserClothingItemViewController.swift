@@ -167,17 +167,21 @@ class OtherUserClothingItemViewController: UIViewController {
     
     
     func swipeLeft(_ gesture: UIGestureRecognizer) {
-        let vc:ClothingItemViewController = storyboard?.instantiateViewController(withIdentifier: "ClothingItemViewController") as! ClothingItemViewController
+        let vc:OtherUserClothingItemViewController = storyboard?.instantiateViewController(withIdentifier: "OtherUserClothingItemViewController") as! OtherUserClothingItemViewController
         
         switch self.clothingType! {
         case .Top:
             vc.clothingType = ClothingType.Bottom
+            vc.user = self.user
         case .Bottom:
             vc.clothingType = ClothingType.Shoes
+            vc.user = self.user
         case .Shoes:
             vc.clothingType = ClothingType.Accessories
+            vc.user = self.user
         case .Accessories:
             vc.clothingType = ClothingType.Top
+            vc.user = self.user
         }
         
         var currentControllers:[UIViewController] = (self.navigationController?.viewControllers)!
