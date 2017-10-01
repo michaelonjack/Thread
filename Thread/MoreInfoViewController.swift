@@ -14,11 +14,17 @@ class MoreInfoViewController: UIViewController {
     @IBOutlet weak var textViewBrand: UITextView!
     @IBOutlet weak var textViewLink: UITextView!
     
+    @IBOutlet weak var nameTopSpacing: NSLayoutConstraint!
+    @IBOutlet weak var nameHoritzontalSpacing: NSLayoutConstraint!
+    
+    
     var clothingItem: ClothingItem!
     var canEdit: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        nameTopSpacing.constant = 70 * (UIScreen.main.bounds.height/667)
         
         textViewName.text = clothingItem.name
         textViewBrand.text = clothingItem.brand
@@ -47,7 +53,7 @@ class MoreInfoViewController: UIViewController {
     }
     
 
-    func swipeDown(_ gesture: UIGestureRecognizer) {
+    @objc func swipeDown(_ gesture: UIGestureRecognizer) {
         
         // Pass back the new information to the presenting view controller
         if self.canEdit == true {

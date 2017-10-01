@@ -16,6 +16,14 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var imageViewClothingPicture: UIImageView!
     @IBOutlet weak var loadingAnimationView: NVActivityIndicatorView!
     
+    @IBOutlet weak var saveButtonWidthLayout: NSLayoutConstraint!
+    @IBOutlet weak var cameraButtonWidthLayout: NSLayoutConstraint!
+    @IBOutlet weak var galleryButtonWidthLayout: NSLayoutConstraint!
+    @IBOutlet weak var saveBottomLayout: NSLayoutConstraint!
+    @IBOutlet weak var cameraBottomLayout: NSLayoutConstraint!
+    @IBOutlet weak var galleryBottomLayout: NSLayoutConstraint!
+    @IBOutlet weak var searchBottomLayout: NSLayoutConstraint!
+    
     let picker = UIImagePickerController()
     let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     let currentUserStorageRef = Storage.storage().reference(withPath: "images/" + (Auth.auth().currentUser?.uid)!)
@@ -38,6 +46,13 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Adjust constraints based on screen size
+        saveBottomLayout.constant = 20 * (UIScreen.main.bounds.height/667)
+        cameraBottomLayout.constant = 20 * (UIScreen.main.bounds.height/667)
+        galleryBottomLayout.constant = 20 * (UIScreen.main.bounds.height/667)
+        searchBottomLayout.constant = 20 * (UIScreen.main.bounds.height/667)
+        
         
         clothingItem = ClothingItem()
         
@@ -163,7 +178,13 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
             picker.allowsEditing = false
             self.present(picker, animated: true, completion: nil)
         } else {
-            print("not availableeeeeeeeeeeee")
+            let notAvailableAlert = UIAlertController(title: "Camera Not Available",
+                                                      message: "Your device's camera is not available",
+                                                      preferredStyle: .alert)
+            
+            let closeAction = UIAlertAction(title: "Close", style: .default)
+            notAvailableAlert.addAction(closeAction)
+            self.present(notAvailableAlert, animated: true, completion:nil)
         }
     }
     
@@ -262,7 +283,7 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     
-    func swipeLeft(_ gesture: UIGestureRecognizer) {
+    @objc func swipeLeft(_ gesture: UIGestureRecognizer) {
         let vc:ClothingItemViewController = storyboard?.instantiateViewController(withIdentifier: "ClothingItemViewController") as! ClothingItemViewController
         
         switch self.clothingType! {

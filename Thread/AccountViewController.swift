@@ -14,6 +14,11 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelEmail: UILabel!
     
+    @IBOutlet weak var followingButtonTopSpacing: NSLayoutConstraint!
+    @IBOutlet weak var heartButtonTopSpacing: NSLayoutConstraint!
+    @IBOutlet weak var settingsButtonTopSpacing: NSLayoutConstraint!
+    @IBOutlet weak var profilePicTopSpacing: NSLayoutConstraint!
+    
     let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     let currentUserStorageRef = Storage.storage().reference(withPath: "images/" + (Auth.auth().currentUser?.uid)!)
     
@@ -27,6 +32,12 @@ class AccountViewController: UIViewController {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Adjust constraints for screen size
+        followingButtonTopSpacing.constant = 63 * (UIScreen.main.bounds.height/667)
+        heartButtonTopSpacing.constant = 63 * (UIScreen.main.bounds.height/667)
+        settingsButtonTopSpacing.constant = 63 * (UIScreen.main.bounds.height/667)
+        profilePicTopSpacing.constant = 45 * (UIScreen.main.bounds.height/667)
 
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -173,7 +184,7 @@ class AccountViewController: UIViewController {
     // Handles the action of the user swiping up on the screen
     // Dismisses the Account view controller and returns to the
     //
-    func swipeUpAction(_ gesture: UIGestureRecognizer) {
+    @objc func swipeUpAction(_ gesture: UIGestureRecognizer) {
         let transition: CATransition = CATransition()
         transition.duration = 0.5
         transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)

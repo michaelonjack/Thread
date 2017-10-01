@@ -233,7 +233,7 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     //Calls this function when the tap is recognized.
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
 

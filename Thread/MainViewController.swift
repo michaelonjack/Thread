@@ -19,6 +19,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     // Reference to the current user's information in the database
     let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
 
+    @IBOutlet weak var meTopLayout: NSLayoutConstraint!
+    @IBOutlet weak var aroundMeTopLayout: NSLayoutConstraint!
     
     
     /////////////////////////////////////////////////////
@@ -29,6 +31,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        meTopLayout.constant = 84.5 * (UIScreen.main.bounds.height/667)
+        aroundMeTopLayout.constant = 19 * (UIScreen.main.bounds.height/667)
         
         let swipeToShowAccount = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeDown(_:)))
         swipeToShowAccount.direction = UISwipeGestureRecognizerDirection.down
@@ -42,7 +47,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     
     
-    func swipeDown(_ gesture: UIGestureRecognizer) {
+    @objc func swipeDown(_ gesture: UIGestureRecognizer) {
         self.performSegue(withIdentifier: mainToAccount, sender: nil)
     }
     

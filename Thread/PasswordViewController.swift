@@ -23,8 +23,8 @@ class PasswordViewController: UIViewController {
         
         // Set the font of the navigation bar's header
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSFontAttributeName: UIFont(name: "Avenir-Book", size: 20)!,
-            NSForegroundColorAttributeName: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
+            NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 20)!,
+            NSAttributedStringKey.foregroundColor: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
         ]
 
     }

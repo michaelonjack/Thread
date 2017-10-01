@@ -20,6 +20,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var textFieldLoginEmail: UITextField!
     @IBOutlet weak var textFieldLoginPassword: UITextField!
     @IBOutlet weak var buttonTouchID: UIButton!
+    @IBOutlet weak var topLayoutConstrait: NSLayoutConstraint!
     
     let loginToMain = "LoginToMain"
     let usersRef = Database.database().reference(withPath: "users")
@@ -37,6 +38,11 @@ class LoginViewController: UIViewController {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Adjust the size of the top layout constraint depending on the screen height
+        if (UIScreen.main.bounds.height < 667) {
+            topLayoutConstrait.constant = 247 * (UIScreen.main.bounds.height/667)
+        }
         
         buttonTouchID.isHidden = true
         

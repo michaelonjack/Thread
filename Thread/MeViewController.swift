@@ -22,6 +22,11 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
     @IBOutlet weak var buttonProfilePicture: UIButton!
     @IBOutlet weak var labelGreeting: UILabel!
     
+    @IBOutlet weak var shirtTopLayout: NSLayoutConstraint!
+    @IBOutlet weak var bottomTopLayout: NSLayoutConstraint!
+    @IBOutlet weak var shoesTopLayout: NSLayoutConstraint!
+    @IBOutlet weak var accessoriesTopLayout: NSLayoutConstraint!
+    
     let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     let currentUserStorageRef = Storage.storage().reference(withPath: "images/" + (Auth.auth().currentUser?.uid)!)
     let imagePicker = UIImagePickerController()
@@ -38,6 +43,12 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Adjust constraints based on screen size
+        shirtTopLayout.constant = 44 * (UIScreen.main.bounds.height/667)
+        bottomTopLayout.constant = 44 * (UIScreen.main.bounds.height/667)
+        shoesTopLayout.constant = 225 * (UIScreen.main.bounds.height/667)
+        accessoriesTopLayout.constant = 225 * (UIScreen.main.bounds.height/667)
         
         imagePicker.delegate = self
 

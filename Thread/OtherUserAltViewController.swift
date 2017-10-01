@@ -18,6 +18,18 @@ class OtherUserAltViewController: UIViewController {
     @IBOutlet weak var buttonAccessories: UIButton!
     @IBOutlet weak var buttonFollowUser: UIButton!
     
+    @IBOutlet weak var shirtTopSpacing: NSLayoutConstraint!
+    @IBOutlet weak var shirtRightSpacing: NSLayoutConstraint!
+    @IBOutlet weak var bottomTopSpacing: NSLayoutConstraint!
+    @IBOutlet weak var bottomLeftSpacing: NSLayoutConstraint!
+    @IBOutlet weak var shoesTopSpacing: NSLayoutConstraint!
+    @IBOutlet weak var shoesRightSpacing: NSLayoutConstraint!
+    @IBOutlet weak var accessoriesTopSpacing: NSLayoutConstraint!
+    @IBOutlet weak var accessoriesLeftSpacing: NSLayoutConstraint!
+    
+    @IBOutlet weak var viewVerticalSpacing: NSLayoutConstraint!
+    
+    
     let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     
     var userRef: DatabaseReference!
@@ -35,6 +47,16 @@ class OtherUserAltViewController: UIViewController {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewVerticalSpacing.constant = 26 * (UIScreen.main.bounds.height/667)
+        shirtTopSpacing.constant = 47 * (UIScreen.main.bounds.height/667)
+        shirtRightSpacing.constant = -88 * (UIScreen.main.bounds.width/375)
+        shoesTopSpacing.constant = 237 * (UIScreen.main.bounds.height/667)
+        shoesRightSpacing.constant = -88 * (UIScreen.main.bounds.width/375)
+        bottomTopSpacing.constant = 47 * (UIScreen.main.bounds.height/667)
+        bottomLeftSpacing.constant = -87 * (UIScreen.main.bounds.width/375)
+        accessoriesTopSpacing.constant = 237 * (UIScreen.main.bounds.height/667)
+        accessoriesLeftSpacing.constant = -87 * (UIScreen.main.bounds.width/375)
         
         userRef = Database.database().reference(withPath: "users/" + otherUser.uid)
         

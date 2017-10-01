@@ -20,7 +20,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     var items = [
             [("First Name", ""), ("Last Name", ""), ("Email", ""), ("Birthday", "")],
             [("Logout", ">"), ("Change Password", ">")],
-            [("Contact/Requests", "mikeonjack@gmail.com")]
+            [("Contact/Requests", "thethreadapplication@gmail.com")]
     ]
     
 
@@ -29,8 +29,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         // Set the font of the navigation bar's header
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSFontAttributeName: UIFont(name: "Avenir-Book", size: 20)!,
-            NSForegroundColorAttributeName: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
+            NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 20)!,
+            NSAttributedStringKey.foregroundColor: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
         ]
         
         tableViewSettings.delegate = self

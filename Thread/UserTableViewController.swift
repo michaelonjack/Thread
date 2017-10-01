@@ -37,11 +37,11 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
         super.viewDidLoad()
 
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 210
+        tableView.estimatedRowHeight = 520
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSFontAttributeName: UIFont(name: "Avenir-Book", size: 20)!,
-            NSForegroundColorAttributeName: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
+            NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 20)!,
+            NSAttributedStringKey.foregroundColor: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
         ]
         
         // Determine how the User table view will be used
@@ -97,9 +97,9 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
                             
                             // Determine if user is near the current user, if so add to list
                             print("Distance between: " + String(currentUserLocation.distance(from: nearbyUserLocation)))
-                            //if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
+                            if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
                             self.displayUsers.append(nearbyUser)
-                            //}
+                            }
                         }
                         
                     }
@@ -238,7 +238,7 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
         
         
         getDataForUser(userid: user.uid, completion: { (userData) in
-            let status = userData["status"] as? String ?? "Killing the fucking club"
+            let status = userData["status"] as? String ?? ""
             let lastCheckIn = userData["lastCheckIn"] as? String ?? ""
             let city = userData["location"]?["city"] as? String ?? ""
             let state = userData["location"]?["state"] as? String ?? ""
@@ -246,8 +246,8 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
             
             DispatchQueue.main.async {
                 cell.labelUserLocation.text = locationStr
-                cell.labelStatus.text = status
                 cell.labelCheckIn.text = "Last checked in " + self.getTimeElapsed(dateStr: lastCheckIn)
+                cell.labelStatus.text = status == "" ? "No status" : status
             }
         })
         

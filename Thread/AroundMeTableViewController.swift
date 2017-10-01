@@ -58,7 +58,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 100
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSFontAttributeName: UIFont(name: "Avenir-Book", size: 20)!,
+            NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 20)!,
             /*NSForegroundColorAttributeName: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)*/
         ]
         
@@ -294,7 +294,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
     //
     //  Updates the current user's location when the table is refreshed
     //
-    func handleRefresh(refreshControl: UIRefreshControl) {
+    @objc func handleRefresh(refreshControl: UIRefreshControl) {
         // Request a location update
         refresher = refreshControl
         

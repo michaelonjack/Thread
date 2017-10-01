@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().isTranslucent = true
         
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UINavigationBar.classForCoder() as! UIAppearanceContainer.Type]).setTitleTextAttributes([NSForegroundColorAttributeName: tangerine, NSFontAttributeName: UIFont(name: "Avenir-Book", size: 20)!], for: .normal)
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UINavigationBar.classForCoder() as! UIAppearanceContainer.Type]).setTitleTextAttributes([NSAttributedStringKey.foregroundColor: tangerine, NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 20)!], for: .normal)
         
         // Make navigation bar text tangerine
         UINavigationBar.appearance().tintColor = tangerine

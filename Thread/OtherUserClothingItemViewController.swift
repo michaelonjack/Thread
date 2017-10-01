@@ -166,7 +166,7 @@ class OtherUserClothingItemViewController: UIViewController {
     
     
     
-    func swipeLeft(_ gesture: UIGestureRecognizer) {
+    @objc func swipeLeft(_ gesture: UIGestureRecognizer) {
         let vc:OtherUserClothingItemViewController = storyboard?.instantiateViewController(withIdentifier: "OtherUserClothingItemViewController") as! OtherUserClothingItemViewController
         
         switch self.clothingType! {

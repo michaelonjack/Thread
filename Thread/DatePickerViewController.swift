@@ -14,6 +14,9 @@ class DatePickerViewController: UIViewController {
     @IBOutlet weak var buttonUpdate: UIButton!
     @IBOutlet weak var labelBirthday: UILabel!
     
+    @IBOutlet weak var labelContainerTopSpacing: NSLayoutConstraint!
+    @IBOutlet weak var viewTopSpacing: NSLayoutConstraint!
+    
     let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     
     var birthdayStr: String = ""
@@ -22,11 +25,16 @@ class DatePickerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Adjust constraints for screen size
+        labelContainerTopSpacing.constant = 133 * (UIScreen.main.bounds.height/667)
+        viewTopSpacing.constant = 22 * (UIScreen.main.bounds.height/667)
+        
 
         // Set the font of the navigation bar's header
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSFontAttributeName: UIFont(name: "Avenir-Book", size: 20)!,
-            NSForegroundColorAttributeName: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
+            NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 20)!,
+            NSAttributedStringKey.foregroundColor: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
         ]
         
         labelBirthday.text = birthdayStr

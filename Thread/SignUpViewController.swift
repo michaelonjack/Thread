@@ -22,6 +22,10 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var textFieldConfirmPassword: UITextField!
     
+    @IBOutlet weak var titleTopLayout: NSLayoutConstraint!
+    @IBOutlet weak var firstNameTopLayout: NSLayoutConstraint!
+    @IBOutlet weak var lastNameTopLayout: NSLayoutConstraint!
+    
     let usersRef = Database.database().reference(withPath: "users")
     
     
@@ -34,6 +38,12 @@ class SignUpViewController: UIViewController {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Adjust the size of the top layout constraint depending on the screen height
+        titleTopLayout.constant = 52 * (UIScreen.main.bounds.height/667)
+        firstNameTopLayout.constant = 78 * (UIScreen.main.bounds.height/667)
+        lastNameTopLayout.constant = 78 * (UIScreen.main.bounds.height/667)
+       
     }
 
     override func didReceiveMemoryWarning() {

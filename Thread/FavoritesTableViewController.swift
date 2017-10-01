@@ -24,7 +24,7 @@ class FavoritesTableViewController: UITableViewController {
         
         // Set the font of the navigation bar's header
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSFontAttributeName: UIFont(name: "Avenir-Book", size: 20)!,
+            NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 20)!,
             /*NSForegroundColorAttributeName: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)*/
         ]
         
@@ -37,10 +37,11 @@ class FavoritesTableViewController: UITableViewController {
                 
                 // Create instance of the favorited item
                 let currentItem = ClothingItem(snapshot: clothingItem as! DataSnapshot)
-                // Download the item's image using the URL
-                //self.downloadImageFromUrl(url: currentItem.itemPictureUrl, index: index)
                 
                 self.favoriteItems.append(currentItem)
+                
+                // Download the item's image using the URL
+                self.downloadImageFromUrl(url: currentItem.itemPictureUrl, index: index)
             }
             
             DispatchQueue.main.async {
@@ -148,7 +149,8 @@ class FavoritesTableViewController: UITableViewController {
         
         cell.labelInfo.text = clothingItem.name
         
-        cell.imageViewClothingPic.sd_setImage(with: URL(string:clothingItem.itemPictureUrl), placeholderImage: UIImage(named: "Favorite"))
+        cell.imageViewClothingPic.image = clothingItem.itemImage
+        //cell.imageViewClothingPic.sd_setImage(with: URL(string:clothingItem.itemPictureUrl), placeholderImage: UIImage(named: "Favorite"))
         cell.imageViewClothingPic.contentMode = .scaleAspectFit
         
         return cell

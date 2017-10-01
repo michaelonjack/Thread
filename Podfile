@@ -11,7 +11,7 @@ target 'Thread' do
   pod 'SwiftyJSON'
   pod 'IQKeyboardManagerSwift'
   pod 'SDWebImage'
-  pod 'Fusuma'
+  pod 'Fusuma', :git => 'https://github.com/ytakzk/Fusuma.git', :branch => 'swift4'
 
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!

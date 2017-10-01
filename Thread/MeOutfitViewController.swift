@@ -11,6 +11,7 @@ import Fusuma
 import CoreLocation
 import AudioToolbox
 
+
 class MeOutfitViewController: UIViewController, FusumaDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var labelName: UILabel!
@@ -18,12 +19,34 @@ class MeOutfitViewController: UIViewController, FusumaDelegate, CLLocationManage
     @IBOutlet weak var textFieldStatus: UITextField!
     @IBOutlet weak var imageViewProfilePicture: UIImageView!
     @IBOutlet weak var imageViewOutfit: UIImageView!
+    @IBOutlet weak var topInfoView: UIView!
+    
+    @IBOutlet weak var checkInButtonWidthLayout: NSLayoutConstraint!
+    @IBOutlet weak var closetButtonWidthLayout: NSLayoutConstraint!
+    @IBOutlet weak var cameraButtonWidthLayout: NSLayoutConstraint!
+    @IBOutlet weak var imageWidthLayout: NSLayoutConstraint!
+    
+    @IBOutlet weak var outfitTopLayout: NSLayoutConstraint!
+    @IBOutlet weak var cameraButtonTopLayout: NSLayoutConstraint!
+    @IBOutlet weak var checkInTopLayout: NSLayoutConstraint!
+    @IBOutlet weak var outfitButtonTopLayout: NSLayoutConstraint!
     
     // LocationManager instance used to update the current user's location
     let locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(UIScreen.main.bounds.height/667)
+        print(24 * (UIScreen.main.bounds.height/667))
+        cameraButtonTopLayout.constant = 29 * (UIScreen.main.bounds.height/667)
+        checkInTopLayout.constant = 24 * (UIScreen.main.bounds.height/667)
+        outfitButtonTopLayout.constant = 24 * (UIScreen.main.bounds.height/667)
+        outfitTopLayout.constant = 8 * (UIScreen.main.bounds.height/667)
+        
+        // Adjust outfit picture size for different displays
+        scaleConstraintMultiplierForWidth(constraint: imageWidthLayout, originalWidth: 375, parentView: self.view!)
+        
 
         // Makes the profile picture button circular
         imageViewProfilePicture.contentMode = .scaleAspectFill
@@ -89,16 +112,27 @@ class MeOutfitViewController: UIViewController, FusumaDelegate, CLLocationManage
     func fusumaWillClosed() {}
     
     @IBAction func cameraDidTouch(_ sender: UIButton) {
-        let fusuma = FusumaViewController()
         
-        fusuma.delegate = self
-        fusuma.cropHeightRatio = 0.8
-        fusuma.hasVideo = true
-        fusuma.defaultMode = .library
-        fusuma.allowMultipleSelection = false
-        fusumaSavesImage = true
-        
-        self.present(fusuma, animated: true, completion: nil)
+        // Check if camera is available
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            let fusuma = FusumaViewController()
+            fusuma.delegate = self
+            fusuma.cropHeightRatio = 0.8
+            fusuma.hasVideo = true
+            fusuma.defaultMode = .library
+            fusuma.allowMultipleSelection = false
+            fusumaSavesImage = true
+            
+            self.present(fusuma, animated: true, completion: nil)
+        } else {
+            let notAvailableAlert = UIAlertController(title: "Camera Not Available",
+                                               message: "Your device's camera is not available",
+                                               preferredStyle: .alert)
+            
+            let closeAction = UIAlertAction(title: "Close", style: .default)
+            notAvailableAlert.addAction(closeAction)
+            self.present(notAvailableAlert, animated: true, completion:nil)
+        }
     }
     
     
