@@ -21,9 +21,6 @@ class MeOutfitViewController: UIViewController, FusumaDelegate, CLLocationManage
     @IBOutlet weak var imageViewOutfit: UIImageView!
     @IBOutlet weak var topInfoView: UIView!
     
-    @IBOutlet weak var checkInButtonWidthLayout: NSLayoutConstraint!
-    @IBOutlet weak var closetButtonWidthLayout: NSLayoutConstraint!
-    @IBOutlet weak var cameraButtonWidthLayout: NSLayoutConstraint!
     @IBOutlet weak var imageWidthLayout: NSLayoutConstraint!
     
     @IBOutlet weak var outfitTopLayout: NSLayoutConstraint!
