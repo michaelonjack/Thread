@@ -367,29 +367,35 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="169.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nFg-xx-SZH">
-                                            <rect key="frame" x="16" y="8" width="343" height="111"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nFg-xx-SZH">
+                                            <rect key="frame" x="16" y="8" width="343" height="121.5"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="121.5" id="qXb-O1-SH6"/>
+                                            </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F6j-fz-LxE">
-                                            <rect key="frame" x="16" y="127" width="343" height="24"/>
+                                            <rect key="frame" x="16" y="137.5" width="343" height="24"/>
                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                             <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="nFg-xx-SZH" secondAttribute="trailing" constant="8" id="1TN-x4-aYD"/>
                                         <constraint firstItem="F6j-fz-LxE" firstAttribute="top" secondItem="nFg-xx-SZH" secondAttribute="bottom" constant="8" id="6Fu-Ky-efn"/>
-                                        <constraint firstItem="F6j-fz-LxE" firstAttribute="width" secondItem="icn-XH-RvA" secondAttribute="width" multiplier="0.914666" id="BGZ-8c-S98"/>
-                                        <constraint firstItem="F6j-fz-LxE" firstAttribute="centerX" secondItem="icn-XH-RvA" secondAttribute="centerX" id="J1L-hI-gr2"/>
                                         <constraint firstItem="nFg-xx-SZH" firstAttribute="top" secondItem="icn-XH-RvA" secondAttribute="top" constant="8" id="PuE-TM-ThB"/>
-                                        <constraint firstItem="nFg-xx-SZH" firstAttribute="centerX" secondItem="icn-XH-RvA" secondAttribute="centerX" id="fwj-ih-lGl"/>
-                                        <constraint firstAttribute="bottom" secondItem="F6j-fz-LxE" secondAttribute="bottom" constant="18.5" id="jck-Rp-6fO"/>
-                                        <constraint firstItem="nFg-xx-SZH" firstAttribute="width" secondItem="icn-XH-RvA" secondAttribute="width" multiplier="0.914666" id="rx6-k5-BQk"/>
+                                        <constraint firstItem="F6j-fz-LxE" firstAttribute="width" secondItem="nFg-xx-SZH" secondAttribute="width" id="Qb8-Co-GLJ"/>
+                                        <constraint firstItem="nFg-xx-SZH" firstAttribute="leading" secondItem="icn-XH-RvA" secondAttribute="leadingMargin" constant="8" id="VLh-UP-kh6"/>
+                                        <constraint firstItem="F6j-fz-LxE" firstAttribute="leading" secondItem="icn-XH-RvA" secondAttribute="leadingMargin" constant="8" id="YSa-87-wgk"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="F6j-fz-LxE" secondAttribute="trailing" constant="8" id="dLQ-oc-RJG"/>
+                                        <constraint firstAttribute="bottom" secondItem="F6j-fz-LxE" secondAttribute="bottom" constant="8" id="jck-Rp-6fO"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="imageViewClothingPic" destination="nFg-xx-SZH" id="pRq-dA-agG"/>
+                                    <outlet property="imageViewHeightConstraint" destination="qXb-O1-SH6" id="L7Y-6p-OAU"/>
                                     <outlet property="labelInfo" destination="F6j-fz-LxE" id="O6l-xa-X5f"/>
                                 </connections>
                             </tableViewCell>

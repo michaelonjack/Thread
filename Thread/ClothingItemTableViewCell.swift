@@ -13,6 +13,7 @@ class ClothingItemTableViewCell: UITableViewCell {
     @IBOutlet weak var imageViewClothingPic: UIImageView!
     @IBOutlet weak var labelInfo: UILabel!
     @IBOutlet weak var labelLink: UITextView!
+    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     
 
 }

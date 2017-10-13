@@ -150,8 +150,16 @@ class FavoritesTableViewController: UITableViewController {
         cell.labelInfo.text = clothingItem.name
         
         cell.imageViewClothingPic.image = clothingItem.itemImage
+        
+        if let cellImage = clothingItem.itemImage {
+            let imgHeight = cellImage.size.height
+            let imgWidth = cellImage.size.width
+            let imgRatio = imgHeight / imgWidth
+            cell.imageViewHeightConstraint.constant = imgRatio * cell.imageViewClothingPic.bounds.width
+        }
+        
         //cell.imageViewClothingPic.sd_setImage(with: URL(string:clothingItem.itemPictureUrl), placeholderImage: UIImage(named: "Favorite"))
-        cell.imageViewClothingPic.contentMode = .scaleAspectFit
+        //cell.imageViewClothingPic.contentMode = .scaleAspectFit
         
         return cell
     }

@@ -105,7 +105,7 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
                         let longitude = currentUserSnapshotValue["longitude"] as? Double
                         
                         // If a user's longitude and latitude are set to 0.0 then their location is not known so show no nearby users
-                        if( floor(latitude!) != 0 && floor(longitude!) != 0 ) {
+                        //if( floor(latitude!) != 0 && floor(longitude!) != 0 ) {
                             
                             // Get the current user's location using their latitude and longitude
                             let currentUserLocation = CLLocation(latitude: latitude!, longitude: longitude!)
@@ -113,13 +113,14 @@ class AroundMeTableViewController: UITableViewController, CLLocationManagerDeleg
                             let nearbyUserLocation = CLLocation(latitude: nearbyUser.latitude, longitude: nearbyUser.longitude)
                             
                             self.currentUserCoordinates = currentUserLocation.coordinate
-                            
+                            print("hellooooooooo")
                             // Determine if user is near the current user, if so add to list
                             print("Distance between: " + String(currentUserLocation.distance(from: nearbyUserLocation)))
-                            if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
+                            //if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
                                 self.displayUsers.append(nearbyUser)
-                            }
-                        }
+                                print(self.displayUsers.count)
+                            //}
+                        //}
                         
                     }
                     
