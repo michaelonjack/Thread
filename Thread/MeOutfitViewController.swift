@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import Fusuma
+import YPImagePicker
 import CoreLocation
 import AudioToolbox
 
 
-class MeOutfitViewController: UIViewController, FusumaDelegate, CLLocationManagerDelegate {
+class MeOutfitViewController: UIViewController, /*FusumaDelegate,*/ CLLocationManagerDelegate {
     
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelLocation: UILabel!
@@ -92,35 +92,24 @@ class MeOutfitViewController: UIViewController, FusumaDelegate, CLLocationManage
     
     }
     
-    
-    
-    func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
-        
-        imageViewOutfit.image = image
-        uploadOutfitPictureForUser(userid: (Auth.auth().currentUser?.uid)!, image: image)
-        
-    }
-    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {}
-    func fusumaImageSelected(_ image: UIImage, source: FusumaMode, metaData: ImageMetadata) {}
-    func fusumaVideoCompleted(withFileURL fileURL: URL) {}
-    func fusumaDismissedWithImage(_ image: UIImage, source: FusumaMode) {}
-    func fusumaCameraRollUnauthorized() {}
-    func fusumaClosed() {}
-    func fusumaWillClosed() {}
-    
     @IBAction func cameraDidTouch(_ sender: UIButton) {
         
         // Check if camera is available
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            let fusuma = FusumaViewController()
-            fusuma.delegate = self
-            fusuma.cropHeightRatio = 0.8
-            fusuma.hasVideo = true
-            fusuma.defaultMode = .library
-            fusuma.allowMultipleSelection = false
-            fusumaSavesImage = true
             
-            self.present(fusuma, animated: true, completion: nil)
+            let picker = YPImagePicker()
+            picker.onlySquareImages = true
+            picker.showsFilters = true
+            picker.usesFrontCamera = false
+            picker.showsVideo = false
+            picker.didSelectImage = { image in
+                self.imageViewOutfit.image = image
+                uploadOutfitPictureForUser(userid: (Auth.auth().currentUser?.uid)!, image: image)
+                
+                picker.dismiss(animated: true, completion: nil)
+            }
+            present(picker, animated: true, completion: nil)
+            
         } else {
             let notAvailableAlert = UIAlertController(title: "Camera Not Available",
                                                message: "Your device's camera is not available",
