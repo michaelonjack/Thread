@@ -16,8 +16,9 @@
 import UIKit
 import FirebaseStorage
 import SDWebImage
+import YPImagePicker
 
-class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MeViewController: UIViewController, UINavigationControllerDelegate {
 
     @IBOutlet weak var buttonProfilePicture: UIButton!
     @IBOutlet weak var labelGreeting: UILabel!
@@ -29,7 +30,6 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
     
     let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     let currentUserStorageRef = Storage.storage().reference(withPath: "images/" + (Auth.auth().currentUser?.uid)!)
-    let imagePicker = UIImagePickerController()
     
     var containerViewController: MeContainerViewController?
     
@@ -49,8 +49,6 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
         bottomTopLayout.constant = 44 * (UIScreen.main.bounds.height/667)
         shoesTopLayout.constant = 225 * (UIScreen.main.bounds.height/667)
         accessoriesTopLayout.constant = 225 * (UIScreen.main.bounds.height/667)
-        
-        imagePicker.delegate = self
 
         // Makes the profile picture button circular
         buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
@@ -76,39 +74,24 @@ class MeViewController: UIViewController, UIImagePickerControllerDelegate, UINav
     //
     @IBAction func profilePictureDidTouch(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
-            imagePicker.allowsEditing = false
-            self.present(imagePicker, animated: true, completion: nil)
+            let picker = YPImagePicker()
+            picker.onlySquareImages = true
+            picker.showsFilters = true
+            picker.usesFrontCamera = false
+            picker.showsVideo = false
+            picker.didSelectImage = { image in
+                // Sets the user's profile picture to be this image
+                self.buttonProfilePicture.setImage(image, for: .normal)
+                self.buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
+                
+                uploadProfilePictureForUser(userid: (Auth.auth().currentUser?.uid)!, image: image)
+                
+                picker.dismiss(animated: true, completion: nil)
+            }
+            present(picker, animated: true, completion: nil)
         } else {
             print("Error -- Camera")
         }
-    }
-    
-    
-    
-    /////////////////////////////////////////////////////
-    //
-    //  imagePickerController
-    //
-    //  Pulls the image chosen by the user (via their camera) and sets it as their profile picture in the view
-    //  Called by profilePictureDidTouch
-    //
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : Any])
-    {
-        // The image taken by the user's camera
-        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        // Sets the user's profile picture to be this image
-        buttonProfilePicture.setImage(chosenImage, for: .normal)
-        buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
-        
-        uploadProfilePictureForUser(userid: (Auth.auth().currentUser?.uid)!, image: chosenImage)
-        
-        dismiss(animated:true, completion: nil)
-        
-    }
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
     }
 
     

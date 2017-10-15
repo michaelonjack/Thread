@@ -988,7 +988,7 @@
                                     <segue destination="k5d-ze-k3f" kind="show" identifier="bottomToClothingItem" id="qcO-9A-bHk"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-oh-qzy">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-oh-qzy">
                                 <rect key="frame" x="132" y="20" width="110" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xd4-oh-qzy" secondAttribute="height" multiplier="1:1" id="YC1-QX-0gV"/>
@@ -1092,7 +1092,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8r-3m-SzM">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8r-3m-SzM">
                                 <rect key="frame" x="132" y="20" width="110" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="I8r-3m-SzM" secondAttribute="height" multiplier="1:1" id="xEL-4Q-vXG"/>
@@ -2166,12 +2166,12 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="25a-Eo-keZ"/>
-        <segue reference="8rV-wC-94a"/>
+        <segue reference="aKM-qL-paD"/>
         <segue reference="beV-B1-aCh"/>
-        <segue reference="wmk-2P-4IE"/>
-        <segue reference="gfk-di-0lr"/>
-        <segue reference="mKs-pf-UdP"/>
-        <segue reference="F8r-NO-sYT"/>
+        <segue reference="NZo-f1-ct1"/>
+        <segue reference="agw-cD-mfk"/>
+        <segue reference="E2V-HC-zp3"/>
+        <segue reference="DUY-O4-ptb"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

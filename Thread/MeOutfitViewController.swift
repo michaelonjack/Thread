@@ -12,7 +12,7 @@ import CoreLocation
 import AudioToolbox
 
 
-class MeOutfitViewController: UIViewController, /*FusumaDelegate,*/ CLLocationManagerDelegate {
+class MeOutfitViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelLocation: UILabel!
@@ -34,8 +34,11 @@ class MeOutfitViewController: UIViewController, /*FusumaDelegate,*/ CLLocationMa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(UIScreen.main.bounds.height/667)
-        print(24 * (UIScreen.main.bounds.height/667))
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 20)!,
+            NSAttributedStringKey.foregroundColor: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
+        ]
+        
         cameraButtonTopLayout.constant = 29 * (UIScreen.main.bounds.height/667)
         checkInTopLayout.constant = 24 * (UIScreen.main.bounds.height/667)
         outfitButtonTopLayout.constant = 24 * (UIScreen.main.bounds.height/667)

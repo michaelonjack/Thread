@@ -117,7 +117,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     //  tableView -- cellForRowAt
     //
     //  Determines what information is to be displayed in each table cell
-    //  Uses the ClothingItem at the matching index of clothingSearchResults to set the cell's information
     //
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

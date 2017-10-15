@@ -57,7 +57,6 @@ class AccountViewController: UIViewController {
         self.imageViewProfilePicture.layer.cornerRadius = 8.0
         self.imageViewProfilePicture.clipsToBounds = true
         
-        
         loadProfileData()
     }
 
