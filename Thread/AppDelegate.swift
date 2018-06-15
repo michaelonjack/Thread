@@ -8,6 +8,8 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import Firebase
+import SwipeNavigationController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -39,6 +41,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Enable the IQKeyboard
         IQKeyboardManager.shared.enable = true
+        
+        // Determine which view controller should be initially shown
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        var initialViewController: UIViewController = UIViewController()
+        
+        // User is logged in, go right to profile
+        if (Auth.auth().currentUser != nil) {
+            let outfitViewController = mainStoryboard.instantiateViewController(withIdentifier: "MeOutfitViewController") as! MeOutfitViewController
+            let closetViewController = mainStoryboard.instantiateViewController(withIdentifier: "MeContainerViewController") as! MeContainerViewController
+            let aroundMeController = mainStoryboard.instantiateViewController(withIdentifier: "UserTableViewController") as! UserTableViewController
+            
+            let swipeNavigationController = SwipeNavigationController(centerViewController: outfitViewController)
+            swipeNavigationController.leftViewController = aroundMeController
+            swipeNavigationController.rightViewController = closetViewController
+            swipeNavigationController.shouldShowTopViewController = false
+            swipeNavigationController.shouldShowBottomViewController = false
+            
+            initialViewController = swipeNavigationController
+        }
+        
+        // User is not logged in, go to login screen
+        else {
+            initialViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! UINavigationController
+        }
+        
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
 
         return true
     }

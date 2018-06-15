@@ -26,7 +26,6 @@ class MeOutfitViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var outfitTopLayout: NSLayoutConstraint!
     @IBOutlet weak var cameraButtonTopLayout: NSLayoutConstraint!
     @IBOutlet weak var checkInTopLayout: NSLayoutConstraint!
-    @IBOutlet weak var outfitButtonTopLayout: NSLayoutConstraint!
     
     // LocationManager instance used to update the current user's location
     let locationManager = CLLocationManager()
@@ -41,7 +40,6 @@ class MeOutfitViewController: UIViewController, CLLocationManagerDelegate {
         
         cameraButtonTopLayout.constant = 29 * (UIScreen.main.bounds.height/667)
         checkInTopLayout.constant = 24 * (UIScreen.main.bounds.height/667)
-        outfitButtonTopLayout.constant = 24 * (UIScreen.main.bounds.height/667)
         outfitTopLayout.constant = 8 * (UIScreen.main.bounds.height/667)
         
         // Adjust outfit picture size for different displays
