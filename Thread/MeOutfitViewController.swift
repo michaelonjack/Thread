@@ -99,17 +99,22 @@ class MeOutfitViewController: UIViewController, CLLocationManagerDelegate {
         
         // Check if camera is available
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            var ypConfig = YPImagePickerConfiguration()
+            ypConfig.onlySquareImagesFromCamera = true
+            ypConfig.library.onlySquare = true
+            ypConfig.showsFilters = true
+            ypConfig.library.mediaType = .photo
+            ypConfig.usesFrontCamera = false
+            ypConfig.shouldSaveNewPicturesToAlbum = false
             
-            let picker = YPImagePicker()
-            picker.onlySquareImages = true
-            picker.showsFilters = true
-            picker.usesFrontCamera = false
-            picker.showsVideo = false
-            picker.didSelectImage = { image in
-                self.imageViewOutfit.image = image
-                uploadOutfitPictureForUser(userid: (Auth.auth().currentUser?.uid)!, image: image)
-                
-                picker.dismiss(animated: true, completion: nil)
+            let picker = YPImagePicker(configuration: ypConfig)
+            picker.didFinishPicking { items, _ in
+                if let photo = items.singlePhoto {
+                    self.imageViewOutfit.image = photo.image
+                    uploadOutfitPictureForUser(userid: (Auth.auth().currentUser?.uid)!, image: photo.image)
+                    
+                    picker.dismiss(animated: true, completion: nil)
+                }
             }
             present(picker, animated: true, completion: nil)
             

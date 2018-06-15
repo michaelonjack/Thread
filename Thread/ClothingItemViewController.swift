@@ -121,35 +121,42 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
             currentUserClothingTypeImagesRef.putData(imageData, metadata: imageMetaData) { (metaData, error) in
                 if error == nil {
                     // Add the image's url to the Firebase database
-                    let downloadUrl = metaData?.downloadURL()?.absoluteString
-                    currentUserClothingTypeRef.updateChildValues(["pictureUrl": downloadUrl!])
-                    
-                    self.clothingItem.itemPictureUrl = downloadUrl!
-                    
-                    // Refresh the previous view controller in the navigation stack so it uses the updated clothing item image
-                    var currentControllers:[UIViewController] = (self.navigationController?.viewControllers)!
-                    // Get previous view controller in stack (MeContainerViewController)
-                    let meVC:MeContainerViewController = currentControllers[currentControllers.count-2] as! MeContainerViewController
-                    
-                    // Determine if the previous VC is an instance of MeAlt
-                    if ( meVC.activeViewController?.isKind(of: MeAltViewController.self) )! {
-                        // If so, me must change the displayed image
-                        let meAltVC:MeAltViewController = meVC.activeViewController as! MeAltViewController
+                    currentUserClothingTypeImagesRef.downloadURL(completion: { (url, error) in
                         
-                        switch self.clothingType! {
-                            case ClothingType.Top:
-                                meAltVC.loadImage(named: "Top", button: meAltVC.buttonTop)
-                            case ClothingType.Bottom:
-                                meAltVC.loadImage(named: "Bottom", button: meAltVC.buttonBottom)
-                            case ClothingType.Shoes:
-                                meAltVC.loadImage(named: "Shoes", button: meAltVC.buttonShoes)
-                            case ClothingType.Accessories:
-                                meAltVC.loadImage(named: "Accessories", button: meAltVC.buttonAccessories)
+                        if error == nil {
+                            let downloadUrl = url?.absoluteString
+                            currentUserClothingTypeRef.updateChildValues(["pictureUrl": downloadUrl!])
+                            
+                            self.clothingItem.itemPictureUrl = downloadUrl!
+                            
+                            // Refresh the previous view controller in the navigation stack so it uses the updated clothing item image
+                            var currentControllers:[UIViewController] = (self.navigationController?.viewControllers)!
+                            // Get previous view controller in stack (MeContainerViewController)
+                            let meVC:MeContainerViewController = currentControllers[currentControllers.count-2] as! MeContainerViewController
+                            
+                            // Determine if the previous VC is an instance of MeAlt
+                            if ( meVC.activeViewController?.isKind(of: MeAltViewController.self) )! {
+                                // If so, me must change the displayed image
+                                let meAltVC:MeAltViewController = meVC.activeViewController as! MeAltViewController
+                                
+                                switch self.clothingType! {
+                                    case ClothingType.Top:
+                                        meAltVC.loadImage(named: "Top", button: meAltVC.buttonTop)
+                                    case ClothingType.Bottom:
+                                        meAltVC.loadImage(named: "Bottom", button: meAltVC.buttonBottom)
+                                    case ClothingType.Shoes:
+                                        meAltVC.loadImage(named: "Shoes", button: meAltVC.buttonShoes)
+                                    case ClothingType.Accessories:
+                                        meAltVC.loadImage(named: "Accessories", button: meAltVC.buttonAccessories)
+                                }
+                                
+                            }
+                            
+                            self.loadingAnimationView.stopAnimating()
+                        } else {
+                            print(error as? String ?? "")
                         }
-                        
-                    }
-                    
-                    self.loadingAnimationView.stopAnimating()
+                    })
                         
                 } else {
                     print(error?.localizedDescription ?? "Error uploading data to storage")

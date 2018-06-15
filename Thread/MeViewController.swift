@@ -74,19 +74,25 @@ class MeViewController: UIViewController, UINavigationControllerDelegate {
     //
     @IBAction func profilePictureDidTouch(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            let picker = YPImagePicker()
-            picker.onlySquareImages = true
-            picker.showsFilters = true
-            picker.usesFrontCamera = false
-            picker.showsVideo = false
-            picker.didSelectImage = { image in
-                // Sets the user's profile picture to be this image
-                self.buttonProfilePicture.setImage(image, for: .normal)
-                self.buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
-                
-                uploadProfilePictureForUser(userid: (Auth.auth().currentUser?.uid)!, image: image)
-                
-                picker.dismiss(animated: true, completion: nil)
+            var ypConfig = YPImagePickerConfiguration()
+            ypConfig.onlySquareImagesFromCamera = true
+            ypConfig.library.onlySquare = true
+            ypConfig.showsFilters = true
+            ypConfig.library.mediaType = .photo
+            ypConfig.usesFrontCamera = false
+            ypConfig.shouldSaveNewPicturesToAlbum = false
+            
+            let picker = YPImagePicker(configuration: ypConfig)
+            picker.didFinishPicking { items, _ in
+                if let image = items.singlePhoto {
+                    // Sets the user's profile picture to be this image
+                    self.buttonProfilePicture.setImage(image.image, for: .normal)
+                    self.buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
+                    
+                    uploadProfilePictureForUser(userid: (Auth.auth().currentUser?.uid)!, image: image.image)
+                    
+                    picker.dismiss(animated: true, completion: nil)
+                }
             }
             present(picker, animated: true, completion: nil)
         } else {

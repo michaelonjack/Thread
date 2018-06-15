@@ -82,25 +82,29 @@ class ClothingSearchViewController: UIViewController, UITableViewDelegate, UITab
                 (data, response, error) in
                 
                 if error == nil {
+                    do {
+                        let jsonResponse = try JSON(data: data!)
+                        self.totalNumberOfProductsFound = jsonResponse["metadata"]["total"].int! > 25 ? 25 : jsonResponse["metadata"]["total"].int!
+                        
+                        for (key, subJson):(String, JSON) in jsonResponse["products"] {
+                            let itemId = String(subJson["id"].int64 ?? -1)
+                            
+                            let itemName = subJson["name"].string ?? ""
+                            
+                            let itemUrl = subJson["clickUrl"].string?.replacingOccurrences(of: "\\/", with: "/") ?? ""
+                            
+                            let itemBrand = subJson["brand"]["name"].string ?? ""
+                            
+                            let picUrl =  subJson["image"]["sizes"]["IPhone"]["url"].string?.replacingOccurrences(of: "\\/", with: "/")
+                            
+                            
+                            self.clothingSearchResults.append( ClothingItem(id: itemId, name: itemName, brand: itemBrand, itemUrl: itemUrl) )
+                            self.downloadImageFromUrl(url: picUrl!, index: Int(key)!)
+                        }
+                    }
                     
-                    let jsonResponse = JSON(data: data!)
-                    self.totalNumberOfProductsFound = jsonResponse["metadata"]["total"].int! > 25 ? 25 : jsonResponse["metadata"]["total"].int!
-                    
-                    for (key, subJson):(String, JSON) in jsonResponse["products"] {
-                        let itemId = String(subJson["id"].int64 ?? -1)
-                        
-                        let itemName = subJson["name"].string ?? ""
-                        
-                        let itemUrl = subJson["clickUrl"].string?.replacingOccurrences(of: "\\/", with: "/") ?? ""
-                        
-                        let itemBrand = subJson["brand"]["name"].string ?? ""
-                        
-                        let picUrl =  subJson["image"]["sizes"]["IPhone"]["url"].string?.replacingOccurrences(of: "\\/", with: "/")
-                        
-                        
-                        self.clothingSearchResults.append( ClothingItem(id: itemId, name: itemName, brand: itemBrand, itemUrl: itemUrl) )
-                        self.downloadImageFromUrl(url: picUrl!, index: Int(key)!)
-                        
+                    catch {
+                        print("JSON ERROR")
                     }
                     
                 } else {
