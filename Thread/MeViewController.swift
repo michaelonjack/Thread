@@ -23,11 +23,6 @@ class MeViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var buttonProfilePicture: UIButton!
     @IBOutlet weak var labelGreeting: UILabel!
     
-    @IBOutlet weak var shirtTopLayout: NSLayoutConstraint!
-    @IBOutlet weak var bottomTopLayout: NSLayoutConstraint!
-    @IBOutlet weak var shoesTopLayout: NSLayoutConstraint!
-    @IBOutlet weak var accessoriesTopLayout: NSLayoutConstraint!
-    
     let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     let currentUserStorageRef = Storage.storage().reference(withPath: "images/" + (Auth.auth().currentUser?.uid)!)
     
@@ -43,12 +38,6 @@ class MeViewController: UIViewController, UINavigationControllerDelegate {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Adjust constraints based on screen size
-        shirtTopLayout.constant = 44 * (UIScreen.main.bounds.height/667)
-        bottomTopLayout.constant = 44 * (UIScreen.main.bounds.height/667)
-        shoesTopLayout.constant = 225 * (UIScreen.main.bounds.height/667)
-        accessoriesTopLayout.constant = 225 * (UIScreen.main.bounds.height/667)
 
         // Makes the profile picture button circular
         buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
@@ -73,31 +62,28 @@ class MeViewController: UIViewController, UINavigationControllerDelegate {
     //  Launches the user's camera so they can take a new picture and then saves that image to the database
     //
     @IBAction func profilePictureDidTouch(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            var ypConfig = YPImagePickerConfiguration()
-            ypConfig.onlySquareImagesFromCamera = true
-            ypConfig.library.onlySquare = true
-            ypConfig.showsFilters = true
-            ypConfig.library.mediaType = .photo
-            ypConfig.usesFrontCamera = false
-            ypConfig.shouldSaveNewPicturesToAlbum = false
-            
-            let picker = YPImagePicker(configuration: ypConfig)
-            picker.didFinishPicking { items, _ in
-                if let image = items.singlePhoto {
-                    // Sets the user's profile picture to be this image
-                    self.buttonProfilePicture.setImage(image.image, for: .normal)
-                    self.buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
-                    
-                    uploadProfilePictureForUser(userid: (Auth.auth().currentUser?.uid)!, image: image.image)
-                    
-                    picker.dismiss(animated: true, completion: nil)
-                }
+        
+        var ypConfig = YPImagePickerConfiguration()
+        ypConfig.onlySquareImagesFromCamera = true
+        ypConfig.library.onlySquare = true
+        ypConfig.showsFilters = true
+        ypConfig.library.mediaType = .photo
+        ypConfig.usesFrontCamera = false
+        ypConfig.shouldSaveNewPicturesToAlbum = false
+        
+        let picker = YPImagePicker(configuration: ypConfig)
+        picker.didFinishPicking { items, _ in
+            if let image = items.singlePhoto {
+                // Sets the user's profile picture to be this image
+                self.buttonProfilePicture.setImage(image.image, for: .normal)
+                self.buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
+                
+                uploadProfilePictureForUser(userid: (Auth.auth().currentUser?.uid)!, image: image.image)
             }
-            present(picker, animated: true, completion: nil)
-        } else {
-            print("Error -- Camera")
+            picker.dismiss(animated: true, completion: nil)
         }
+        present(picker, animated: true, completion: nil)
+        
     }
 
     

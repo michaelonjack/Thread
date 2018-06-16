@@ -35,6 +35,8 @@
 		B1A11D471EFF3F9000E16169 /* MeOutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A11D461EFF3F9000E16169 /* MeOutfitViewController.swift */; };
 		B1A98C311E7464D700CF2497 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A98C301E7464D700CF2497 /* SettingsViewController.swift */; };
 		B1A98C331E747D0C00CF2497 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A98C321E747D0C00CF2497 /* SettingsTableViewCell.swift */; };
+		B1B1E1E520D54DB7001B81EA /* UsersTableViewCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B1E1E320D54DB7001B81EA /* UsersTableViewCellHeader.swift */; };
+		B1B1E1E620D54DB7001B81EA /* UsersTableViewCellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1B1E1E420D54DB7001B81EA /* UsersTableViewCellHeader.xib */; };
 		B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A8E1E2C66730036E559 /* AppDelegate.swift */; };
 		B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A901E2C66730036E559 /* LoginViewController.swift */; };
 		B1C96A941E2C66730036E559 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C96A921E2C66730036E559 /* Main.storyboard */; };
@@ -105,6 +107,8 @@
 		B1A11D461EFF3F9000E16169 /* MeOutfitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeOutfitViewController.swift; sourceTree = "<group>"; };
 		B1A98C301E7464D700CF2497 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B1A98C321E747D0C00CF2497 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		B1B1E1E320D54DB7001B81EA /* UsersTableViewCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewCellHeader.swift; sourceTree = "<group>"; };
+		B1B1E1E420D54DB7001B81EA /* UsersTableViewCellHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UsersTableViewCellHeader.xib; sourceTree = "<group>"; };
 		B1C96A8B1E2C66730036E559 /* Thread.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thread.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C96A8E1E2C66730036E559 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1C96A901E2C66730036E559 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -264,6 +268,8 @@
 				B11623A51EA3E65A00262617 /* FavoritesTableViewController.swift */,
 				B163FA3E1E3051EC00EF399D /* AroundMeTableViewController.swift */,
 				B1A11D3C1EFE7EDD00E16169 /* UserTableViewController.swift */,
+				B1B1E1E320D54DB7001B81EA /* UsersTableViewCellHeader.swift */,
+				B1B1E1E420D54DB7001B81EA /* UsersTableViewCellHeader.xib */,
 			);
 			name = TableViewControllers;
 			sourceTree = "<group>";
@@ -471,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1C96A991E2C66730036E559 /* LaunchScreen.storyboard in Resources */,
+				B1B1E1E620D54DB7001B81EA /* UsersTableViewCellHeader.xib in Resources */,
 				B174D0261E36C8E900218590 /* APIKeys.plist in Resources */,
 				B18430731E2D43E300EED632 /* GoogleService-Info.plist in Resources */,
 				B184307F1E2F0C8A00EED632 /* Assets.xcassets in Resources */,
@@ -619,6 +626,7 @@
 				B1A089AA1E4FE4DD00FC7C65 /* KeychainWrapper.m in Sources */,
 				B18430861E33B03A00EED632 /* User.swift in Sources */,
 				B1E8374E1E64BD9000789BC2 /* MeContainerViewController.swift in Sources */,
+				B1B1E1E520D54DB7001B81EA /* UsersTableViewCellHeader.swift in Sources */,
 				B1EDE1081EA286040042FB15 /* PasswordViewController.swift in Sources */,
 				B16202211E5759D10099D3D7 /* UserTableViewCell.swift in Sources */,
 				B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */,

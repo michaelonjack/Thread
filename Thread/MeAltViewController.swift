@@ -18,15 +18,6 @@ class MeAltViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var buttonShoes: UIButton!
     @IBOutlet weak var buttonAccessories: UIButton!
     
-    @IBOutlet weak var shirtTopLayout: NSLayoutConstraint!
-    @IBOutlet weak var shirtHorizontalLayout: NSLayoutConstraint!
-    @IBOutlet weak var bottomTopLayout: NSLayoutConstraint!
-    @IBOutlet weak var bottomHorizontalLayout: NSLayoutConstraint!
-    @IBOutlet weak var shoesTopLayout: NSLayoutConstraint!
-    @IBOutlet weak var shoesHorizontalLayout: NSLayoutConstraint!
-    @IBOutlet weak var accessoriesTopLayout: NSLayoutConstraint!
-    @IBOutlet weak var accessoriesHorizontalLayout: NSLayoutConstraint!
-    
     let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     let currentUserStorageRef = Storage.storage().reference(withPath: "images/" + (Auth.auth().currentUser?.uid)!)
     
@@ -35,16 +26,6 @@ class MeAltViewController: UIViewController, UINavigationControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Adjust constraints based on screen size
-        shirtHorizontalLayout.constant = -88 * (UIScreen.main.bounds.width/375)
-        shirtTopLayout.constant = 46 * (UIScreen.main.bounds.height/667)
-        bottomHorizontalLayout.constant = -87 * (UIScreen.main.bounds.width/375)
-        bottomTopLayout.constant = 46 * (UIScreen.main.bounds.height/667)
-        shoesHorizontalLayout.constant = -88 * (UIScreen.main.bounds.width/375)
-        shoesTopLayout.constant = 236 * (UIScreen.main.bounds.height/667)
-        accessoriesHorizontalLayout.constant = -87 * (UIScreen.main.bounds.width/375)
-        accessoriesTopLayout.constant = 236 * (UIScreen.main.bounds.height/667)
         
         // Makes the profile picture button circular
         buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
@@ -72,31 +53,29 @@ class MeAltViewController: UIViewController, UINavigationControllerDelegate {
     //  Launches the user's camera so they can take a new picture and then saves that image to the database
     //
     @IBAction func profilePictureDidTouch(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            var ypConfig = YPImagePickerConfiguration()
-            ypConfig.onlySquareImagesFromCamera = true
-            ypConfig.library.onlySquare = true
-            ypConfig.showsFilters = true
-            ypConfig.library.mediaType = .photo
-            ypConfig.usesFrontCamera = false
-            ypConfig.shouldSaveNewPicturesToAlbum = false
-            
-            let picker = YPImagePicker(configuration: ypConfig)
-            picker.didFinishPicking { items, _ in
-                if let photo = items.singlePhoto {
-                    // Sets the user's profile picture to be this image
-                    self.buttonProfilePicture.setImage(photo.image, for: .normal)
-                    self.buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
-                    
-                    uploadProfilePictureForUser(userid: (Auth.auth().currentUser?.uid)!, image: photo.image)
-                    
-                    picker.dismiss(animated: true, completion: nil)
-                }
+        
+        var ypConfig = YPImagePickerConfiguration()
+        ypConfig.onlySquareImagesFromCamera = true
+        ypConfig.library.onlySquare = true
+        ypConfig.showsFilters = true
+        ypConfig.library.mediaType = .photo
+        ypConfig.usesFrontCamera = false
+        ypConfig.shouldSaveNewPicturesToAlbum = false
+        
+        let picker = YPImagePicker(configuration: ypConfig)
+        picker.didFinishPicking { items, _ in
+            if let photo = items.singlePhoto {
+                // Sets the user's profile picture to be this image
+                self.buttonProfilePicture.setImage(photo.image, for: .normal)
+                self.buttonProfilePicture.imageView?.contentMode = .scaleAspectFill
+                
+                uploadProfilePictureForUser(userid: (Auth.auth().currentUser?.uid)!, image: photo.image)
+                
             }
-            present(picker, animated: true, completion: nil)
-        } else {
-            print("Error -- Camera")
+            picker.dismiss(animated: true, completion: nil)
         }
+        present(picker, animated: true, completion: nil)
+        
     }
     
     

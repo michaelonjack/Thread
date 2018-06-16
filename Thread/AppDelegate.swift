@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // User is logged in, go right to profile
         if (Auth.auth().currentUser != nil) {
             let outfitViewController = mainStoryboard.instantiateViewController(withIdentifier: "MeOutfitViewController") as! MeOutfitViewController
-            let closetViewController = mainStoryboard.instantiateViewController(withIdentifier: "MeContainerViewController") as! MeContainerViewController
+            let closetViewController = mainStoryboard.instantiateViewController(withIdentifier: "ClosetNavigationController") as! UINavigationController
             let aroundMeController = mainStoryboard.instantiateViewController(withIdentifier: "UserTableViewController") as! UserTableViewController
             
             let swipeNavigationController = SwipeNavigationController(centerViewController: outfitViewController)

@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseStorage
+import YPImagePicker
 import NVActivityIndicatorView
 
 class ClothingItemViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
@@ -19,10 +20,6 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var saveButtonWidthLayout: NSLayoutConstraint!
     @IBOutlet weak var cameraButtonWidthLayout: NSLayoutConstraint!
     @IBOutlet weak var galleryButtonWidthLayout: NSLayoutConstraint!
-    @IBOutlet weak var saveBottomLayout: NSLayoutConstraint!
-    @IBOutlet weak var cameraBottomLayout: NSLayoutConstraint!
-    @IBOutlet weak var galleryBottomLayout: NSLayoutConstraint!
-    @IBOutlet weak var searchBottomLayout: NSLayoutConstraint!
     
     let picker = UIImagePickerController()
     let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
@@ -46,13 +43,6 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Adjust constraints based on screen size
-        saveBottomLayout.constant = 20 * (UIScreen.main.bounds.height/667)
-        cameraBottomLayout.constant = 20 * (UIScreen.main.bounds.height/667)
-        galleryBottomLayout.constant = 20 * (UIScreen.main.bounds.height/667)
-        searchBottomLayout.constant = 20 * (UIScreen.main.bounds.height/667)
-        
         
         clothingItem = ClothingItem()
         
@@ -180,62 +170,28 @@ class ClothingItemViewController: UIViewController, UIImagePickerControllerDeleg
     //  Uses the user's camera to take a picture
     //
     @IBAction func cameraDidTouch(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            picker.sourceType = UIImagePickerControllerSourceType.camera;
-            picker.allowsEditing = false
-            self.present(picker, animated: true, completion: nil)
-        } else {
-            let notAvailableAlert = UIAlertController(title: "Camera Not Available",
-                                                      message: "Your device's camera is not available",
-                                                      preferredStyle: .alert)
-            
-            let closeAction = UIAlertAction(title: "Close", style: .default)
-            notAvailableAlert.addAction(closeAction)
-            self.present(notAvailableAlert, animated: true, completion:nil)
+        var ypConfig = YPImagePickerConfiguration()
+        ypConfig.onlySquareImagesFromCamera = true
+        ypConfig.library.onlySquare = true
+        ypConfig.showsFilters = true
+        ypConfig.library.mediaType = .photo
+        ypConfig.usesFrontCamera = false
+        ypConfig.shouldSaveNewPicturesToAlbum = false
+        
+        let picker = YPImagePicker(configuration: ypConfig)
+        picker.didFinishPicking { items, _ in
+            if let photo = items.singlePhoto {
+                self.imageViewClothingPicture.contentMode = .scaleAspectFit
+                self.imageViewClothingPicture.image = photo.image
+                self.imageDidChange = true
+                
+                self.clothingItem.name = ""
+                self.clothingItem.brand = ""
+                self.clothingItem.itemUrl = ""
+            }
+            picker.dismiss(animated: true, completion: nil)
         }
-    }
-    
-    
-    
-    /////////////////////////////////////////////////////
-    //
-    //  photoLibraryDidTouch
-    //
-    //  Action to handle when the user selects the photo library button
-    //  Allows the user to select a photo from their phone library
-    //
-    @IBAction func photoLibraryDidTouch(_ sender: Any) {
-        picker.allowsEditing = false
-        picker.sourceType = .photoLibrary
-        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         present(picker, animated: true, completion: nil)
-    }
-    
-    
-    
-    /////////////////////////////////////////////////////
-    //
-    //  imagePickController
-    //
-    //  Pulls the image chosen by the user (via their photo library or camera) and sets that as the view's image
-    //  Called by cameraDidTouch and photoLibraryDidTouch
-    //
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : Any])
-    {
-        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        imageViewClothingPicture.contentMode = .scaleAspectFit
-        imageViewClothingPicture.image = chosenImage
-        dismiss(animated:true, completion: nil)
-        self.imageDidChange = true
-        
-        self.clothingItem.name = ""
-        self.clothingItem.brand = ""
-        self.clothingItem.itemUrl = ""
-        
-    }
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
     }
     
     

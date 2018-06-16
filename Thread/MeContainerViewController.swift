@@ -21,6 +21,10 @@ class MeContainerViewController: UIViewController {
         
         let sb = UIStoryboard(name: "Main", bundle: nil)
         self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 20)!,
+            NSAttributedStringKey.foregroundColor: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
+        ]
         
         iconViewController = sb.instantiateViewController(withIdentifier: "MeIconVC") as? MeViewController
         iconViewController?.containerViewController = self

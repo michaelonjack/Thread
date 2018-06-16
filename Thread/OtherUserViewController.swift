@@ -18,11 +18,6 @@ class OtherUserViewController: UIViewController {
     @IBOutlet weak var imgButton: UIButton!
     @IBOutlet weak var buttonFollowUser: UIButton!
     
-    @IBOutlet weak var shirtTopLayout: NSLayoutConstraint!
-    @IBOutlet weak var bottomTopLayout: NSLayoutConstraint!
-    @IBOutlet weak var shoesTopLayout: NSLayoutConstraint!
-    @IBOutlet weak var accessoriesTopLayout: NSLayoutConstraint!
-    
     let currentUserRef = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     
     var userRef: DatabaseReference!
@@ -41,12 +36,6 @@ class OtherUserViewController: UIViewController {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Adjust constraints based on screen size
-        shirtTopLayout.constant = 44 * (UIScreen.main.bounds.height/667)
-        bottomTopLayout.constant = 44 * (UIScreen.main.bounds.height/667)
-        shoesTopLayout.constant = 225 * (UIScreen.main.bounds.height/667)
-        accessoriesTopLayout.constant = 225 * (UIScreen.main.bounds.height/667)
         
         userRef = Database.database().reference(withPath: "users/" + otherUser.uid)
         userStorageRef = Storage.storage().reference(withPath: "images/" + otherUser.uid)

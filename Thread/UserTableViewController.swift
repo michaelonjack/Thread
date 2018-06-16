@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import FirebaseStorage
 
-class UserTableViewController: UITableViewController, CLLocationManagerDelegate {
+class UserTableViewController: UITableViewController, UsersTableViewCellHeaderDelegate, CLLocationManagerDelegate {
     
     // Maximum number of meters another user can be away and still show up in the table (roughly 2 miles)
     let MAX_ALLOWABLE_DISTANCE = 3000.0
@@ -35,10 +35,10 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 520
-        self.navigationController?.navigationBar.isTranslucent = false
+        
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 20)!,
             NSAttributedStringKey.foregroundColor: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
@@ -164,6 +164,10 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     
     
@@ -190,6 +194,48 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserTableViewCell
         
         cell.contentView.backgroundColor = UIColor.init(red: 147.0/255.0, green: 82.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+    }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 35.0
+    }
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        // Grab first view from the nib file
+        let headerView = Bundle.main.loadNibNamed("UsersTableViewCellHeader", owner: self, options: nil)?.first as! UsersTableViewCellHeader
+        
+        headerView.delegate = self
+        
+        if forAroundMe {
+            headerView.titleLabel.text = "Around Me"
+            headerView.dismissButton.isHidden = true
+        } else {
+            headerView.titleLabel.text = "Following"
+            headerView.dismissButton.isHidden = false
+        }
+        
+        return headerView
+    }
+    func dismissTable() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    
+    
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if forAroundMe {
+            return "AROUND ME"
+        } else {
+            return "FOLLOWING"
+        }
     }
     
     
@@ -253,7 +299,7 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
         
         // Makes the profile picture view circular
         cell.imageViewProfilePicture.contentMode = .scaleAspectFill
-        cell.imageViewProfilePicture.layer.cornerRadius = 0.5 * cell.imageViewProfilePicture.bounds.width
+        cell.imageViewProfilePicture.layer.cornerRadius = 0.5 * cell.imageViewProfilePicture.layer.bounds.width
         cell.imageViewProfilePicture.clipsToBounds = true
         
         return cell
@@ -450,8 +496,16 @@ class UserTableViewController: UITableViewController, CLLocationManagerDelegate 
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let otherUserVC: OtherUserContainerViewController = segue.destination as! OtherUserContainerViewController
-        otherUserVC.otherUser = sender as! User
+        if let _ = segue.destination as? OtherUserContainerViewController {
+            let otherUserVC: OtherUserContainerViewController = segue.destination as! OtherUserContainerViewController
+            otherUserVC.otherUser = sender as! User
+        }
+        
+        else if let _ = segue.destination as? UINavigationController {
+            let otherUserNavigationVC: UINavigationController = segue.destination as! UINavigationController
+            let otherUserVC: OtherUserContainerViewController = otherUserNavigationVC.viewControllers.first as! OtherUserContainerViewController
+            otherUserVC.otherUser = sender as! User
+        }
     }
 
 }

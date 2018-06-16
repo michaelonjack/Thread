@@ -53,6 +53,12 @@ class OtherUserContainerViewController: UIViewController {
     
     
     
+    @IBAction func exitPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
     /////////////////////////////////////////////////////
     //
     //  cycle

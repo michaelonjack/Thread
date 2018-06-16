@@ -24,8 +24,6 @@ class MeOutfitViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var imageWidthLayout: NSLayoutConstraint!
     
     @IBOutlet weak var outfitTopLayout: NSLayoutConstraint!
-    @IBOutlet weak var cameraButtonTopLayout: NSLayoutConstraint!
-    @IBOutlet weak var checkInTopLayout: NSLayoutConstraint!
     
     // LocationManager instance used to update the current user's location
     let locationManager = CLLocationManager()
@@ -38,8 +36,6 @@ class MeOutfitViewController: UIViewController, CLLocationManagerDelegate {
             NSAttributedStringKey.foregroundColor: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
         ]
         
-        cameraButtonTopLayout.constant = 29 * (UIScreen.main.bounds.height/667)
-        checkInTopLayout.constant = 24 * (UIScreen.main.bounds.height/667)
         outfitTopLayout.constant = 8 * (UIScreen.main.bounds.height/667)
         
         // Adjust outfit picture size for different displays
@@ -55,6 +51,13 @@ class MeOutfitViewController: UIViewController, CLLocationManagerDelegate {
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "OutfitToFollowing" {
+            let followingController: UserTableViewController = segue.destination as! UserTableViewController
+            followingController.forAroundMe = false
+        }
     }
     
     
@@ -95,36 +98,24 @@ class MeOutfitViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func cameraDidTouch(_ sender: UIButton) {
         
-        // Check if camera is available
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            var ypConfig = YPImagePickerConfiguration()
-            ypConfig.onlySquareImagesFromCamera = true
-            ypConfig.library.onlySquare = true
-            ypConfig.showsFilters = true
-            ypConfig.library.mediaType = .photo
-            ypConfig.usesFrontCamera = false
-            ypConfig.shouldSaveNewPicturesToAlbum = false
-            
-            let picker = YPImagePicker(configuration: ypConfig)
-            picker.didFinishPicking { items, _ in
-                if let photo = items.singlePhoto {
-                    self.imageViewOutfit.image = photo.image
-                    uploadOutfitPictureForUser(userid: (Auth.auth().currentUser?.uid)!, image: photo.image)
-                    
-                    picker.dismiss(animated: true, completion: nil)
-                }
+        var ypConfig = YPImagePickerConfiguration()
+        ypConfig.onlySquareImagesFromCamera = true
+        ypConfig.library.onlySquare = true
+        ypConfig.showsFilters = true
+        ypConfig.library.mediaType = .photo
+        ypConfig.usesFrontCamera = false
+        ypConfig.shouldSaveNewPicturesToAlbum = false
+        
+        let picker = YPImagePicker(configuration: ypConfig)
+        picker.didFinishPicking { items, _ in
+            if let photo = items.singlePhoto {
+                self.imageViewOutfit.image = photo.image
+                uploadOutfitPictureForUser(userid: (Auth.auth().currentUser?.uid)!, image: photo.image)
             }
-            present(picker, animated: true, completion: nil)
-            
-        } else {
-            let notAvailableAlert = UIAlertController(title: "Camera Not Available",
-                                               message: "Your device's camera is not available",
-                                               preferredStyle: .alert)
-            
-            let closeAction = UIAlertAction(title: "Close", style: .default)
-            notAvailableAlert.addAction(closeAction)
-            self.present(notAvailableAlert, animated: true, completion:nil)
+            picker.dismiss(animated: true, completion: nil)
         }
+        present(picker, animated: true, completion: nil)
+        
     }
     
     

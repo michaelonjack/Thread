@@ -18,6 +18,11 @@ class FavoritesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 20)!,
+            NSAttributedStringKey.foregroundColor: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
+        ]
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 300
@@ -25,7 +30,7 @@ class FavoritesTableViewController: UITableViewController {
         // Set the font of the navigation bar's header
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 20)!,
-            /*NSForegroundColorAttributeName: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)*/
+            NSAttributedStringKey.foregroundColor: UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
         ]
         
         // Fetch the current user's favorited items
@@ -52,6 +57,13 @@ class FavoritesTableViewController: UITableViewController {
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    
+    
+    
+    @IBAction func exitPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     
