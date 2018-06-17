@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YPImagePicker
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     
@@ -18,7 +19,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     let sections = ["ACCOUNT", "ACCOUNT ACTIONS", "SUPPORT"]
     var items = [
-            [("First Name", ""), ("Last Name", ""), ("Email", ""), ("Birthday", "")],
+            [("First Name", ""), ("Last Name", ""), ("Email", ""), ("Birthday", ""), ("Update Profile Picture", ">")],
             [("Logout", ">"), ("Change Password", ">")],
             [("Contact/Requests", "thethreadapplication@gmail.com")]
     ]
@@ -131,7 +132,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.labelKey.text = currentKey
         cell.textFieldValue.text = currentValue
         
-        let readOnly = ["Birthday", "Change Password", "Logout", "Contact/Requests"]
+        let readOnly = ["Birthday", "Change Password", "Logout", "Contact/Requests", "Update Profile Picture"]
         if readOnly.contains(currentKey) {
             cell.textFieldValue.isUserInteractionEnabled = false
         }
@@ -237,6 +238,24 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             
             case "Change Password":
                 self.performSegue(withIdentifier: "SettingsToPassword", sender: nil)
+            
+            case "Update Profile Picture":
+                var ypConfig = YPImagePickerConfiguration()
+                ypConfig.onlySquareImagesFromCamera = true
+                ypConfig.library.onlySquare = true
+                ypConfig.showsFilters = true
+                ypConfig.library.mediaType = .photo
+                ypConfig.usesFrontCamera = false
+                ypConfig.shouldSaveNewPicturesToAlbum = false
+                
+                let picker = YPImagePicker(configuration: ypConfig)
+                picker.didFinishPicking { items, _ in
+                    if let photo = items.singlePhoto {
+                        uploadProfilePictureForUser(userid: (Auth.auth().currentUser?.uid)!, image: photo.image)
+                    }
+                    picker.dismiss(animated: true, completion: nil)
+                }
+                present(picker, animated: true, completion: nil)
             
             default:
                 var _ = 0
