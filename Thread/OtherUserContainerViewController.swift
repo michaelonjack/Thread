@@ -20,7 +20,7 @@ class OtherUserContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isTranslucent = true
+        //self.navigationController?.navigationBar.isTranslucent = true
 
         let sb = UIStoryboard(name: "Main", bundle: nil)
         
@@ -43,7 +43,7 @@ class OtherUserContainerViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isTranslucent = false
+        //self.navigationController?.navigationBar.isTranslucent = false
     }
 
     override func didReceiveMemoryWarning() {

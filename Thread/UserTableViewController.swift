@@ -158,7 +158,7 @@ class UserTableViewController: UITableViewController, UsersTableViewCellHeaderDe
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isTranslucent = true
+        //self.navigationController?.navigationBar.isTranslucent = true
     }
     
     override func didReceiveMemoryWarning() {

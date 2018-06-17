@@ -47,6 +47,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func returnToCenterPressed(_ sender: Any) {
+        self.containerSwipeNavigationController?.showEmbeddedView(position: .center)
+    }
     
     
     /////////////////////////////////////////////////////
@@ -220,14 +223,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             case "Logout":
                 do {
                     try Auth.auth().signOut()
-                    
-                    // Blank out the user's location
-                    currentUserRef.updateChildValues(["latitude": 0.0, "longitude": 0.0])
-                    
-                    self.navigationController?.dismiss(animated: true, completion: nil)
+                    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {break}
+                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let loginViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                    appDelegate.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                    appDelegate.window?.rootViewController = loginViewController
                 } catch {
-                    print("Error while signing out")
-                }
+                    print("Sign out failure")
+            }
             
             case "Birthday":
                 self.performSegue(withIdentifier: "SettingsToDatePicker", sender: nil)

@@ -14,6 +14,7 @@
 
 import UIKit
 import LocalAuthentication
+import SwipeNavigationController
 
 class LoginViewController: UIViewController {
 
@@ -22,7 +23,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var buttonTouchID: UIButton!
     @IBOutlet weak var topLayoutConstrait: NSLayoutConstraint!
     
-    let loginToMain = "LoginToMain"
     let usersRef = Database.database().reference(withPath: "users")
     let threadKeychainWrapper = KeychainWrapper()
     
@@ -45,13 +45,6 @@ class LoginViewController: UIViewController {
         }
         
         buttonTouchID.isHidden = true
-        
-        // If a user is already logged in, skip login view and continue to the main view
-        Auth.auth().addStateDidChangeListener() { auth, user in
-            if user != nil && (user?.isEmailVerified)! {
-                self.performSegue(withIdentifier: self.loginToMain, sender: nil)
-            }
-        }
         
         // If the user's device supports touch ID and their login is stored in the keychain, show the touch ID button
         if authContext.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: nil) && UserDefaults.standard.bool(forKey: "hasLoginKey"){
@@ -96,7 +89,12 @@ class LoginViewController: UIViewController {
                         UserDefaults.standard.synchronize()
                     }
                     
-                    self.performSegue(withIdentifier: self.loginToMain, sender: nil)
+                    // Create the swipe controller
+                    let swipeNavigationController = self.createSwipeController()
+                    
+                    DispatchQueue.main.async {
+                        self.present(swipeNavigationController, animated: true, completion: nil)
+                    }
                 }
                     
                     
@@ -162,7 +160,12 @@ class LoginViewController: UIViewController {
                                 if let user = Auth.auth().currentUser {
                                     // Check if user has already verified their email address
                                     if user.isEmailVerified {
-                                        self.performSegue(withIdentifier: self.loginToMain, sender: nil)
+                                        // Create the swipe controller
+                                        let swipeNavigationController = self.createSwipeController()
+                                        
+                                        DispatchQueue.main.async {
+                                            self.present(swipeNavigationController, animated: true, completion: nil)
+                                        }
                                     }
                                 }
                                 // If the login fails, display the error message to the user
@@ -183,6 +186,27 @@ class LoginViewController: UIViewController {
                 }
             })
         }
+    }
+    
+    
+    
+    func createSwipeController() -> UIViewController {
+        // Create the swipe controller
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let outfitViewController = mainStoryboard.instantiateViewController(withIdentifier: "MeOutfitViewController") as! MeOutfitViewController
+        let closetViewController = mainStoryboard.instantiateViewController(withIdentifier: "ClosetNavigationController") as! UINavigationController
+        let aroundMeController = mainStoryboard.instantiateViewController(withIdentifier: "UserTableViewController") as! UserTableViewController
+        let settingsController = mainStoryboard.instantiateViewController(withIdentifier: "SettingsNavigationController") as! UINavigationController
+        
+        let swipeNavigationController = SwipeNavigationController(centerViewController: outfitViewController)
+        swipeNavigationController.leftViewController = aroundMeController
+        swipeNavigationController.rightViewController = closetViewController
+        swipeNavigationController.topViewController = settingsController
+        swipeNavigationController.shouldShowTopViewController = true
+        swipeNavigationController.shouldShowBottomViewController = false
+        
+        return swipeNavigationController
     }
     
     

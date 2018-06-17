@@ -39,6 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Make navigation bar text tangerine
         UINavigationBar.appearance().tintColor = tangerine
         
+        UIApplication.shared.statusBarStyle = .default
+        
         // Enable the IQKeyboard
         IQKeyboardManager.shared.enable = true
         
@@ -52,11 +54,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let outfitViewController = mainStoryboard.instantiateViewController(withIdentifier: "MeOutfitViewController") as! MeOutfitViewController
             let closetViewController = mainStoryboard.instantiateViewController(withIdentifier: "ClosetNavigationController") as! UINavigationController
             let aroundMeController = mainStoryboard.instantiateViewController(withIdentifier: "UserTableViewController") as! UserTableViewController
+            let settingsController = mainStoryboard.instantiateViewController(withIdentifier: "SettingsNavigationController") as! UINavigationController
             
             let swipeNavigationController = SwipeNavigationController(centerViewController: outfitViewController)
             swipeNavigationController.leftViewController = aroundMeController
             swipeNavigationController.rightViewController = closetViewController
-            swipeNavigationController.shouldShowTopViewController = false
+            swipeNavigationController.topViewController = settingsController
+            swipeNavigationController.shouldShowTopViewController = true
             swipeNavigationController.shouldShowBottomViewController = false
             
             initialViewController = swipeNavigationController
@@ -64,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // User is not logged in, go to login screen
         else {
-            initialViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! UINavigationController
+            initialViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         }
         
         self.window?.rootViewController = initialViewController

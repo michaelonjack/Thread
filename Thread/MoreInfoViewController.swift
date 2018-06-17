@@ -26,6 +26,7 @@ class MoreInfoViewController: UIViewController {
         
         nameTopSpacing.constant = 70 * (UIScreen.main.bounds.height/667)
         
+        
         textViewName.text = clothingItem.name
         textViewBrand.text = clothingItem.brand
         textViewLink.text = clothingItem.itemUrl
@@ -66,6 +67,13 @@ class MoreInfoViewController: UIViewController {
         
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    
+    @IBAction func closeButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     
     /////////////////////////////////////////////////////

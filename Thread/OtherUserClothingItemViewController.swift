@@ -14,8 +14,6 @@ class OtherUserClothingItemViewController: UIViewController {
 
     @IBOutlet weak var imageViewClothingPicture: UIImageView!
     @IBOutlet weak var labelViewTitle: UILabel!
-    @IBOutlet weak var labelItemName: UILabel!
-    @IBOutlet weak var textViewItemLink: UITextView!
     @IBOutlet weak var buttonFavoriteClothingItem: UIButton!
     @IBOutlet weak var loadingAnimationView: NVActivityIndicatorView!
     
