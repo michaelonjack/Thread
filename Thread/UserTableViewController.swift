@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreLocation
+import FirebaseAuth
+import FirebaseDatabase
 import FirebaseStorage
 
 class UserTableViewController: UITableViewController, UsersTableViewCellHeaderDelegate, CLLocationManagerDelegate {
@@ -97,9 +99,9 @@ class UserTableViewController: UITableViewController, UsersTableViewCellHeaderDe
                             
                             // Determine if user is near the current user, if so add to list
                             print("Distance between: " + String(currentUserLocation.distance(from: nearbyUserLocation)))
-                            //if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
-                            self.displayUsers.append(nearbyUser)
-                            //}
+                            if (currentUserLocation.distance(from: nearbyUserLocation) < self.MAX_ALLOWABLE_DISTANCE) {
+                                self.displayUsers.append(nearbyUser)
+                            }
                         }
                         
                     }

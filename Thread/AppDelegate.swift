@@ -8,7 +8,8 @@
 
 import UIKit
 import IQKeyboardManagerSwift
-import Firebase
+import FirebaseAuth
+import FirebaseDatabase
 import SwipeNavigationController
 
 @UIApplicationMain

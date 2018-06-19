@@ -13,6 +13,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
 import LocalAuthentication
 import SwipeNavigationController
 

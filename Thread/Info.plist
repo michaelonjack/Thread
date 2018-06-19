@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Thread will only your microphone while you are recording videos for your outfit</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -17,9 +15,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1</string>
+	<string>1.2</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppleMusicUsageDescription</key>
@@ -27,11 +25,13 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Thread will use your camera to take pictures of your clothes.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Thread will use your location to find other users near you so you can see what they&apos;re wearing.</string>
+	<string>Thread will use your location to find other users near you so you can see what they're wearing.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Thread will use your location to find other users near you so you can see what they&apos;re wearing.</string>
+	<string>Thread will use your location to find other users near you so you can see what they're wearing.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Thread will use your location to find other users near you so you can see what they&apos;re wearing.</string>
+	<string>Thread will use your location to find other users near you so you can see what they're wearing.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Thread will only your microphone while you are recording videos for your outfit</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Thread will use your camera to take pictures of your clothes.</string>
 	<key>UILaunchStoryboardName</key>

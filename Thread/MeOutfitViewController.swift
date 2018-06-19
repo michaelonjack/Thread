@@ -10,6 +10,7 @@ import UIKit
 import YPImagePicker
 import CoreLocation
 import AudioToolbox
+import NotificationBannerSwift
 
 
 class MeOutfitViewController: UIViewController, CLLocationManagerDelegate {
@@ -27,6 +28,8 @@ class MeOutfitViewController: UIViewController, CLLocationManagerDelegate {
     
     // LocationManager instance used to update the current user's location
     let locationManager = CLLocationManager()
+    
+    var locationBanner:StatusBarNotificationBanner = StatusBarNotificationBanner(attributedTitle: NSAttributedString(string: "Updating location..."), style: .warning)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,13 +44,13 @@ class MeOutfitViewController: UIViewController, CLLocationManagerDelegate {
         // Adjust outfit picture size for different displays
         scaleConstraintMultiplierForWidth(constraint: imageWidthLayout, originalWidth: 375, parentView: self.view!)
         
-
         // Makes the profile picture button circular
         imageViewProfilePicture.contentMode = .scaleAspectFill
         imageViewProfilePicture.layer.cornerRadius = 0.5 * imageViewProfilePicture.layer.bounds.width
         imageViewProfilePicture.clipsToBounds = true
         
         loadData()
+        detectFirstLaunch()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -96,6 +99,20 @@ class MeOutfitViewController: UIViewController, CLLocationManagerDelegate {
     
     }
     
+    func detectFirstLaunch() {
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if launchedBefore  {
+            print("Not first launch.")
+        } else {
+            print("First launch, setting UserDefault.")
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+            
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "OutfitToInstructions", sender: nil)
+            }
+        }
+    }
+    
     @IBAction func cameraDidTouch(_ sender: UIButton) {
         
         var ypConfig = YPImagePickerConfiguration()
@@ -135,6 +152,8 @@ class MeOutfitViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func checkIn(_ sender: UIButton) {
         
         if locationServiceIsEnabled() {
+            self.locationBanner.show()
+            
             self.locationManager.delegate = self
             // Request location authorization for the app
             self.locationManager.requestWhenInUseAuthorization()
@@ -203,6 +222,10 @@ class MeOutfitViewController: UIViewController, CLLocationManagerDelegate {
         let minutes = calendar.component(.minute, from: date)
         let dateStr = formatter.string(from: date) + " " + String(hour) + ":" + String(minutes)
          updateDataForUser(userid: (Auth.auth().currentUser?.uid)!, key: "lastCheckIn", value: dateStr as AnyObject)
+        
+        self.locationBanner.dismiss()
+        let successBanner = NotificationBanner(attributedTitle: NSAttributedString(string: "Checked In!"), attributedSubtitle: NSAttributedString(string: "You can now see other Thread users around you."), style: .success)
+        successBanner.show()
         
         // Vibrate the phone to signify a successful check-in
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
