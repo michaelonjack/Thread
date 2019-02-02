@@ -10,50 +10,23 @@
 		047A2A4DEADCCCC1006F080F /* Pods_ThreadUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE3BD1DB1BADDF10CDC9F8B /* Pods_ThreadUITests.framework */; };
 		0C6686D8773E8AE3E1E0D72A /* Pods_Thread.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9560FB66ADAA3C0318ED7771 /* Pods_Thread.framework */; };
 		3535199162A3752B698A930C /* Pods_ThreadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB2183E2AAEB7F63B3BAF82 /* Pods_ThreadTests.framework */; };
-		B11623A61EA3E65A00262617 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11623A51EA3E65A00262617 /* FavoritesTableViewController.swift */; };
-		B162021F1E5699D90099D3D7 /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162021E1E5699D90099D3D7 /* MoreInfoViewController.swift */; };
-		B16202211E5759D10099D3D7 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16202201E5759D10099D3D7 /* UserTableViewCell.swift */; };
-		B163FA3F1E3051EC00EF399D /* AroundMeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B163FA3E1E3051EC00EF399D /* AroundMeTableViewController.swift */; };
+		B11CBD502205CFB200D6620B /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11CBD4F2205CFB200D6620B /* UIColor+Additions.swift */; };
+		B157D4A12205E1BC00D83CDB /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157D4A02205E1BC00D83CDB /* Configuration.swift */; };
 		B174D0261E36C8E900218590 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B174D0251E36C8E900218590 /* APIKeys.plist */; };
-		B174D0281E36CAC700218590 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0271E36CAC700218590 /* APIKeys.swift */; };
+		B174D0281E36CAC700218590 /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0271E36CAC700218590 /* APIHelper.swift */; };
 		B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0291E36D2A300218590 /* ClothingItem.swift */; };
-		B174D02C1E36D8BF00218590 /* ClothingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D02B1E36D8BF00218590 /* ClothingItemViewController.swift */; };
 		B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D02D1E36DE0B00218590 /* ClothingType.swift */; };
 		B18430731E2D43E300EED632 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B18430721E2D43E300EED632 /* GoogleService-Info.plist */; };
-		B18430751E2D4BF200EED632 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18430741E2D4BF200EED632 /* MainViewController.swift */; };
-		B18430791E2EED7300EED632 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18430781E2EED7300EED632 /* MeViewController.swift */; };
 		B184307F1E2F0C8A00EED632 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B184307E1E2F0C8A00EED632 /* Assets.xcassets */; };
 		B18430861E33B03A00EED632 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18430851E33B03A00EED632 /* User.swift */; };
-		B18575651E8F3A5500A62507 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18575641E8F3A5500A62507 /* DatePickerViewController.swift */; };
-		B1878ADD1E49486900847326 /* ClothingSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1878ADC1E49486900847326 /* ClothingSearchViewController.swift */; };
-		B193C7D01E3E97A300054C78 /* OtherUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B193C7CF1E3E97A300054C78 /* OtherUserViewController.swift */; };
-		B193C7D21E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B193C7D11E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift */; };
-		B1A089AA1E4FE4DD00FC7C65 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B1A089A91E4FE4DD00FC7C65 /* KeychainWrapper.m */; };
-		B1A11D3D1EFE7EDD00E16169 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A11D3C1EFE7EDD00E16169 /* UserTableViewController.swift */; };
 		B1A11D411EFEC4AB00E16169 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A11D401EFEC4AB00E16169 /* DatabaseHelper.swift */; };
-		B1A11D431EFF2F8000E16169 /* OtherUserOutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A11D421EFF2F8000E16169 /* OtherUserOutfitViewController.swift */; };
-		B1A11D471EFF3F9000E16169 /* MeOutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A11D461EFF3F9000E16169 /* MeOutfitViewController.swift */; };
-		B1A98C311E7464D700CF2497 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A98C301E7464D700CF2497 /* SettingsViewController.swift */; };
-		B1A98C331E747D0C00CF2497 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A98C321E747D0C00CF2497 /* SettingsTableViewCell.swift */; };
-		B1B1E1E520D54DB7001B81EA /* UsersTableViewCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B1E1E320D54DB7001B81EA /* UsersTableViewCellHeader.swift */; };
-		B1B1E1E620D54DB7001B81EA /* UsersTableViewCellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1B1E1E420D54DB7001B81EA /* UsersTableViewCellHeader.xib */; };
-		B1B1E1EE20D882F1001B81EA /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B1E1ED20D882F1001B81EA /* InstructionsViewController.swift */; };
 		B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A8E1E2C66730036E559 /* AppDelegate.swift */; };
 		B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A901E2C66730036E559 /* LoginViewController.swift */; };
 		B1C96A941E2C66730036E559 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C96A921E2C66730036E559 /* Main.storyboard */; };
 		B1C96A991E2C66730036E559 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C96A971E2C66730036E559 /* LaunchScreen.storyboard */; };
 		B1C96AA41E2C66730036E559 /* ThreadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96AA31E2C66730036E559 /* ThreadTests.swift */; };
 		B1C96AAF1E2C66730036E559 /* ThreadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96AAE1E2C66730036E559 /* ThreadUITests.swift */; };
-		B1DE12311E4BEDCC00DF724F /* ClothingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DE12301E4BEDCC00DF724F /* ClothingItemTableViewCell.swift */; };
 		B1E08ADA1E50DB7E0011B1EA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E08AD91E50DB7E0011B1EA /* SignUpViewController.swift */; };
-		B1E837401E5BF5C300789BC2 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8373F1E5BF5C300789BC2 /* AccountViewController.swift */; };
-		B1E837421E5C6FDA00789BC2 /* TopDownSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E837411E5C6FDA00789BC2 /* TopDownSegue.swift */; };
-		B1E8374A1E63534000789BC2 /* OtherUserContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E837491E63534000789BC2 /* OtherUserContainerViewController.swift */; };
-		B1E8374C1E63554F00789BC2 /* OtherUserAltViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8374B1E63554F00789BC2 /* OtherUserAltViewController.swift */; };
-		B1E8374E1E64BD9000789BC2 /* MeContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8374D1E64BD9000789BC2 /* MeContainerViewController.swift */; };
-		B1E837501E64BDAC00789BC2 /* MeAltViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8374F1E64BDAC00789BC2 /* MeAltViewController.swift */; };
-		B1EDE1081EA286040042FB15 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EDE1071EA286040042FB15 /* PasswordViewController.swift */; };
-		B1F859391F6765A6007F8E7D /* ConstraintHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F859381F6765A6007F8E7D /* ConstraintHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,37 +53,18 @@
 		7D290579FCFE88FA818A8002 /* Pods-Thread.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thread.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thread/Pods-Thread.debug.xcconfig"; sourceTree = "<group>"; };
 		8976F182E6528772898954DF /* Pods-ThreadUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadUITests/Pods-ThreadUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9560FB66ADAA3C0318ED7771 /* Pods_Thread.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thread.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B11623A51EA3E65A00262617 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
-		B162021E1E5699D90099D3D7 /* MoreInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
-		B16202201E5759D10099D3D7 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
-		B163FA3E1E3051EC00EF399D /* AroundMeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AroundMeTableViewController.swift; sourceTree = "<group>"; };
+		B11CBD462205CD8C00D6620B /* Thread.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Thread.entitlements; sourceTree = "<group>"; };
+		B11CBD4F2205CFB200D6620B /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
+		B157D49F2205E18100D83CDB /* Thread-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Thread-Bridging-Header.h"; sourceTree = "<group>"; };
+		B157D4A02205E1BC00D83CDB /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		B174D0251E36C8E900218590 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
-		B174D0271E36CAC700218590 /* APIKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
+		B174D0271E36CAC700218590 /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		B174D0291E36D2A300218590 /* ClothingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
-		B174D02B1E36D8BF00218590 /* ClothingItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingItemViewController.swift; sourceTree = "<group>"; };
 		B174D02D1E36DE0B00218590 /* ClothingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingType.swift; sourceTree = "<group>"; };
-		B18430701E2D3D6A00EED632 /* Thread.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Thread.entitlements; sourceTree = "<group>"; };
 		B18430721E2D43E300EED632 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		B18430741E2D4BF200EED632 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		B18430781E2EED7300EED632 /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		B184307E1E2F0C8A00EED632 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B18430821E3362EF00EED632 /* Thread-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Thread-Bridging-Header.h"; sourceTree = "<group>"; };
 		B18430851E33B03A00EED632 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		B18575641E8F3A5500A62507 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
-		B1878ADC1E49486900847326 /* ClothingSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingSearchViewController.swift; sourceTree = "<group>"; };
-		B193C7CF1E3E97A300054C78 /* OtherUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserViewController.swift; sourceTree = "<group>"; };
-		B193C7D11E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserClothingItemViewController.swift; sourceTree = "<group>"; };
-		B1A089A81E4FE4DD00FC7C65 /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
-		B1A089A91E4FE4DD00FC7C65 /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
-		B1A11D3C1EFE7EDD00E16169 /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
 		B1A11D401EFEC4AB00E16169 /* DatabaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
-		B1A11D421EFF2F8000E16169 /* OtherUserOutfitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserOutfitViewController.swift; sourceTree = "<group>"; };
-		B1A11D461EFF3F9000E16169 /* MeOutfitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeOutfitViewController.swift; sourceTree = "<group>"; };
-		B1A98C301E7464D700CF2497 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		B1A98C321E747D0C00CF2497 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
-		B1B1E1E320D54DB7001B81EA /* UsersTableViewCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewCellHeader.swift; sourceTree = "<group>"; };
-		B1B1E1E420D54DB7001B81EA /* UsersTableViewCellHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UsersTableViewCellHeader.xib; sourceTree = "<group>"; };
-		B1B1E1ED20D882F1001B81EA /* InstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InstructionsViewController.swift; path = /Users/MichaelOnjack/Desktop/Programming/iOSDev/Swift/Thread/Thread/InstructionsViewController.swift; sourceTree = "<absolute>"; };
 		B1C96A8B1E2C66730036E559 /* Thread.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thread.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C96A8E1E2C66730036E559 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1C96A901E2C66730036E559 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -123,16 +77,7 @@
 		B1C96AAA1E2C66730036E559 /* ThreadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C96AAE1E2C66730036E559 /* ThreadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadUITests.swift; sourceTree = "<group>"; };
 		B1C96AB01E2C66730036E559 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B1DE12301E4BEDCC00DF724F /* ClothingItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingItemTableViewCell.swift; sourceTree = "<group>"; };
 		B1E08AD91E50DB7E0011B1EA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		B1E8373F1E5BF5C300789BC2 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
-		B1E837411E5C6FDA00789BC2 /* TopDownSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopDownSegue.swift; sourceTree = "<group>"; };
-		B1E837491E63534000789BC2 /* OtherUserContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserContainerViewController.swift; sourceTree = "<group>"; };
-		B1E8374B1E63554F00789BC2 /* OtherUserAltViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserAltViewController.swift; sourceTree = "<group>"; };
-		B1E8374D1E64BD9000789BC2 /* MeContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeContainerViewController.swift; sourceTree = "<group>"; };
-		B1E8374F1E64BDAC00789BC2 /* MeAltViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeAltViewController.swift; sourceTree = "<group>"; };
-		B1EDE1071EA286040042FB15 /* PasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
-		B1F859381F6765A6007F8E7D /* ConstraintHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintHelper.swift; sourceTree = "<group>"; };
 		B315754A20752E20A13E984D /* Pods-Thread.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thread.release.xcconfig"; path = "Pods/Target Support Files/Pods-Thread/Pods-Thread.release.xcconfig"; sourceTree = "<group>"; };
 		BEED098888EFE05ADEE3966C /* Pods-ThreadUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadUITests/Pods-ThreadUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CB1E9B1CE232603724C5E794 /* Pods-ThreadTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadTests/Pods-ThreadTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -189,39 +134,56 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B184306A1E2D2EEB00EED632 /* Controllers */ = {
+		B11CBD4A2205CEF500D6620B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B1A11D451EFF3E3A00E16169 /* Me */,
-				B1A11D441EFF3E1C00E16169 /* OtherUser */,
-				B1A11D3F1EFE80B000E16169 /* TableViewControllers */,
-				B1A11D3E1EFE807300E16169 /* TableViewCells */,
-				B1EDE1071EA286040042FB15 /* PasswordViewController.swift */,
-				B18575641E8F3A5500A62507 /* DatePickerViewController.swift */,
-				B1A98C301E7464D700CF2497 /* SettingsViewController.swift */,
-				B1E8373F1E5BF5C300789BC2 /* AccountViewController.swift */,
-				B1B1E1ED20D882F1001B81EA /* InstructionsViewController.swift */,
-				B162021E1E5699D90099D3D7 /* MoreInfoViewController.swift */,
+				B157D4A02205E1BC00D83CDB /* Configuration.swift */,
+				B18430851E33B03A00EED632 /* User.swift */,
+				B174D0291E36D2A300218590 /* ClothingItem.swift */,
+				B174D02D1E36DE0B00218590 /* ClothingType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B11CBD4B2205CF0C00D6620B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
 				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
 				B1E08AD91E50DB7E0011B1EA /* SignUpViewController.swift */,
-				B18430741E2D4BF200EED632 /* MainViewController.swift */,
-				B174D02B1E36D8BF00218590 /* ClothingItemViewController.swift */,
-				B1878ADC1E49486900847326 /* ClothingSearchViewController.swift */,
-				B1DE12301E4BEDCC00DF724F /* ClothingItemTableViewCell.swift */,
 			);
-			name = Controllers;
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B11CBD4C2205CF2E00D6620B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B1C96A971E2C66730036E559 /* LaunchScreen.storyboard */,
+				B1C96A921E2C66730036E559 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B11CBD4E2205CF7E00D6620B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B11CBD4F2205CFB200D6620B /* UIColor+Additions.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		B157D4A22205E20B00D83CDB /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				B174D0271E36CAC700218590 /* APIHelper.swift */,
+				B1A11D401EFEC4AB00E16169 /* DatabaseHelper.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		B184306C1E2D2F4D00EED632 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				B1A11D401EFEC4AB00E16169 /* DatabaseHelper.swift */,
-				B1F859381F6765A6007F8E7D /* ConstraintHelper.swift */,
 				B1C96A8E1E2C66730036E559 /* AppDelegate.swift */,
-				B174D0271E36CAC700218590 /* APIKeys.swift */,
-				B1A089A81E4FE4DD00FC7C65 /* KeychainWrapper.h */,
-				B1A089A91E4FE4DD00FC7C65 /* KeychainWrapper.m */,
-				B1E837411E5C6FDA00789BC2 /* TopDownSegue.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -229,75 +191,12 @@
 		B184306D1E2D2F6B00EED632 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B18430821E3362EF00EED632 /* Thread-Bridging-Header.h */,
+				B157D49F2205E18100D83CDB /* Thread-Bridging-Header.h */,
 				B18430721E2D43E300EED632 /* GoogleService-Info.plist */,
 				B1C96A9A1E2C66730036E559 /* Info.plist */,
 				B174D0251E36C8E900218590 /* APIKeys.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		B184306E1E2D2FD200EED632 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				B18430851E33B03A00EED632 /* User.swift */,
-				B174D0291E36D2A300218590 /* ClothingItem.swift */,
-				B174D02D1E36DE0B00218590 /* ClothingType.swift */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		B184306F1E2D2FEF00EED632 /* Layouts */ = {
-			isa = PBXGroup;
-			children = (
-				B1C96A971E2C66730036E559 /* LaunchScreen.storyboard */,
-				B1C96A921E2C66730036E559 /* Main.storyboard */,
-			);
-			name = Layouts;
-			sourceTree = "<group>";
-		};
-		B1A11D3E1EFE807300E16169 /* TableViewCells */ = {
-			isa = PBXGroup;
-			children = (
-				B16202201E5759D10099D3D7 /* UserTableViewCell.swift */,
-				B1A98C321E747D0C00CF2497 /* SettingsTableViewCell.swift */,
-			);
-			name = TableViewCells;
-			sourceTree = "<group>";
-		};
-		B1A11D3F1EFE80B000E16169 /* TableViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				B11623A51EA3E65A00262617 /* FavoritesTableViewController.swift */,
-				B163FA3E1E3051EC00EF399D /* AroundMeTableViewController.swift */,
-				B1A11D3C1EFE7EDD00E16169 /* UserTableViewController.swift */,
-				B1B1E1E320D54DB7001B81EA /* UsersTableViewCellHeader.swift */,
-				B1B1E1E420D54DB7001B81EA /* UsersTableViewCellHeader.xib */,
-			);
-			name = TableViewControllers;
-			sourceTree = "<group>";
-		};
-		B1A11D441EFF3E1C00E16169 /* OtherUser */ = {
-			isa = PBXGroup;
-			children = (
-				B1E837491E63534000789BC2 /* OtherUserContainerViewController.swift */,
-				B1A11D421EFF2F8000E16169 /* OtherUserOutfitViewController.swift */,
-				B193C7CF1E3E97A300054C78 /* OtherUserViewController.swift */,
-				B1E8374B1E63554F00789BC2 /* OtherUserAltViewController.swift */,
-				B193C7D11E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift */,
-			);
-			name = OtherUser;
-			sourceTree = "<group>";
-		};
-		B1A11D451EFF3E3A00E16169 /* Me */ = {
-			isa = PBXGroup;
-			children = (
-				B1A11D461EFF3F9000E16169 /* MeOutfitViewController.swift */,
-				B1E8374D1E64BD9000789BC2 /* MeContainerViewController.swift */,
-				B18430781E2EED7300EED632 /* MeViewController.swift */,
-				B1E8374F1E64BDAC00789BC2 /* MeAltViewController.swift */,
-			);
-			name = Me;
 			sourceTree = "<group>";
 		};
 		B1C96A821E2C66730036E559 = {
@@ -325,10 +224,12 @@
 		B1C96A8D1E2C66730036E559 /* Thread */ = {
 			isa = PBXGroup;
 			children = (
-				B18430701E2D3D6A00EED632 /* Thread.entitlements */,
-				B184306E1E2D2FD200EED632 /* Models */,
-				B184306A1E2D2EEB00EED632 /* Controllers */,
-				B184306F1E2D2FEF00EED632 /* Layouts */,
+				B11CBD462205CD8C00D6620B /* Thread.entitlements */,
+				B11CBD4A2205CEF500D6620B /* Model */,
+				B11CBD4C2205CF2E00D6620B /* View */,
+				B11CBD4B2205CF0C00D6620B /* Controller */,
+				B11CBD4E2205CF7E00D6620B /* Extension */,
+				B157D4A22205E20B00D83CDB /* Helper */,
 				B184306C1E2D2F4D00EED632 /* Other */,
 				B184306D1E2D2F6B00EED632 /* Supporting Files */,
 				B184307E1E2F0C8A00EED632 /* Assets.xcassets */,
@@ -480,7 +381,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1C96A991E2C66730036E559 /* LaunchScreen.storyboard in Resources */,
-				B1B1E1E620D54DB7001B81EA /* UsersTableViewCellHeader.xib in Resources */,
 				B174D0261E36C8E900218590 /* APIKeys.plist in Resources */,
 				B18430731E2D43E300EED632 /* GoogleService-Info.plist in Resources */,
 				B184307F1E2F0C8A00EED632 /* Assets.xcassets in Resources */,
@@ -531,17 +431,11 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Thread/Pods-Thread-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
-				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/PryntTrimmerView/PryntTrimmerView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SteviaLayout/Stevia.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/SwipeNavigationController/SwipeNavigationController.framework",
 				"${BUILT_PRODUCTS_DIR}/YPImagePicker/YPImagePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -549,17 +443,11 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PryntTrimmerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stevia.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeNavigationController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YPImagePicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -612,42 +500,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1A11D471EFF3F9000E16169 /* MeOutfitViewController.swift in Sources */,
 				B1A11D411EFEC4AB00E16169 /* DatabaseHelper.swift in Sources */,
-				B1A11D431EFF2F8000E16169 /* OtherUserOutfitViewController.swift in Sources */,
-				B1878ADD1E49486900847326 /* ClothingSearchViewController.swift in Sources */,
-				B18430751E2D4BF200EED632 /* MainViewController.swift in Sources */,
-				B18575651E8F3A5500A62507 /* DatePickerViewController.swift in Sources */,
 				B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */,
-				B11623A61EA3E65A00262617 /* FavoritesTableViewController.swift in Sources */,
-				B1E837501E64BDAC00789BC2 /* MeAltViewController.swift in Sources */,
-				B174D02C1E36D8BF00218590 /* ClothingItemViewController.swift in Sources */,
-				B1F859391F6765A6007F8E7D /* ConstraintHelper.swift in Sources */,
 				B1E08ADA1E50DB7E0011B1EA /* SignUpViewController.swift in Sources */,
-				B1E837401E5BF5C300789BC2 /* AccountViewController.swift in Sources */,
-				B1DE12311E4BEDCC00DF724F /* ClothingItemTableViewCell.swift in Sources */,
-				B1A11D3D1EFE7EDD00E16169 /* UserTableViewController.swift in Sources */,
-				B1A98C311E7464D700CF2497 /* SettingsViewController.swift in Sources */,
-				B193C7D01E3E97A300054C78 /* OtherUserViewController.swift in Sources */,
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
-				B1E8374A1E63534000789BC2 /* OtherUserContainerViewController.swift in Sources */,
-				B174D0281E36CAC700218590 /* APIKeys.swift in Sources */,
-				B1A089AA1E4FE4DD00FC7C65 /* KeychainWrapper.m in Sources */,
+				B174D0281E36CAC700218590 /* APIHelper.swift in Sources */,
 				B18430861E33B03A00EED632 /* User.swift in Sources */,
-				B1E8374E1E64BD9000789BC2 /* MeContainerViewController.swift in Sources */,
-				B1B1E1E520D54DB7001B81EA /* UsersTableViewCellHeader.swift in Sources */,
-				B1EDE1081EA286040042FB15 /* PasswordViewController.swift in Sources */,
-				B16202211E5759D10099D3D7 /* UserTableViewCell.swift in Sources */,
+				B157D4A12205E1BC00D83CDB /* Configuration.swift in Sources */,
 				B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */,
-				B1A98C331E747D0C00CF2497 /* SettingsTableViewCell.swift in Sources */,
-				B163FA3F1E3051EC00EF399D /* AroundMeTableViewController.swift in Sources */,
-				B18430791E2EED7300EED632 /* MeViewController.swift in Sources */,
-				B1B1E1EE20D882F1001B81EA /* InstructionsViewController.swift in Sources */,
-				B162021F1E5699D90099D3D7 /* MoreInfoViewController.swift in Sources */,
-				B1E837421E5C6FDA00789BC2 /* TopDownSegue.swift in Sources */,
-				B193C7D21E3E9F3E00054C78 /* OtherUserClothingItemViewController.swift in Sources */,
-				B1E8374C1E63554F00789BC2 /* OtherUserAltViewController.swift in Sources */,
 				B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */,
+				B11CBD502205CFB200D6620B /* UIColor+Additions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -824,6 +686,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 64B49T3B7F;
 				INFOPLIST_FILE = Thread/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelonjack.Thread;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -832,7 +695,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Thread/Thread-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -849,6 +712,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 64B49T3B7F;
 				INFOPLIST_FILE = Thread/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelonjack.Thread;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -856,7 +720,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Thread/Thread-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

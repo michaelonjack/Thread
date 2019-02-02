@@ -7,10 +7,8 @@
 //
 
 import UIKit
-import IQKeyboardManagerSwift
 import FirebaseAuth
 import FirebaseDatabase
-import SwipeNavigationController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,55 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Database.database().isPersistenceEnabled = true
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        let tangerine = UIColor.init(red: 1.000, green: 0.568, blue: 0.196, alpha: 1.000)
-        
-        // Make navigation bar transparent
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().isTranslucent = true
-        
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UINavigationBar.classForCoder() as! UIAppearanceContainer.Type]).setTitleTextAttributes([NSAttributedStringKey.foregroundColor: tangerine, NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 20)!], for: .normal)
-        
-        // Make navigation bar text tangerine
-        UINavigationBar.appearance().tintColor = tangerine
-        
-        UIApplication.shared.statusBarStyle = .default
-        
-        // Enable the IQKeyboard
-        IQKeyboardManager.shared.enable = true
-        
-        // Determine which view controller should be initially shown
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        var initialViewController: UIViewController = UIViewController()
-        
-        // User is logged in, go right to profile
-        if (Auth.auth().currentUser != nil) {
-            let outfitViewController = mainStoryboard.instantiateViewController(withIdentifier: "MeOutfitViewController") as! MeOutfitViewController
-            let closetViewController = mainStoryboard.instantiateViewController(withIdentifier: "ClosetNavigationController") as! UINavigationController
-            let aroundMeController = mainStoryboard.instantiateViewController(withIdentifier: "UserTableViewController") as! UserTableViewController
-            let settingsController = mainStoryboard.instantiateViewController(withIdentifier: "SettingsNavigationController") as! UINavigationController
-            
-            let swipeNavigationController = SwipeNavigationController(centerViewController: outfitViewController)
-            swipeNavigationController.leftViewController = aroundMeController
-            swipeNavigationController.rightViewController = closetViewController
-            swipeNavigationController.topViewController = settingsController
-            swipeNavigationController.shouldShowTopViewController = true
-            swipeNavigationController.shouldShowBottomViewController = false
-            
-            initialViewController = swipeNavigationController
-        }
-        
-        // User is not logged in, go to login screen
-        else {
-            initialViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        }
-        
-        self.window?.rootViewController = initialViewController
-        self.window?.makeKeyAndVisible()
-
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         return true
     }
 

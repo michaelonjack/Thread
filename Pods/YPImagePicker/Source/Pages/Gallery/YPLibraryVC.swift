@@ -35,16 +35,7 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     
     func setAlbum(_ album: YPAlbum) {
         mediaManager.collection = album.collection
-        resetMultipleSelection()
-    }
-    
-    private func resetMultipleSelection() {
-        selection.removeAll()
         currentlySelectedIndex = 0
-        multipleSelectionEnabled = false
-        v.assetViewContainer.setMultipleSelectionMode(on: false)
-        delegate?.libraryViewDidToggleMultipleSelection(enabled: false)
-        checkLimit()
     }
     
     func initialize() {
@@ -78,10 +69,12 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
         // When crop area changes in multiple selection mode,
         // we need to update the scrollView values in order to restore
         // them when user selects a previously selected item.
-        v.assetZoomableView.cropAreaDidChange = { [unowned self] in
-            if self.multipleSelectionEnabled {
-                self.updateCropInfo()
+        v.assetZoomableView.cropAreaDidChange = { [weak self] in
+            guard let strongSelf = self else {
+                return
             }
+
+            strongSelf.updateCropInfo()
         }
     }
     
@@ -102,6 +95,11 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
         // Also fits the first element to the square if the onlySquareFromLibrary = true
         if !YPConfig.library.onlySquare && v.assetZoomableView.contentSize == CGSize(width: 0, height: 0) {
             v.assetZoomableView.setZoomScale(1, animated: false)
+        }
+        
+        // Activate multiple selection when using `minNumberOfItems`
+        if YPConfig.library.minNumberOfItems > 1 {
+            multipleSelectionButtonTapped()
         }
     }
     
@@ -126,19 +124,32 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
 
     @objc
     func multipleSelectionButtonTapped() {
+        
+        if !multipleSelectionEnabled {
+            selection.removeAll()
+        }
+        
+        // Prevent desactivating multiple selection when using `minNumberOfItems`
+        if YPConfig.library.minNumberOfItems > 1 && multipleSelectionEnabled {
+            return
+        }
+        
         multipleSelectionEnabled = !multipleSelectionEnabled
 
         if multipleSelectionEnabled {
             if selection.isEmpty {
+                let asset = mediaManager.fetchResult[currentlySelectedIndex]
                 selection = [
                     YPLibrarySelection(index: currentlySelectedIndex,
                                        cropRect: v.currentCropRect(),
                                        scrollViewContentOffset: v.assetZoomableView!.contentOffset,
-                                       scrollViewZoomScale: v.assetZoomableView!.zoomScale)
+                                       scrollViewZoomScale: v.assetZoomableView!.zoomScale,
+                                       assetIdentifier: asset.localIdentifier)
                 ]
             }
         } else {
             selection.removeAll()
+            addToSelection(indexPath: IndexPath(row: currentlySelectedIndex, section: 0))
         }
 
         v.assetViewContainer.setMultipleSelectionMode(on: multipleSelectionEnabled)
@@ -174,10 +185,13 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     }
     
     func checkPermission() {
-        checkPermissionToAccessPhotoLibrary { [unowned self] hasPermission in
-            if hasPermission && !self.initialized {
-                self.initialize()
-                self.initialized = true
+        checkPermissionToAccessPhotoLibrary { [weak self] hasPermission in
+            guard let strongSelf = self else {
+                return
+            }
+            if hasPermission && !strongSelf.initialized {
+                strongSelf.initialize()
+                strongSelf.initialized = true
             }
         }
     }
@@ -221,13 +235,21 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
             v.collectionView.reloadData()
             v.collectionView.selectItem(at: IndexPath(row: 0, section: 0),
                                              animated: false,
-                                             scrollPosition: UICollectionViewScrollPosition())
+                                             scrollPosition: UICollectionView.ScrollPosition())
+            if !multipleSelectionEnabled {
+                addToSelection(indexPath: IndexPath(row: 0, section: 0))
+            }
+        } else {
+            delegate?.noPhotosForOptions()
         }
         scrollToTop()
     }
     
     func buildPHFetchOptions() -> PHFetchOptions {
         // Sorting condition
+        if let userOpt = YPConfig.library.options {
+            return userOpt
+        }
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         options.predicate = YPConfig.library.mediaType.predicate()
@@ -248,30 +270,29 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     }
     
     func changeAsset(_ asset: PHAsset) {
-        mediaManager.selectedAsset = asset
         latestImageTapped = asset.localIdentifier
         delegate?.libraryViewStartedLoading()
+        
+        let completion = {
+            self.v.hideLoader()
+            self.v.hideGrid()
+            self.delegate?.libraryViewFinishedLoading()
+            self.v.assetViewContainer.refreshSquareCropButton()
+            self.updateCropInfo()
+        }
         
         DispatchQueue.global(qos: .userInitiated).async {
             switch asset.mediaType {
             case .image:
                 self.v.assetZoomableView.setImage(asset,
                                                   mediaManager: self.mediaManager,
-                                                  storedCropPosition: self.fetchStoredCrop()) {
-                    self.v.hideLoader()
-                    self.v.hideGrid()
-                    self.delegate?.libraryViewFinishedLoading()
-                    self.v.assetViewContainer.refreshSquareCropButton()
-                }
+                                                  storedCropPosition: self.fetchStoredCrop(),
+                                                  completion: completion)
             case .video:
                 self.v.assetZoomableView.setVideo(asset,
                                                   mediaManager: self.mediaManager,
-                                                  storedCropPosition: self.fetchStoredCrop()) {
-                    self.v.hideLoader()
-                    self.v.hideGrid()
-                    self.delegate?.libraryViewFinishedLoading()
-                    self.v.assetViewContainer.refreshSquareCropButton()
-                }
+                                                  storedCropPosition: self.fetchStoredCrop(),
+                                                  completion: completion)
             case .audio, .unknown:
                 ()
             }
@@ -365,16 +386,18 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
         }
     }
     
-    public func selectedMedia(photoCallback: @escaping (_ photo: UIImage, _ exifMeta : [String : Any]?) -> Void,
-                              videoCallback: @escaping (_ videoURL: URL) -> Void,
+    public func selectedMedia(photoCallback: @escaping (_ photo: YPMediaPhoto) -> Void,
+                              videoCallback: @escaping (_ videoURL: YPMediaVideo) -> Void,
                               multipleItemsCallback: @escaping (_ items: [YPMediaItem]) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             
+            let selectedAssets: [(asset: PHAsset, cropRect: CGRect?)] = self.selection.map {
+                guard let asset = PHAsset.fetchAssets(withLocalIdentifiers: [$0.assetIdentifier], options: PHFetchOptions()).firstObject else { fatalError() }
+                return (asset, $0.cropRect)
+            }
+            
             // Multiple selection
             if self.multipleSelectionEnabled && self.selection.count > 1 {
-                let selectedAssets: [(asset: PHAsset, cropRect: CGRect?)] = self.selection.map {
-                    return (self.mediaManager.fetchResult[$0.index], $0.cropRect)
-                }
                 
                 // Check video length
                 for asset in selectedAssets {
@@ -393,7 +416,7 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
                     switch asset.asset.mediaType {
                     case .image:
                         self.fetchImageAndCrop(for: asset.asset, withCropRect: asset.cropRect) { image, exifMeta in
-                            let photo = YPMediaPhoto(image: image.resizedImageIfNeeded(), exifMeta: exifMeta)
+                            let photo = YPMediaPhoto(image: image.resizedImageIfNeeded(), exifMeta: exifMeta, asset: asset.asset)
                             resultMediaItems.append(YPMediaItem.photo(p: photo))
                             asyncGroup.leave()
                         }
@@ -401,7 +424,7 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
                     case .video:
                         self.checkVideoLengthAndCrop(for: asset.asset, withCropRect: asset.cropRect) { videoURL in
                             let videoItem = YPMediaVideo(thumbnail: thumbnailFromVideoPath(videoURL),
-                                                         videoURL: videoURL)
+                                                         videoURL: videoURL, asset: asset.asset)
                             resultMediaItems.append(YPMediaItem.video(v: videoItem))
                             asyncGroup.leave()
                         }
@@ -415,20 +438,25 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
                     self.delegate?.libraryViewFinishedLoading()
                 }
         } else {
-                let asset = self.mediaManager.selectedAsset!
+                let asset = selectedAssets.first!.asset
                 switch asset.mediaType {
                 case .video:
                     self.checkVideoLengthAndCrop(for: asset, callback: { videoURL in
                         DispatchQueue.main.async {
                             self.delegate?.libraryViewFinishedLoading()
-                            videoCallback(videoURL)
+                            let video = YPMediaVideo(thumbnail: thumbnailFromVideoPath(videoURL),
+                                                     videoURL: videoURL, asset: asset)
+                            videoCallback(video)
                         }
                     })
                 case .image:
                     self.fetchImageAndCrop(for: asset) { image, exifMeta in
                         DispatchQueue.main.async {
                             self.delegate?.libraryViewFinishedLoading()
-                            photoCallback(image.resizedImageIfNeeded(), exifMeta)
+                            let photo = YPMediaPhoto(image: image.resizedImageIfNeeded(),
+                                                     exifMeta: exifMeta,
+                                                     asset: asset)
+                            photoCallback(photo)
                         }
                     }
                 case .audio, .unknown:
@@ -459,15 +487,5 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
-    }
-}
-
-extension UIImage {
-    
-    func resized(to size: CGSize) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        defer { UIGraphicsEndImageContext() }
-        draw(in: CGRect(origin: .zero, size: size))
-        return UIGraphicsGetImageFromCurrentImageContext()
     }
 }

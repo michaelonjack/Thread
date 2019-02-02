@@ -9,6 +9,7 @@
 import Foundation
 import AVFoundation
 import UIKit
+import Photos
 
 /// Typealias for code prettiness
 internal var YPConfig: YPImagePickerConfiguration { return YPImagePickerConfiguration.shared }
@@ -17,6 +18,9 @@ public struct YPImagePickerConfiguration {
     public static var shared: YPImagePickerConfiguration = YPImagePickerConfiguration()
     
     public init() {}
+    
+    /// Scroll to change modes, defaults to true
+    public var isScrollToChangeModesEnabled = true
     
     // Library configuration
     public var library = YPConfigLibrary()
@@ -66,24 +70,43 @@ public struct YPImagePickerConfiguration {
     public var targetImageSize = YPImageSize.original
     
     /// Adds a Overlay View to the camera
-    public var overlayView = UIView()
+    public var overlayView: UIView?
     
     /// Defines if the status bar should be hidden when showing the picker. Default is true
     public var hidesStatusBar = true
     
+    /// Defines if the bottom bar should be hidden when showing the picker. Default is false.
+    public var hidesBottomBar = false
+
+    /// Defines the preferredStatusBarAppearance
+    public var preferredStatusBarStyle = UIStatusBarStyle.default
+    
+    /// Defines the text colour to be shown when a bottom option is selected
+    public var bottomMenuItemSelectedColour = UIColor(r: 38, g: 38, b: 38)
+    
+    /// Defines the text colour to be shown when a bottom option is unselected
+    public var bottomMenuItemUnSelectedColour = UIColor(r: 153, g: 153, b: 153)
+    
     /// List of default filters which will be added on the filter screen
-    public var filters: [YPFilterDescriptor] = [
-        YPFilterDescriptor(name: "Normal", filterName: ""),
-        YPFilterDescriptor(name: "Mono", filterName: "CIPhotoEffectMono"),
-        YPFilterDescriptor(name: "Tonal", filterName: "CIPhotoEffectTonal"),
-        YPFilterDescriptor(name: "Noir", filterName: "CIPhotoEffectNoir"),
-        YPFilterDescriptor(name: "Fade", filterName: "CIPhotoEffectFade"),
-        YPFilterDescriptor(name: "Chrome", filterName: "CIPhotoEffectChrome"),
-        YPFilterDescriptor(name: "Process", filterName: "CIPhotoEffectProcess"),
-        YPFilterDescriptor(name: "Transfer", filterName: "CIPhotoEffectTransfer"),
-        YPFilterDescriptor(name: "Instant", filterName: "CIPhotoEffectInstant"),
-        YPFilterDescriptor(name: "Sepia", filterName: "CISepiaTone")
-    ]
+    public var filters: [YPFilter] = [
+        YPFilter(name: "Normal", applier: nil),
+        YPFilter(name: "Nashville", applier: YPFilter.nashvilleFilter),
+        YPFilter(name: "Toaster", applier: YPFilter.toasterFilter),
+        YPFilter(name: "1977", applier: YPFilter.apply1977Filter),
+        YPFilter(name: "Clarendon", applier: YPFilter.clarendonFilter),
+        YPFilter(name: "HazeRemoval", applier: YPFilter.hazeRemovalFilter),
+        YPFilter(name: "Chrome", coreImageFilterName: "CIPhotoEffectChrome"),
+        YPFilter(name: "Fade", coreImageFilterName: "CIPhotoEffectFade"),
+        YPFilter(name: "Instant", coreImageFilterName: "CIPhotoEffectInstant"),
+        YPFilter(name: "Mono", coreImageFilterName: "CIPhotoEffectMono"),
+        YPFilter(name: "Noir", coreImageFilterName: "CIPhotoEffectNoir"),
+        YPFilter(name: "Process", coreImageFilterName: "CIPhotoEffectProcess"),
+        YPFilter(name: "Tonal", coreImageFilterName: "CIPhotoEffectTonal"),
+        YPFilter(name: "Transfer", coreImageFilterName: "CIPhotoEffectTransfer"),
+        YPFilter(name: "Tone", coreImageFilterName: "CILinearToSRGBToneCurve"),
+        YPFilter(name: "Linear", coreImageFilterName: "CISRGBToneCurveToLinear"),
+        YPFilter(name: "Sepia", coreImageFilterName: "CISepiaTone"),
+        ]
     
     /// Migration
     
@@ -131,8 +154,13 @@ public struct YPImagePickerConfiguration {
 /// Encapsulates library specific settings.
 public struct YPConfigLibrary {
     
+     public var options: PHFetchOptions? = nil
+    
     /// Set this to true if you want to force the library output to be a squared image. Defaults to false
     public var onlySquare = false
+    
+    /// Minimum width, to prevent selectiong too high images. Have sense if onlySquare is true and the image is portrait.
+    public var minWidthForItem: CGFloat?
     
     /// Choose what media types are available in the library. Defaults to `.photo`
     public var mediaType = YPlibraryMediaType.photo
@@ -140,6 +168,16 @@ public struct YPConfigLibrary {
     /// Anything superior than 1 will enable the multiple selection feature.
     public var maxNumberOfItems = 1
     
+    /// Anything greater than 1 will desactivate live photo and video modes (library only) and
+    // force users to select at least the number of items defined.
+    public var minNumberOfItems = 1
+
+    /// Set the number of items per row in collection view. Defaults to 4.
+    public var numberOfItemsInRow: Int = 4
+
+    /// Set the spacing between items in collection view. Defaults to 1.0.
+    public var spacingBetweenItems: CGFloat = 1.0
+
     /// Allow to skip the selections gallery when selecting the multiple media items. Defaults to false.
     public var skipSelectionsGallery = false
 }

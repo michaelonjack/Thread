@@ -10,18 +10,18 @@ import UIKit
 
 public struct SteviaAttribute {
     let view: UIView
-    let attribute: NSLayoutAttribute
+    let attribute: NSLayoutConstraint.Attribute
     let constant: CGFloat?
     let multiplier: CGFloat?
     
-    init(view: UIView, attribute: NSLayoutAttribute) {
+    init(view: UIView, attribute: NSLayoutConstraint.Attribute) {
         self.view = view
         self.attribute = attribute
         self.constant = nil
         self.multiplier = nil
     }
     
-    init(view: UIView, attribute: NSLayoutAttribute, constant: CGFloat?, multiplier: CGFloat?) {
+    init(view: UIView, attribute: NSLayoutConstraint.Attribute, constant: CGFloat?, multiplier: CGFloat?) {
         self.view = view
         self.attribute = attribute
         self.constant = constant
@@ -69,6 +69,14 @@ public extension UIView {
     
     public var CenterY: SteviaAttribute {
         return SteviaAttribute(view: self, attribute: .centerY)
+    }
+    
+    public var FirstBaseline: SteviaAttribute {
+        return SteviaAttribute(view: self, attribute: .firstBaseline)
+    }
+    
+    public var LastBaseline: SteviaAttribute {
+        return SteviaAttribute(view: self, attribute: .lastBaseline)
     }
 }
 
@@ -150,28 +158,21 @@ func commonParent(with viewA: UIView, and viewB: UIView) -> UIView? {
 
 @discardableResult
 public func >= (left: SteviaAttribute, right: SteviaAttribute) -> NSLayoutConstraint {
-    let constant = right.constant ?? 0
-    let multiplier = right.multiplier ?? 1
-    if let spv = left.view.superview {
-        return spv.addConstraint(item: left.view,
-                                 attribute: left.attribute,
-                                 relatedBy: .greaterThanOrEqual,
-                                 toItem: right.view,
-                                 attribute: right.attribute,
-                                 multiplier: multiplier,
-                                 constant: constant)
-    }
-    return NSLayoutConstraint()
+    return applyRelation(left: left, right: right, relateBy: .greaterThanOrEqual)
 }
 
 @discardableResult
 public func <= (left: SteviaAttribute, right: SteviaAttribute) -> NSLayoutConstraint {
+    return applyRelation(left: left, right: right, relateBy: .lessThanOrEqual)
+}
+
+private func applyRelation(left: SteviaAttribute, right: SteviaAttribute, relateBy: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
     let constant = right.constant ?? 0
     let multiplier = right.multiplier ?? 1
     if let spv = left.view.superview {
         return spv.addConstraint(item: left.view,
                                  attribute: left.attribute,
-                                 relatedBy: .lessThanOrEqual,
+                                 relatedBy: relateBy,
                                  toItem: right.view,
                                  attribute: right.attribute,
                                  multiplier: multiplier,
