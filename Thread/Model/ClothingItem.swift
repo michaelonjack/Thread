@@ -32,8 +32,8 @@ struct ClothingItem {
     }
     
     init(snapshot: DataSnapshot) {
-        id = snapshot.key
         let snapshotValue = snapshot.value as! [String: AnyObject]
+        id = snapshotValue["id"] as? String ?? ""
         name = snapshotValue["name"] as? String ?? ""
         brand = snapshotValue["brand"] as? String ?? ""
         itemUrl = snapshotValue["link"] as? String ?? ""

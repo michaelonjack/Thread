@@ -7,12 +7,23 @@
 //
 
 import Foundation
+import FirebaseAuth
+import FirebaseDatabase
 
 final class Configuration {
     private static let sharedConfiguration: Configuration = Configuration()
     
+    var currentUser: User!
+    
     private init() {
-        
+        Auth.auth().addStateDidChangeListener { (auth, newUser) in
+            // Set the current user
+            if (Auth.auth().currentUser != nil) {
+                getCurrentUser(completion: { (currentUser) in
+                    self.currentUser = currentUser
+                })
+            }
+        }
     }
     
     class func shared() -> Configuration {

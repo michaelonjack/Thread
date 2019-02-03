@@ -12,6 +12,11 @@
 		3535199162A3752B698A930C /* Pods_ThreadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB2183E2AAEB7F63B3BAF82 /* Pods_ThreadTests.framework */; };
 		B11CBD502205CFB200D6620B /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11CBD4F2205CFB200D6620B /* UIColor+Additions.swift */; };
 		B157D4A12205E1BC00D83CDB /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157D4A02205E1BC00D83CDB /* Configuration.swift */; };
+		B157D4A42206147D00D83CDB /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157D4A32206147D00D83CDB /* UserProfileViewController.swift */; };
+		B157D4A722061F0300D83CDB /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157D4A622061F0300D83CDB /* ImageCollectionViewCell.swift */; };
+		B157D4AB2206452100D83CDB /* UserProfileStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157D4AA2206452100D83CDB /* UserProfileStatsView.swift */; };
+		B157D4AF22065ADD00D83CDB /* UserProfileSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157D4AE22065ADD00D83CDB /* UserProfileSummaryView.swift */; };
+		B157D4B122065B3900D83CDB /* UserProfileFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157D4B022065B3900D83CDB /* UserProfileFeedView.swift */; };
 		B174D0261E36C8E900218590 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B174D0251E36C8E900218590 /* APIKeys.plist */; };
 		B174D0281E36CAC700218590 /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0271E36CAC700218590 /* APIHelper.swift */; };
 		B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0291E36D2A300218590 /* ClothingItem.swift */; };
@@ -26,6 +31,7 @@
 		B1C96A991E2C66730036E559 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C96A971E2C66730036E559 /* LaunchScreen.storyboard */; };
 		B1C96AA41E2C66730036E559 /* ThreadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96AA31E2C66730036E559 /* ThreadTests.swift */; };
 		B1C96AAF1E2C66730036E559 /* ThreadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96AAE1E2C66730036E559 /* ThreadUITests.swift */; };
+		B1DB7EF02206B99700F3C4D9 /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB7EEF2206B99700F3C4D9 /* FeedCollectionViewCell.swift */; };
 		B1E08ADA1E50DB7E0011B1EA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E08AD91E50DB7E0011B1EA /* SignUpViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +63,11 @@
 		B11CBD4F2205CFB200D6620B /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		B157D49F2205E18100D83CDB /* Thread-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Thread-Bridging-Header.h"; sourceTree = "<group>"; };
 		B157D4A02205E1BC00D83CDB /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		B157D4A32206147D00D83CDB /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		B157D4A622061F0300D83CDB /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		B157D4AA2206452100D83CDB /* UserProfileStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileStatsView.swift; sourceTree = "<group>"; };
+		B157D4AE22065ADD00D83CDB /* UserProfileSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileSummaryView.swift; sourceTree = "<group>"; };
+		B157D4B022065B3900D83CDB /* UserProfileFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileFeedView.swift; sourceTree = "<group>"; };
 		B174D0251E36C8E900218590 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		B174D0271E36CAC700218590 /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		B174D0291E36D2A300218590 /* ClothingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
@@ -77,6 +88,7 @@
 		B1C96AAA1E2C66730036E559 /* ThreadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C96AAE1E2C66730036E559 /* ThreadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadUITests.swift; sourceTree = "<group>"; };
 		B1C96AB01E2C66730036E559 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1DB7EEF2206B99700F3C4D9 /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1E08AD91E50DB7E0011B1EA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B315754A20752E20A13E984D /* Pods-Thread.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thread.release.xcconfig"; path = "Pods/Target Support Files/Pods-Thread/Pods-Thread.release.xcconfig"; sourceTree = "<group>"; };
 		BEED098888EFE05ADEE3966C /* Pods-ThreadUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadUITests/Pods-ThreadUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +162,8 @@
 			children = (
 				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
 				B1E08AD91E50DB7E0011B1EA /* SignUpViewController.swift */,
+				B157D4A32206147D00D83CDB /* UserProfileViewController.swift */,
+				B157D4A522061ED200D83CDB /* CollectionCell */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -159,6 +173,9 @@
 			children = (
 				B1C96A971E2C66730036E559 /* LaunchScreen.storyboard */,
 				B1C96A921E2C66730036E559 /* Main.storyboard */,
+				B157D4AA2206452100D83CDB /* UserProfileStatsView.swift */,
+				B157D4AE22065ADD00D83CDB /* UserProfileSummaryView.swift */,
+				B157D4B022065B3900D83CDB /* UserProfileFeedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -178,6 +195,15 @@
 				B1A11D401EFEC4AB00E16169 /* DatabaseHelper.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		B157D4A522061ED200D83CDB /* CollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				B157D4A622061F0300D83CDB /* ImageCollectionViewCell.swift */,
+				B1DB7EEF2206B99700F3C4D9 /* FeedCollectionViewCell.swift */,
+			);
+			path = CollectionCell;
 			sourceTree = "<group>";
 		};
 		B184306C1E2D2F4D00EED632 /* Other */ = {
@@ -502,13 +528,19 @@
 			files = (
 				B1A11D411EFEC4AB00E16169 /* DatabaseHelper.swift in Sources */,
 				B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */,
+				B1DB7EF02206B99700F3C4D9 /* FeedCollectionViewCell.swift in Sources */,
 				B1E08ADA1E50DB7E0011B1EA /* SignUpViewController.swift in Sources */,
+				B157D4B122065B3900D83CDB /* UserProfileFeedView.swift in Sources */,
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
 				B174D0281E36CAC700218590 /* APIHelper.swift in Sources */,
 				B18430861E33B03A00EED632 /* User.swift in Sources */,
+				B157D4A722061F0300D83CDB /* ImageCollectionViewCell.swift in Sources */,
 				B157D4A12205E1BC00D83CDB /* Configuration.swift in Sources */,
+				B157D4AF22065ADD00D83CDB /* UserProfileSummaryView.swift in Sources */,
+				B157D4AB2206452100D83CDB /* UserProfileStatsView.swift in Sources */,
 				B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */,
 				B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */,
+				B157D4A42206147D00D83CDB /* UserProfileViewController.swift in Sources */,
 				B11CBD502205CFB200D6620B /* UIColor+Additions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

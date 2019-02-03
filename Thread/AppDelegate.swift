@@ -22,9 +22,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         // Allow Firebase database to work offline
         Database.database().isPersistenceEnabled = true
+        
+        let _ = configuration
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        var initialViewController: UIViewController = UIViewController()
+        
+        if let currentUser = Auth.auth().currentUser {
+            let userProfileController = mainStoryboard.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
+            userProfileController.userId = currentUser.uid
+            initialViewController = userProfileController
+        }
+        
+        else {
+            initialViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController")
+        }
+        
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 

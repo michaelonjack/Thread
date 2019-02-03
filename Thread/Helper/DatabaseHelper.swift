@@ -12,6 +12,26 @@ import FirebaseDatabase
 import FirebaseAuth
 import CoreLocation
 
+let configuration = Configuration.shared()
+
+
+
+func getCurrentUser(completion: @escaping (User) -> Void) {
+    let userReference = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
+    userReference.keepSynced(true)
+    userReference.observe(.value) { (snapshot) in
+        completion( User(snapshot: snapshot) )
+    }
+}
+
+
+func getUser(withId id: String, completion: @escaping (User) -> Void) {
+    let userReference = Database.database().reference(withPath: "users/" + id)
+    userReference.keepSynced(true)
+    userReference.observe(.value) { (snapshot) in
+        completion( User(snapshot: snapshot) )
+    }
+}
 
 
 

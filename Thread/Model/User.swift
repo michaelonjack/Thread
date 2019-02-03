@@ -16,6 +16,7 @@ class User {
     let firstName: String
     let lastName: String
     let email: String
+    var lastCheckIn: Date?
     var status: String?
     var location: CLLocation? {
         didSet {
@@ -27,6 +28,33 @@ class User {
     var profilePictureUrl: String?
     var outfitPictureUrl: String?
     var clothingItems: [ClothingItem] = []
+    
+    // Computed properties
+    var name: String {
+        return firstName + " " + lastName
+    }
+    
+    var lastCheckInStr: String {
+        guard let lastCheckIn = lastCheckIn else { return "" }
+        var timeElapsedStr = ""
+        
+        let secondsSince = Int(Date().timeIntervalSince(lastCheckIn))
+        let minutesSince = secondsSince / 60
+        let hoursSince = minutesSince / 60
+        let daysSince = hoursSince / 24
+        
+        if secondsSince / 60 == 0 {
+            timeElapsedStr = String(secondsSince) + " seconds ago"
+        } else if minutesSince / 60 == 0 {
+            timeElapsedStr = String(minutesSince) + " minutes ago"
+        } else if hoursSince / 24 == 0 {
+            timeElapsedStr = String(hoursSince) + " hours ago"
+        } else {
+            timeElapsedStr = String(daysSince) + " days ago"
+        }
+        
+        return timeElapsedStr
+    }
     
     init(uid:String, firstName: String, lastName: String, email: String) {
         self.uid = uid
@@ -46,9 +74,21 @@ class User {
         profilePictureUrl = snapshotValue["profilePictureUrl"] as? String
         outfitPictureUrl = snapshotValue["outfitPictureUrl"] as? String
         
+        if let lastCheckInStr = snapshotValue["lastCheckIn"] as? String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
+            self.lastCheckIn = dateFormatter.date(from: lastCheckInStr)
+        }
+        
         if let latitude = snapshotValue["latitude"] as? Double, let longitude = snapshotValue["longitude"] as? Double {
             location = CLLocation(latitude: latitude, longitude: longitude)
         }
+        
+        let itemsSnapshot = snapshot.childSnapshot(forPath: "items")
+        for item in itemsSnapshot.children {
+            clothingItems.append( ClothingItem(snapshot: item as! DataSnapshot) )
+        }
+        
     }
     
     func toAnyObject() -> Any {

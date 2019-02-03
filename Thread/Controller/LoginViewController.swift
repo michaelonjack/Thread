@@ -70,8 +70,10 @@ class LoginViewController: UIViewController {
                 // Check if user has already verified their email address
                 if user.isEmailVerified {
                     
+                    let userProfileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UserProfileViewController")
+                    
                     DispatchQueue.main.async {
-                        self.present(UIViewController(), animated: true, completion: nil)
+                        self.present(userProfileVC, animated: true, completion: nil)
                     }
                 }
                     
