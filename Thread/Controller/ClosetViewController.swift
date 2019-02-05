@@ -9,8 +9,10 @@
 import UIKit
 import SDWebImage
 
-class ClosetViewController: UIViewController {
-
+class ClosetViewController: UIViewController, Storyboarded {
+    
+    weak var coordinator: MainCoordinator?
+    
     @IBOutlet weak var clothingItemsView: ClosetClothingItemsView!
     @IBOutlet weak var detailsView: ClosetDetailsView!
     @IBOutlet weak var ownerLabel: UILabel!
@@ -89,7 +91,10 @@ class ClosetViewController: UIViewController {
                 self.favoriteButton.transform = self.favoriteButton.transform.scaledBy(x: 0.5, y: 0.5)
             })
         }
-        
+    }
+    
+    @IBAction func dismissCloset(_ sender: Any) {
+        coordinator?.pop()
     }
 }
 

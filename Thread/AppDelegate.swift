@@ -14,6 +14,7 @@ import FirebaseDatabase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var coordinator: MainCoordinator?
 
     // Move firebase configuration to init to avoid race conditions with the database instantiation on the login page
     override init() {
@@ -29,23 +30,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        var initialViewController: UIViewController = UIViewController()
+        self.window?.makeKeyAndVisible()
         
-        if let currentUser = Auth.auth().currentUser {
-//            let userProfileController = mainStoryboard.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
-//            userProfileController.userId = currentUser.uid
-            let closetViewController = mainStoryboard.instantiateViewController(withIdentifier: "ClosetViewController") as! ClosetViewController
-            closetViewController.userId = currentUser.uid
-            initialViewController = closetViewController
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if let _ = Auth.auth().currentUser {
+            
+            let navController = CoordinatorNavigationController()
+            navController.setNavigationBarHidden(true, animated: false)
+            
+            coordinator = MainCoordinator(navigationController: navController)
+            coordinator?.start()
+            
+            self.window?.rootViewController = navController
         }
         
         else {
-            initialViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController")
+            let initialViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController")
+            self.window?.rootViewController = initialViewController
         }
-        
-        self.window?.rootViewController = initialViewController
-        self.window?.makeKeyAndVisible()
         
         return true
     }

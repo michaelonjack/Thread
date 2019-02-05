@@ -9,8 +9,10 @@
 import UIKit
 import SDWebImage
 
-class UserProfileViewController: UIViewController {
-
+class UserProfileViewController: UIViewController, Storyboarded {
+    
+    weak var coordinator: MainCoordinator?
+    
     @IBOutlet weak var userStatisticsView: UserProfileStatsView!
     @IBOutlet weak var userSummaryView: UserProfileSummaryView!
     @IBOutlet weak var userFeedView: UserProfileFeedView!
@@ -33,6 +35,8 @@ class UserProfileViewController: UIViewController {
     }
     
     fileprivate func setupView() {
+        
+        userFeedView.viewButton.addTarget(self, action: #selector(viewCloset), for: .touchUpInside)
         
         setupProfilePictureButton()
         setupLayout()
@@ -78,6 +82,10 @@ class UserProfileViewController: UIViewController {
                 self.userFeedView.feedCollectionView.reloadData()
             }
         }
+    }
+    
+    @objc func viewCloset() {
+        coordinator?.viewCloset(forUserId: userId)
     }
 }
 
