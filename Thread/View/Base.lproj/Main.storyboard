@@ -431,6 +431,9 @@
                                                     <constraint firstAttribute="width" secondItem="bpE-tQ-kkZ" secondAttribute="height" multiplier="1:1" id="9Zx-LF-UaU"/>
                                                 </constraints>
                                                 <state key="normal" title="Button" image="Favorite"/>
+                                                <connections>
+                                                    <action selector="itemFavorited:" destination="ul7-99-M57" eventType="touchUpInside" id="NjR-Cw-HqN"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -481,6 +484,7 @@
                     <connections>
                         <outlet property="clothingItemsView" destination="4u4-1C-hfP" id="rGQ-UT-7PT"/>
                         <outlet property="detailsView" destination="zgn-9L-nhO" id="9IS-jr-sil"/>
+                        <outlet property="favoriteButton" destination="bpE-tQ-kkZ" id="rRB-d8-p8D"/>
                         <outlet property="itemNameLabel" destination="xX2-yJ-4o4" id="jUJ-u0-ZKY"/>
                         <outlet property="ownerLabel" destination="mLX-hb-3Dn" id="IXh-7g-owW"/>
                     </connections>
@@ -491,9 +495,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Avatar" width="512" height="512"/>
-        <image name="Favorite" width="256" height="256"/>
-        <image name="TouchID" width="138" height="137"/>
+        <image name="Avatar" width="1024" height="1024"/>
+        <image name="Favorite" width="409.60000610351562" height="409.60000610351562"/>
+        <image name="TouchID" width="138" height="137.5"/>
     </resources>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

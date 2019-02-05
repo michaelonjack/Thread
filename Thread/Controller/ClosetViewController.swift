@@ -15,6 +15,7 @@ class ClosetViewController: UIViewController {
     @IBOutlet weak var detailsView: ClosetDetailsView!
     @IBOutlet weak var ownerLabel: UILabel!
     @IBOutlet weak var itemNameLabel: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     var userId: String!
     var user: User?
@@ -26,6 +27,7 @@ class ClosetViewController: UIViewController {
             
             DispatchQueue.main.async {
                 self.itemNameLabel.text = currentItem?.name
+                self.favoriteButton.setImage(UIImage(named: "Favorite"), for: .normal)
             }
         }
     }
@@ -66,12 +68,28 @@ class ClosetViewController: UIViewController {
             sself.detailsView.detailsView.alpha = 0
             sself.detailsView.reviewsView.alpha = 0
             sself.detailsView.otherView.alpha = 0
+            sself.favoriteButton.alpha = 0.02
             
             sself.itemNameLabel.transform = sself.itemNameLabel.transform.translatedBy(x: 0, y: 30)
             sself.detailsView.detailsView.transform = sself.detailsView.detailsView.transform.translatedBy(x: 0, y: 30)
             sself.detailsView.reviewsView.transform = sself.detailsView.reviewsView.transform.translatedBy(x: 0, y: 30)
             sself.detailsView.otherView.transform = sself.detailsView.otherView.transform.translatedBy(x: 0, y: 30)
+            sself.favoriteButton.transform = sself.favoriteButton.transform.translatedBy(x: 0, y: 30)
         })
+        revealDetailsAnimator.pausesOnCompletion = true
+    }
+    
+    @IBAction func itemFavorited(_ sender: Any) {
+        favoriteButton.setImage(UIImage(named: "FavoriteClicked"), for: .normal)
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+            self.favoriteButton.transform = self.favoriteButton.transform.scaledBy(x: 2, y: 2)
+        }) { (_) in
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.favoriteButton.transform = self.favoriteButton.transform.scaledBy(x: 0.5, y: 0.5)
+            })
+        }
+        
     }
 }
 
