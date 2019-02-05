@@ -21,6 +21,7 @@
 		B174D0281E36CAC700218590 /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0271E36CAC700218590 /* APIHelper.swift */; };
 		B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0291E36D2A300218590 /* ClothingItem.swift */; };
 		B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D02D1E36DE0B00218590 /* ClothingType.swift */; };
+		B183EE152207A8A90065A9F1 /* ClosetDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183EE142207A8A90065A9F1 /* ClosetDetailsView.swift */; };
 		B18430731E2D43E300EED632 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B18430721E2D43E300EED632 /* GoogleService-Info.plist */; };
 		B184307F1E2F0C8A00EED632 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B184307E1E2F0C8A00EED632 /* Assets.xcassets */; };
 		B18430861E33B03A00EED632 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18430851E33B03A00EED632 /* User.swift */; };
@@ -32,7 +33,11 @@
 		B1C96AA41E2C66730036E559 /* ThreadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96AA31E2C66730036E559 /* ThreadTests.swift */; };
 		B1C96AAF1E2C66730036E559 /* ThreadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96AAE1E2C66730036E559 /* ThreadUITests.swift */; };
 		B1DB7EF02206B99700F3C4D9 /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB7EEF2206B99700F3C4D9 /* FeedCollectionViewCell.swift */; };
+		B1DB7EF222071A2C00F3C4D9 /* ClosetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB7EF122071A2C00F3C4D9 /* ClosetViewController.swift */; };
+		B1DB7EF42207220D00F3C4D9 /* ClosetItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB7EF32207220D00F3C4D9 /* ClosetItemCollectionViewCell.swift */; };
+		B1DB7EF62207231300F3C4D9 /* ClosetClothingItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB7EF52207231300F3C4D9 /* ClosetClothingItemsView.swift */; };
 		B1E08ADA1E50DB7E0011B1EA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E08AD91E50DB7E0011B1EA /* SignUpViewController.swift */; };
+		B1F7596122073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F7596022073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +77,7 @@
 		B174D0271E36CAC700218590 /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		B174D0291E36D2A300218590 /* ClothingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
 		B174D02D1E36DE0B00218590 /* ClothingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingType.swift; sourceTree = "<group>"; };
+		B183EE142207A8A90065A9F1 /* ClosetDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetDetailsView.swift; sourceTree = "<group>"; };
 		B18430721E2D43E300EED632 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B184307E1E2F0C8A00EED632 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B18430851E33B03A00EED632 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -89,7 +95,11 @@
 		B1C96AAE1E2C66730036E559 /* ThreadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadUITests.swift; sourceTree = "<group>"; };
 		B1C96AB01E2C66730036E559 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1DB7EEF2206B99700F3C4D9 /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
+		B1DB7EF122071A2C00F3C4D9 /* ClosetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClosetViewController.swift; path = Thread/Controller/ClosetViewController.swift; sourceTree = SOURCE_ROOT; };
+		B1DB7EF32207220D00F3C4D9 /* ClosetItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		B1DB7EF52207231300F3C4D9 /* ClosetClothingItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClosetClothingItemsView.swift; path = Thread/View/ClosetClothingItemsView.swift; sourceTree = SOURCE_ROOT; };
 		B1E08AD91E50DB7E0011B1EA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		B1F7596022073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		B315754A20752E20A13E984D /* Pods-Thread.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thread.release.xcconfig"; path = "Pods/Target Support Files/Pods-Thread/Pods-Thread.release.xcconfig"; sourceTree = "<group>"; };
 		BEED098888EFE05ADEE3966C /* Pods-ThreadUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadUITests/Pods-ThreadUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CB1E9B1CE232603724C5E794 /* Pods-ThreadTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadTests/Pods-ThreadTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -162,6 +172,7 @@
 			children = (
 				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
 				B1E08AD91E50DB7E0011B1EA /* SignUpViewController.swift */,
+				B1DB7EF122071A2C00F3C4D9 /* ClosetViewController.swift */,
 				B157D4A32206147D00D83CDB /* UserProfileViewController.swift */,
 				B157D4A522061ED200D83CDB /* CollectionCell */,
 			);
@@ -176,6 +187,8 @@
 				B157D4AA2206452100D83CDB /* UserProfileStatsView.swift */,
 				B157D4AE22065ADD00D83CDB /* UserProfileSummaryView.swift */,
 				B157D4B022065B3900D83CDB /* UserProfileFeedView.swift */,
+				B1DB7EF52207231300F3C4D9 /* ClosetClothingItemsView.swift */,
+				B183EE142207A8A90065A9F1 /* ClosetDetailsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -202,6 +215,8 @@
 			children = (
 				B157D4A622061F0300D83CDB /* ImageCollectionViewCell.swift */,
 				B1DB7EEF2206B99700F3C4D9 /* FeedCollectionViewCell.swift */,
+				B1DB7EF32207220D00F3C4D9 /* ClosetItemCollectionViewCell.swift */,
+				B1F7596022073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift */,
 			);
 			path = CollectionCell;
 			sourceTree = "<group>";
@@ -456,24 +471,28 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Thread/Pods-Thread-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AnimatedCollectionViewLayout/AnimatedCollectionViewLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/PryntTrimmerView/PryntTrimmerView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SteviaLayout/Stevia.framework",
+				"${BUILT_PRODUCTS_DIR}/TabbedPageView/TabbedPageView.framework",
 				"${BUILT_PRODUCTS_DIR}/YPImagePicker/YPImagePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AnimatedCollectionViewLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PryntTrimmerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stevia.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TabbedPageView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YPImagePicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -529,6 +548,8 @@
 				B1A11D411EFEC4AB00E16169 /* DatabaseHelper.swift in Sources */,
 				B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */,
 				B1DB7EF02206B99700F3C4D9 /* FeedCollectionViewCell.swift in Sources */,
+				B1DB7EF42207220D00F3C4D9 /* ClosetItemCollectionViewCell.swift in Sources */,
+				B1DB7EF62207231300F3C4D9 /* ClosetClothingItemsView.swift in Sources */,
 				B1E08ADA1E50DB7E0011B1EA /* SignUpViewController.swift in Sources */,
 				B157D4B122065B3900D83CDB /* UserProfileFeedView.swift in Sources */,
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
@@ -536,11 +557,14 @@
 				B18430861E33B03A00EED632 /* User.swift in Sources */,
 				B157D4A722061F0300D83CDB /* ImageCollectionViewCell.swift in Sources */,
 				B157D4A12205E1BC00D83CDB /* Configuration.swift in Sources */,
+				B1DB7EF222071A2C00F3C4D9 /* ClosetViewController.swift in Sources */,
+				B1F7596122073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift in Sources */,
 				B157D4AF22065ADD00D83CDB /* UserProfileSummaryView.swift in Sources */,
 				B157D4AB2206452100D83CDB /* UserProfileStatsView.swift in Sources */,
 				B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */,
 				B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */,
 				B157D4A42206147D00D83CDB /* UserProfileViewController.swift in Sources */,
+				B183EE152207A8A90065A9F1 /* ClosetDetailsView.swift in Sources */,
 				B11CBD502205CFB200D6620B /* UIColor+Additions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -40,7 +40,7 @@ struct ClothingItem {
         itemImageUrl = snapshotValue["pictureUrl"] as? String ?? ""
         price = snapshotValue["price"] as? Double ?? 0.0
         
-        let clothingType = snapshotValue["type"] as? String ?? ""
+        let clothingType = snapshot.key
         switch clothingType {
         case ClothingType.bottom.description:
             type = .bottom

@@ -47,6 +47,26 @@ func updateDataForUser(userid:String, key:String, value:AnyObject) {
 
 
 
+func uploadImage(toLocation path:String, image: UIImage, completion: @escaping (_ url: URL?, _ error: Error?) -> Void ) {
+    let storageReference = Storage.storage().reference(withPath: path)
+    
+    let imageMetaData = StorageMetadata()
+    imageMetaData.contentType = "image/jpeg"
+    
+    var imageData = Data()
+    imageData = image.jpegData(compressionQuality: 1.0)!
+    
+    storageReference.putData(imageData, metadata: imageMetaData) { (metaData, error) in
+        if error == nil {
+            storageReference.downloadURL(completion: { (url, error) in
+                completion(url, error)
+            })
+        }
+    }
+}
+
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////
 //
@@ -170,34 +190,4 @@ func unfollowUser(userid:String) {
             followRef.child(userid).removeValue()
         }
     })
-}
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//
-//
-//
-//
-func getPlacemark(forLocation location: CLLocation, completionHandler: @escaping (CLPlacemark?, String?) -> ()) {
-    let geocoder = CLGeocoder()
-    
-    geocoder.reverseGeocodeLocation(location, completionHandler: {
-        placemarks, error in
-        
-        if let err = error {
-            completionHandler(nil, err.localizedDescription)
-        } else if let placemarkArray = placemarks {
-            if let placemark = placemarkArray.first {
-                completionHandler(placemark, nil)
-            } else {
-                completionHandler(nil, "Placemark was nil")
-            }
-        } else {
-            completionHandler(nil, "Unknown error")
-        }
-    })
-    
 }

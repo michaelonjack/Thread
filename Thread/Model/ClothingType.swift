@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ClothingType {
+enum ClothingType: Int {
     case top
     case bottom
     case shoes

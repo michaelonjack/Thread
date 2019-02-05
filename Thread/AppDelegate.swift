@@ -33,9 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var initialViewController: UIViewController = UIViewController()
         
         if let currentUser = Auth.auth().currentUser {
-            let userProfileController = mainStoryboard.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
-            userProfileController.userId = currentUser.uid
-            initialViewController = userProfileController
+//            let userProfileController = mainStoryboard.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
+//            userProfileController.userId = currentUser.uid
+            let closetViewController = mainStoryboard.instantiateViewController(withIdentifier: "ClosetViewController") as! ClosetViewController
+            closetViewController.userId = currentUser.uid
+            initialViewController = closetViewController
         }
         
         else {

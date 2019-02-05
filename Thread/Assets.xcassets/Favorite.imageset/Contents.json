@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "heart_notclicked.png",
+      "filename" : "favorite.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "heart_notclicked-2.png",
+      "filename" : "favorite-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "heart_notclicked-1.png",
+      "filename" : "favorite-2.png",
       "scale" : "3x"
     }
   ],

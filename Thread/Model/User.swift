@@ -27,7 +27,7 @@ class User {
     var profilePicture: UIImage?
     var profilePictureUrl: String?
     var outfitPictureUrl: String?
-    var clothingItems: [ClothingItem] = []
+    var clothingItems: [ClothingType:ClothingItem] = [:]
     
     // Computed properties
     var name: String {
@@ -86,15 +86,16 @@ class User {
         
         let itemsSnapshot = snapshot.childSnapshot(forPath: "items")
         for item in itemsSnapshot.children {
-            clothingItems.append( ClothingItem(snapshot: item as! DataSnapshot) )
+            let clothingItem = ClothingItem(snapshot: item as! DataSnapshot)
+            clothingItems[clothingItem.type] = clothingItem
         }
         
     }
     
     func toAnyObject() -> Any {
         var clothingItemsDict: [String:Any] = [:]
-        for item in clothingItems {
-            clothingItemsDict[item.type.description] = item.toAnyObject()
+        for (type, item) in clothingItems {
+            clothingItemsDict[type.description] = item.toAnyObject()
         }
         
         return [

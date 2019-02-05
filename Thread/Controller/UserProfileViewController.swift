@@ -116,7 +116,7 @@ extension UserProfileViewController: UICollectionViewDataSource {
         feedCell.layer.shadowOpacity = 0.1
         feedCell.layer.shadowPath = UIBezierPath(roundedRect: feedCell.bounds, cornerRadius: cornerRadius).cgPath
         
-        if let clothingItemImageUrlStr = user?.clothingItems[indexPath.row].itemImageUrl {
+        if let clothingType = ClothingType(rawValue: indexPath.row), let clothingItemImageUrlStr = user?.clothingItems[clothingType]?.itemImageUrl {
             let clothingItemImageUrl = URL(string: clothingItemImageUrlStr)
             feedCell.imageView.sd_setImage(with: clothingItemImageUrl, completed: nil)
         }
