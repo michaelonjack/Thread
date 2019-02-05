@@ -17,7 +17,9 @@ import FirebaseAuth
 import FirebaseDatabase
 import LocalAuthentication
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, Storyboarded {
+    
+    weak var coordinator: MainCoordinator?
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -45,6 +47,12 @@ class LoginViewController: UIViewController {
             touchIDButton.isHidden = false
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        coordinator?.attemptAutoLogin()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -69,12 +77,7 @@ class LoginViewController: UIViewController {
                 
                 // Check if user has already verified their email address
                 if user.isEmailVerified {
-                    
-                    let userProfileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UserProfileViewController")
-                    
-                    DispatchQueue.main.async {
-                        self.present(userProfileVC, animated: true, completion: nil)
-                    }
+                    self.coordinator?.login()
                 }
                     
                     

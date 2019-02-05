@@ -11,7 +11,7 @@ import SDWebImage
 
 class ClosetViewController: UIViewController, Storyboarded {
     
-    weak var coordinator: MainCoordinator?
+    weak var coordinator: ActiveUserCoordinator?
     
     @IBOutlet weak var clothingItemsView: ClosetClothingItemsView!
     @IBOutlet weak var detailsView: ClosetDetailsView!

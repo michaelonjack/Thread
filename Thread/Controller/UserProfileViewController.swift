@@ -11,7 +11,7 @@ import SDWebImage
 
 class UserProfileViewController: UIViewController, Storyboarded {
     
-    weak var coordinator: MainCoordinator?
+    weak var coordinator: ActiveUserCoordinator?
     
     @IBOutlet weak var userStatisticsView: UserProfileStatsView!
     @IBOutlet weak var userSummaryView: UserProfileSummaryView!

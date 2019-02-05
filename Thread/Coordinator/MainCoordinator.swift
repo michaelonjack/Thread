@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class MainCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
@@ -17,31 +18,39 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        let profileController = UserProfileViewController.instantiate()
-        profileController.coordinator = self
-        profileController.userId = Auth.auth().currentUser?.uid
-        
-        navigationController.pushViewController(profileController, animated: false)
+        let loginController: LoginViewController = LoginViewController.instantiate()
+        loginController.coordinator = self
+        navigationController.pushViewController(loginController, animated: false)
     }
     
-    func pop() {
-        navigationController.popViewController(animated: true)
+    func login() {
+        if let currentUser = Auth.auth().currentUser {
+            let activeUserCoordinator = ActiveUserCoordinator(userId: currentUser.uid)
+            childCoordinators.append(activeUserCoordinator)
+            activeUserCoordinator.start()
+            
+            navigationController.present(activeUserCoordinator.navigationController, animated: true)
+        }
     }
     
-    func viewCloset(forUser user: User) {
-        let closetController = ClosetViewController.instantiate()
-        closetController.coordinator = self
-        closetController.user = user
-        closetController.userId = user.uid
-        
-        navigationController.pushViewController(closetController, animated: true)
-    }
-    
-    func viewCloset(forUserId userId: String) {
-        let closetController = ClosetViewController.instantiate()
-        closetController.coordinator = self
-        closetController.userId = userId
-        
-        navigationController.pushViewController(closetController, animated: true)
+    func attemptAutoLogin() {
+        if let currentUser = Auth.auth().currentUser {
+            let activeUserCoordinator = ActiveUserCoordinator(userId: currentUser.uid)
+            childCoordinators.append(activeUserCoordinator)
+            activeUserCoordinator.start()
+            
+            let launchScreenView = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()!.view!
+            launchScreenView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            launchScreenView.frame = navigationController.view.frame
+            navigationController.view.addSubview(launchScreenView)
+            
+            DispatchQueue.global().async {
+                DispatchQueue.main.async {
+                    self.navigationController.present(activeUserCoordinator.navigationController, animated: false, completion: {
+                        launchScreenView.removeFromSuperview()
+                    })
+                }
+            }
+        }
     }
 }

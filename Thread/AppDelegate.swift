@@ -32,23 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.makeKeyAndVisible()
         
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let navController = UINavigationController()
         
-        if let _ = Auth.auth().currentUser {
-            
-            let navController = CoordinatorNavigationController()
-            navController.setNavigationBarHidden(true, animated: false)
-            
-            coordinator = MainCoordinator(navigationController: navController)
-            coordinator?.start()
-            
-            self.window?.rootViewController = navController
-        }
+        coordinator = MainCoordinator(navigationController: navController)
+        coordinator?.start()
         
-        else {
-            let initialViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController")
-            self.window?.rootViewController = initialViewController
-        }
+        self.window?.rootViewController = navController
         
         return true
     }

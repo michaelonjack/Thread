@@ -13,4 +13,11 @@ protocol Coordinator {
     var navigationController: UINavigationController { get set }
     
     func start()
+    func pop()
+}
+
+extension Coordinator {
+    func pop() {
+        navigationController.popViewController(animated: true)
+    }
 }

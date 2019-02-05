@@ -42,6 +42,7 @@
 		B1FE821B22093A49006AFD43 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FE821A22093A49006AFD43 /* MainCoordinator.swift */; };
 		B1FE821F22093C32006AFD43 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FE821E22093C32006AFD43 /* Storyboarded.swift */; };
 		B1FE8221220947DA006AFD43 /* CoordinatorNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FE8220220947DA006AFD43 /* CoordinatorNavigationController.swift */; };
+		B1FE8227220A1CA4006AFD43 /* ActiveUserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FE8226220A1CA4006AFD43 /* ActiveUserCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		B1FE821A22093A49006AFD43 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		B1FE821E22093C32006AFD43 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		B1FE8220220947DA006AFD43 /* CoordinatorNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorNavigationController.swift; sourceTree = "<group>"; };
+		B1FE8226220A1CA4006AFD43 /* ActiveUserCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveUserCoordinator.swift; sourceTree = "<group>"; };
 		B315754A20752E20A13E984D /* Pods-Thread.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thread.release.xcconfig"; path = "Pods/Target Support Files/Pods-Thread/Pods-Thread.release.xcconfig"; sourceTree = "<group>"; };
 		BEED098888EFE05ADEE3966C /* Pods-ThreadUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadUITests/Pods-ThreadUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CB1E9B1CE232603724C5E794 /* Pods-ThreadTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadTests/Pods-ThreadTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -178,12 +180,12 @@
 		B11CBD4B2205CF0C00D6620B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B1FE8220220947DA006AFD43 /* CoordinatorNavigationController.swift */,
 				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
 				B1E08AD91E50DB7E0011B1EA /* SignUpViewController.swift */,
 				B1DB7EF122071A2C00F3C4D9 /* ClosetViewController.swift */,
 				B157D4A32206147D00D83CDB /* UserProfileViewController.swift */,
 				B157D4A522061ED200D83CDB /* CollectionCell */,
-				B1FE8220220947DA006AFD43 /* CoordinatorNavigationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -312,6 +314,7 @@
 			children = (
 				B1FE8218220939D9006AFD43 /* Coordinator.swift */,
 				B1FE821A22093A49006AFD43 /* MainCoordinator.swift */,
+				B1FE8226220A1CA4006AFD43 /* ActiveUserCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 				B157D4B122065B3900D83CDB /* UserProfileFeedView.swift in Sources */,
 				B1FE821B22093A49006AFD43 /* MainCoordinator.swift in Sources */,
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
+				B1FE8227220A1CA4006AFD43 /* ActiveUserCoordinator.swift in Sources */,
 				B174D0281E36CAC700218590 /* APIHelper.swift in Sources */,
 				B18430861E33B03A00EED632 /* User.swift in Sources */,
 				B157D4A722061F0300D83CDB /* ImageCollectionViewCell.swift in Sources */,
