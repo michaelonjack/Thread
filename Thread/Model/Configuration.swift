@@ -13,7 +13,7 @@ import FirebaseDatabase
 final class Configuration {
     private static let sharedConfiguration: Configuration = Configuration()
     
-    var currentUser: User!
+    var currentUser: User?
     
     private init() {
         Auth.auth().addStateDidChangeListener { (auth, newUser) in

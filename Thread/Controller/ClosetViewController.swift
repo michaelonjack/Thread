@@ -29,8 +29,15 @@ class ClosetViewController: UIViewController, Storyboarded {
             let currentItem = user?.clothingItems[clothingType]
             
             DispatchQueue.main.async {
-                self.itemNameLabel.text = currentItem?.name
-                self.favoriteButton.setImage(UIImage(named: "Favorite"), for: .normal)
+                self.itemNameLabel.text = currentItem?.name ?? clothingType.description
+                
+                if let currentUser = configuration.currentUser, let currentItem = currentItem {
+                    if currentUser.favoritedItems.contains(currentItem) {
+                        self.favoriteButton.setImage(UIImage(named: "FavoriteClicked"), for: .normal)
+                    } else {
+                        self.favoriteButton.setImage(UIImage(named: "Favorite"), for: .normal)
+                    }
+                }
             }
         }
     }
@@ -55,13 +62,22 @@ class ClosetViewController: UIViewController, Storyboarded {
         getUser(withId: userId) { (user) in
             self.user = user
             
+            guard let clothingType = ClothingType(rawValue: self.currentItemIndex) else { return }
+            let currentItem = user.clothingItems[clothingType]
+            
             DispatchQueue.main.async {
-                let currentClothingItemType = ClothingType(rawValue: self.currentItemIndex) ?? .top
-                
                 self.ownerLabel.text = user.name
-                self.itemNameLabel.text = user.clothingItems[currentClothingItemType]?.name ?? "Top"
+                self.itemNameLabel.text = currentItem?.name ?? clothingType.description
                 self.clothingItemsView.clothingItemCollectionView.reloadData()
                 self.clothingItemsView.clothingItemCollectionView.scrollToItem(at: IndexPath(row: self.currentItemIndex, section: 0), at: .centeredHorizontally, animated: false)
+                
+                if let currentUser = configuration.currentUser, let currentItem = currentItem {
+                    if currentUser.favoritedItems.contains(currentItem) {
+                        self.favoriteButton.setImage(UIImage(named: "FavoriteClicked"), for: .normal)
+                    } else {
+                        self.favoriteButton.setImage(UIImage(named: "Favorite"), for: .normal)
+                    }
+                }
             }
         }
     }
@@ -86,14 +102,28 @@ class ClosetViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func itemFavorited(_ sender: Any) {
-        favoriteButton.setImage(UIImage(named: "FavoriteClicked"), for: .normal)
+        guard let currentClothingType = ClothingType(rawValue: currentItemIndex) else { return }
+        guard let currentItem = user?.clothingItems[currentClothingType] else { return }
+        guard let currentUser = configuration.currentUser else { return }
         
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
-            self.favoriteButton.transform = self.favoriteButton.transform.scaledBy(x: 2, y: 2)
-        }) { (_) in
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.favoriteButton.transform = self.favoriteButton.transform.scaledBy(x: 0.5, y: 0.5)
-            })
+        if currentUser.favoritedItems.contains(currentItem) {
+            currentUser.favoritedItems.removeAll(where: { $0 == currentItem })
+            
+            favoriteButton.setImage(UIImage(named: "Favorite"), for: .normal)
+        }
+        
+        else {
+            currentUser.favoritedItems.append(currentItem)
+            
+            favoriteButton.setImage(UIImage(named: "FavoriteClicked"), for: .normal)
+            
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+                self.favoriteButton.transform = self.favoriteButton.transform.scaledBy(x: 2, y: 2)
+            }) { (_) in
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    self.favoriteButton.transform = self.favoriteButton.transform.scaledBy(x: 0.5, y: 0.5)
+                })
+            }
         }
     }
     

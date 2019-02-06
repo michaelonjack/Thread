@@ -31,7 +31,7 @@ struct ClothingItem {
         self.price = 0.0
     }
     
-    init(snapshot: DataSnapshot) {
+    init(snapshot: DataSnapshot, withIdAsKey: Bool = false) {
         let snapshotValue = snapshot.value as! [String: AnyObject]
         id = snapshotValue["id"] as? String ?? ""
         name = snapshotValue["name"] as? String ?? ""
@@ -40,7 +40,8 @@ struct ClothingItem {
         itemImageUrl = snapshotValue["pictureUrl"] as? String ?? ""
         price = snapshotValue["price"] as? Double ?? 0.0
         
-        let clothingType = snapshot.key
+        let itemType = snapshotValue["type"] as? String ?? ""
+        let clothingType = withIdAsKey ? itemType : snapshot.key
         switch clothingType {
         case ClothingType.bottom.description:
             type = .bottom
@@ -63,5 +64,18 @@ struct ClothingItem {
             "itemUrl": itemUrl,
             "itemImageUrl": itemImageUrl
         ]
+    }
+}
+
+extension ClothingItem: Equatable {
+    static func == (lhs: ClothingItem, rhs: ClothingItem) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+
+extension ClothingItem: Hashable {
+    var hashValue: Int {
+        return self.id.hashValue
     }
 }

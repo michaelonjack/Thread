@@ -28,6 +28,7 @@ class User {
     var profilePictureUrl: String?
     var outfitPictureUrl: String?
     var clothingItems: [ClothingType:ClothingItem] = [:]
+    var favoritedItems: [ClothingItem] = []
     
     // Computed properties
     var name: String {
@@ -90,12 +91,22 @@ class User {
             clothingItems[clothingItem.type] = clothingItem
         }
         
+        let favoritesSnapshot = snapshot.childSnapshot(forPath: "favorites")
+        for item in favoritesSnapshot.children {
+            let favoritedItem = ClothingItem(snapshot: item as! DataSnapshot, withIdAsKey: true)
+            favoritedItems.append(favoritedItem)
+        }
     }
     
     func toAnyObject() -> Any {
         var clothingItemsDict: [String:Any] = [:]
         for (type, item) in clothingItems {
             clothingItemsDict[type.description] = item.toAnyObject()
+        }
+        
+        var favoritedItemsDict: [String:Any] = [:]
+        for item in favoritedItems {
+            favoritedItemsDict[item.id] = item.toAnyObject()
         }
         
         return [
@@ -107,7 +118,8 @@ class User {
             "longitude": location?.coordinate.longitude ?? 0.0,
             "profilePictureUrl": profilePictureUrl ?? "",
             "outfitPictureUrl": outfitPictureUrl ?? "",
-            "items": clothingItemsDict
+            "items": clothingItemsDict,
+            "favorites": favoritedItemsDict
         ]
     }
     
@@ -152,5 +164,18 @@ class User {
             completion(nil)
             return
         }
+    }
+}
+
+extension User: Equatable {
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.uid == rhs.uid
+    }
+}
+
+
+extension User: Hashable {
+    var hashValue: Int {
+        return self.uid.hashValue
     }
 }
