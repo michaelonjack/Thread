@@ -92,7 +92,9 @@ class UserProfileViewController: UIViewController, Storyboarded {
 
 
 extension UserProfileViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        coordinator?.viewCloset(forUserId: userId, initialIndex: indexPath.row)
+    }
 }
 
 

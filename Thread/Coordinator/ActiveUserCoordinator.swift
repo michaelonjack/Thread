@@ -27,19 +27,21 @@ class ActiveUserCoordinator: Coordinator {
         navigationController.pushViewController(profileController, animated: false)
     }
     
-    func viewCloset(forUser user: User) {
+    func viewCloset(forUser user: User, initialIndex: Int = 0) {
         let closetController = ClosetViewController.instantiate()
         closetController.coordinator = self
         closetController.user = user
         closetController.userId = user.uid
+        closetController.currentItemIndex = initialIndex
         
         navigationController.pushViewController(closetController, animated: true)
     }
     
-    func viewCloset(forUserId userId: String) {
+    func viewCloset(forUserId userId: String, initialIndex: Int = 0) {
         let closetController = ClosetViewController.instantiate()
         closetController.coordinator = self
         closetController.userId = userId
+        closetController.currentItemIndex = initialIndex
         
         navigationController.pushViewController(closetController, animated: true)
     }

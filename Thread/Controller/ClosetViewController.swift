@@ -22,8 +22,9 @@ class ClosetViewController: UIViewController, Storyboarded {
     var userId: String!
     var user: User?
     var revealDetailsAnimator: UIViewPropertyAnimator!
-    var currentItemIndex: Int = 0 {
+    var currentItemIndex: Int! {
         didSet {
+            if !isViewLoaded { return }
             guard let clothingType = ClothingType(rawValue: currentItemIndex) else { return }
             let currentItem = user?.clothingItems[clothingType]
             
@@ -55,9 +56,12 @@ class ClosetViewController: UIViewController, Storyboarded {
             self.user = user
             
             DispatchQueue.main.async {
+                let currentClothingItemType = ClothingType(rawValue: self.currentItemIndex) ?? .top
+                
                 self.ownerLabel.text = user.name
-                self.itemNameLabel.text = user.clothingItems[.top]?.name ?? "Top"
+                self.itemNameLabel.text = user.clothingItems[currentClothingItemType]?.name ?? "Top"
                 self.clothingItemsView.clothingItemCollectionView.reloadData()
+                self.clothingItemsView.clothingItemCollectionView.scrollToItem(at: IndexPath(row: self.currentItemIndex, section: 0), at: .centeredHorizontally, animated: false)
             }
         }
     }
