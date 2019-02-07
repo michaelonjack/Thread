@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.makeKeyAndVisible()
         
-        let navController = UINavigationController()
+        let navController = CoordinatorNavigationController()
         
         coordinator = MainCoordinator(navigationController: navController)
         coordinator?.start()

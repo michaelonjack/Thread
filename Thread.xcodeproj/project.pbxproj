@@ -22,6 +22,9 @@
 		B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0291E36D2A300218590 /* ClothingItem.swift */; };
 		B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D02D1E36DE0B00218590 /* ClothingType.swift */; };
 		B183EE152207A8A90065A9F1 /* ClosetDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183EE142207A8A90065A9F1 /* ClosetDetailsView.swift */; };
+		B183EE17220BC5CF0065A9F1 /* LoginButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183EE16220BC5CF0065A9F1 /* LoginButtonsView.swift */; };
+		B183EE19220BCE800065A9F1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183EE18220BCE800065A9F1 /* LoginView.swift */; };
+		B183EE1B220BCEDC0065A9F1 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183EE1A220BCEDC0065A9F1 /* SignUpView.swift */; };
 		B18430731E2D43E300EED632 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B18430721E2D43E300EED632 /* GoogleService-Info.plist */; };
 		B184307F1E2F0C8A00EED632 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B184307E1E2F0C8A00EED632 /* Assets.xcassets */; };
 		B18430861E33B03A00EED632 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18430851E33B03A00EED632 /* User.swift */; };
@@ -83,6 +86,9 @@
 		B174D0291E36D2A300218590 /* ClothingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
 		B174D02D1E36DE0B00218590 /* ClothingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingType.swift; sourceTree = "<group>"; };
 		B183EE142207A8A90065A9F1 /* ClosetDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetDetailsView.swift; sourceTree = "<group>"; };
+		B183EE16220BC5CF0065A9F1 /* LoginButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonsView.swift; sourceTree = "<group>"; };
+		B183EE18220BCE800065A9F1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B183EE1A220BCEDC0065A9F1 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		B18430721E2D43E300EED632 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B184307E1E2F0C8A00EED632 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B18430851E33B03A00EED632 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -200,6 +206,9 @@
 				B157D4B022065B3900D83CDB /* UserProfileFeedView.swift */,
 				B1DB7EF52207231300F3C4D9 /* ClosetClothingItemsView.swift */,
 				B183EE142207A8A90065A9F1 /* ClosetDetailsView.swift */,
+				B183EE16220BC5CF0065A9F1 /* LoginButtonsView.swift */,
+				B183EE18220BCE800065A9F1 /* LoginView.swift */,
+				B183EE1A220BCEDC0065A9F1 /* SignUpView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -590,8 +599,11 @@
 				B157D4AB2206452100D83CDB /* UserProfileStatsView.swift in Sources */,
 				B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */,
 				B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */,
+				B183EE19220BCE800065A9F1 /* LoginView.swift in Sources */,
 				B157D4A42206147D00D83CDB /* UserProfileViewController.swift in Sources */,
 				B183EE152207A8A90065A9F1 /* ClosetDetailsView.swift in Sources */,
+				B183EE17220BC5CF0065A9F1 /* LoginButtonsView.swift in Sources */,
+				B183EE1B220BCEDC0065A9F1 /* SignUpView.swift in Sources */,
 				B11CBD502205CFB200D6620B /* UIColor+Additions.swift in Sources */,
 				B1FE821F22093C32006AFD43 /* Storyboarded.swift in Sources */,
 			);
