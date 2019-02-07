@@ -127,6 +127,27 @@ class ClosetViewController: UIViewController, Storyboarded {
         }
     }
     
+    @IBAction func viewItem(_ sender: UIButton) {
+        guard let currentClothingType = ClothingType(rawValue: currentItemIndex) else { return }
+        guard let currentItem = user?.clothingItems[currentClothingType] else { return }
+        
+        if let urlStr = currentItem.itemUrl, let url = URL(string: urlStr) {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:])
+            }
+        } else {
+            DispatchQueue.main.async {
+                sender.setTitle("Link Not Provided", for: .normal)
+                sender.backgroundColor = .red
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                sender.setTitle("View", for: .normal)
+                sender.backgroundColor = .black
+            }
+        }
+    }
+    
     @IBAction func dismissCloset(_ sender: Any) {
         coordinator?.pop()
     }
@@ -155,7 +176,7 @@ extension ClosetViewController: UICollectionViewDataSource {
         
         if let type = ClothingType(rawValue: indexPath.row), let item = user?.clothingItems[type] {
             priceStr = "$" + String(item.price)
-            itemImageUrl = URL(string: item.itemImageUrl)
+            itemImageUrl = URL(string: item.itemImageUrl ?? "")
         }
         
         closetItemCell.label.text = priceStr

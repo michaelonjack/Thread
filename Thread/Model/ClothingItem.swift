@@ -16,28 +16,17 @@ struct ClothingItem {
     var name: String
     var price: Double
     var brand: String
-    var itemUrl: String
-    var itemImageUrl: String
+    var itemUrl: String?
+    var itemImageUrl: String?
     var itemImage: UIImage?
-    
-    init(id: String, type: ClothingType, name: String, brand: String, itemUrl: String) {
-        self.id = id
-        self.type = type
-        self.name = name
-        self.brand = brand
-        self.itemUrl = itemUrl
-        
-        self.itemImageUrl = ""
-        self.price = 0.0
-    }
     
     init(snapshot: DataSnapshot, withIdAsKey: Bool = false) {
         let snapshotValue = snapshot.value as! [String: AnyObject]
         id = snapshotValue["id"] as? String ?? ""
         name = snapshotValue["name"] as? String ?? ""
         brand = snapshotValue["brand"] as? String ?? ""
-        itemUrl = snapshotValue["link"] as? String ?? ""
-        itemImageUrl = snapshotValue["pictureUrl"] as? String ?? ""
+        itemUrl = snapshotValue["link"] as? String ?? nil
+        itemImageUrl = snapshotValue["pictureUrl"] as? String ?? nil
         price = snapshotValue["price"] as? Double ?? 0.0
         
         let itemType = snapshotValue["type"] as? String ?? ""
@@ -55,15 +44,23 @@ struct ClothingItem {
     }
     
     func toAnyObject() -> Any {
-        return [
+        var dict: [String:Any] = [
             "id": id,
             "type": type.description,
             "name": name,
             "price": price,
-            "brand": brand,
-            "itemUrl": itemUrl,
-            "itemImageUrl": itemImageUrl
+            "brand": brand
         ]
+        
+        if let itemUrl = itemUrl {
+            dict["itemUrl"] = itemUrl
+        }
+        
+        if let itemImageUrl = itemImageUrl {
+            dict["itemImageUrl"] = itemImageUrl
+        }
+        
+        return dict
     }
 }
 

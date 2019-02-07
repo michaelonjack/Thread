@@ -434,6 +434,9 @@
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                         <state key="normal" title="View"/>
+                                        <connections>
+                                            <action selector="viewItem:" destination="ul7-99-M57" eventType="touchUpInside" id="ooE-xZ-D17"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vVJ-U0-iYt">
                                         <rect key="frame" x="278.5" y="15" width="96.5" height="36.5"/>
