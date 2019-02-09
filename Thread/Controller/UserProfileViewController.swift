@@ -78,6 +78,7 @@ class UserProfileViewController: UIViewController, Storyboarded {
                 self.profilePictureButton.sd_setImage(with: imageUrl, for: .normal, completed: nil)
             }
             
+            self.userStatisticsView.favoritesCount = user.favoritedItems.count
             self.userSummaryView.status = user.status ?? ""
             self.userSummaryView.lastCheckIn = user.lastCheckInStr
             user.getLocationStr(completion: { (locationStr) in
