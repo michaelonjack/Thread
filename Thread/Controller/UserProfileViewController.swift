@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import YPImagePicker
 
 class UserProfileViewController: UIViewController, Storyboarded {
     
@@ -29,6 +30,8 @@ class UserProfileViewController: UIViewController, Storyboarded {
         
         userFeedView.feedCollectionView.delegate = self
         userFeedView.feedCollectionView.dataSource = self
+        
+        profilePictureButton.isUserInteractionEnabled = false
 
         setupView()
         setUserInfo()
@@ -65,6 +68,11 @@ class UserProfileViewController: UIViewController, Storyboarded {
         getUser(withId: userId) { (user) in
             self.user = user
             
+            // Allow the user to update the profile picture if they're viewing their own profile
+            if user == configuration.currentUser {
+                self.profilePictureButton.isUserInteractionEnabled = true
+            }
+            
             if let imageUrlStr = user.profilePictureUrl {
                 let imageUrl = URL(string: imageUrlStr)
                 self.profilePictureButton.sd_setImage(with: imageUrl, for: .normal, completed: nil)
@@ -93,6 +101,35 @@ class UserProfileViewController: UIViewController, Storyboarded {
             coordinator?.viewCloset(forUser: user, initialIndex: initialIndex)
         } else {
             coordinator?.viewCloset(forUserId: userId, initialIndex: initialIndex)
+        }
+    }
+    
+    @IBAction func updateProfilePicture(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) || UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            var ypConfig = YPImagePickerConfiguration()
+            ypConfig.onlySquareImagesFromCamera = true
+            ypConfig.library.onlySquare = true
+            ypConfig.showsFilters = true
+            ypConfig.library.mediaType = .photo
+            ypConfig.usesFrontCamera = false
+            ypConfig.shouldSaveNewPicturesToAlbum = false
+            
+            let picker = YPImagePicker(configuration: ypConfig)
+            picker.didFinishPicking { (items, _) in
+                if let photo = items.singlePhoto, let currentUser = configuration.currentUser {
+                    uploadImage(toLocation: "images/" + currentUser.uid + "/ProfilePicture", image: photo.image, completion: { (url, error) in
+                        if error == nil {
+                            currentUser.profilePicture = photo.image
+                            currentUser.profilePictureUrl = url?.absoluteString
+                            self.profilePictureButton.setImage(photo.image, for: .normal)
+                            currentUser.save()
+                        }
+                    })
+                }
+                
+                picker.dismiss(animated: true, completion: nil)
+            }
+            present(picker, animated: true, completion: nil)
         }
     }
 }

@@ -107,6 +107,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rJB-yi-gze">
                                                 <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
                                                 <state key="normal" image="Avatar"/>
+                                                <connections>
+                                                    <action selector="updateProfilePicture:" destination="Uo4-cb-L0J" eventType="touchUpInside" id="GVr-iz-eCB"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
