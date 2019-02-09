@@ -46,6 +46,17 @@ class ActiveUserCoordinator: Coordinator {
         navigationController.pushViewController(closetController, animated: true)
     }
     
+    func updateClothingItem(ofType type: ClothingType) {
+        let closetUpdateOptionsController = ClosetUpdateOptionsViewController.instantiate()
+        closetUpdateOptionsController.clothingType = type
+        
+        navigationController.present(closetUpdateOptionsController, animated: true, completion: nil)
+    }
+    
+    func updateDetails(forClothingItem item: ClothingItem) {
+        
+    }
+    
     func logout() {
         navigationController.dismiss(animated: true, completion: nil)
     }

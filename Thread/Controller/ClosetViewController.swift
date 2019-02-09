@@ -17,6 +17,8 @@ class ClosetViewController: UIViewController, Storyboarded {
     @IBOutlet weak var detailsView: ClosetDetailsView!
     @IBOutlet weak var ownerLabel: UILabel!
     @IBOutlet weak var itemNameLabel: UILabel!
+    @IBOutlet weak var buttonsStackView: UIStackView!
+    @IBOutlet weak var updateButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
     
     var userId: String!
@@ -24,21 +26,7 @@ class ClosetViewController: UIViewController, Storyboarded {
     var revealDetailsAnimator: UIViewPropertyAnimator!
     var currentItemIndex: Int! {
         didSet {
-            if !isViewLoaded { return }
-            guard let clothingType = ClothingType(rawValue: currentItemIndex) else { return }
-            let currentItem = user?.clothingItems[clothingType]
-            
-            DispatchQueue.main.async {
-                self.itemNameLabel.text = currentItem?.name ?? clothingType.description
-                
-                if let currentUser = configuration.currentUser, let currentItem = currentItem {
-                    if currentUser.favoritedItems.contains(currentItem) {
-                        self.favoriteButton.setImage(UIImage(named: "FavoriteClicked"), for: .normal)
-                    } else {
-                        self.favoriteButton.setImage(UIImage(named: "Favorite"), for: .normal)
-                    }
-                }
-            }
+            updateViewForNewItem()
         }
     }
     
@@ -49,11 +37,21 @@ class ClosetViewController: UIViewController, Storyboarded {
         clothingItemsView.clothingItemCollectionView.dataSource = self
         
         if let user = user {
+            setUserData()
             
+            // If the owner of the item is not the current user, remove the ability to update
+            if configuration.currentUser != user {
+                buttonsStackView.removeArrangedSubview(updateButton)
+            }
         } else {
             getUser(withId: userId) { (user) in
                 self.user = user
                 self.setUserData()
+                
+                // If the owner of the item is not the current user, remove the ability to update
+                if configuration.currentUser != user {
+                    self.buttonsStackView.removeArrangedSubview(self.updateButton)
+                }
             }
         }
         
@@ -108,6 +106,24 @@ class ClosetViewController: UIViewController, Storyboarded {
         revealDetailsAnimator.pausesOnCompletion = true
     }
     
+    fileprivate func updateViewForNewItem() {
+        if !isViewLoaded { return }
+        guard let clothingType = ClothingType(rawValue: currentItemIndex) else { return }
+        let currentItem = user?.clothingItems[clothingType]
+        
+        DispatchQueue.main.async {
+            self.itemNameLabel.text = currentItem?.name ?? clothingType.description
+            
+            if let currentUser = configuration.currentUser, let currentItem = currentItem {
+                if currentUser.favoritedItems.contains(currentItem) {
+                    self.favoriteButton.setImage(UIImage(named: "FavoriteClicked"), for: .normal)
+                } else {
+                    self.favoriteButton.setImage(UIImage(named: "Favorite"), for: .normal)
+                }
+            }
+        }
+    }
+    
     @IBAction func itemFavorited(_ sender: Any) {
         guard let currentClothingType = ClothingType(rawValue: currentItemIndex) else { return }
         guard let currentItem = user?.clothingItems[currentClothingType] else { return }
@@ -153,6 +169,12 @@ class ClosetViewController: UIViewController, Storyboarded {
                 sender.backgroundColor = .black
             }
         }
+    }
+    
+    @IBAction func updateClothingItem(_ sender: Any) {
+        guard let currentClothingType = ClothingType(rawValue: currentItemIndex) else { return }
+        
+        coordinator?.updateClothingItem(ofType: currentClothingType)
     }
     
     @IBAction func dismissCloset(_ sender: Any) {

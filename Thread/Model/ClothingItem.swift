@@ -43,6 +43,16 @@ struct ClothingItem {
         }
     }
     
+    init(id:String, type: ClothingType, itemImageUrl: String?, itemImage: UIImage) {
+        self.id = id
+        self.type = type
+        self.name = ""
+        self.price = 0
+        self.brand = ""
+        self.itemImageUrl = itemImageUrl
+        self.itemImage = itemImage
+    }
+    
     func toAnyObject() -> Any {
         var dict: [String:Any] = [
             "id": id,

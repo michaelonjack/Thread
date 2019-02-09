@@ -84,11 +84,11 @@ class UserProfileViewController: UIViewController, Storyboarded {
         }
     }
     
-    @objc func viewCloset() {
+    @objc func viewCloset(initialIndex: Int = 0) {
         if let user = user {
-            coordinator?.viewCloset(forUser: user)
+            coordinator?.viewCloset(forUser: user, initialIndex: initialIndex)
         } else {
-            coordinator?.viewCloset(forUserId: userId)
+            coordinator?.viewCloset(forUserId: userId, initialIndex: initialIndex)
         }
     }
 }
@@ -97,7 +97,7 @@ class UserProfileViewController: UIViewController, Storyboarded {
 
 extension UserProfileViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        coordinator?.viewCloset(forUserId: userId, initialIndex: indexPath.row)
+        viewCloset(initialIndex: indexPath.row)
     }
 }
 
