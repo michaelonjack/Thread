@@ -33,32 +33,23 @@ class LoginView: UIView {
     var cancelButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(.lightGray, for: .normal)
         button.setTitle("cancel", for: .normal)
         
         return button
     }()
     
-    var emailField: UITextField = {
-        let field = UITextField()
+    var emailField: UnderlinedTextFieldView = {
+        let field = UnderlinedTextFieldView(contentType: UITextContentType.emailAddress, placeHolder: "email")
         field.translatesAutoresizingMaskIntoConstraints = false
-        field.adjustsFontSizeToFitWidth = true
-        field.borderStyle = UITextField.BorderStyle.none
-        field.textContentType = UITextContentType.emailAddress
-        field.backgroundColor = .white
-        field.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
+        field.textField.autocapitalizationType = UITextAutocapitalizationType.none
         
         return field
     }()
     
-    var passwordField: UITextField = {
-        let field = UITextField()
+    var passwordField: UnderlinedTextFieldView = {
+        let field = UnderlinedTextFieldView(contentType: UITextContentType.password, placeHolder: "password")
         field.translatesAutoresizingMaskIntoConstraints = false
-        field.adjustsFontSizeToFitWidth = true
-        field.borderStyle = UITextField.BorderStyle.none
-        field.textContentType = UITextContentType.password
-        field.isSecureTextEntry = true
-        field.backgroundColor = .white
-        field.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
         
         return field
     }()
@@ -81,7 +72,7 @@ class LoginView: UIView {
         layer.cornerRadius = frame.height / 10.0
         clipsToBounds = true
         
-        loginButton.layer.cornerRadius = loginButton.frame.height / 2.0
+        loginButton.layer.cornerRadius = loginButton.frame.height / 6.0
         loginButton.clipsToBounds = true
     }
     
@@ -105,20 +96,24 @@ class LoginView: UIView {
             emailField.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 30),
             emailField.centerXAnchor.constraint(equalTo: centerXAnchor),
             emailField.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75),
+            emailField.heightAnchor.constraint(equalToConstant: 30),
             
             passwordField.topAnchor.constraint(equalTo: emailField.bottomAnchor, constant: 15),
             passwordField.centerXAnchor.constraint(equalTo: centerXAnchor),
             passwordField.widthAnchor.constraint(equalTo: emailField.widthAnchor),
+            passwordField.heightAnchor.constraint(equalTo: emailField.heightAnchor),
             
             loginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             loginButton.widthAnchor.constraint(equalTo: passwordField.widthAnchor),
             loginButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 30),
-            loginButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.15),
+            loginButton.heightAnchor.constraint(equalToConstant: 60),
             
             cancelButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             cancelButton.widthAnchor.constraint(equalTo: loginButton.widthAnchor),
-            cancelButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 15),
-            cancelButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.11)
+            cancelButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 10),
+            cancelButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            bottomAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 30)
         ])
     }
 }

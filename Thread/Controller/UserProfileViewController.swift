@@ -85,7 +85,11 @@ class UserProfileViewController: UIViewController, Storyboarded {
     }
     
     @objc func viewCloset() {
-        coordinator?.viewCloset(forUserId: userId)
+        if let user = user {
+            coordinator?.viewCloset(forUser: user)
+        } else {
+            coordinator?.viewCloset(forUserId: userId)
+        }
     }
 }
 

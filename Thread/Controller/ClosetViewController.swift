@@ -48,6 +48,16 @@ class ClosetViewController: UIViewController, Storyboarded {
         clothingItemsView.clothingItemCollectionView.delegate = self
         clothingItemsView.clothingItemCollectionView.dataSource = self
         
+        if let user = user {
+            
+        } else {
+            getUser(withId: userId) { (user) in
+                self.user = user
+                self.setUserData()
+            }
+        }
+        
+        
         setUserData()
         setupAnimator()
     }
@@ -59,24 +69,21 @@ class ClosetViewController: UIViewController, Storyboarded {
     }
     
     fileprivate func setUserData() {
-        getUser(withId: userId) { (user) in
-            self.user = user
+        guard let user = user else { return }
+        guard let clothingType = ClothingType(rawValue: self.currentItemIndex) else { return }
+        let currentItem = user.clothingItems[clothingType]
+        
+        DispatchQueue.main.async {
+            self.ownerLabel.text = user.name
+            self.itemNameLabel.text = currentItem?.name ?? clothingType.description
+            self.clothingItemsView.clothingItemCollectionView.reloadData()
+            self.clothingItemsView.clothingItemCollectionView.scrollToItem(at: IndexPath(row: self.currentItemIndex, section: 0), at: .centeredHorizontally, animated: false)
             
-            guard let clothingType = ClothingType(rawValue: self.currentItemIndex) else { return }
-            let currentItem = user.clothingItems[clothingType]
-            
-            DispatchQueue.main.async {
-                self.ownerLabel.text = user.name
-                self.itemNameLabel.text = currentItem?.name ?? clothingType.description
-                self.clothingItemsView.clothingItemCollectionView.reloadData()
-                self.clothingItemsView.clothingItemCollectionView.scrollToItem(at: IndexPath(row: self.currentItemIndex, section: 0), at: .centeredHorizontally, animated: false)
-                
-                if let currentUser = configuration.currentUser, let currentItem = currentItem {
-                    if currentUser.favoritedItems.contains(currentItem) {
-                        self.favoriteButton.setImage(UIImage(named: "FavoriteClicked"), for: .normal)
-                    } else {
-                        self.favoriteButton.setImage(UIImage(named: "Favorite"), for: .normal)
-                    }
+            if let currentUser = configuration.currentUser, let currentItem = currentItem {
+                if currentUser.favoritedItems.contains(currentItem) {
+                    self.favoriteButton.setImage(UIImage(named: "FavoriteClicked"), for: .normal)
+                } else {
+                    self.favoriteButton.setImage(UIImage(named: "Favorite"), for: .normal)
                 }
             }
         }

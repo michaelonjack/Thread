@@ -14,7 +14,6 @@ class LoginButtonsView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("log in", for: .normal)
-        button.backgroundColor = .blue
         
         return button
     }()
@@ -23,7 +22,6 @@ class LoginButtonsView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("sign up", for: .normal)
-        button.backgroundColor = .red
         
         return button
     }()
@@ -47,10 +45,10 @@ class LoginButtonsView: UIView {
         layer.cornerRadius = frame.height / 10.0
         clipsToBounds = true
         
-        loginButton.layer.cornerRadius = buttonsContainerView.frame.height / 2.0
+        loginButton.layer.cornerRadius = buttonsContainerView.frame.height / 6.0
         loginButton.clipsToBounds = true
         
-        signupButton.layer.cornerRadius = buttonsContainerView.frame.height / 2.0
+        signupButton.layer.cornerRadius = buttonsContainerView.frame.height / 6.0
         signupButton.clipsToBounds = true
     }
     
