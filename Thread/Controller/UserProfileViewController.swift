@@ -36,7 +36,7 @@ class UserProfileViewController: UIViewController, Storyboarded {
     
     fileprivate func setupView() {
         
-        userFeedView.viewButton.addTarget(self, action: #selector(viewCloset), for: .touchUpInside)
+        userFeedView.viewButton.addTarget(self, action: #selector(viewPressed), for: .touchUpInside)
         
         setupProfilePictureButton()
         setupLayout()
@@ -84,7 +84,11 @@ class UserProfileViewController: UIViewController, Storyboarded {
         }
     }
     
-    @objc func viewCloset(initialIndex: Int = 0) {
+    @objc func viewPressed() {
+        viewCloset(initialIndex: 0)
+    }
+    
+    func viewCloset(initialIndex: Int = 0) {
         if let user = user {
             coordinator?.viewCloset(forUser: user, initialIndex: initialIndex)
         } else {

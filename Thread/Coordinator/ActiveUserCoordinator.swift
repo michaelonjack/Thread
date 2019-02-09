@@ -48,13 +48,36 @@ class ActiveUserCoordinator: Coordinator {
     
     func updateClothingItem(ofType type: ClothingType) {
         let closetUpdateOptionsController = ClosetUpdateOptionsViewController.instantiate()
+        closetUpdateOptionsController.coordinator = self
         closetUpdateOptionsController.clothingType = type
         
         navigationController.present(closetUpdateOptionsController, animated: true, completion: nil)
     }
     
-    func updateDetails(forClothingItem item: ClothingItem) {
+    func startEditingDetails(forClothingItem item: ClothingItem) {
+        let clothingItemEditController = ClothingItemEditViewController.instantiate()
+        clothingItemEditController.coordinator = self
+        clothingItemEditController.clothingItem = item
         
+        navigationController.pushViewController(clothingItemEditController, animated: true)
+    }
+    
+    func finishEditingDetails(forClothingItem item: ClothingItem) {
+        configuration.currentUser?.clothingItems[item.type] = item
+        configuration.currentUser?.save()
+        
+        let navControllers = navigationController.viewControllers
+        if let closetController = navControllers[navControllers.count - 2] as? ClosetViewController {
+            closetController.user = configuration.currentUser
+            closetController.updateViewForNewItem()
+            closetController.clothingItemsView.clothingItemCollectionView.reloadItems(at: [IndexPath(row: item.type.rawValue, section: 0)])
+        }
+        
+        pop()
+    }
+    
+    func cancelEditingClothingItem() {
+        pop()
     }
     
     func logout() {

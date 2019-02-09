@@ -106,7 +106,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rJB-yi-gze">
                                                 <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
-                                                <state key="normal" title="Button" image="Avatar"/>
+                                                <state key="normal" image="Avatar"/>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -449,10 +449,10 @@
             </objects>
             <point key="canvasLocation" x="986" y="139"/>
         </scene>
-        <!--Closet Item Update View Controller-->
+        <!--Clothing Item Edit View Controller-->
         <scene sceneID="Hbd-A9-h6X">
             <objects>
-                <viewController id="TW6-Vr-EjI" customClass="ClosetItemUpdateViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ClothingItemEditViewController" id="TW6-Vr-EjI" customClass="ClothingItemEditViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xQc-mj-HVZ"/>
                         <viewControllerLayoutGuide type="bottom" id="Ks2-pV-wxo"/>
@@ -462,22 +462,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="luF-u9-OuN" userLabel="ButtonsView">
-                                <rect key="frame" x="0.0" y="587" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="600.5" width="375" height="66.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Kxj-cE-3BZ">
-                                        <rect key="frame" x="19" y="12" width="337.5" height="56"/>
+                                        <rect key="frame" x="19" y="10" width="337.5" height="46.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhI-Pe-tRZ" userLabel="CancelButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="161" height="56"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="161" height="46.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                 <state key="normal" title="Cancel"/>
+                                                <connections>
+                                                    <action selector="canceled:" destination="TW6-Vr-EjI" eventType="touchUpInside" id="DgR-6C-pIM"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iA-7I-Ugn" userLabel="UpdateButton">
-                                                <rect key="frame" x="176" y="0.0" width="161.5" height="56"/>
+                                                <rect key="frame" x="176" y="0.0" width="161.5" height="46.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                 <state key="normal" title="Update"/>
+                                                <connections>
+                                                    <action selector="updateItem:" destination="TW6-Vr-EjI" eventType="touchUpInside" id="mdI-jl-cFi"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -490,15 +496,36 @@
                                     <constraint firstItem="Kxj-cE-3BZ" firstAttribute="centerY" secondItem="luF-u9-OuN" secondAttribute="centerY" id="bdi-0d-la9"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DOr-rZ-BqA">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="267"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jwN-Ix-LhF" customClass="ClothingItemEditView" customModule="Thread" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="267" width="375" height="333.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="luF-u9-OuN" firstAttribute="height" secondItem="fHR-ll-OKp" secondAttribute="height" multiplier="0.12" id="6SW-fs-s2W"/>
+                            <constraint firstItem="luF-u9-OuN" firstAttribute="height" secondItem="fHR-ll-OKp" secondAttribute="height" multiplier="0.1" id="6SW-fs-s2W"/>
+                            <constraint firstItem="DOr-rZ-BqA" firstAttribute="leading" secondItem="fHR-ll-OKp" secondAttribute="leading" id="8en-v5-aHH"/>
                             <constraint firstAttribute="trailing" secondItem="luF-u9-OuN" secondAttribute="trailing" id="8hh-Cm-HtX"/>
+                            <constraint firstAttribute="trailing" secondItem="DOr-rZ-BqA" secondAttribute="trailing" id="90W-Z2-9Qr"/>
+                            <constraint firstItem="DOr-rZ-BqA" firstAttribute="height" secondItem="fHR-ll-OKp" secondAttribute="height" multiplier="0.4" id="FD8-CV-bmm"/>
+                            <constraint firstItem="luF-u9-OuN" firstAttribute="top" secondItem="jwN-Ix-LhF" secondAttribute="bottom" id="HCG-55-qWS"/>
+                            <constraint firstAttribute="trailing" secondItem="jwN-Ix-LhF" secondAttribute="trailing" id="JOG-2w-wen"/>
                             <constraint firstItem="luF-u9-OuN" firstAttribute="leading" secondItem="fHR-ll-OKp" secondAttribute="leading" id="Ja8-GK-vBl"/>
+                            <constraint firstItem="jwN-Ix-LhF" firstAttribute="leading" secondItem="fHR-ll-OKp" secondAttribute="leading" id="QkW-kv-kPN"/>
                             <constraint firstItem="Ks2-pV-wxo" firstAttribute="top" secondItem="luF-u9-OuN" secondAttribute="bottom" id="hW7-RK-jfA"/>
+                            <constraint firstItem="jwN-Ix-LhF" firstAttribute="top" secondItem="DOr-rZ-BqA" secondAttribute="bottom" id="syb-aQ-JtP"/>
+                            <constraint firstItem="DOr-rZ-BqA" firstAttribute="top" secondItem="fHR-ll-OKp" secondAttribute="top" id="t5S-DB-Dcr"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="mhI-Pe-tRZ" id="tXd-WF-Oq8"/>
+                        <outlet property="editView" destination="jwN-Ix-LhF" id="Gg1-ZD-dQS"/>
+                        <outlet property="itemImageView" destination="DOr-rZ-BqA" id="kwK-1d-ZXu"/>
+                        <outlet property="updateButton" destination="1iA-7I-Ugn" id="PQj-dn-49P"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PCt-vV-lcN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -16,6 +16,7 @@ struct ClothingItem {
     var name: String
     var price: Double
     var brand: String
+    var details: String?
     var itemUrl: String?
     var itemImageUrl: String?
     var itemImage: UIImage?
@@ -25,9 +26,10 @@ struct ClothingItem {
         id = snapshotValue["id"] as? String ?? ""
         name = snapshotValue["name"] as? String ?? ""
         brand = snapshotValue["brand"] as? String ?? ""
-        itemUrl = snapshotValue["link"] as? String ?? nil
-        itemImageUrl = snapshotValue["pictureUrl"] as? String ?? nil
+        itemUrl = snapshotValue["itemUrl"] as? String ?? nil
+        itemImageUrl = snapshotValue["itemImageUrl"] as? String ?? nil
         price = snapshotValue["price"] as? Double ?? 0.0
+        details = snapshotValue["details"] as? String ?? nil
         
         let itemType = snapshotValue["type"] as? String ?? ""
         let clothingType = withIdAsKey ? itemType : snapshot.key
@@ -43,13 +45,12 @@ struct ClothingItem {
         }
     }
     
-    init(id:String, type: ClothingType, itemImageUrl: String?, itemImage: UIImage) {
+    init(id:String, type: ClothingType, itemImage: UIImage) {
         self.id = id
         self.type = type
         self.name = ""
         self.price = 0
         self.brand = ""
-        self.itemImageUrl = itemImageUrl
         self.itemImage = itemImage
     }
     
@@ -68,6 +69,10 @@ struct ClothingItem {
         
         if let itemImageUrl = itemImageUrl {
             dict["itemImageUrl"] = itemImageUrl
+        }
+        
+        if let details = details {
+            dict["details"] = details
         }
         
         return dict

@@ -247,8 +247,6 @@ class LoginViewController: UIViewController, Storyboarded {
                     
                     let newUser = User(uid: (user?.uid)!, firstName: firstName, lastName: lastName, email: email)
                     let newUserRef = self.usersRef.child( newUser.uid )
-                    
-                    
                     newUserRef.setValue(newUser.toAnyObject())
                     
                     

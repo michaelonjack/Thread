@@ -10,10 +10,9 @@ import TabbedPageView
 
 class ClosetDetailsView: UIView {
     
-    var detailsView: UIView = {
-        let view = UIView()
+    var detailsView: ClosetDetailsTextView = {
+        let view = ClosetDetailsTextView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
         
         return view
     }()

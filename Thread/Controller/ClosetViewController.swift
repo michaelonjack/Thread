@@ -55,15 +55,20 @@ class ClosetViewController: UIViewController, Storyboarded {
             }
         }
         
-        
         setUserData()
-        setupAnimator()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         revealDetailsAnimator.stopAnimation(true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        revealDetailsAnimator = nil
+        setupAnimator()
     }
     
     fileprivate func setUserData() {
@@ -74,6 +79,8 @@ class ClosetViewController: UIViewController, Storyboarded {
         DispatchQueue.main.async {
             self.ownerLabel.text = user.name
             self.itemNameLabel.text = currentItem?.name ?? clothingType.description
+            self.detailsView.detailsView.detailsLabel.text = currentItem?.details
+            
             self.clothingItemsView.clothingItemCollectionView.reloadData()
             self.clothingItemsView.clothingItemCollectionView.scrollToItem(at: IndexPath(row: self.currentItemIndex, section: 0), at: .centeredHorizontally, animated: false)
             
@@ -106,13 +113,14 @@ class ClosetViewController: UIViewController, Storyboarded {
         revealDetailsAnimator.pausesOnCompletion = true
     }
     
-    fileprivate func updateViewForNewItem() {
+    func updateViewForNewItem() {
         if !isViewLoaded { return }
         guard let clothingType = ClothingType(rawValue: currentItemIndex) else { return }
         let currentItem = user?.clothingItems[clothingType]
         
         DispatchQueue.main.async {
             self.itemNameLabel.text = currentItem?.name ?? clothingType.description
+            self.detailsView.detailsView.detailsLabel.text = currentItem?.details
             
             if let currentUser = configuration.currentUser, let currentItem = currentItem {
                 if currentUser.favoritedItems.contains(currentItem) {
@@ -155,6 +163,7 @@ class ClosetViewController: UIViewController, Storyboarded {
         guard let currentItem = user?.clothingItems[currentClothingType] else { return }
         
         if let urlStr = currentItem.itemUrl, let url = URL(string: urlStr) {
+            
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:])
             }
@@ -200,11 +209,13 @@ extension ClosetViewController: UICollectionViewDataSource {
         
         guard let closetItemCell = cell as? ClosetItemCollectionViewCell else { return cell }
         
-        var priceStr: String = "$0"
+        var priceStr: String = "No Price"
         var itemImageUrl: URL?
         
         if let type = ClothingType(rawValue: indexPath.row), let item = user?.clothingItems[type] {
-            priceStr = "$" + String(item.price)
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .currency
+            priceStr = formatter.string(from: item.price as NSNumber) ?? "No Price"
             itemImageUrl = URL(string: item.itemImageUrl ?? "")
         }
         

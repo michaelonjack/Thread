@@ -56,20 +56,12 @@ class ClosetUpdateOptionsViewController: UIViewController, Storyboarded {
             
             let picker = YPImagePicker(configuration: ypConfig)
             picker.didFinishPicking { (items, _) in
-                if let photo = items.singlePhoto, let currentUser = configuration.currentUser {
-                    uploadImage(toLocation: "images/" + currentUser.uid + "/" + self.clothingType.description, image: photo.image, completion: { (url, error) in
-                        if error == nil {
-                            let newItem = ClothingItem(id: UUID().uuidString, type: self.clothingType, itemImageUrl: url?.absoluteString, itemImage: photo.image)
-                            
-                            self.coordinator?.updateDetails(forClothingItem: newItem)
-                        }
-                        
-                        picker.dismiss(animated: true, completion: {
-                            DispatchQueue.main.async {
-                                self.dismiss(animated: true, completion: nil)
-                            }
-                        })
-                    })
+                if let photo = items.singlePhoto {
+                    let newItem = ClothingItem(id: UUID().uuidString, type: self.clothingType, itemImage: photo.image)
+                    
+                    self.coordinator?.startEditingDetails(forClothingItem: newItem)
+                    picker.dismiss(animated: false, completion: nil)
+                    self.dismiss(animated: false, completion: nil)
                 } else {
                     picker.dismiss(animated: true, completion: nil)
                 }

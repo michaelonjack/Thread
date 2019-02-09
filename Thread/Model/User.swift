@@ -109,18 +109,25 @@ class User {
             favoritedItemsDict[item.id] = item.toAnyObject()
         }
         
-        return [
+        var dict: [String: Any] = [
             "firstName": firstName,
             "lastName": lastName,
             "email": email,
-            "status": status ?? "",
             "latitude": location?.coordinate.latitude ?? 0.0,
             "longitude": location?.coordinate.longitude ?? 0.0,
-            "profilePictureUrl": profilePictureUrl ?? "",
-            "outfitPictureUrl": outfitPictureUrl ?? "",
             "items": clothingItemsDict,
             "favorites": favoritedItemsDict
         ]
+        
+        if let profilePictureUrl = profilePictureUrl {
+            dict["profilePictureUrl"] = profilePictureUrl
+        }
+        
+        if let status = status {
+            dict["status"] = status
+        }
+        
+        return dict
     }
     
     func getLocationStr(completion: @escaping (_ location: String?) -> Void) {
@@ -164,6 +171,11 @@ class User {
             completion(nil)
             return
         }
+    }
+    
+    func save() {
+        let userReference = Database.database().reference(withPath: "users/")
+        userReference.updateChildValues([uid : toAnyObject()])
     }
 }
 
