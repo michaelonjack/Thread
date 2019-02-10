@@ -33,6 +33,11 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
         updateButton.clipsToBounds = true
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.view.endEditing(true)
+    }
+    
     fileprivate func setInitialData() {
         itemImageView.image = clothingItem.itemImage
         

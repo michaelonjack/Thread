@@ -60,9 +60,9 @@ class ClosetUpdateOptionsViewController: UIViewController, Storyboarded {
                 if let photo = items.singlePhoto {
                     let newItem = ClothingItem(id: UUID().uuidString, type: self.clothingType, itemImage: photo.image)
                     
+                    picker.dismiss(animated: true, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
                     self.coordinator?.startEditingDetails(forClothingItem: newItem)
-                    picker.dismiss(animated: false, completion: nil)
-                    self.dismiss(animated: false, completion: nil)
                 } else {
                     picker.dismiss(animated: true, completion: nil)
                 }

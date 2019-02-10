@@ -23,14 +23,21 @@ class ClothingItemSearchViewController: UIViewController, Storyboarded {
         searchBar.searchButton.addTarget(self, action: #selector(performSearch), for: .touchUpInside)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+    
     @objc func performSearch() {
+        view.endEditing(true)
         
         searchResults = []
+        
         let searchQuery = searchBar.searchBarView.textField.text ?? ""
         
         APIHelper.searchShopStyle(query: searchQuery, limit: 30) { (items, error) in
             if error != nil {
-                print(error?.localizedDescription)
+                print(error.debugDescription)
             }
             
             self.searchResults = items
