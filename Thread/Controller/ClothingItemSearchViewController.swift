@@ -17,10 +17,12 @@ class ClothingItemSearchViewController: UIViewController, Storyboarded {
     @IBOutlet weak var cancelButton: UIButton!
     
     var searchResults: [ClothingItem] = []
+    var clothingType: ClothingType!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        resultsTable.coordinator = coordinator
         searchBar.searchButton.addTarget(self, action: #selector(performSearch), for: .touchUpInside)
     }
     
@@ -46,11 +48,12 @@ class ClothingItemSearchViewController: UIViewController, Storyboarded {
                 print(error.debugDescription)
             }
             
-            self.searchResults = items
+            self.searchResults = items.map { ClothingItem(shopStyleItem: $0, clothingType: self.clothingType) }
             
             DispatchQueue.main.async {
                 self.resultsTable.clothingItems = self.searchResults
                 self.resultsTable.itemsTableView.reloadData()
+                self.resultsTable.scrollToTop()
             }
         }
     }

@@ -14,10 +14,15 @@ protocol Coordinator {
     
     func start()
     func pop()
+    func pop(to controller: UIViewController)
 }
 
 extension Coordinator {
     func pop() {
         navigationController.popViewController(animated: true)
+    }
+    
+    func pop(to controller: UIViewController) {
+        navigationController.popToViewController(controller, animated: true)
     }
 }

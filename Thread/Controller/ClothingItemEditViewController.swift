@@ -39,11 +39,23 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
     }
     
     fileprivate func setInitialData() {
-        itemImageView.image = clothingItem.itemImage
+        
+        if let itemImage = clothingItem.itemImage {
+            itemImageView.image = itemImage
+        } else if let itemImageUrlStr = clothingItem.itemImageUrl, let url = URL(string: itemImageUrlStr) {
+            itemImageView.sd_setImage(with: url) { (image, error, _, _) in
+                if error != nil {
+                    print(error.debugDescription)
+                    return
+                }
+                
+                self.clothingItem.itemImage = image
+            }
+        }
         
         editView.nameField.textField.text = clothingItem.name
         editView.brandField.textField.text = clothingItem.brand
-        editView.priceField.textField.text = String(clothingItem.price)
+        editView.priceField.textField.text = String(format: "%.2f", clothingItem.price)
         editView.linkField.textField.text = clothingItem.itemUrl
         editView.detailsField.text = clothingItem.details ?? ""
     }
@@ -64,6 +76,10 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
                     self.clothingItem.brand = self.editView.brandField.textField.text ?? ""
                     self.clothingItem.price = Double(self.editView.priceField.textField.text ?? "0") ?? 0
                     self.clothingItem.itemUrl = self.editView.linkField.textField.text
+                    
+                    if self.clothingItem.smallItemImageUrl == nil {
+                        self.clothingItem.smallItemImageUrl = url?.absoluteString
+                    }
                     
                     self.coordinator?.finishEditingDetails(forClothingItem: self.clothingItem)
                 }

@@ -46,9 +46,10 @@ class ActiveUserCoordinator: Coordinator {
         navigationController.pushViewController(closetController, animated: true)
     }
     
-    func searchClothingItems() {
+    func searchClothingItems(forType clothingType: ClothingType) {
         let searchController = ClothingItemSearchViewController.instantiate()
         searchController.coordinator = self
+        searchController.clothingType = clothingType
         
         navigationController.pushViewController(searchController, animated: true)
     }
@@ -74,13 +75,22 @@ class ActiveUserCoordinator: Coordinator {
         configuration.currentUser?.save()
         
         let navControllers = navigationController.viewControllers
+        
         if let closetController = navControllers[navControllers.count - 2] as? ClosetViewController {
             closetController.user = configuration.currentUser
             closetController.updateViewForNewItem()
             closetController.clothingItemsView.clothingItemCollectionView.reloadItems(at: [IndexPath(row: item.type.rawValue, section: 0)])
+            
+            pop()
         }
         
-        pop()
+        else if let closetController = navControllers[navControllers.count - 3] as? ClosetViewController {
+            closetController.user = configuration.currentUser
+            closetController.updateViewForNewItem()
+            closetController.clothingItemsView.clothingItemCollectionView.reloadItems(at: [IndexPath(row: item.type.rawValue, section: 0)])
+            
+            pop(to: closetController)
+        }
     }
     
     func cancelEditingClothingItem() {

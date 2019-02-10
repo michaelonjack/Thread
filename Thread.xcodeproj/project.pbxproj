@@ -34,7 +34,7 @@
 		B1C8161A220F836600B35B43 /* ClothingItemSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C81619220F836600B35B43 /* ClothingItemSearchViewController.swift */; };
 		B1C8161C220F853D00B35B43 /* ClothingItemSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C8161B220F853D00B35B43 /* ClothingItemSearchBar.swift */; };
 		B1C81620220F960E00B35B43 /* ClothingItemTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C8161F220F960E00B35B43 /* ClothingItemTableView.swift */; };
-		B1C81622220F96CE00B35B43 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C81621220F96CE00B35B43 /* ImageTableViewCell.swift */; };
+		B1C81622220F96CE00B35B43 /* ClothingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C81621220F96CE00B35B43 /* ClothingItemTableViewCell.swift */; };
 		B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A8E1E2C66730036E559 /* AppDelegate.swift */; };
 		B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C96A901E2C66730036E559 /* LoginViewController.swift */; };
 		B1C96A941E2C66730036E559 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C96A921E2C66730036E559 /* Main.storyboard */; };
@@ -109,7 +109,7 @@
 		B1C81619220F836600B35B43 /* ClothingItemSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemSearchViewController.swift; sourceTree = "<group>"; };
 		B1C8161B220F853D00B35B43 /* ClothingItemSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemSearchBar.swift; sourceTree = "<group>"; };
 		B1C8161F220F960E00B35B43 /* ClothingItemTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemTableView.swift; sourceTree = "<group>"; };
-		B1C81621220F96CE00B35B43 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		B1C81621220F96CE00B35B43 /* ClothingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemTableViewCell.swift; sourceTree = "<group>"; };
 		B1C96A8B1E2C66730036E559 /* Thread.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thread.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C96A8E1E2C66730036E559 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1C96A901E2C66730036E559 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -329,7 +329,7 @@
 		B1C8161E220F95ED00B35B43 /* TableCell */ = {
 			isa = PBXGroup;
 			children = (
-				B1C81621220F96CE00B35B43 /* ImageTableViewCell.swift */,
+				B1C81621220F96CE00B35B43 /* ClothingItemTableViewCell.swift */,
 			);
 			path = TableCell;
 			sourceTree = "<group>";
@@ -667,7 +667,7 @@
 				B174D0281E36CAC700218590 /* APIHelper.swift in Sources */,
 				B1C2D48C220D2B7D00AD36BA /* UIView+Additions.swift in Sources */,
 				B18430861E33B03A00EED632 /* User.swift in Sources */,
-				B1C81622220F96CE00B35B43 /* ImageTableViewCell.swift in Sources */,
+				B1C81622220F96CE00B35B43 /* ClothingItemTableViewCell.swift in Sources */,
 				B1C8161A220F836600B35B43 /* ClothingItemSearchViewController.swift in Sources */,
 				B157D4A722061F0300D83CDB /* ImageCollectionViewCell.swift in Sources */,
 				B157D4A12205E1BC00D83CDB /* Configuration.swift in Sources */,
@@ -874,7 +874,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Thread/Thread-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -899,7 +899,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Thread/Thread-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;

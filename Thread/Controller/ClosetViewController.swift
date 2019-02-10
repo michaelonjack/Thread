@@ -163,7 +163,6 @@ class ClosetViewController: UIViewController, Storyboarded {
         guard let currentItem = user?.clothingItems[currentClothingType] else { return }
         
         if let urlStr = currentItem.itemUrl, let url = URL(string: urlStr) {
-            
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:])
             }

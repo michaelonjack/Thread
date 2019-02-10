@@ -10,12 +10,14 @@ import UIKit
 
 class ClothingItemTableView: UIView {
     
+    weak var coordinator: ActiveUserCoordinator?
+    
     var itemsTableView: UITableView = {
         let tv = UITableView()
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.rowHeight = UITableView.automaticDimension
         tv.estimatedRowHeight = 300
-        tv.register(ImageTableViewCell.self, forCellReuseIdentifier: "ImageTableCell")
+        tv.register(ClothingItemTableViewCell.self, forCellReuseIdentifier: "ImageTableCell")
         
         return tv
     }()
@@ -52,6 +54,12 @@ class ClothingItemTableView: UIView {
             itemsTableView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
+    
+    func scrollToTop() {
+        if clothingItems.count > 0 {
+            itemsTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
+    }
 }
 
 
@@ -59,6 +67,22 @@ class ClothingItemTableView: UIView {
 extension ClothingItemTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? ClothingItemTableViewCell else { return }
+        
+        if cell.blurDetailView.alpha == 0 {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                cell.blurDetailView.alpha = 1
+                cell.detailStackView.alpha = 1
+            })
+        } else {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                cell.blurDetailView.alpha = 0
+                cell.detailStackView.alpha = 0
+            })
+        }
     }
 }
 
@@ -71,24 +95,50 @@ extension ClothingItemTableView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ImageTableCell", for: indexPath)
+        
+        guard let clothingItemCell = cell as? ClothingItemTableViewCell else { return cell }
+        
         let clothingItem = clothingItems[indexPath.row]
         
-        guard let imageCell = cell as? ImageTableViewCell else { return cell }
+        clothingItemCell.delegate = self
+        clothingItemCell.itemImageView.image = nil
+        clothingItemCell.itemNameLabel.text = clothingItem.name
+        clothingItemCell.blurDetailView.alpha = 0
+        clothingItemCell.detailStackView.alpha = 0
+        clothingItemCell.itemImageView.contentMode = .scaleAspectFit
         
-        imageCell.itemImageView.image = nil
-        imageCell.itemImageView.contentMode = .scaleAspectFit
-        
-        if let itemImage = clothingItem.itemImage {
-            imageCell.itemImageView.image = itemImage
-        } else if let itemImageUrlStr = clothingItem.itemImageUrl, let itemImageUrl = URL(string: itemImageUrlStr) {
-            imageCell.itemImageView.sd_setImage(with: itemImageUrl) { (image, error, _, _) in
-                self.clothingItems[indexPath.row].itemImage = image
+        if let itemImage = clothingItem.smallItemImage {
+            clothingItemCell.itemImageView.image = itemImage
+        } else if let itemImageUrlStr = clothingItem.smallItemImageUrl, let itemImageUrl = URL(string: itemImageUrlStr) {
+            clothingItemCell.itemImageView.sd_setImage(with: itemImageUrl) { (image, error, _, _) in
+                self.clothingItems[indexPath.row].smallItemImage = image
                 tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
             }
         }
         
-        return imageCell
+        return clothingItemCell
+    }
+}
+
+
+
+extension ClothingItemTableView: ClothingItemTableCellDelegate {
+    func viewClothingItem(at cell: ClothingItemTableViewCell) {
+        guard let indexPath = self.itemsTableView.indexPath(for: cell) else { return }
+        
+        let currentItem = clothingItems[indexPath.row]
+        
+        if let urlStr = currentItem.itemUrl, let url = URL(string: urlStr) {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:])
+            }
+        }
     }
     
-    
+    func selectClothingItem(at cell: ClothingItemTableViewCell) {
+        guard let indexPath = self.itemsTableView.indexPath(for: cell) else { return }
+        
+        let currentItem = clothingItems[indexPath.row]
+        self.coordinator?.startEditingDetails(forClothingItem: currentItem)
+    }
 }

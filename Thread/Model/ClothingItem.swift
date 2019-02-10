@@ -19,7 +19,9 @@ struct ClothingItem {
     var details: String?
     var itemUrl: String?
     var itemImageUrl: String?
+    var smallItemImageUrl: String?
     var itemImage: UIImage?
+    var smallItemImage: UIImage?
     
     init(snapshot: DataSnapshot, withIdAsKey: Bool = false) {
         let snapshotValue = snapshot.value as! [String: AnyObject]
@@ -28,6 +30,7 @@ struct ClothingItem {
         brand = snapshotValue["brand"] as? String ?? ""
         itemUrl = snapshotValue["itemUrl"] as? String ?? nil
         itemImageUrl = snapshotValue["itemImageUrl"] as? String ?? nil
+        smallItemImageUrl = snapshotValue["smallItemImageUrl"] as? String ?? nil
         price = snapshotValue["price"] as? Double ?? 0.0
         details = snapshotValue["details"] as? String ?? nil
         
@@ -54,14 +57,16 @@ struct ClothingItem {
         self.itemImage = itemImage
     }
     
-    init(shopStyleItem: ShopStyleClothingItem) {
+    init(shopStyleItem: ShopStyleClothingItem, clothingType: ClothingType) {
         self.id = String(shopStyleItem.id)
-        self.type = .top
+        self.type = clothingType
         self.name = shopStyleItem.unbrandedName
         self.price = shopStyleItem.price
         self.brand = shopStyleItem.brand?.name ?? ""
+        self.details = shopStyleItem.description
         self.itemUrl = shopStyleItem.clickUrl
-        self.itemImageUrl = shopStyleItem.image.sizes["IPhone"]?.url
+        self.itemImageUrl = shopStyleItem.image.sizes["Best"]?.url
+        self.smallItemImageUrl = shopStyleItem.image.sizes["IPhone"]?.url
     }
     
     func toAnyObject() -> Any {
@@ -79,6 +84,10 @@ struct ClothingItem {
         
         if let itemImageUrl = itemImageUrl {
             dict["itemImageUrl"] = itemImageUrl
+        }
+        
+        if let smallItemImageUrl = smallItemImageUrl {
+            dict["smallItemImageUrl"] = smallItemImageUrl
         }
         
         if let details = details {

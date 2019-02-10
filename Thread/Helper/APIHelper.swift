@@ -13,7 +13,7 @@ struct ShopStyleRoot: Decodable {
 }
 
 struct ShopStyleClothingItem: Decodable {
-    let id: Double
+    let id: Int
     let brandedName: String
     let unbrandedName: String
     let description: String
@@ -61,7 +61,7 @@ struct APIHelper {
     
     
     
-    static func searchShopStyle(query: String, limit: Int = 40, completion: @escaping (([ClothingItem], Error?) -> Void)) {
+    static func searchShopStyle(query: String, limit: Int = 40, completion: @escaping (([ShopStyleClothingItem], Error?) -> Void)) {
         
         guard let shopStyleAPIKey = valueForAPIKey(keyname: "ShopStyle") else { return }
         guard let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
@@ -71,35 +71,31 @@ struct APIHelper {
         urlStr = urlStr + "&limit=" + String(limit)
         urlStr = urlStr + "&fts=" + encodedQuery
         
-        var searchResults: [ClothingItem] = []
-        
         if let url = URL(string: urlStr) {
             URLSession.shared.dataTask(with: url) { (data, response, error) in
                 
                 if error != nil {
-                    completion(searchResults, error)
+                    completion([ShopStyleClothingItem](), error)
                     return
                 }
                 
                 guard let data = data else {
-                    completion(searchResults, nil)
+                    completion([ShopStyleClothingItem](), nil)
                     return
                 }
                 
                 do {
                     let jsonData = try JSONDecoder().decode(ShopStyleRoot.self, from: data)
                     
-                    searchResults = jsonData.products.map { ClothingItem(shopStyleItem: $0) }
-                    
-                    completion(searchResults, nil)
+                    completion(jsonData.products, nil)
                     
                 } catch let jsonError {
-                    completion(searchResults, jsonError)
+                    completion([ShopStyleClothingItem](), jsonError)
                     return
                 }
             }.resume()
         } else {
-            completion(searchResults, nil)
+            completion([ShopStyleClothingItem](), nil)
             return
         }
     }
