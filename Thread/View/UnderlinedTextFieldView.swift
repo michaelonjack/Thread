@@ -16,6 +16,7 @@ class UnderlinedTextFieldView: UIView {
         field.adjustsFontSizeToFitWidth = true
         field.borderStyle = UITextField.BorderStyle.none
         field.textAlignment = .center
+        field.tintColor = .black
         field.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
         
         return field

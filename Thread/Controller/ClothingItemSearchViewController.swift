@@ -14,6 +14,7 @@ class ClothingItemSearchViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var searchBar: ClothingItemSearchBar!
     @IBOutlet weak var resultsTable: ClothingItemTableView!
+    @IBOutlet weak var cancelButton: UIButton!
     
     var searchResults: [ClothingItem] = []
     
@@ -21,6 +22,11 @@ class ClothingItemSearchViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         
         searchBar.searchButton.addTarget(self, action: #selector(performSearch), for: .touchUpInside)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        cancelButton.layer.cornerRadius = cancelButton.frame.height / 6.0
+        cancelButton.clipsToBounds = true
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -47,6 +53,9 @@ class ClothingItemSearchViewController: UIViewController, Storyboarded {
                 self.resultsTable.itemsTableView.reloadData()
             }
         }
-        
+    }
+    
+    @IBAction func cancelSearch(_ sender: Any) {
+        coordinator?.pop()
     }
 }

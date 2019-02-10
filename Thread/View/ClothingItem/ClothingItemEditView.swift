@@ -83,6 +83,7 @@ class ClothingItemEditView: UIView {
         field.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.layer.borderWidth = 1
+        field.tintColor = .black
         
         return field
     }()

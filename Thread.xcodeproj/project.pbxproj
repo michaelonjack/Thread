@@ -301,7 +301,6 @@
 				B183EE142207A8A90065A9F1 /* ClosetDetailsView.swift */,
 				B1DC8197220F1FB50005278D /* ClosetDetailsTextView.swift */,
 				B1DB7EF52207231300F3C4D9 /* ClosetClothingItemsView.swift */,
-				B1DC8193220EF00A0005278D /* ClothingItemEditView.swift */,
 			);
 			path = Closet;
 			sourceTree = "<group>";
@@ -320,6 +319,7 @@
 		B1C8161D220F884000B35B43 /* ClothingItem */ = {
 			isa = PBXGroup;
 			children = (
+				B1DC8193220EF00A0005278D /* ClothingItemEditView.swift */,
 				B1C8161B220F853D00B35B43 /* ClothingItemSearchBar.swift */,
 				B1C8161F220F960E00B35B43 /* ClothingItemTableView.swift */,
 			);

@@ -315,30 +315,55 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8IH-Lx-G32" customClass="ClothingItemTableView" customModule="Thread" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="86.5" width="375" height="580.5"/>
+                                <rect key="frame" x="0.0" y="86.5" width="375" height="534"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S9X-Gs-VsD" userLabel="Cancel Button View">
+                                <rect key="frame" x="0.0" y="620.5" width="375" height="46.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3M-rR-I7E">
+                                        <rect key="frame" x="37.5" y="4.5" width="300" height="37.5"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelSearch:" destination="Lkw-R2-V8G" eventType="touchUpInside" id="ru0-lK-bQu"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="i3M-rR-I7E" firstAttribute="height" secondItem="S9X-Gs-VsD" secondAttribute="height" multiplier="0.8" id="6Cs-SM-V2X"/>
+                                    <constraint firstItem="i3M-rR-I7E" firstAttribute="width" secondItem="S9X-Gs-VsD" secondAttribute="width" multiplier="0.8" id="ERq-ak-4sW"/>
+                                    <constraint firstItem="i3M-rR-I7E" firstAttribute="centerX" secondItem="S9X-Gs-VsD" secondAttribute="centerX" id="oTQ-tq-ctx"/>
+                                    <constraint firstItem="i3M-rR-I7E" firstAttribute="centerY" secondItem="S9X-Gs-VsD" secondAttribute="centerY" id="yxh-vi-IPO"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="8IH-Lx-G32" firstAttribute="top" secondItem="WQj-pb-pga" secondAttribute="bottom" id="4ef-lz-rgx"/>
+                            <constraint firstItem="S9X-Gs-VsD" firstAttribute="leading" secondItem="dxc-o8-mtk" secondAttribute="leading" id="5Nm-C2-YnE"/>
+                            <constraint firstAttribute="trailing" secondItem="S9X-Gs-VsD" secondAttribute="trailing" id="5eo-nP-fE4"/>
+                            <constraint firstItem="S9X-Gs-VsD" firstAttribute="top" secondItem="8IH-Lx-G32" secondAttribute="bottom" id="HbA-B1-hzg"/>
                             <constraint firstItem="WQj-pb-pga" firstAttribute="top" secondItem="MZK-TI-vSH" secondAttribute="bottom" id="Hyc-xI-Ual"/>
+                            <constraint firstItem="PaX-aR-QEv" firstAttribute="top" secondItem="S9X-Gs-VsD" secondAttribute="bottom" id="KB2-Ry-8Dp"/>
                             <constraint firstItem="WQj-pb-pga" firstAttribute="height" secondItem="dxc-o8-mtk" secondAttribute="height" multiplier="0.1" id="Klw-z4-T8H"/>
                             <constraint firstItem="8IH-Lx-G32" firstAttribute="leading" secondItem="dxc-o8-mtk" secondAttribute="leading" id="SFc-w3-EPd"/>
                             <constraint firstItem="WQj-pb-pga" firstAttribute="leading" secondItem="dxc-o8-mtk" secondAttribute="leading" id="XiR-cj-J8P"/>
-                            <constraint firstAttribute="bottom" secondItem="8IH-Lx-G32" secondAttribute="bottom" id="h1h-Bu-TtG"/>
                             <constraint firstAttribute="trailing" secondItem="8IH-Lx-G32" secondAttribute="trailing" id="jby-1b-KqN"/>
                             <constraint firstAttribute="trailing" secondItem="WQj-pb-pga" secondAttribute="trailing" id="mTS-Lc-5vo"/>
+                            <constraint firstItem="S9X-Gs-VsD" firstAttribute="height" secondItem="dxc-o8-mtk" secondAttribute="height" multiplier="0.07" id="oYS-n3-keR"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="i3M-rR-I7E" id="pyQ-bR-eO4"/>
                         <outlet property="resultsTable" destination="8IH-Lx-G32" id="Uxr-AW-8Kf"/>
                         <outlet property="searchBar" destination="WQj-pb-pga" id="SOm-0e-FAh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4wR-k5-sgp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1737" y="-563"/>
+            <point key="canvasLocation" x="1736.8" y="-563.56821589205401"/>
         </scene>
         <!--Closet View Controller-->
         <scene sceneID="4RM-Fa-tlw">
