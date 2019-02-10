@@ -298,6 +298,48 @@
             </objects>
             <point key="canvasLocation" x="985" y="-562"/>
         </scene>
+        <!--Clothing Item Search View Controller-->
+        <scene sceneID="PjM-Aw-mvz">
+            <objects>
+                <viewController storyboardIdentifier="ClothingItemSearchViewController" id="Lkw-R2-V8G" customClass="ClothingItemSearchViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MZK-TI-vSH"/>
+                        <viewControllerLayoutGuide type="bottom" id="PaX-aR-QEv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dxc-o8-mtk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WQj-pb-pga" customClass="ClothingItemSearchBar" customModule="Thread" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="66.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8IH-Lx-G32" customClass="ClothingItemTableView" customModule="Thread" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="86.5" width="375" height="580.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="8IH-Lx-G32" firstAttribute="top" secondItem="WQj-pb-pga" secondAttribute="bottom" id="4ef-lz-rgx"/>
+                            <constraint firstItem="WQj-pb-pga" firstAttribute="top" secondItem="MZK-TI-vSH" secondAttribute="bottom" id="Hyc-xI-Ual"/>
+                            <constraint firstItem="WQj-pb-pga" firstAttribute="height" secondItem="dxc-o8-mtk" secondAttribute="height" multiplier="0.1" id="Klw-z4-T8H"/>
+                            <constraint firstItem="8IH-Lx-G32" firstAttribute="leading" secondItem="dxc-o8-mtk" secondAttribute="leading" id="SFc-w3-EPd"/>
+                            <constraint firstItem="WQj-pb-pga" firstAttribute="leading" secondItem="dxc-o8-mtk" secondAttribute="leading" id="XiR-cj-J8P"/>
+                            <constraint firstAttribute="bottom" secondItem="8IH-Lx-G32" secondAttribute="bottom" id="h1h-Bu-TtG"/>
+                            <constraint firstAttribute="trailing" secondItem="8IH-Lx-G32" secondAttribute="trailing" id="jby-1b-KqN"/>
+                            <constraint firstAttribute="trailing" secondItem="WQj-pb-pga" secondAttribute="trailing" id="mTS-Lc-5vo"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="resultsTable" destination="8IH-Lx-G32" id="Uxr-AW-8Kf"/>
+                        <outlet property="searchBar" destination="WQj-pb-pga" id="SOm-0e-FAh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4wR-k5-sgp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1737" y="-563"/>
+        </scene>
         <!--Closet View Controller-->
         <scene sceneID="4RM-Fa-tlw">
             <objects>
@@ -536,11 +578,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Avatar" width="1024" height="1024"/>
-        <image name="BackArrow" width="336" height="336"/>
-        <image name="Camera" width="409.60000610351562" height="409.60000610351562"/>
-        <image name="Favorite" width="409.60000610351562" height="409.60000610351562"/>
-        <image name="Search" width="409.60000610351562" height="409.60000610351562"/>
+        <image name="Avatar" width="512" height="512"/>
+        <image name="BackArrow" width="168" height="168"/>
+        <image name="Camera" width="256" height="256"/>
+        <image name="Favorite" width="256" height="256"/>
+        <image name="Search" width="256" height="256"/>
     </resources>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

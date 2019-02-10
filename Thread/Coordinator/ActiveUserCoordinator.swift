@@ -46,6 +46,13 @@ class ActiveUserCoordinator: Coordinator {
         navigationController.pushViewController(closetController, animated: true)
     }
     
+    func searchClothingItems() {
+        let searchController = ClothingItemSearchViewController.instantiate()
+        searchController.coordinator = self
+        
+        navigationController.pushViewController(searchController, animated: true)
+    }
+    
     func updateClothingItem(ofType type: ClothingType) {
         let closetUpdateOptionsController = ClosetUpdateOptionsViewController.instantiate()
         closetUpdateOptionsController.coordinator = self

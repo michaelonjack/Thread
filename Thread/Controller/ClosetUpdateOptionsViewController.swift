@@ -41,7 +41,8 @@ class ClosetUpdateOptionsViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func chooseSearchOption(_ sender: Any) {
-        
+        self.dismiss(animated: true, completion: nil)
+        coordinator?.searchClothingItems()
     }
     
     @IBAction func chooseCameraOption(_ sender: Any) {

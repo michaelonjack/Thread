@@ -54,6 +54,16 @@ struct ClothingItem {
         self.itemImage = itemImage
     }
     
+    init(shopStyleItem: ShopStyleClothingItem) {
+        self.id = String(shopStyleItem.id)
+        self.type = .top
+        self.name = shopStyleItem.unbrandedName
+        self.price = shopStyleItem.price
+        self.brand = shopStyleItem.brand?.name ?? ""
+        self.itemUrl = shopStyleItem.clickUrl
+        self.itemImageUrl = shopStyleItem.image.sizes["IPhone"]?.url
+    }
+    
     func toAnyObject() -> Any {
         var dict: [String:Any] = [
             "id": id,
