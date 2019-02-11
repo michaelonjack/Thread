@@ -10,16 +10,17 @@ import UIKit
 
 class ClosetDetailsTextView: UIView {
     
-    var detailsLabel: UILabel = {
-        let l = UILabel()
-        l.translatesAutoresizingMaskIntoConstraints = false
-        l.textAlignment = .left
-        l.textColor = .black
-        l.adjustsFontSizeToFitWidth = true
-        l.numberOfLines = 0
-        l.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
+    var detailsTextView: UITextView = {
+        let tv = UITextView()
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.textAlignment = .left
+        tv.textColor = .black
+        tv.showsVerticalScrollIndicator = true
+        tv.isScrollEnabled = true
+        tv.font = UIFont(name: "AvenirNext-Regular", size: 14.0)
+        tv.isEditable = false
         
-        return l
+        return tv
     }()
     
     override init(frame: CGRect) {
@@ -36,17 +37,17 @@ class ClosetDetailsTextView: UIView {
     
     fileprivate func setupView() {
         
-        addSubview(detailsLabel)
+        addSubview(detailsTextView)
         
         setupLayout()
     }
     
     fileprivate func setupLayout() {
         NSLayoutConstraint.activate([
-            detailsLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-            detailsLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
-            detailsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            detailsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
+            detailsTextView.topAnchor.constraint(equalTo: topAnchor),
+            detailsTextView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            detailsTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            detailsTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
         ])
     }
 }

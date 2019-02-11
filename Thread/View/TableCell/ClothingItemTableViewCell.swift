@@ -1,5 +1,5 @@
 //
-//  ImageTableViewCell.swift
+//  ClothingItemTableViewCell.swift
 //  Thread
 //
 //  Created by Michael Onjack on 2/9/19.
@@ -7,11 +7,6 @@
 //
 
 import UIKit
-
-protocol ClothingItemTableCellDelegate: AnyObject {
-    func viewClothingItem(at cell: ClothingItemTableViewCell)
-    func selectClothingItem(at cell: ClothingItemTableViewCell)
-}
 
 class ClothingItemTableViewCell: UITableViewCell {
     
@@ -151,7 +146,7 @@ class ClothingItemTableViewCell: UITableViewCell {
             detailStackView.centerXAnchor.constraint(equalTo: blurDetailView.centerXAnchor),
             detailStackView.centerYAnchor.constraint(equalTo: blurDetailView.centerYAnchor),
             detailStackView.heightAnchor.constraint(equalTo: blurDetailView.heightAnchor, multiplier: 0.4),
-            detailStackView.widthAnchor.constraint(equalTo: blurDetailView.widthAnchor, multiplier: 0.5)
+            detailStackView.widthAnchor.constraint(equalTo: blurDetailView.widthAnchor, multiplier: 0.7)
         ])
     }
     

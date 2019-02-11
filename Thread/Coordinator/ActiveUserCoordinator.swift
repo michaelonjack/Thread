@@ -76,6 +76,7 @@ class ActiveUserCoordinator: Coordinator {
         
         let navControllers = navigationController.viewControllers
         
+        // CASE 1: We're updating the item details via a camera / photo library upload
         if let closetController = navControllers[navControllers.count - 2] as? ClosetViewController {
             closetController.user = configuration.currentUser
             closetController.updateViewForNewItem()
@@ -84,6 +85,7 @@ class ActiveUserCoordinator: Coordinator {
             pop()
         }
         
+        // CASE 2: We're updating the item details via a ShopStyle product search
         else if let closetController = navControllers[navControllers.count - 3] as? ClosetViewController {
             closetController.user = configuration.currentUser
             closetController.updateViewForNewItem()

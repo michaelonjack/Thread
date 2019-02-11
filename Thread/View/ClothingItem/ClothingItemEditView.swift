@@ -159,7 +159,7 @@ class ClothingItemEditView: UIView {
             
             detailsField.topAnchor.constraint(equalTo: detailsLabel.bottomAnchor, constant: 15),
             detailsField.leadingAnchor.constraint(equalTo: nameField.leadingAnchor),
-            detailsField.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
+            detailsField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             detailsField.heightAnchor.constraint(equalToConstant: 200)
         ])
     }

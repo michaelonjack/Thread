@@ -79,7 +79,7 @@ class ClosetViewController: UIViewController, Storyboarded {
         DispatchQueue.main.async {
             self.ownerLabel.text = user.name
             self.itemNameLabel.text = currentItem?.name ?? clothingType.description
-            self.detailsView.detailsView.detailsLabel.text = currentItem?.details
+            self.detailsView.detailsView.detailsTextView.text = currentItem?.details
             
             self.clothingItemsView.clothingItemCollectionView.reloadData()
             self.clothingItemsView.clothingItemCollectionView.scrollToItem(at: IndexPath(row: self.currentItemIndex, section: 0), at: .centeredHorizontally, animated: false)
@@ -120,7 +120,7 @@ class ClosetViewController: UIViewController, Storyboarded {
         
         DispatchQueue.main.async {
             self.itemNameLabel.text = currentItem?.name ?? clothingType.description
-            self.detailsView.detailsView.detailsLabel.text = currentItem?.details
+            self.detailsView.detailsView.detailsTextView.text = currentItem?.details
             
             if let currentUser = configuration.currentUser, let currentItem = currentItem {
                 if currentUser.favoritedItems.contains(currentItem) {
@@ -256,6 +256,13 @@ extension ClosetViewController: UIScrollViewDelegate {
         let currentIndex = Int(contentOffsetX / scrollView.frame.width) + Int(CGFloat(currentPageOffsetX / scrollView.frame.width).rounded())
         if currentItemIndex != currentIndex {
             currentItemIndex = currentIndex
+        }
+        
+        // Reset the animator once then transition completes so the animated views can be interacted with (.isUserInteractionEnabled doesn't work -_-)
+        if revealDetailsAnimator.fractionComplete == 0 {
+            revealDetailsAnimator.stopAnimation(true)
+            revealDetailsAnimator.finishAnimation(at: .start)
+            setupAnimator()
         }
     }
 }

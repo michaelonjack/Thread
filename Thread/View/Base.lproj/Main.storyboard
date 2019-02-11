@@ -603,11 +603,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Avatar" width="512" height="512"/>
-        <image name="BackArrow" width="168" height="168"/>
-        <image name="Camera" width="256" height="256"/>
-        <image name="Favorite" width="256" height="256"/>
-        <image name="Search" width="256" height="256"/>
+        <image name="Avatar" width="1024" height="1024"/>
+        <image name="BackArrow" width="336" height="336"/>
+        <image name="Camera" width="409.60000610351562" height="409.60000610351562"/>
+        <image name="Favorite" width="409.60000610351562" height="409.60000610351562"/>
+        <image name="Search" width="409.60000610351562" height="409.60000610351562"/>
     </resources>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
