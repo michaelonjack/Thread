@@ -55,7 +55,7 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
         
         editView.nameField.textField.text = clothingItem.name
         editView.brandField.textField.text = clothingItem.brand
-        editView.priceField.textField.text = String(format: "%.2f", clothingItem.price)
+        editView.priceField.textField.text = clothingItem.price == nil ? "" : String(format: "%.2f", clothingItem.price!)
         editView.linkField.textField.text = clothingItem.itemUrl
         editView.detailsField.text = clothingItem.details ?? ""
     }
@@ -74,7 +74,7 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
                     self.clothingItem.details = self.editView.detailsField.text
                     self.clothingItem.name = self.editView.nameField.textField.text ?? ""
                     self.clothingItem.brand = self.editView.brandField.textField.text ?? ""
-                    self.clothingItem.price = Double(self.editView.priceField.textField.text ?? "0") ?? 0
+                    self.clothingItem.price = Double(self.editView.priceField.textField.text ?? "")
                     self.clothingItem.itemUrl = self.editView.linkField.textField.text
                     
                     if self.clothingItem.smallItemImageUrl == nil {

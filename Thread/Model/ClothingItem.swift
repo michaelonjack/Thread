@@ -14,8 +14,8 @@ struct ClothingItem {
     var id: String
     var type: ClothingType
     var name: String
-    var price: Double
     var brand: String
+    var price: Double?
     var details: String?
     var itemUrl: String?
     var itemImageUrl: String?
@@ -31,7 +31,7 @@ struct ClothingItem {
         itemUrl = snapshotValue["itemUrl"] as? String ?? nil
         itemImageUrl = snapshotValue["itemImageUrl"] as? String ?? nil
         smallItemImageUrl = snapshotValue["smallItemImageUrl"] as? String ?? nil
-        price = snapshotValue["price"] as? Double ?? 0.0
+        price = snapshotValue["price"] as? Double ?? nil
         details = snapshotValue["details"] as? String ?? nil
         
         let itemType = snapshotValue["type"] as? String ?? ""
@@ -52,7 +52,6 @@ struct ClothingItem {
         self.id = id
         self.type = type
         self.name = ""
-        self.price = 0
         self.brand = ""
         self.itemImage = itemImage
     }
@@ -74,9 +73,12 @@ struct ClothingItem {
             "id": id,
             "type": type.description,
             "name": name,
-            "price": price,
             "brand": brand
         ]
+        
+        if let price = price {
+            dict["price"] = price
+        }
         
         if let itemUrl = itemUrl {
             dict["itemUrl"] = itemUrl

@@ -212,9 +212,12 @@ extension ClosetViewController: UICollectionViewDataSource {
         var itemImageUrl: URL?
         
         if let type = ClothingType(rawValue: indexPath.row), let item = user?.clothingItems[type] {
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .currency
-            priceStr = formatter.string(from: item.price as NSNumber) ?? "No Price"
+            if let price = item.price {
+                let formatter = NumberFormatter()
+                formatter.numberStyle = .currency
+                priceStr = formatter.string(from: price as NSNumber) ?? "No Price"
+            }
+            
             itemImageUrl = URL(string: item.itemImageUrl ?? "")
         }
         
@@ -258,7 +261,7 @@ extension ClosetViewController: UIScrollViewDelegate {
             currentItemIndex = currentIndex
         }
         
-        // Reset the animator once then transition completes so the animated views can be interacted with (.isUserInteractionEnabled doesn't work -_-)
+        // Reset the animator once the transition completes so the animated views can be interacted with (.isUserInteractionEnabled doesn't work -_-)
         if revealDetailsAnimator.fractionComplete == 0 {
             revealDetailsAnimator.stopAnimation(true)
             revealDetailsAnimator.finishAnimation(at: .start)
