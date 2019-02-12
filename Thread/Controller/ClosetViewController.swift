@@ -180,9 +180,10 @@ class ClosetViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func updateClothingItem(_ sender: Any) {
-        guard let currentClothingType = ClothingType(rawValue: currentItemIndex) else { return }
+        guard let currentType = ClothingType(rawValue: currentItemIndex) else { return }
+        let currentItem = user?.clothingItems[currentType]
         
-        coordinator?.updateClothingItem(ofType: currentClothingType)
+        coordinator?.updateClothingItem(ofType: currentType, existingItem: currentItem)
     }
     
     @IBAction func dismissCloset(_ sender: Any) {

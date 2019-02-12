@@ -15,10 +15,10 @@ class ClosetUpdateOptionsViewController: UIViewController, Storyboarded {
     
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var cameraView: UIView!
+    @IBOutlet weak var editView: UIView!
     
+    var clothingItem: ClothingItem?
     var clothingType: ClothingType!
-    var searchDashedBorder: CAShapeLayer?
-    var cameraDashedBorder: CAShapeLayer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,17 +29,23 @@ class ClosetUpdateOptionsViewController: UIViewController, Storyboarded {
     }
     
     override func viewDidLayoutSubviews() {
-        searchView.layer.cornerRadius = searchView.frame.height / 6.0
-        searchView.layer.borderColor = UIColor.white.cgColor
-        searchView.layer.borderWidth = 3
-        searchView.clipsToBounds = true
         
-        cameraView.layer.cornerRadius = cameraView.frame.height / 6.0
-        cameraView.layer.borderColor = UIColor.white.cgColor
-        cameraView.layer.borderWidth = 3
-        cameraView.clipsToBounds = true
+        let buttonViews: [UIView] = [searchView, cameraView, editView]
+        
+        buttonViews.forEach { (view) in
+            view.layer.cornerRadius = view.frame.height / 6.0
+            view.layer.borderColor = UIColor.white.cgColor
+            view.layer.borderWidth = 3
+            view.clipsToBounds = true
+        }
     }
 
+    @IBAction func chooseEditOption(_ sender: Any) {
+        guard let item = clothingItem else { return }
+        self.dismiss(animated: true, completion: nil)
+        coordinator?.startEditingDetails(forClothingItem: item)
+    }
+    
     @IBAction func chooseSearchOption(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         coordinator?.searchClothingItems(forType: clothingType)
