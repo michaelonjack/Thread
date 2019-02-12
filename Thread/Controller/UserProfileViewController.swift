@@ -79,6 +79,7 @@ class UserProfileViewController: UIViewController, Storyboarded {
             }
             
             self.userStatisticsView.favoritesCount = user.favoritedItems.count
+            self.userStatisticsView.followingCount = user.followingUserIds.count
             self.userSummaryView.status = user.status ?? ""
             self.userSummaryView.lastCheckIn = user.lastCheckInStr
             user.getLocationStr(completion: { (locationStr) in

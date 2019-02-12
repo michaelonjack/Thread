@@ -10,15 +10,21 @@ import UIKit
 
 class UserProfileStatsView: UIView {
     
-    var followersCount: Int = 125
-    var favoritesCount: Int = 112 {
+    var followersCount: Int = 0
+    var favoritesCount: Int = 0 {
         didSet {
             DispatchQueue.main.async {
                 self.favoritesLabel.attributedText = self.createStatsLabel(title: String(self.favoritesCount), subtitle: "Favorites")
             }
         }
     }
-    var followingCount: Int = 453
+    var followingCount: Int = 0 {
+        didSet {
+            DispatchQueue.main.async {
+                self.followingLabel.attributedText = self.createStatsLabel(title: String(self.followingCount), subtitle: "Following")
+            }
+        }
+    }
     
     var allLabelsStackView: UIStackView!
     

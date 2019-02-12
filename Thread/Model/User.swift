@@ -29,6 +29,7 @@ class User {
     var outfitPictureUrl: String?
     var clothingItems: [ClothingType:ClothingItem] = [:]
     var favoritedItems: [ClothingItem] = []
+    var followingUserIds: [String] = []
     
     // Computed properties
     var name: String {
@@ -96,6 +97,13 @@ class User {
             let favoritedItem = ClothingItem(snapshot: item as! DataSnapshot, withIdAsKey: true)
             favoritedItems.append(favoritedItem)
         }
+        
+        let followingSnapshot = snapshot.childSnapshot(forPath: "following")
+        for child in followingSnapshot.children {
+            let user = child as! DataSnapshot
+            if user.key == uid { return }
+            followingUserIds.append(user.key)
+        }
     }
     
     func toAnyObject() -> Any {
@@ -109,6 +117,11 @@ class User {
             favoritedItemsDict[item.id] = item.toAnyObject()
         }
         
+        var followingDict: [String:Any] = [:]
+        for userId in followingUserIds {
+            followingDict[userId] = true
+        }
+        
         var dict: [String: Any] = [
             "firstName": firstName,
             "lastName": lastName,
@@ -116,7 +129,8 @@ class User {
             "latitude": location?.coordinate.latitude ?? 0.0,
             "longitude": location?.coordinate.longitude ?? 0.0,
             "items": clothingItemsDict,
-            "favorites": favoritedItemsDict
+            "favorites": favoritedItemsDict,
+            "following": followingDict
         ]
         
         if let profilePictureUrl = profilePictureUrl {

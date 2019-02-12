@@ -29,7 +29,7 @@ func getCurrentUser(completion: @escaping (User) -> Void) {
 func getUser(withId id: String, completion: @escaping (User) -> Void) {
     let userReference = Database.database().reference(withPath: "users/" + id)
     userReference.keepSynced(true)
-    userReference.observe(.value) { (snapshot) in
+    userReference.observeSingleEvent(of: .value) { (snapshot) in
         completion( User(snapshot: snapshot) )
     }
 }
