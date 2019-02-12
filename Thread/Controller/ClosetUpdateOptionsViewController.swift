@@ -16,12 +16,20 @@ class ClosetUpdateOptionsViewController: UIViewController, Storyboarded {
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var editView: UIView!
+    @IBOutlet weak var deleteView: UIView!
     
-    var clothingItem: ClothingItem?
+    @IBOutlet weak var optionsStackView: UIStackView!
+    @IBOutlet weak var updateOptionsStackView: UIStackView!
+    
+    var existingItem: ClothingItem?
     var clothingType: ClothingType!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if existingItem == nil {
+            optionsStackView.removeArrangedSubview(updateOptionsStackView)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -30,7 +38,7 @@ class ClosetUpdateOptionsViewController: UIViewController, Storyboarded {
     
     override func viewDidLayoutSubviews() {
         
-        let buttonViews: [UIView] = [searchView, cameraView, editView]
+        let buttonViews: [UIView] = [searchView, cameraView, editView, deleteView]
         
         buttonViews.forEach { (view) in
             view.layer.cornerRadius = view.frame.height / 6.0
@@ -40,8 +48,14 @@ class ClosetUpdateOptionsViewController: UIViewController, Storyboarded {
         }
     }
 
+    @IBAction func chooseDeleteOption(_ sender: Any) {
+        guard let item = existingItem else { return }
+        coordinator?.removeClosetItem(ofType: item.type)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func chooseEditOption(_ sender: Any) {
-        guard let item = clothingItem else { return }
+        guard let item = existingItem else { return }
         self.dismiss(animated: true, completion: nil)
         coordinator?.startEditingDetails(forClothingItem: item)
     }
