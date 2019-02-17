@@ -53,6 +53,10 @@
 		B1DC81E3221514E00005278D /* SwipeViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC81E2221514E00005278D /* SwipeViewContainer.swift */; };
 		B1DC82232215E2CB0005278D /* ClothingItemSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC82222215E2CB0005278D /* ClothingItemSwipeView.swift */; };
 		B1DC82252215E6E20005278D /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC82242215E6E20005278D /* UserTableViewCell.swift */; };
+		B1DC8227221787030005278D /* SlideOutMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC8226221787030005278D /* SlideOutMenuView.swift */; };
+		B1DC826B221889AE0005278D /* SlideOutMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC826A221889AE0005278D /* SlideOutMenuTableViewCell.swift */; };
+		B1DC826D22188DB30005278D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC826C22188DB30005278D /* HomeViewController.swift */; };
+		B1DC82732218932C0005278D /* SlideOutMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC82722218932C0005278D /* SlideOutMenuViewController.swift */; };
 		B1F7596122073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F7596022073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift */; };
 		B1FE8219220939D9006AFD43 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FE8218220939D9006AFD43 /* Coordinator.swift */; };
 		B1FE821B22093A49006AFD43 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FE821A22093A49006AFD43 /* MainCoordinator.swift */; };
@@ -139,6 +143,10 @@
 		B1DC81E2221514E00005278D /* SwipeViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeViewContainer.swift; sourceTree = "<group>"; };
 		B1DC82222215E2CB0005278D /* ClothingItemSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemSwipeView.swift; sourceTree = "<group>"; };
 		B1DC82242215E6E20005278D /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		B1DC8226221787030005278D /* SlideOutMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOutMenuView.swift; sourceTree = "<group>"; };
+		B1DC826A221889AE0005278D /* SlideOutMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOutMenuTableViewCell.swift; sourceTree = "<group>"; };
+		B1DC826C22188DB30005278D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		B1DC82722218932C0005278D /* SlideOutMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOutMenuViewController.swift; sourceTree = "<group>"; };
 		B1F7596022073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1FE8218220939D9006AFD43 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		B1FE821A22093A49006AFD43 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
@@ -225,6 +233,8 @@
 				B1377C56220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift */,
 				B1DC8191220E8CDF0005278D /* ClothingItemEditViewController.swift */,
 				B1C81619220F836600B35B43 /* ClothingItemSearchViewController.swift */,
+				B1DC826C22188DB30005278D /* HomeViewController.swift */,
+				B1DC82722218932C0005278D /* SlideOutMenuViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -341,6 +351,7 @@
 			children = (
 				B1C81621220F96CE00B35B43 /* ClothingItemTableViewCell.swift */,
 				B1DC82242215E6E20005278D /* UserTableViewCell.swift */,
+				B1DC826A221889AE0005278D /* SlideOutMenuTableViewCell.swift */,
 			);
 			path = TableCell;
 			sourceTree = "<group>";
@@ -419,6 +430,7 @@
 				B1FE822A220CC7C9006AFD43 /* UnderlinedTextFieldView.swift */,
 				B1DC81E0221502950005278D /* SwipeView.swift */,
 				B1DC81E2221514E00005278D /* SwipeViewContainer.swift */,
+				B1DC8226221787030005278D /* SlideOutMenuView.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -692,7 +704,9 @@
 				B1DB7EF62207231300F3C4D9 /* ClosetClothingItemsView.swift in Sources */,
 				B1FE8219220939D9006AFD43 /* Coordinator.swift in Sources */,
 				B1DC8192220E8CDF0005278D /* ClothingItemEditViewController.swift in Sources */,
+				B1DC826D22188DB30005278D /* HomeViewController.swift in Sources */,
 				B1FE8221220947DA006AFD43 /* CoordinatorNavigationController.swift in Sources */,
+				B1DC8227221787030005278D /* SlideOutMenuView.swift in Sources */,
 				B157D4B122065B3900D83CDB /* UserProfileFeedView.swift in Sources */,
 				B1FE821B22093A49006AFD43 /* MainCoordinator.swift in Sources */,
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
@@ -709,6 +723,7 @@
 				B1F7596122073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift in Sources */,
 				B157D4AF22065ADD00D83CDB /* UserProfileSummaryView.swift in Sources */,
 				B157D4AB2206452100D83CDB /* UserProfileStatsView.swift in Sources */,
+				B1DC82732218932C0005278D /* SlideOutMenuViewController.swift in Sources */,
 				B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */,
 				B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */,
 				B1FE822F220D000A006AFD43 /* LoginAboutCollectionViewCell.swift in Sources */,
@@ -722,6 +737,7 @@
 				B183EE17220BC5CF0065A9F1 /* LoginButtonsView.swift in Sources */,
 				B183EE1B220BCEDC0065A9F1 /* SignUpView.swift in Sources */,
 				B1DC8194220EF00A0005278D /* ClothingItemEditView.swift in Sources */,
+				B1DC826B221889AE0005278D /* SlideOutMenuTableViewCell.swift in Sources */,
 				B1C8161C220F853D00B35B43 /* ClothingItemSearchBar.swift in Sources */,
 				B11CBD502205CFB200D6620B /* UIColor+Additions.swift in Sources */,
 				B1FE821F22093C32006AFD43 /* Storyboarded.swift in Sources */,

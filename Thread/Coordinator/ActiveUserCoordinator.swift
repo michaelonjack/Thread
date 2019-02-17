@@ -20,9 +20,16 @@ class ActiveUserCoordinator: Coordinator {
     }
     
     func start() {
+        let homeController = HomeViewController.instantiate()
+        homeController.coordinator = self
+        
+        navigationController.pushViewController(homeController, animated: false)
+    }
+    
+    func viewUserProfile(userId: String) {
         let profileController = UserProfileViewController.instantiate()
         profileController.coordinator = self
-        profileController.userId = Auth.auth().currentUser?.uid
+        profileController.userId = userId
         
         navigationController.pushViewController(profileController, animated: false)
     }

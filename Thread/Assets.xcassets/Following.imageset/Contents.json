@@ -2,17 +2,15 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "usersAlt.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "usersAlt-1.png",
+      "filename" : "following.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "usersAlt-2.png",
       "scale" : "3x"
     }
   ],
