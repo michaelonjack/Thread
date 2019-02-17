@@ -52,7 +52,7 @@ class ClothingItemSearchViewController: UIViewController, Storyboarded {
             
             DispatchQueue.main.async {
                 self.resultsTable.clothingItems = self.searchResults
-                self.resultsTable.itemsTableView.reloadData()
+                self.resultsTable.reloadData()
                 self.resultsTable.scrollToTop()
             }
         }

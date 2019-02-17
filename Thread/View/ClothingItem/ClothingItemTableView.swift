@@ -8,24 +8,14 @@
 
 import UIKit
 
-class ClothingItemTableView: UIView {
+class ClothingItemTableView: UITableView {
     
     weak var coordinator: ActiveUserCoordinator?
     
-    var itemsTableView: UITableView = {
-        let tv = UITableView()
-        tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.rowHeight = UITableView.automaticDimension
-        tv.estimatedRowHeight = 300
-        tv.register(ClothingItemTableViewCell.self, forCellReuseIdentifier: "ImageTableCell")
-        
-        return tv
-    }()
-    
     var clothingItems: [ClothingItem] = []
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(frame: CGRect, style: UITableView.Style) {
+        super.init(frame: frame, style: style)
         
         setupView()
     }
@@ -38,26 +28,19 @@ class ClothingItemTableView: UIView {
     
     fileprivate func setupView() {
         
-        itemsTableView.delegate = self
-        itemsTableView.dataSource = self
+        translatesAutoresizingMaskIntoConstraints = false
+        clipsToBounds = true
+        rowHeight = UITableView.automaticDimension
+        estimatedRowHeight = 300
+        register(ClothingItemTableViewCell.self, forCellReuseIdentifier: "ImageTableCell")
         
-        addSubview(itemsTableView)
-        
-        setupLayout()
-    }
-    
-    fileprivate func setupLayout() {
-        NSLayoutConstraint.activate([
-            itemsTableView.topAnchor.constraint(equalTo: topAnchor),
-            itemsTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            itemsTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            itemsTableView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+        delegate = self
+        dataSource = self
     }
     
     func scrollToTop() {
         if clothingItems.count > 0 {
-            itemsTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         }
     }
 }
@@ -124,7 +107,7 @@ extension ClothingItemTableView: UITableViewDataSource {
 
 extension ClothingItemTableView: ClothingItemTableCellDelegate {
     func viewClothingItem(at cell: ClothingItemTableViewCell) {
-        guard let indexPath = self.itemsTableView.indexPath(for: cell) else { return }
+        guard let indexPath = self.indexPath(for: cell) else { return }
         
         let currentItem = clothingItems[indexPath.row]
         
@@ -136,7 +119,7 @@ extension ClothingItemTableView: ClothingItemTableCellDelegate {
     }
     
     func selectClothingItem(at cell: ClothingItemTableViewCell) {
-        guard let indexPath = self.itemsTableView.indexPath(for: cell) else { return }
+        guard let indexPath = self.indexPath(for: cell) else { return }
         
         let currentItem = clothingItems[indexPath.row]
         self.coordinator?.startEditingDetails(forClothingItem: currentItem)
