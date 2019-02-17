@@ -56,6 +56,7 @@ class SlideOutMenuView: UIView {
         return tv
     }()
     
+    weak var delegate: SlideOutMenuDelegate?
     var menuWidth: CGFloat!
     var isOpen: Bool = false
     
@@ -198,6 +199,21 @@ extension SlideOutMenuView: UITableViewDelegate {
         view.backgroundColor = .clear
         
         return view
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            delegate?.didSelectProfileOption()
+        case 1:
+            delegate?.didSelectFollowingOption()
+        case 2:
+            delegate?.didSelectFavoritesOption()
+        case 3:
+            delegate?.didSelectSettingsOption()
+        default:
+            break
+        }
     }
 }
 

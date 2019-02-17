@@ -9,8 +9,6 @@
 import UIKit
 
 class HomeViewController: SlideOutMenuViewController, Storyboarded {
-    
-    weak var coordinator: ActiveUserCoordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()

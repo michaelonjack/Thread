@@ -57,6 +57,7 @@
 		B1DC826B221889AE0005278D /* SlideOutMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC826A221889AE0005278D /* SlideOutMenuTableViewCell.swift */; };
 		B1DC826D22188DB30005278D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC826C22188DB30005278D /* HomeViewController.swift */; };
 		B1DC82732218932C0005278D /* SlideOutMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC82722218932C0005278D /* SlideOutMenuViewController.swift */; };
+		B1DC82752218E1C80005278D /* SlideOutMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC82742218E1C80005278D /* SlideOutMenuDelegate.swift */; };
 		B1F7596122073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F7596022073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift */; };
 		B1FE8219220939D9006AFD43 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FE8218220939D9006AFD43 /* Coordinator.swift */; };
 		B1FE821B22093A49006AFD43 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FE821A22093A49006AFD43 /* MainCoordinator.swift */; };
@@ -147,6 +148,7 @@
 		B1DC826A221889AE0005278D /* SlideOutMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOutMenuTableViewCell.swift; sourceTree = "<group>"; };
 		B1DC826C22188DB30005278D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B1DC82722218932C0005278D /* SlideOutMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOutMenuViewController.swift; sourceTree = "<group>"; };
+		B1DC82742218E1C80005278D /* SlideOutMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOutMenuDelegate.swift; sourceTree = "<group>"; };
 		B1F7596022073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1FE8218220939D9006AFD43 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		B1FE821A22093A49006AFD43 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				B1FE8218220939D9006AFD43 /* Coordinator.swift */,
 				B1FE821E22093C32006AFD43 /* Storyboarded.swift */,
 				B1DC819A2210D24B0005278D /* ClothingItemTableCellDelegate.swift */,
+				B1DC82742218E1C80005278D /* SlideOutMenuDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -699,6 +702,7 @@
 				B1DC81E1221502950005278D /* SwipeView.swift in Sources */,
 				B1DC81E3221514E00005278D /* SwipeViewContainer.swift in Sources */,
 				B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */,
+				B1DC82752218E1C80005278D /* SlideOutMenuDelegate.swift in Sources */,
 				B1DB7EF02206B99700F3C4D9 /* FeedCollectionViewCell.swift in Sources */,
 				B1DB7EF42207220D00F3C4D9 /* ClosetItemCollectionViewCell.swift in Sources */,
 				B1DB7EF62207231300F3C4D9 /* ClosetClothingItemsView.swift in Sources */,

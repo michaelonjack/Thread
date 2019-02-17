@@ -10,6 +10,8 @@ import UIKit
 
 class SlideOutMenuViewController: UIViewController {
     
+    weak var coordinator: ActiveUserCoordinator?
+    
     var darkCoverView: UIView!
     var slideOutMenu: SlideOutMenuView!
     var slideOutMenuTrailingAnchor: NSLayoutConstraint!
@@ -26,6 +28,7 @@ class SlideOutMenuViewController: UIViewController {
         let menuWidth = min(400, view.frame.width * 0.75)
         slideOutMenu = SlideOutMenuView(ofWidth: menuWidth)
         slideOutMenu.translatesAutoresizingMaskIntoConstraints = false
+        slideOutMenu.delegate = self
         
         view.addSubview(slideOutMenu)
         
@@ -116,4 +119,26 @@ class SlideOutMenuViewController: UIViewController {
             self.darkCoverView.alpha = self.slideOutMenu.isOpen ? 1 : 0
         })
     }
+}
+
+
+
+extension SlideOutMenuViewController: SlideOutMenuDelegate {
+    func didSelectProfileOption() {
+        coordinator?.viewUserProfile(userId: (Auth.auth().currentUser?.uid)!)
+    }
+    
+    func didSelectFollowingOption() {
+        
+    }
+    
+    func didSelectFavoritesOption() {
+        
+    }
+    
+    func didSelectSettingsOption() {
+        
+    }
+    
+    
 }

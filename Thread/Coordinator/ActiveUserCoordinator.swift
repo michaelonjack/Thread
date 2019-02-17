@@ -31,7 +31,7 @@ class ActiveUserCoordinator: Coordinator {
         profileController.coordinator = self
         profileController.userId = userId
         
-        navigationController.pushViewController(profileController, animated: false)
+        navigationController.pushViewController(profileController, animated: true)
     }
     
     func viewCloset(forUser user: User, initialIndex: Int = 0) {
