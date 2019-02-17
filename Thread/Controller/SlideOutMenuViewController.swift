@@ -90,7 +90,7 @@ class SlideOutMenuViewController: UIViewController {
                     return
                 }
                 
-                if abs(translationX) < slideOutMenu.menuWidth / 2 {
+                if translationX < slideOutMenu.menuWidth / 2 {
                     closeMenu()
                 } else {
                     openMenu()
