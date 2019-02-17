@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct SlideOutMenuItem {
+    var title: String
+    var icon: UIImage?
+}
+
 class SlideOutMenuView: UIView {
     
     var profilePictureView: UIImageView = {
@@ -59,6 +64,12 @@ class SlideOutMenuView: UIView {
     weak var delegate: SlideOutMenuDelegate?
     var menuWidth: CGFloat!
     var isOpen: Bool = false
+    var menuItems: [SlideOutMenuItem] = [
+        SlideOutMenuItem(title: "Profile", icon: UIImage(named: "AvatarMan")),
+        SlideOutMenuItem(title: "Following", icon: UIImage(named: "Following")),
+        SlideOutMenuItem(title: "Favorites", icon: UIImage(named: "Favorite")),
+        SlideOutMenuItem(title: "Settings", icon: UIImage(named: "Settings"))
+    ]
     
     init(ofWidth width: CGFloat) {
         super.init(frame: CGRect.zero)
@@ -221,25 +232,12 @@ extension SlideOutMenuView: UITableViewDelegate {
 
 extension SlideOutMenuView: UITableViewDataSource {
     
-    var cellLabels: [String] {
-        return ["Profile", "Following", "Favorites", "Settings"]
-    }
-    
-    var cellImages: [UIImage?] {
-        return [
-            UIImage(named: "AvatarMan"),
-            UIImage(named: "Following"),
-            UIImage(named: "Favorite"),
-            UIImage(named: "Settings")
-        ]
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return cellLabels.count
+        return menuItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -247,8 +245,8 @@ extension SlideOutMenuView: UITableViewDataSource {
         
         guard let slideOutCell = cell as? SlideOutMenuTableViewCell else { return cell }
         
-        slideOutCell.optionLabel.text = cellLabels[indexPath.section]
-        slideOutCell.optionImageView.image = cellImages[indexPath.section]
+        slideOutCell.optionLabel.text = menuItems[indexPath.section].title
+        slideOutCell.optionImageView.image = menuItems[indexPath.section].icon
         
         return slideOutCell
     }

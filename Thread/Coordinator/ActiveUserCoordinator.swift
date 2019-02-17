@@ -116,6 +116,14 @@ class ActiveUserCoordinator: Coordinator {
         }
     }
     
+    func showUsersTable(withUsers users: [User]) {
+        let userTableController = UserTableViewController.instantiate()
+        userTableController.coordinator = self
+        userTableController.users = users
+        
+        navigationController.pushViewController(userTableController, animated: true)
+    }
+    
     func cancelEditingClothingItem() {
         pop()
     }

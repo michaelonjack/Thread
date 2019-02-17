@@ -162,17 +162,6 @@ extension UserProfileViewController: UICollectionViewDataSource {
         feedCell.imageView.contentMode = .scaleAspectFit
         feedCell.imageView.image = nil
         
-        let cornerRadius:CGFloat = (collectionView.frame.height - 20) / 5.0
-        feedCell.shadowView.backgroundColor = .white
-        feedCell.shadowView.layer.cornerRadius = cornerRadius
-        feedCell.shadowView.clipsToBounds = true
-        
-        feedCell.backgroundColor = .clear
-        feedCell.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
-        feedCell.layer.shadowOffset = CGSize(width: 8, height: 6)
-        feedCell.layer.shadowOpacity = 0.1
-        feedCell.layer.shadowPath = UIBezierPath(roundedRect: feedCell.bounds, cornerRadius: cornerRadius).cgPath
-        
         if let clothingType = ClothingType(rawValue: indexPath.row), let clothingItemImageUrlStr = user?.clothingItems[clothingType]?.itemImageUrl {
             let clothingItemImageUrl = URL(string: clothingItemImageUrlStr)
             feedCell.imageView.sd_setImage(with: clothingItemImageUrl, completed: nil)

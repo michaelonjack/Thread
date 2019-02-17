@@ -10,6 +10,7 @@ import Foundation
 import CoreLocation
 import FirebaseAuth
 import FirebaseDatabase
+import SDWebImage
 
 class User {
     let uid: String
@@ -182,6 +183,29 @@ class User {
                 return
             }
             
+            completion(nil)
+            return
+        }
+    }
+    
+    func getProfilePicture(completion: @escaping (UIImage?) -> Void) {
+        if let profilePicture = profilePicture {
+            completion(profilePicture)
+            return
+        }
+        
+        else if let imageUrlStr = profilePictureUrl, let imageUrl = URL(string: imageUrlStr) {
+            SDWebImageDownloader.shared().downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
+                if error != nil {
+                    completion(nil)
+                    return
+                }
+                
+                self.profilePicture = image
+                completion(image)
+                return
+            }
+        } else {
             completion(nil)
             return
         }

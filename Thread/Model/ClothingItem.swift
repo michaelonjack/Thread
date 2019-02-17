@@ -9,6 +9,12 @@
 import Foundation
 import FirebaseAuth
 import FirebaseDatabase
+import SDWebImage
+
+enum ImageSize {
+    case small
+    case normal
+}
 
 struct ClothingItem {
     var id: String
@@ -97,6 +103,49 @@ struct ClothingItem {
         }
         
         return dict
+    }
+    
+    func getImage(ofPreferredSize size: ImageSize, completion: @escaping (UIImage?) -> Void) {
+        switch size {
+        case .small:
+            if let smallImage = smallItemImage {
+                completion(smallImage)
+                return
+            }
+            
+            else if let imageUrlStr = smallItemImageUrl, let imageUrl = URL(string: imageUrlStr) {
+                SDWebImageDownloader.shared().downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
+                    if error != nil {
+                        completion(nil)
+                        return
+                    }
+                    
+                    completion(image)
+                    return
+                }
+            }
+            fallthrough
+        case .normal:
+            if let normalImage = itemImage {
+                completion(normalImage)
+            }
+            
+            else if let imageUrlStr = itemImageUrl, let imageUrl = URL(string: imageUrlStr) {
+                SDWebImageDownloader.shared().downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
+                    if error != nil {
+                        completion(nil)
+                        return
+                    }
+                    
+                    completion(image)
+                    return
+                }
+            }
+            
+            else {
+                completion(nil)
+            }
+        }
     }
 }
 

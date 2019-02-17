@@ -17,13 +17,6 @@ class FeedCollectionViewCell: UICollectionViewCell {
         return iv
     }()
     
-    let shadowView: UIView = {
-        let v = UIView()
-        v.translatesAutoresizingMaskIntoConstraints = false
-        
-        return v
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -36,25 +29,34 @@ class FeedCollectionViewCell: UICollectionViewCell {
         setupView()
     }
     
+    override func layoutSubviews() {
+        let cornerRadius: CGFloat = frame.height / 5.0
+        
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
+        imageView.layer.cornerRadius = cornerRadius
+    }
+    
     fileprivate func setupView() {
         
-        addSubview(shadowView)
-        shadowView.addSubview(imageView)
+        backgroundColor = .clear
+        layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        layer.shadowOffset = CGSize(width: 8, height: 6)
+        layer.shadowOpacity = 0.1
+        
+        imageView.backgroundColor = .white
+        imageView.clipsToBounds = true
+        
+        addSubview(imageView)
         
         setupLayout()
     }
     
     fileprivate func setupLayout() {
         NSLayoutConstraint.activate([
-            shadowView.topAnchor.constraint(equalTo: topAnchor),
-            shadowView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            shadowView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            shadowView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
-            imageView.topAnchor.constraint(equalTo: shadowView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: shadowView.bottomAnchor),
-            imageView.leadingAnchor.constraint(equalTo: shadowView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: shadowView.trailingAnchor)
+            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
 }

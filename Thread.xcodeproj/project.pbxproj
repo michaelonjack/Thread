@@ -49,15 +49,14 @@
 		B1DC8194220EF00A0005278D /* ClothingItemEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC8193220EF00A0005278D /* ClothingItemEditView.swift */; };
 		B1DC8198220F1FB50005278D /* ClosetDetailsTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC8197220F1FB50005278D /* ClosetDetailsTextView.swift */; };
 		B1DC819B2210D24B0005278D /* ClothingItemTableCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC819A2210D24B0005278D /* ClothingItemTableCellDelegate.swift */; };
-		B1DC81E1221502950005278D /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC81E0221502950005278D /* SwipeView.swift */; };
-		B1DC81E3221514E00005278D /* SwipeViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC81E2221514E00005278D /* SwipeViewContainer.swift */; };
-		B1DC82232215E2CB0005278D /* ClothingItemSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC82222215E2CB0005278D /* ClothingItemSwipeView.swift */; };
 		B1DC82252215E6E20005278D /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC82242215E6E20005278D /* UserTableViewCell.swift */; };
 		B1DC8227221787030005278D /* SlideOutMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC8226221787030005278D /* SlideOutMenuView.swift */; };
 		B1DC826B221889AE0005278D /* SlideOutMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC826A221889AE0005278D /* SlideOutMenuTableViewCell.swift */; };
 		B1DC826D22188DB30005278D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC826C22188DB30005278D /* HomeViewController.swift */; };
 		B1DC82732218932C0005278D /* SlideOutMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC82722218932C0005278D /* SlideOutMenuViewController.swift */; };
 		B1DC82752218E1C80005278D /* SlideOutMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC82742218E1C80005278D /* SlideOutMenuDelegate.swift */; };
+		B1DC8277221999B60005278D /* UserTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC8276221999B60005278D /* UserTableView.swift */; };
+		B1DC82792219B7670005278D /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC82782219B7670005278D /* UserTableViewController.swift */; };
 		B1F7596122073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F7596022073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift */; };
 		B1FE8219220939D9006AFD43 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FE8218220939D9006AFD43 /* Coordinator.swift */; };
 		B1FE821B22093A49006AFD43 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FE821A22093A49006AFD43 /* MainCoordinator.swift */; };
@@ -140,15 +139,14 @@
 		B1DC8193220EF00A0005278D /* ClothingItemEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemEditView.swift; sourceTree = "<group>"; };
 		B1DC8197220F1FB50005278D /* ClosetDetailsTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetDetailsTextView.swift; sourceTree = "<group>"; };
 		B1DC819A2210D24B0005278D /* ClothingItemTableCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemTableCellDelegate.swift; sourceTree = "<group>"; };
-		B1DC81E0221502950005278D /* SwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
-		B1DC81E2221514E00005278D /* SwipeViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeViewContainer.swift; sourceTree = "<group>"; };
-		B1DC82222215E2CB0005278D /* ClothingItemSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemSwipeView.swift; sourceTree = "<group>"; };
 		B1DC82242215E6E20005278D /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		B1DC8226221787030005278D /* SlideOutMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOutMenuView.swift; sourceTree = "<group>"; };
 		B1DC826A221889AE0005278D /* SlideOutMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOutMenuTableViewCell.swift; sourceTree = "<group>"; };
 		B1DC826C22188DB30005278D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B1DC82722218932C0005278D /* SlideOutMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOutMenuViewController.swift; sourceTree = "<group>"; };
 		B1DC82742218E1C80005278D /* SlideOutMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOutMenuDelegate.swift; sourceTree = "<group>"; };
+		B1DC8276221999B60005278D /* UserTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableView.swift; sourceTree = "<group>"; };
+		B1DC82782219B7670005278D /* UserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
 		B1F7596022073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1FE8218220939D9006AFD43 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		B1FE821A22093A49006AFD43 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
@@ -228,6 +226,7 @@
 		B11CBD4B2205CF0C00D6620B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B1DC82782219B7670005278D /* UserTableViewController.swift */,
 				B1FE8220220947DA006AFD43 /* CoordinatorNavigationController.swift */,
 				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
 				B1DB7EF122071A2C00F3C4D9 /* ClosetViewController.swift */,
@@ -246,7 +245,7 @@
 			children = (
 				B1888CAA220D0A5F0028146C /* Login */,
 				B1888CA9220D0A4B0028146C /* Closet */,
-				B1888CA8220D0A350028146C /* UserProfile */,
+				B1888CA8220D0A350028146C /* User */,
 				B1C8161D220F884000B35B43 /* ClothingItem */,
 				B157D4A522061ED200D83CDB /* CollectionCell */,
 				B1C8161E220F95ED00B35B43 /* TableCell */,
@@ -306,14 +305,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B1888CA8220D0A350028146C /* UserProfile */ = {
+		B1888CA8220D0A350028146C /* User */ = {
 			isa = PBXGroup;
 			children = (
 				B157D4B022065B3900D83CDB /* UserProfileFeedView.swift */,
 				B157D4AE22065ADD00D83CDB /* UserProfileSummaryView.swift */,
 				B157D4AA2206452100D83CDB /* UserProfileStatsView.swift */,
+				B1DC8276221999B60005278D /* UserTableView.swift */,
 			);
-			path = UserProfile;
+			path = User;
 			sourceTree = "<group>";
 		};
 		B1888CA9220D0A4B0028146C /* Closet */ = {
@@ -343,7 +343,6 @@
 				B1DC8193220EF00A0005278D /* ClothingItemEditView.swift */,
 				B1C8161B220F853D00B35B43 /* ClothingItemSearchBar.swift */,
 				B1C8161F220F960E00B35B43 /* ClothingItemTableView.swift */,
-				B1DC82222215E2CB0005278D /* ClothingItemSwipeView.swift */,
 			);
 			path = ClothingItem;
 			sourceTree = "<group>";
@@ -431,8 +430,6 @@
 			isa = PBXGroup;
 			children = (
 				B1FE822A220CC7C9006AFD43 /* UnderlinedTextFieldView.swift */,
-				B1DC81E0221502950005278D /* SwipeView.swift */,
-				B1DC81E2221514E00005278D /* SwipeViewContainer.swift */,
 				B1DC8226221787030005278D /* SlideOutMenuView.swift */,
 			);
 			path = General;
@@ -698,9 +695,8 @@
 			files = (
 				B1FE822B220CC7C9006AFD43 /* UnderlinedTextFieldView.swift in Sources */,
 				B1FE822D220CFC88006AFD43 /* LoginAboutView.swift in Sources */,
+				B1DC82792219B7670005278D /* UserTableViewController.swift in Sources */,
 				B1A11D411EFEC4AB00E16169 /* DatabaseHelper.swift in Sources */,
-				B1DC81E1221502950005278D /* SwipeView.swift in Sources */,
-				B1DC81E3221514E00005278D /* SwipeViewContainer.swift in Sources */,
 				B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */,
 				B1DC82752218E1C80005278D /* SlideOutMenuDelegate.swift in Sources */,
 				B1DB7EF02206B99700F3C4D9 /* FeedCollectionViewCell.swift in Sources */,
@@ -714,6 +710,7 @@
 				B157D4B122065B3900D83CDB /* UserProfileFeedView.swift in Sources */,
 				B1FE821B22093A49006AFD43 /* MainCoordinator.swift in Sources */,
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
+				B1DC8277221999B60005278D /* UserTableView.swift in Sources */,
 				B1FE8227220A1CA4006AFD43 /* ActiveUserCoordinator.swift in Sources */,
 				B174D0281E36CAC700218590 /* APIHelper.swift in Sources */,
 				B1C2D48C220D2B7D00AD36BA /* UIView+Additions.swift in Sources */,
@@ -733,7 +730,6 @@
 				B1FE822F220D000A006AFD43 /* LoginAboutCollectionViewCell.swift in Sources */,
 				B1C81620220F960E00B35B43 /* ClothingItemTableView.swift in Sources */,
 				B1DC8198220F1FB50005278D /* ClosetDetailsTextView.swift in Sources */,
-				B1DC82232215E2CB0005278D /* ClothingItemSwipeView.swift in Sources */,
 				B1DC819B2210D24B0005278D /* ClothingItemTableCellDelegate.swift in Sources */,
 				B183EE19220BCE800065A9F1 /* LoginView.swift in Sources */,
 				B157D4A42206147D00D83CDB /* UserProfileViewController.swift in Sources */,

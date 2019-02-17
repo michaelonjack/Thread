@@ -219,6 +219,39 @@
             </objects>
             <point key="canvasLocation" x="102" y="139"/>
         </scene>
+        <!--User Table View Controller-->
+        <scene sceneID="LLm-mM-53C">
+            <objects>
+                <viewController storyboardIdentifier="UserTableViewController" id="NOp-n5-SSe" customClass="UserTableViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ove-3P-DTR"/>
+                        <viewControllerLayoutGuide type="bottom" id="qNg-7J-jVM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VsZ-28-07O">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qfT-ZX-Jju" customClass="UserTableView" customModule="Thread" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="66.5" width="375" height="600.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="qfT-ZX-Jju" secondAttribute="trailing" id="4py-mA-Efy"/>
+                            <constraint firstItem="qfT-ZX-Jju" firstAttribute="leading" secondItem="VsZ-28-07O" secondAttribute="leading" id="A7X-X3-Bpg"/>
+                            <constraint firstItem="qNg-7J-jVM" firstAttribute="top" secondItem="qfT-ZX-Jju" secondAttribute="bottom" id="Pvj-VF-8hP"/>
+                            <constraint firstItem="qfT-ZX-Jju" firstAttribute="height" secondItem="VsZ-28-07O" secondAttribute="height" multiplier="0.9" id="VJC-8D-rW2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="usersTableView" destination="qfT-ZX-Jju" id="GWD-ru-62I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="raJ-hQ-Jgl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="102" y="-1268"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="WXP-cb-84d">
             <objects>
