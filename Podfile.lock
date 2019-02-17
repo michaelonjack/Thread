@@ -82,7 +82,7 @@ PODS:
     - SDWebImage/Core (= 4.4.5)
   - SDWebImage/Core (4.4.5)
   - SteviaLayout (4.4.3)
-  - TabbedPageView (0.2.1)
+  - TabbedPageView (0.2.3)
   - YPImagePicker (3.5.3):
     - PryntTrimmerView (~> 3.0.0)
     - SteviaLayout (~> 4.4.1)
@@ -140,9 +140,9 @@ SPEC CHECKSUMS:
   PryntTrimmerView: 53ac64053c7ce63cb3e27f54090f52da0734891d
   SDWebImage: ecc03494e973b93b80213649d32175f8d2d17d4d
   SteviaLayout: ae5ee66101e03607a93c9b3773b84ab7ba7b3d17
-  TabbedPageView: 1b608dadebc048467f0336d15fa48f40578ff1b9
+  TabbedPageView: 39e30c45a06260139f3b95697e3552e6e2aba7e0
   YPImagePicker: 5dd3814b47b1208e9c8cc8f6ef77fe90db3723b6
 
 PODFILE CHECKSUM: b6c1b96413fc11d59bd76267afbd2e388ae6472a
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0

@@ -12,6 +12,5 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 }

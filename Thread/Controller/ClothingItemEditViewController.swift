@@ -22,6 +22,8 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        itemImageView.clipsToBounds = true
+        
         setInitialData()
     }
 
