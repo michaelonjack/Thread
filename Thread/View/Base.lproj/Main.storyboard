@@ -230,12 +230,27 @@
                     <view key="view" contentMode="scaleToFill" id="wkI-uf-FjZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RXJ-Sb-0em" customClass="TabbedPageView" customModule="TabbedPageView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="RXJ-Sb-0em" firstAttribute="leading" secondItem="wkI-uf-FjZ" secondAttribute="leading" id="0cT-v1-Bp1"/>
+                            <constraint firstItem="RXJ-Sb-0em" firstAttribute="top" secondItem="wkI-uf-FjZ" secondAttribute="top" id="fcn-L7-cto"/>
+                            <constraint firstItem="xbw-ye-MEO" firstAttribute="top" secondItem="RXJ-Sb-0em" secondAttribute="bottom" id="rWh-yQ-E1u"/>
+                            <constraint firstAttribute="trailing" secondItem="RXJ-Sb-0em" secondAttribute="trailing" id="rqT-rT-I1h"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tabbedPageView" destination="RXJ-Sb-0em" id="r1G-bV-dbb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPZ-8l-nk4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="102" y="-563"/>
+            <point key="canvasLocation" x="101.59999999999999" y="-563.56821589205401"/>
         </scene>
         <!--Closet Update Options View Controller-->
         <scene sceneID="vnf-Uf-koA">
