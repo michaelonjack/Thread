@@ -145,6 +145,16 @@
                                             <constraint firstItem="Aol-FB-sez" firstAttribute="leading" secondItem="QLY-oP-FTJ" secondAttribute="leading" id="yA4-nX-D2K"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bnx-DR-sBQ">
+                                        <rect key="frame" x="16" y="8" width="14.5" height="14.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Bnx-DR-sBQ" secondAttribute="height" multiplier="1:1" id="hIu-Hw-B7K"/>
+                                        </constraints>
+                                        <state key="normal" image="BackArrow"/>
+                                        <connections>
+                                            <action selector="dismissProfile:" destination="Uo4-cb-L0J" eventType="touchUpInside" id="PeN-rQ-epr"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -193,9 +203,12 @@
                             <constraint firstItem="XEw-46-9eX" firstAttribute="top" secondItem="Qkc-SX-7y4" secondAttribute="top" id="4ix-LN-Kjd"/>
                             <constraint firstItem="Qkc-SX-7y4" firstAttribute="trailing" secondItem="Cgq-38-2ha" secondAttribute="trailing" id="JRh-KJ-6oG"/>
                             <constraint firstItem="Cgq-38-2ha" firstAttribute="top" secondItem="XEw-46-9eX" secondAttribute="bottom" id="LEK-IT-PKl"/>
+                            <constraint firstItem="Bnx-DR-sBQ" firstAttribute="top" secondItem="Qkc-SX-7y4" secondAttribute="top" constant="8" id="OMo-8T-lJp"/>
                             <constraint firstItem="XEw-46-9eX" firstAttribute="height" secondItem="LfD-6y-DjN" secondAttribute="height" multiplier="0.35" id="PG6-NL-gQ4"/>
                             <constraint firstItem="Cgq-38-2ha" firstAttribute="leading" secondItem="Qkc-SX-7y4" secondAttribute="leading" id="R1G-Fl-iaS"/>
                             <constraint firstItem="Qkc-SX-7y4" firstAttribute="trailing" secondItem="XEw-46-9eX" secondAttribute="trailing" id="UjI-KA-SgP"/>
+                            <constraint firstItem="Bnx-DR-sBQ" firstAttribute="height" secondItem="LfD-6y-DjN" secondAttribute="height" multiplier="0.022" id="Xvt-e0-7aY"/>
+                            <constraint firstItem="Bnx-DR-sBQ" firstAttribute="leading" secondItem="Qkc-SX-7y4" secondAttribute="leading" constant="16" id="hy3-4k-bbW"/>
                             <constraint firstItem="XEw-46-9eX" firstAttribute="leading" secondItem="Qkc-SX-7y4" secondAttribute="leading" id="mrG-z4-Cdz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Qkc-SX-7y4"/>

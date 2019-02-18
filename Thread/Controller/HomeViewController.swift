@@ -24,7 +24,7 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         tabbedPageView.tabBar.position = .bottom
         tabbedPageView.tabBar.sliderColor = .black
         tabbedPageView.tabBar.transitionStyle = .sticky
-        tabbedPageView.tabBar.height = 40
+        tabbedPageView.tabBar.height = 60
         
         tabbedPageView.delegate = self
         tabbedPageView.dataSource = self

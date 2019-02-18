@@ -133,6 +133,10 @@ class UserProfileViewController: UIViewController, Storyboarded {
             present(picker, animated: true, completion: nil)
         }
     }
+    
+    @IBAction func dismissProfile(_ sender: Any) {
+        coordinator?.pop()
+    }
 }
 
 
