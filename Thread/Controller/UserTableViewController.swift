@@ -13,13 +13,25 @@ class UserTableViewController: UIViewController, Storyboarded {
     weak var coordinator: ActiveUserCoordinator?
 
     @IBOutlet weak var usersTableView: UserTableView!
+    @IBOutlet weak var navigationLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    var navigationText: String!
+    var titleText: String!
     
     var users: [User] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationLabel.text = navigationText
+        titleLabel.text = titleText
 
         usersTableView.users = users
         usersTableView.reloadData()
+    }
+    
+    @IBAction func dismiss(_ sender: Any) {
+        coordinator?.pop()
     }
 }

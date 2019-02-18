@@ -29,6 +29,7 @@ class UserTableView: UITableView {
         delegate = self
         dataSource = self
         
+        clipsToBounds = true
         rowHeight = frame.height * 0.6
         register(UserTableViewCell.self, forCellReuseIdentifier: "UserTableCell")
     }

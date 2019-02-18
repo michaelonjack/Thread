@@ -129,7 +129,8 @@ extension SlideOutMenuViewController: SlideOutMenuDelegate {
     }
     
     func didSelectFollowingOption() {
-        coordinator?.showUsersTable(withUsers: [configuration.currentUser!])
+        let currentUser = configuration.currentUser!
+        coordinator?.showFollowedUsers(users: [currentUser, currentUser, currentUser])
     }
     
     func didSelectFavoritesOption() {
