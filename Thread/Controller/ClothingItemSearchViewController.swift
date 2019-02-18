@@ -12,7 +12,7 @@ class ClothingItemSearchViewController: UIViewController, Storyboarded {
     
     weak var coordinator: ActiveUserCoordinator?
 
-    @IBOutlet weak var searchBar: ClothingItemSearchBar!
+    @IBOutlet weak var searchBar: SearchBarView!
     @IBOutlet weak var resultsTable: ClothingItemTableView!
     @IBOutlet weak var cancelButton: UIButton!
     

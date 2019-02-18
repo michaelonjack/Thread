@@ -12,6 +12,7 @@ import TabbedPageView
 class HomeViewController: SlideOutMenuViewController, Storyboarded {
 
     @IBOutlet weak var tabbedPageView: TabbedPageView!
+    @IBOutlet var exploreView: ExploreMainView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,9 +50,6 @@ extension HomeViewController: TabbedPageViewDataSource {
             NSAttributedString.Key.font: UIFont(name: "AvenirNext-Medium", size: 14)!
         ]
         
-        let redView = UIView()
-        redView.backgroundColor = .ultraLightRed
-        
         let blueView = UIView()
         blueView.backgroundColor = .ultraLightBlue
         
@@ -59,7 +57,7 @@ extension HomeViewController: TabbedPageViewDataSource {
         greenView.backgroundColor = .ultraLightGreen
         
         return [
-            Tab(view: redView, type: .attributedText(NSAttributedString(string: "EXPLORE", attributes: tabAttributes))),
+            Tab(view: exploreView, type: .attributedText(NSAttributedString(string: "EXPLORE", attributes: tabAttributes))),
             Tab(view: blueView, type: .attributedText(NSAttributedString(string: "HOME", attributes: tabAttributes))),
             Tab(view: greenView, type: .attributedText(NSAttributedString(string: "AROUND ME", attributes: tabAttributes)))
         ]
