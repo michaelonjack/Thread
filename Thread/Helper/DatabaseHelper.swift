@@ -27,10 +27,22 @@ func getCurrentUser(completion: @escaping (User) -> Void) {
 
 
 func getUser(withId id: String, completion: @escaping (User) -> Void) {
+    
+    // Check if the user is cached first
+    if let user = configuration.userCache[id] {
+        completion( user )
+        return
+    }
+    
     let userReference = Database.database().reference(withPath: "users/" + id)
     userReference.keepSynced(true)
     userReference.observeSingleEvent(of: .value) { (snapshot) in
-        completion( User(snapshot: snapshot) )
+        let user = User(snapshot: snapshot)
+        
+        // Save the user to the cache
+        configuration.userCache[user.uid] = user
+        
+        completion( user )
     }
 }
 
