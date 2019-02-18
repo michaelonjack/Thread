@@ -55,12 +55,14 @@ extension UserTableView: UITableViewDataSource {
         
         // Reset cell fields
         userCell.userPictureImageView.image = nil
-        userCell.userDetailsLabel.text = ""
+        userCell.userNameLabel.text = ""
+        userCell.userStatusLabel.text = ""
         userCell.itemImages = [nil, nil, nil, nil]
         
         let user = users[indexPath.row]
         
-        userCell.userDetailsLabel.text = user.name
+        userCell.userNameLabel.text = user.name
+        userCell.userStatusLabel.text = user.status ?? "No status"
         user.getProfilePicture { (profilePicture) in
             userCell.userPictureImageView.image = profilePicture
         }

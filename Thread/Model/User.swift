@@ -73,7 +73,7 @@ class User {
         firstName = snapshotValue["firstName"] as? String ?? ""
         lastName = snapshotValue["lastName"] as? String ?? ""
         email = snapshotValue["email"] as? String ?? ""
-        status = snapshotValue["status"] as? String ?? ""
+        status = snapshotValue["status"] as? String
         profilePictureUrl = snapshotValue["profilePictureUrl"] as? String
         outfitPictureUrl = snapshotValue["outfitPictureUrl"] as? String
         

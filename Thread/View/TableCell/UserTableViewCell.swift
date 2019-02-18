@@ -17,11 +17,32 @@ class UserTableViewCell: UITableViewCell {
         return iv
     }()
     
-    var userDetailsLabel: UILabel = {
+    var userNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .black
+        label.font = UIFont(name: "AvenirNext-Regular", size: 18.0)
         
         return label
+    }()
+    
+    var userStatusLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .gray
+        label.font = UIFont(name: "AvenirNext-Regular", size: 15.0)
+        
+        return label
+    }()
+    
+    var followButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "Follow"), for: .normal)
+        
+        return button
     }()
     
     var userClothingItemsView: UserProfileFeedView = {
@@ -66,7 +87,9 @@ class UserTableViewCell: UITableViewCell {
         userClothingItemsView.feedCollectionView.dataSource = self
         
         addSubview(userPictureImageView)
-        addSubview(userDetailsLabel)
+        addSubview(userNameLabel)
+        addSubview(userStatusLabel)
+        addSubview(followButton)
         addSubview(userClothingItemsView)
         
         setupLayout()
@@ -74,15 +97,25 @@ class UserTableViewCell: UITableViewCell {
     
     fileprivate func setupLayout() {
         NSLayoutConstraint.activate([
-            userPictureImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            userPictureImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             userPictureImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             userPictureImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2),
             userPictureImageView.widthAnchor.constraint(equalTo: userPictureImageView.heightAnchor),
             
-            userDetailsLabel.topAnchor.constraint(equalTo: userPictureImageView.topAnchor),
-            userDetailsLabel.bottomAnchor.constraint(equalTo: userPictureImageView.bottomAnchor),
-            userDetailsLabel.leadingAnchor.constraint(equalTo: userPictureImageView.trailingAnchor, constant: 8),
-            userDetailsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            userNameLabel.topAnchor.constraint(equalTo: userPictureImageView.topAnchor),
+            userNameLabel.heightAnchor.constraint(equalTo: userPictureImageView.heightAnchor, multiplier: 0.5),
+            userNameLabel.leadingAnchor.constraint(equalTo: userPictureImageView.trailingAnchor, constant: 16),
+            userNameLabel.trailingAnchor.constraint(equalTo: followButton.leadingAnchor, constant: -8),
+            
+            userStatusLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor),
+            userStatusLabel.bottomAnchor.constraint(equalTo: userPictureImageView.bottomAnchor),
+            userStatusLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
+            userStatusLabel.trailingAnchor.constraint(equalTo: userNameLabel.trailingAnchor),
+            
+            followButton.centerYAnchor.constraint(equalTo: userPictureImageView.centerYAnchor),
+            followButton.heightAnchor.constraint(equalTo: userPictureImageView.heightAnchor, multiplier: 0.5),
+            followButton.widthAnchor.constraint(equalTo: followButton.heightAnchor),
+            followButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             
             userClothingItemsView.leadingAnchor.constraint(equalTo: userPictureImageView.leadingAnchor),
             userClothingItemsView.trailingAnchor.constraint(equalTo: trailingAnchor),
