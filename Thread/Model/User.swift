@@ -189,6 +189,7 @@ class User {
     }
     
     func getProfilePicture(completion: @escaping (UIImage?) -> Void) {
+        
         if let profilePicture = profilePicture {
             completion(profilePicture)
             return
@@ -196,6 +197,7 @@ class User {
         
         else if let imageUrlStr = profilePictureUrl, let imageUrl = URL(string: imageUrlStr) {
             SDWebImageDownloader.shared().downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
+                
                 if error != nil {
                     completion(nil)
                     return

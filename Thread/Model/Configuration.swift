@@ -21,6 +21,7 @@ final class Configuration {
             // Set the current user
             if (Auth.auth().currentUser != nil) {
                 getCurrentUser(completion: { (currentUser) in
+                    self.userCache[currentUser.uid] = currentUser
                     self.currentUser = currentUser
                 })
             }

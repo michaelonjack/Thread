@@ -73,10 +73,9 @@ class UserProfileViewController: UIViewController, Storyboarded {
                 self.profilePictureButton.isUserInteractionEnabled = true
             }
             
-            if let imageUrlStr = user.profilePictureUrl {
-                let imageUrl = URL(string: imageUrlStr)
-                self.profilePictureButton.sd_setImage(with: imageUrl, for: .normal, completed: nil)
-            }
+            user.getProfilePicture(completion: { (profilePicture) in
+                self.profilePictureButton.setImage(profilePicture, for: .normal)
+            })
             
             self.userStatisticsView.favoritesCount = user.favoritedItems.count
             self.userStatisticsView.followingCount = user.followingUserIds.count

@@ -162,11 +162,9 @@ class SlideOutMenuView: UIView {
             self.nameLabel.text = user.name
             self.statsLabel.attributedText = self.createStatsLabelString(favoritesCount: user.favoritedItems.count, followingCount: user.followingUserIds.count)
             
-            if let profilePicture = user.profilePicture {
+            user.getProfilePicture(completion: { (profilePicture) in
                 self.profilePictureView.image = profilePicture
-            } else if let picUrlStr = user.profilePictureUrl, let picUrl = URL(string: picUrlStr) {
-                self.profilePictureView.sd_setImage(with: picUrl, completed: nil)
-            }
+            })
         }
     }
     
