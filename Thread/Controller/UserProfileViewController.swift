@@ -121,7 +121,7 @@ class UserProfileViewController: UIViewController, Storyboarded {
                     uploadImage(toLocation: "images/" + currentUser.uid + "/ProfilePicture", image: photo.image, completion: { (url, error) in
                         if error == nil {
                             currentUser.profilePicture = photo.image
-                            currentUser.profilePictureUrl = url?.absoluteString
+                            currentUser.profilePictureUrl = url
                             self.profilePictureButton.setImage(photo.image, for: .normal)
                             currentUser.save()
                         }

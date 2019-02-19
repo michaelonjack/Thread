@@ -26,8 +26,8 @@ class User {
     }
     var locationStr: String?
     var profilePicture: UIImage?
-    var profilePictureUrl: String?
-    var outfitPictureUrl: String?
+    var profilePictureUrl: URL?
+    var outfitPictureUrl: URL?
     var clothingItems: [ClothingType:ClothingItem] = [:]
     var favoritedItems: [ClothingItem] = []
     var followingUserIds: [String] = []
@@ -74,8 +74,14 @@ class User {
         lastName = snapshotValue["lastName"] as? String ?? ""
         email = snapshotValue["email"] as? String ?? ""
         status = snapshotValue["status"] as? String
-        profilePictureUrl = snapshotValue["profilePictureUrl"] as? String
-        outfitPictureUrl = snapshotValue["outfitPictureUrl"] as? String
+        
+        if let profilePictureUrlStr = snapshotValue["profilePictureUrl"] as? String {
+            profilePictureUrl = URL(string: profilePictureUrlStr)
+        }
+        
+        if let outfitPictureUrlStr = snapshotValue["outfitPictureUrl"] as? String {
+            outfitPictureUrl = URL(string: outfitPictureUrlStr)
+        }
         
         if let lastCheckInStr = snapshotValue["lastCheckIn"] as? String {
             let dateFormatter = DateFormatter()
@@ -135,7 +141,7 @@ class User {
         ]
         
         if let profilePictureUrl = profilePictureUrl {
-            dict["profilePictureUrl"] = profilePictureUrl
+            dict["profilePictureUrl"] = profilePictureUrl.absoluteString
         }
         
         if let status = status {
@@ -195,7 +201,7 @@ class User {
             return
         }
         
-        else if let imageUrlStr = profilePictureUrl, let imageUrl = URL(string: imageUrlStr) {
+        else if let imageUrl = profilePictureUrl {
             SDWebImageDownloader.shared().downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
                 
                 if error != nil {
