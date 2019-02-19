@@ -23,9 +23,9 @@ struct ClothingItem {
     var brand: String
     var price: Double?
     var details: String?
-    var itemUrl: String?
-    var itemImageUrl: String?
-    var smallItemImageUrl: String?
+    var itemUrl: URL?
+    var itemImageUrl: URL?
+    var smallItemImageUrl: URL?
     var itemImage: UIImage?
     var smallItemImage: UIImage?
     
@@ -34,11 +34,20 @@ struct ClothingItem {
         id = snapshotValue["id"] as? String ?? ""
         name = snapshotValue["name"] as? String ?? ""
         brand = snapshotValue["brand"] as? String ?? ""
-        itemUrl = snapshotValue["itemUrl"] as? String ?? nil
-        itemImageUrl = snapshotValue["itemImageUrl"] as? String ?? nil
-        smallItemImageUrl = snapshotValue["smallItemImageUrl"] as? String ?? nil
         price = snapshotValue["price"] as? Double ?? nil
         details = snapshotValue["details"] as? String ?? nil
+        
+        if let itemUrlStr = snapshotValue["itemUrl"] as? String {
+            itemUrl = URL(string: itemUrlStr)
+        }
+        
+        if let itemImageUrlStr = snapshotValue["itemImageUrl"] as? String {
+            itemImageUrl = URL(string: itemImageUrlStr)
+        }
+        
+        if let smallItemImageUrlStr = snapshotValue["smallItemImageUrl"] as? String {
+            smallItemImageUrl = URL(string: smallItemImageUrlStr)
+        }
         
         let itemType = snapshotValue["type"] as? String ?? ""
         let clothingType = withIdAsKey ? itemType : snapshot.key
@@ -69,9 +78,15 @@ struct ClothingItem {
         self.price = shopStyleItem.price
         self.brand = shopStyleItem.brand?.name ?? ""
         self.details = shopStyleItem.description
-        self.itemUrl = shopStyleItem.clickUrl
-        self.itemImageUrl = shopStyleItem.image.sizes["Best"]?.url
-        self.smallItemImageUrl = shopStyleItem.image.sizes["IPhone"]?.url
+        self.itemUrl = URL(string: shopStyleItem.clickUrl)
+        
+        if let itemImageUrlStr = shopStyleItem.image.sizes["Best"]?.url {
+            itemImageUrl = URL(string: itemImageUrlStr)
+        }
+        
+        if let smallItemImageUrlStr = shopStyleItem.image.sizes["IPhone"]?.url {
+            smallItemImageUrl = URL(string: smallItemImageUrlStr)
+        }
     }
     
     func toAnyObject() -> Any {
@@ -87,15 +102,15 @@ struct ClothingItem {
         }
         
         if let itemUrl = itemUrl {
-            dict["itemUrl"] = itemUrl
+            dict["itemUrl"] = itemUrl.absoluteString
         }
         
         if let itemImageUrl = itemImageUrl {
-            dict["itemImageUrl"] = itemImageUrl
+            dict["itemImageUrl"] = itemImageUrl.absoluteString
         }
         
         if let smallItemImageUrl = smallItemImageUrl {
-            dict["smallItemImageUrl"] = smallItemImageUrl
+            dict["smallItemImageUrl"] = smallItemImageUrl.absoluteString
         }
         
         if let details = details {
@@ -113,7 +128,7 @@ struct ClothingItem {
                 return
             }
             
-            else if let imageUrlStr = smallItemImageUrl, let imageUrl = URL(string: imageUrlStr) {
+            else if let imageUrl = smallItemImageUrl {
                 SDWebImageDownloader.shared().downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
                     if error != nil {
                         completion(nil)
@@ -130,7 +145,7 @@ struct ClothingItem {
                 completion(normalImage)
             }
             
-            else if let imageUrlStr = itemImageUrl, let imageUrl = URL(string: imageUrlStr) {
+            else if let imageUrl = itemImageUrl {
                 SDWebImageDownloader.shared().downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
                     if error != nil {
                         completion(nil)

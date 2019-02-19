@@ -44,7 +44,7 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
         
         if let itemImage = clothingItem.itemImage {
             itemImageView.image = itemImage
-        } else if let itemImageUrlStr = clothingItem.itemImageUrl, let url = URL(string: itemImageUrlStr) {
+        } else if let url = clothingItem.itemImageUrl {
             itemImageView.sd_setImage(with: url) { (image, error, _, _) in
                 if error != nil {
                     print(error.debugDescription)
@@ -58,7 +58,7 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
         editView.nameField.textField.text = clothingItem.name
         editView.brandField.textField.text = clothingItem.brand
         editView.priceField.textField.text = clothingItem.price == nil ? "" : String(format: "%.2f", clothingItem.price!)
-        editView.linkField.textField.text = clothingItem.itemUrl
+        editView.linkField.textField.text = clothingItem.itemUrl?.absoluteString
         editView.detailsField.text = clothingItem.details ?? ""
     }
     
@@ -72,15 +72,18 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
         if let itemImage = clothingItem.itemImage {
             uploadImage(toLocation: "images/" + currentUser.uid + "/" + clothingItem.type.description, image: itemImage, completion: { (url, error) in
                 if error == nil {
-                    self.clothingItem.itemImageUrl = url?.absoluteString
+                    self.clothingItem.itemImageUrl = url
                     self.clothingItem.details = self.editView.detailsField.text
                     self.clothingItem.name = self.editView.nameField.textField.text ?? ""
                     self.clothingItem.brand = self.editView.brandField.textField.text ?? ""
                     self.clothingItem.price = Double(self.editView.priceField.textField.text ?? "")
-                    self.clothingItem.itemUrl = self.editView.linkField.textField.text
+                    
+                    if let urlStr = self.editView.linkField.textField.text {
+                        self.clothingItem.itemUrl = URL(string: urlStr)
+                    }
                     
                     if self.clothingItem.smallItemImageUrl == nil {
-                        self.clothingItem.smallItemImageUrl = url?.absoluteString
+                        self.clothingItem.smallItemImageUrl = url
                     }
                     
                     self.coordinator?.finishEditingDetails(forClothingItem: self.clothingItem)

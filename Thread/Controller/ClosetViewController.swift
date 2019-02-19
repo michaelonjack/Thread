@@ -162,7 +162,7 @@ class ClosetViewController: UIViewController, Storyboarded {
         guard let currentClothingType = ClothingType(rawValue: currentItemIndex) else { return }
         guard let currentItem = user?.clothingItems[currentClothingType] else { return }
         
-        if let urlStr = currentItem.itemUrl, let url = URL(string: urlStr) {
+        if let url = currentItem.itemUrl {
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:])
             }
@@ -219,7 +219,7 @@ extension ClosetViewController: UICollectionViewDataSource {
                 priceStr = formatter.string(from: price as NSNumber) ?? "No Price"
             }
             
-            itemImageUrl = URL(string: item.itemImageUrl ?? "")
+            itemImageUrl = item.itemImageUrl
         }
         
         closetItemCell.label.text = priceStr

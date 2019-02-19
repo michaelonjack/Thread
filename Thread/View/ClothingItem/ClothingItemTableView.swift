@@ -92,7 +92,7 @@ extension ClothingItemTableView: UITableViewDataSource {
         
         if let itemImage = clothingItem.smallItemImage {
             clothingItemCell.itemImageView.image = itemImage
-        } else if let itemImageUrlStr = clothingItem.smallItemImageUrl, let itemImageUrl = URL(string: itemImageUrlStr) {
+        } else if let itemImageUrl = clothingItem.smallItemImageUrl {
             clothingItemCell.itemImageView.sd_setImage(with: itemImageUrl) { (image, error, _, _) in
                 self.clothingItems[indexPath.row].smallItemImage = image
                 tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
@@ -111,7 +111,7 @@ extension ClothingItemTableView: ClothingItemTableCellDelegate {
         
         let currentItem = clothingItems[indexPath.row]
         
-        if let urlStr = currentItem.itemUrl, let url = URL(string: urlStr) {
+        if let url = currentItem.itemUrl {
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:])
             }
