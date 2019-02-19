@@ -30,7 +30,7 @@ class ExploreLocationExpandedView: UIView {
         let b = UIButton()
         b.translatesAutoresizingMaskIntoConstraints = false
         b.alpha = 0
-        b.setImage(UIImage(named: "Unfollow"), for: .normal)
+        b.setImage(UIImage(named: "X"), for: .normal)
         
         return b
     }()

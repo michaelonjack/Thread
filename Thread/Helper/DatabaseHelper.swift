@@ -47,6 +47,21 @@ func getUser(withId id: String, completion: @escaping (User) -> Void) {
 }
 
 
+func getPlaces(completion: @escaping ([Place]) -> Void) {
+    let placeReference = Database.database().reference(withPath: "places")
+    placeReference.keepSynced(true)
+    placeReference.observeSingleEvent(of: .value) { (snapshot) in
+        var places: [Place] = []
+        for childSnapshot in snapshot.children {
+            let place = Place(snapshot: childSnapshot as! DataSnapshot)
+            places.append(place)
+        }
+        
+        completion(places)
+    }
+}
+
+
 
 func updateDataForUser(userid:String, key:String, value:AnyObject) {
     Database.database().reference(withPath: "users/" + userid).updateChildValues([key:value])

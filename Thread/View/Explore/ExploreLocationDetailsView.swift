@@ -23,8 +23,8 @@ class ExploreLocationDetailsView: UIView {
     var nameLabel: UILabel = {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
+        l.adjustsFontSizeToFitWidth = true
         l.font = UIFont(name: "AvenirNext-Medium", size: 30.0)
-        l.text = "Washington, DC"
         
         return l
     }()
@@ -32,9 +32,9 @@ class ExploreLocationDetailsView: UIView {
     var blurbLabel: UILabel = {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
+        l.adjustsFontSizeToFitWidth = true
         l.numberOfLines = 0
         l.font = UIFont(name: "AvenirNext-Regular", size: 18.0)
-        l.text = "Washington, D.C., is the capital city of the United States, located between Virginia and Maryland on the north bank of the Potomac River. The city is home to all three branches of the federal government, as well as the White House, the Supreme Court and the Capitol Building"
         
         return l
     }()

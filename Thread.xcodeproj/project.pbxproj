@@ -23,6 +23,7 @@
 		B1701AFC221B100A009B1788 /* ExploreLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AFB221B100A009B1788 /* ExploreLocationCollectionViewCell.swift */; };
 		B1701B00221B1D5A009B1788 /* ExploreLocationExpandedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AFF221B1D5A009B1788 /* ExploreLocationExpandedView.swift */; };
 		B1701B02221B2D81009B1788 /* ExploreLocationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B01221B2D81009B1788 /* ExploreLocationDetailsView.swift */; };
+		B1701B04221B9D6D009B1788 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B03221B9D6D009B1788 /* Place.swift */; };
 		B174D0261E36C8E900218590 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B174D0251E36C8E900218590 /* APIKeys.plist */; };
 		B174D0281E36CAC700218590 /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0271E36CAC700218590 /* APIHelper.swift */; };
 		B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0291E36D2A300218590 /* ClothingItem.swift */; };
@@ -112,6 +113,7 @@
 		B1701AFB221B100A009B1788 /* ExploreLocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1701AFF221B1D5A009B1788 /* ExploreLocationExpandedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationExpandedView.swift; sourceTree = "<group>"; };
 		B1701B01221B2D81009B1788 /* ExploreLocationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationDetailsView.swift; sourceTree = "<group>"; };
+		B1701B03221B9D6D009B1788 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		B174D0251E36C8E900218590 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		B174D0271E36CAC700218590 /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		B174D0291E36D2A300218590 /* ClothingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 			children = (
 				B157D4A02205E1BC00D83CDB /* Configuration.swift */,
 				B18430851E33B03A00EED632 /* User.swift */,
+				B1701B03221B9D6D009B1788 /* Place.swift */,
 				B174D0291E36D2A300218590 /* ClothingItem.swift */,
 				B174D02D1E36DE0B00218590 /* ClothingType.swift */,
 			);
@@ -728,6 +731,7 @@
 				B1FE8219220939D9006AFD43 /* Coordinator.swift in Sources */,
 				B1DC8192220E8CDF0005278D /* ClothingItemEditViewController.swift in Sources */,
 				B1DC826D22188DB30005278D /* HomeViewController.swift in Sources */,
+				B1701B04221B9D6D009B1788 /* Place.swift in Sources */,
 				B1FE8221220947DA006AFD43 /* CoordinatorNavigationController.swift in Sources */,
 				B1DC8227221787030005278D /* SlideOutMenuView.swift in Sources */,
 				B1701B00221B1D5A009B1788 /* ExploreLocationExpandedView.swift in Sources */,

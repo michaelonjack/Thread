@@ -14,6 +14,7 @@ final class Configuration {
     private static let sharedConfiguration: Configuration = Configuration()
     
     var currentUser: User?
+    var places: [Place] = []
     var userCache: [String:User] = [:]
     
     private init() {

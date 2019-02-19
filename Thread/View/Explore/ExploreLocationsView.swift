@@ -25,6 +25,8 @@ class ExploreLocationsView: UIView {
         return cv
     }()
     
+    var places: [Place] = []
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -41,6 +43,15 @@ class ExploreLocationsView: UIView {
         
         locationsCollectionView.delegate = self
         locationsCollectionView.dataSource = self
+        
+        getPlaces { (places) in
+            configuration.places = places
+            self.places = places
+            
+            DispatchQueue.main.async {
+                self.locationsCollectionView.reloadData()
+            }
+        }
         
         addSubview(locationsCollectionView)
         
@@ -68,12 +79,15 @@ extension ExploreLocationsView: UICollectionViewDelegate {
         let originInParent = selectedCell.convert(CGPoint(x: 0, y: 0), to: rootView)
         let frameInRootView = CGRect(x: originInParent.x, y: originInParent.y, width: selectedCell.frame.width, height: selectedCell.frame.height)
         
-        let locationTopView = ExploreLocationExpandedView(frame: frameInRootView)
-        locationTopView.translatesAutoresizingMaskIntoConstraints = false
-        locationTopView.locationImageView.image = selectedCell.imageView.image
+        let location = places[indexPath.row]
+        let locationExpandedView = ExploreLocationExpandedView(frame: frameInRootView)
+        locationExpandedView.translatesAutoresizingMaskIntoConstraints = false
+        locationExpandedView.locationImageView.image = selectedCell.imageView.image
+        locationExpandedView.detailsView.nameLabel.text = location.name
+        locationExpandedView.detailsView.blurbLabel.text = location.blurb
         
-        rootView.addSubview(locationTopView)
-        locationTopView.animateOpening()
+        rootView.addSubview(locationExpandedView)
+        locationExpandedView.animateOpening()
     }
 }
 
@@ -81,7 +95,7 @@ extension ExploreLocationsView: UICollectionViewDelegate {
 
 extension ExploreLocationsView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return places.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -89,19 +103,13 @@ extension ExploreLocationsView: UICollectionViewDataSource {
         
         guard let imageCell = cell as? ExploreLocationCollectionViewCell else { return cell }
         
+        let location = places[indexPath.row]
         imageCell.imageView.contentMode = .scaleAspectFill
         
-        switch indexPath.row {
-        case 0:
-            imageCell.imageView.image = UIImage(named: "dc")
-        case 1:
-            imageCell.imageView.image = UIImage(named: "philly")
-        case 2:
-            imageCell.imageView.image = UIImage(named: "ny")
-        case 3:
-            imageCell.imageView.image = UIImage(named: "la")
-        default:
-            break
+        location.getImage { (image) in
+            DispatchQueue.main.async {
+                imageCell.imageView.image = image
+            }
         }
         
         return imageCell
