@@ -14,6 +14,7 @@ extension UIColor {
     static let ultraLightRed = UIColor(red: 1.0, green: 0.9254901961, blue: 0.9019607843, alpha: 1.0)
     static let ultraLightBlue = UIColor(red: 0.9254901961, green: 0.9019607843, blue: 1.0, alpha: 1.0)
     static let ultraLightGreen = UIColor(red: 0.9019607843, green: 1.0, blue: 0.9254901961, alpha: 1.0)
+    static let lighterGray = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
     
     static let loginGradientStart = UIColor(red:0.50, green:0.55, blue:0.55, alpha:1.0)
     static let loginGradientEnd = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0)
