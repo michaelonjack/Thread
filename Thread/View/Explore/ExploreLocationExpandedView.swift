@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExploreLocationTopView: UIView {
+class ExploreLocationExpandedView: UIView {
     
     var locationImageView: UIImageView = {
         let iv = UIImageView()

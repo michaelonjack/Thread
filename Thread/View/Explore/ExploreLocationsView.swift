@@ -68,7 +68,7 @@ extension ExploreLocationsView: UICollectionViewDelegate {
         let originInParent = selectedCell.convert(CGPoint(x: 0, y: 0), to: rootView)
         let frameInRootView = CGRect(x: originInParent.x, y: originInParent.y, width: selectedCell.frame.width, height: selectedCell.frame.height)
         
-        let locationTopView = ExploreLocationTopView(frame: frameInRootView)
+        let locationTopView = ExploreLocationExpandedView(frame: frameInRootView)
         locationTopView.translatesAutoresizingMaskIntoConstraints = false
         locationTopView.locationImageView.image = selectedCell.imageView.image
         
