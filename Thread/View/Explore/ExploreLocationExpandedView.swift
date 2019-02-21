@@ -156,7 +156,7 @@ class ExploreLocationExpandedView: UIView {
     func animateClosing() {
         guard let superview = superview else { return }
         
-        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: { [weak self] in
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear, animations: { [weak self] in
             
             self?.detailsView.transform = .identity
             self?.locationImageView.transform = .identity
@@ -166,7 +166,7 @@ class ExploreLocationExpandedView: UIView {
             self?.detailsView.alpha = 0
             self?.setClosedConstraints()
             
-            UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: { [weak self] in
+            UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear, animations: { [weak self] in
                 self?.closeButton.alpha = 0
                 superview.layoutIfNeeded()
                 }, completion: { [weak self ](_) in

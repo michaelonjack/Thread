@@ -325,11 +325,18 @@
                         <viewLayoutGuide key="safeArea" id="Uhz-1L-ZaP"/>
                     </view>
                     <connections>
+                        <outlet property="aroundMeView" destination="Abp-ce-00n" id="Fzz-kr-1HG"/>
                         <outlet property="exploreView" destination="ETu-Yd-gvN" id="JBH-EY-O7p"/>
                         <outlet property="tabbedPageView" destination="RXJ-Sb-0em" id="r1G-bV-dbb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPZ-8l-nk4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="Abp-ce-00n" customClass="AroundMeView" customModule="Thread" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="64r-3P-Cm1"/>
+                </view>
                 <view contentMode="scaleToFill" id="ETu-Yd-gvN" customClass="ExploreMainView" customModule="Thread" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

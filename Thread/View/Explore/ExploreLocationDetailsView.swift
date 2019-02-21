@@ -83,7 +83,7 @@ class ExploreLocationDetailsView: UIView {
         super.layoutSubviews()
         
         layer.cornerRadius = frame.height / 20.0
-        minimumYTranslation = frame.height - itemsCollectionView.frame.maxY - 8
+        minimumYTranslation = frame.height - itemsCollectionView.frame.maxY
         maximumYTranslation = frame.height - (blurbLabel.frame.maxY + frame.height * 0.1)
     }
     
@@ -118,6 +118,7 @@ class ExploreLocationDetailsView: UIView {
             blurbLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 16),
             blurbLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             blurbLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            blurbLabel.heightAnchor.constraint(lessThanOrEqualTo: heightAnchor, multiplier: 0.18),
             
             itemsLabel.topAnchor.constraint(equalTo: blurbLabel.bottomAnchor, constant: 32),
             itemsLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
