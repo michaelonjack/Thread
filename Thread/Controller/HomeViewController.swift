@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 import TabbedPageView
+import FirebaseDatabase
 
 class HomeViewController: SlideOutMenuViewController, Storyboarded {
 
@@ -66,10 +67,23 @@ extension HomeViewController: CLLocationManagerDelegate {
         let mapRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 0.025, longitudinalMeters: 0.025)
         aroundMeView.mapView.setRegion(mapRegion, animated: true)
         
-        // Add annotation for the current user
-        let userAnnotation = UserMapAnnotation(user: currentUser)
-        userAnnotation.coordinate = location.coordinate
-        aroundMeView.mapView.addAnnotation(userAnnotation)
+        // Get users near the current user and add a new map annotation for them (this will include the current user)
+        let usersReference = Database.database().reference(withPath: "users")
+        usersReference.observeSingleEvent(of: .value) { (snapshot) in
+            for child in snapshot.children {
+                if let childSnapshot = child as? DataSnapshot {
+                    let user = User(snapshot: childSnapshot)
+                    
+                    // Make sure the user is close enough to the current user to show
+                    if let distance = currentUser.getDistanceFrom(user: user) {
+                        if distance <= configuration.maximumUserDistance {
+                            let userAnnotation = UserMapAnnotation(user: user)
+                            self.aroundMeView.mapView.addAnnotation(userAnnotation)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

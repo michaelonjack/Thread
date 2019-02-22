@@ -225,6 +225,13 @@ class User {
         }
     }
     
+    func getDistanceFrom(user: User) -> CLLocationDistance? {
+        guard let otherUserLocation = user.location else { return nil }
+        guard let userLocation = location else { return nil }
+        
+        return userLocation.distance(from: otherUserLocation)
+    }
+    
     func save() {
         let userReference = Database.database().reference(withPath: "users/")
         userReference.updateChildValues([uid : toAnyObject()])

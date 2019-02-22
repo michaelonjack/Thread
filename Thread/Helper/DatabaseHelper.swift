@@ -47,6 +47,7 @@ func getUser(withId id: String, completion: @escaping (User) -> Void) {
 }
 
 
+
 func getPlaces(completion: @escaping ([Place]) -> Void) {
     let placeReference = Database.database().reference(withPath: "places")
     placeReference.keepSynced(true)
