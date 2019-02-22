@@ -14,7 +14,6 @@ class AroundMeView: UIView {
     var mapView: MKMapView = {
         let mv = MKMapView()
         mv.translatesAutoresizingMaskIntoConstraints = false
-        mv.showsUserLocation = true
         mv.register(UserMapAnnotationView.self, forAnnotationViewWithReuseIdentifier: "UserAnnotation")
         
         return mv

@@ -144,6 +144,12 @@ class User {
             dict["profilePictureUrl"] = profilePictureUrl.absoluteString
         }
         
+        if let lastCheckIn = lastCheckIn {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
+            dict["lastCheckIn"] = dateFormatter.string(from: lastCheckIn)
+        }
+        
         if let status = status {
             dict["status"] = status
         }

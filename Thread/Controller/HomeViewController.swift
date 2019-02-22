@@ -84,15 +84,31 @@ extension HomeViewController: MKMapViewDelegate {
         guard let userAnnotation = annotation as? UserMapAnnotation else { return nil }
         guard let annotationView = aroundMeView.mapView.dequeueReusableAnnotationView(withIdentifier: "UserAnnotation") as? UserMapAnnotationView else { return nil }
         
+        let callOutView = UserMapAnnotationCallOutView()
+        callOutView.nameLabel.text = userAnnotation.user.name
+        callOutView.lastCheckedInLabel.text = "Last checked in: " + userAnnotation.user.lastCheckInStr
+        callOutView.userId = userAnnotation.user.uid
+        callOutView.delegate = self
+        
         userAnnotation.user.getProfilePicture { (profilePicture) in
             DispatchQueue.main.async {
                 annotationView.profilePictureImageView.image = profilePicture
+                callOutView.profilePictureImageView.image = profilePicture
             }
         }
         
         annotationView.canShowCallout = true
+        annotationView.detailCalloutAccessoryView = callOutView
         
         return annotationView
+    }
+}
+
+
+
+extension HomeViewController: UserMapAnnotationDelegate {
+    func viewButtonPressed(userId: String) {
+        coordinator?.viewUserProfile(userId: userId)
     }
 }
 
