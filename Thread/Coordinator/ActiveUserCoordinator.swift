@@ -26,6 +26,13 @@ class ActiveUserCoordinator: Coordinator {
         navigationController.pushViewController(homeController, animated: false)
     }
     
+    func viewSettings() {
+        let settingsController = SettingsViewController.instantiate()
+        settingsController.coordinator = self
+        
+        navigationController.pushViewController(settingsController, animated: true)
+    }
+    
     func viewUserProfile(userId: String) {
         let profileController = UserProfileViewController.instantiate()
         profileController.coordinator = self
@@ -116,7 +123,7 @@ class ActiveUserCoordinator: Coordinator {
         }
     }
     
-    func showFollowedUsers(users: [User]) {
+    func viewFollowedUsers(users: [User]) {
         let userTableController = UserTableViewController.instantiate()
         userTableController.coordinator = self
         userTableController.users = users

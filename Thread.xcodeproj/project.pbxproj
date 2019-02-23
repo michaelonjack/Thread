@@ -29,6 +29,9 @@
 		B1701B0D221E49D6009B1788 /* UserMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B0C221E49D6009B1788 /* UserMapAnnotationView.swift */; };
 		B1701B0F221F78B6009B1788 /* UserMapAnnotationCallOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B0E221F78B6009B1788 /* UserMapAnnotationCallOutView.swift */; };
 		B1701B11221F8A5D009B1788 /* UserMapAnnotationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B10221F8A5D009B1788 /* UserMapAnnotationDelegate.swift */; };
+		B1701B132220C522009B1788 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B122220C522009B1788 /* SettingsViewController.swift */; };
+		B1701B162220C5F6009B1788 /* SettingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B152220C5F6009B1788 /* SettingsTableView.swift */; };
+		B1701B182220CA36009B1788 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B172220CA36009B1788 /* SettingsTableViewCell.swift */; };
 		B174D0261E36C8E900218590 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B174D0251E36C8E900218590 /* APIKeys.plist */; };
 		B174D0281E36CAC700218590 /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0271E36CAC700218590 /* APIHelper.swift */; };
 		B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0291E36D2A300218590 /* ClothingItem.swift */; };
@@ -124,6 +127,9 @@
 		B1701B0C221E49D6009B1788 /* UserMapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMapAnnotationView.swift; sourceTree = "<group>"; };
 		B1701B0E221F78B6009B1788 /* UserMapAnnotationCallOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMapAnnotationCallOutView.swift; sourceTree = "<group>"; };
 		B1701B10221F8A5D009B1788 /* UserMapAnnotationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMapAnnotationDelegate.swift; sourceTree = "<group>"; };
+		B1701B122220C522009B1788 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B1701B152220C5F6009B1788 /* SettingsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableView.swift; sourceTree = "<group>"; };
+		B1701B172220CA36009B1788 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		B174D0251E36C8E900218590 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		B174D0271E36CAC700218590 /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		B174D0291E36D2A300218590 /* ClothingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
@@ -249,6 +255,7 @@
 		B11CBD4B2205CF0C00D6620B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B1701B122220C522009B1788 /* SettingsViewController.swift */,
 				B1DC82782219B7670005278D /* UserTableViewController.swift */,
 				B1FE8220220947DA006AFD43 /* CoordinatorNavigationController.swift */,
 				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
@@ -272,6 +279,7 @@
 				B1888CA9220D0A4B0028146C /* Closet */,
 				B1888CA8220D0A350028146C /* User */,
 				B1C8161D220F884000B35B43 /* ClothingItem */,
+				B1701B142220C535009B1788 /* Settings */,
 				B157D4A522061ED200D83CDB /* CollectionCell */,
 				B1C8161E220F95ED00B35B43 /* TableCell */,
 				B1DC81DF221502790005278D /* General */,
@@ -332,6 +340,14 @@
 				B1701B08221E3D89009B1788 /* AroundMeView.swift */,
 			);
 			path = AroundMe;
+			sourceTree = "<group>";
+		};
+		B1701B142220C535009B1788 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B1701B152220C5F6009B1788 /* SettingsTableView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		B184306C1E2D2F4D00EED632 /* Other */ = {
@@ -400,6 +416,7 @@
 				B1C81621220F96CE00B35B43 /* ClothingItemTableViewCell.swift */,
 				B1DC82242215E6E20005278D /* UserTableViewCell.swift */,
 				B1DC826A221889AE0005278D /* SlideOutMenuTableViewCell.swift */,
+				B1701B172220CA36009B1788 /* SettingsTableViewCell.swift */,
 			);
 			path = TableCell;
 			sourceTree = "<group>";
@@ -753,6 +770,7 @@
 				B1DB7EF62207231300F3C4D9 /* ClosetClothingItemsView.swift in Sources */,
 				B1FE8219220939D9006AFD43 /* Coordinator.swift in Sources */,
 				B1DC8192220E8CDF0005278D /* ClothingItemEditViewController.swift in Sources */,
+				B1701B182220CA36009B1788 /* SettingsTableViewCell.swift in Sources */,
 				B1DC826D22188DB30005278D /* HomeViewController.swift in Sources */,
 				B1701B0B221E45A2009B1788 /* UserMapAnnotation.swift in Sources */,
 				B1701B04221B9D6D009B1788 /* Place.swift in Sources */,
@@ -766,10 +784,12 @@
 				B1DC8277221999B60005278D /* UserTableView.swift in Sources */,
 				B1FE8227220A1CA4006AFD43 /* ActiveUserCoordinator.swift in Sources */,
 				B1701B09221E3D89009B1788 /* AroundMeView.swift in Sources */,
+				B1701B162220C5F6009B1788 /* SettingsTableView.swift in Sources */,
 				B174D0281E36CAC700218590 /* APIHelper.swift in Sources */,
 				B1C2D48C220D2B7D00AD36BA /* UIView+Additions.swift in Sources */,
 				B18430861E33B03A00EED632 /* User.swift in Sources */,
 				B1701B0F221F78B6009B1788 /* UserMapAnnotationCallOutView.swift in Sources */,
+				B1701B132220C522009B1788 /* SettingsViewController.swift in Sources */,
 				B1DC82252215E6E20005278D /* UserTableViewCell.swift in Sources */,
 				B1C81622220F96CE00B35B43 /* ClothingItemTableViewCell.swift in Sources */,
 				B1C8161A220F836600B35B43 /* ClothingItemSearchViewController.swift in Sources */,
