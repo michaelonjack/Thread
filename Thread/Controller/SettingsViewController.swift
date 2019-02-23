@@ -43,6 +43,8 @@ extension SettingsViewController: UITableViewDelegate {
             coordinator?.startEditingUserName()
         case "Email":
             coordinator?.startEditingEmail()
+        case "Logout":
+            coordinator?.logout()
         default:
             break
         }

@@ -26,6 +26,17 @@ class ActiveUserCoordinator: Coordinator {
         navigationController.pushViewController(homeController, animated: false)
     }
     
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+            
+            configuration.currentUser = nil
+            navigationController.dismiss(animated: true, completion: nil)
+        } catch {
+            print("error signing out")
+        }
+    }
+    
     func viewSettings() {
         let settingsController = SettingsViewController.instantiate()
         settingsController.coordinator = self
@@ -194,9 +205,5 @@ class ActiveUserCoordinator: Coordinator {
     
     func cancelEditingClothingItem() {
         pop()
-    }
-    
-    func logout() {
-        navigationController.dismiss(animated: true, completion: nil)
     }
 }
