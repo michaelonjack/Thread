@@ -19,6 +19,14 @@ class AroundMeView: UIView {
         return mv
     }()
     
+    var refreshButton: UIButton = {
+        let b = UIButton()
+        b.translatesAutoresizingMaskIntoConstraints = false
+        b.setImage(UIImage(named: "Reload"), for: .normal)
+        
+        return b
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -34,6 +42,7 @@ class AroundMeView: UIView {
     fileprivate func setupView() {
         
         addSubview(mapView)
+        addSubview(refreshButton)
         
         setupLayout()
     }
@@ -43,7 +52,12 @@ class AroundMeView: UIView {
             mapView.topAnchor.constraint(equalTo: topAnchor),
             mapView.bottomAnchor.constraint(equalTo: bottomAnchor),
             mapView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            mapView.trailingAnchor.constraint(equalTo: trailingAnchor)
+            mapView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            refreshButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            refreshButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            refreshButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.05),
+            refreshButton.widthAnchor.constraint(equalTo: refreshButton.heightAnchor)
         ])
     }
 }

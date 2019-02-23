@@ -69,6 +69,10 @@ class SettingsEmailViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     fileprivate func setupView() {
         
         view.backgroundColor = .white

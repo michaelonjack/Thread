@@ -28,6 +28,11 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         updateUserLocation()
         
         setupTabbedPageView()
+        setupAroundMeView()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     fileprivate func setupTabbedPageView() {
@@ -42,11 +47,54 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         tabbedPageView.reloadData()
     }
     
+    fileprivate func setupAroundMeView() {
+        aroundMeView.refreshButton.addTarget(self, action: #selector(refreshAroundMeMap), for: .touchUpInside)
+    }
+    
     fileprivate func updateUserLocation() {
         locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
+    }
+    
+    @objc func refreshAroundMeMap() {
+        // Animate the button spin
+        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear, animations: {
+            self.aroundMeView.refreshButton.transform = self.aroundMeView.refreshButton.transform.rotated(by: .pi)
+        })
+        
+        UIView.animate(withDuration: 0.25, delay: 0.15, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear, animations: {
+            self.aroundMeView.refreshButton.transform = self.aroundMeView.refreshButton.transform.rotated(by: .pi)
+        })
+        
+        // Remove all annotations
+        aroundMeView.mapView.removeAnnotations(aroundMeView.mapView.annotations)
+        
+        // Re-add the annotations
+        addAroundMeMapAnnotations()
+    }
+    
+    func addAroundMeMapAnnotations() {
+        guard let currentUser = configuration.currentUser else { return }
+        
+        // Get users near the current user and add a new map annotation for them (this will include the current user)
+        let usersReference = Database.database().reference(withPath: "users")
+        usersReference.observeSingleEvent(of: .value) { (snapshot) in
+            for child in snapshot.children {
+                if let childSnapshot = child as? DataSnapshot {
+                    let user = User(snapshot: childSnapshot)
+                    
+                    // Make sure the user is close enough to the current user to show
+                    if let distance = currentUser.getDistanceFrom(user: user) {
+                        if distance <= configuration.maximumUserDistance {
+                            let userAnnotation = UserMapAnnotation(user: user)
+                            self.aroundMeView.mapView.addAnnotation(userAnnotation)
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -66,24 +114,7 @@ extension HomeViewController: CLLocationManagerDelegate {
         // Set the initial map region
         let mapRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 0.025, longitudinalMeters: 0.025)
         aroundMeView.mapView.setRegion(mapRegion, animated: true)
-        
-        // Get users near the current user and add a new map annotation for them (this will include the current user)
-        let usersReference = Database.database().reference(withPath: "users")
-        usersReference.observeSingleEvent(of: .value) { (snapshot) in
-            for child in snapshot.children {
-                if let childSnapshot = child as? DataSnapshot {
-                    let user = User(snapshot: childSnapshot)
-                    
-                    // Make sure the user is close enough to the current user to show
-                    if let distance = currentUser.getDistanceFrom(user: user) {
-                        if distance <= configuration.maximumUserDistance {
-                            let userAnnotation = UserMapAnnotation(user: user)
-                            self.aroundMeView.mapView.addAnnotation(userAnnotation)
-                        }
-                    }
-                }
-            }
-        }
+        addAroundMeMapAnnotations()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -145,9 +176,6 @@ extension HomeViewController: TabbedPageViewDataSource {
         
         let blueView = UIView()
         blueView.backgroundColor = .ultraLightBlue
-        
-        let greenView = UIView()
-        greenView.backgroundColor = .ultraLightGreen
         
         return [
             Tab(view: exploreView, type: .attributedText(NSAttributedString(string: "EXPLORE", attributes: tabAttributes))),
