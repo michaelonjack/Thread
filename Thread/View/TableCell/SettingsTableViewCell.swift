@@ -14,7 +14,7 @@ class SettingsTableViewCell: UITableViewCell {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
         l.adjustsFontSizeToFitWidth = true
-        l.font = UIFont(name: "AvenirNext-Regular", size: 15.0)
+        l.font = UIFont(name: "AvenirNext-Regular", size: 13.0)
         l.textColor = .white
         l.textAlignment = .left
         
@@ -25,7 +25,7 @@ class SettingsTableViewCell: UITableViewCell {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
         l.adjustsFontSizeToFitWidth = true
-        l.font = UIFont(name: "AvenirNext-Regular", size: 15.0)
+        l.font = UIFont(name: "AvenirNext-Regular", size: 13.0)
         l.textColor = .white
         l.textAlignment = .right
         

@@ -1,5 +1,5 @@
 //
-//  SettingsNameViewController.swift
+//  SettingsEmailViewController.swift
 //  Thread
 //
 //  Created by Michael Onjack on 2/23/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsNameViewController: UIViewController {
+class SettingsEmailViewController: UIViewController {
     
     weak var coordinator: ActiveUserCoordinator?
     
@@ -16,29 +16,30 @@ class SettingsNameViewController: UIViewController {
         let navHeader = NavigationHeaderView()
         navHeader.translatesAutoresizingMaskIntoConstraints = false
         navHeader.previousViewLabel.text = "Settings"
-        navHeader.currentViewLabel.text = "Update Name"
+        navHeader.currentViewLabel.text = "Update Email"
         
         return navHeader
     }()
     
-    var firstNameTextField: UnderlinedTextFieldView = {
-        var tf = UnderlinedTextFieldView()
+    var emailTextField: UnderlinedTextFieldView = {
+        var tf = UnderlinedTextFieldView(contentType: UITextContentType.emailAddress, placeHolder: "email")
         tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.textField.placeholder = "first name"
         tf.textField.textAlignment = .left
-        tf.textField.text = configuration.currentUser?.firstName
+        tf.textField.autocapitalizationType = .none
+        tf.textField.text = configuration.currentUser?.email
         
         return tf
     }()
     
-    var lastNameTextField: UnderlinedTextFieldView = {
-        var tf = UnderlinedTextFieldView()
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.textField.placeholder = "last name"
-        tf.textField.textAlignment = .left
-        tf.textField.text = configuration.currentUser?.lastName
+    var updateResultLabel: UILabel = {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.adjustsFontSizeToFitWidth = true
+        l.textColor = .red
+        l.numberOfLines = 2
+        l.font = UIFont(name: "AvenirNext-Regular", size: 11.0)
         
-        return tf
+        return l
     }()
     
     var updateButton: UIButton = {
@@ -54,16 +55,16 @@ class SettingsNameViewController: UIViewController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-
-        setupView()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-
+        
         setupView()
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        setupView()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -73,13 +74,13 @@ class SettingsNameViewController: UIViewController {
         view.backgroundColor = .white
         
         navigationHeader.backButton.addTarget(self, action: #selector(cancelUpdate), for: .touchUpInside)
-        updateButton.addTarget(self, action: #selector(finishUpdatingName), for: .touchUpInside)
+        updateButton.addTarget(self, action: #selector(finishUpdatingEmail), for: .touchUpInside)
         
         updateButton.layer.cornerRadius = view.frame.height * 0.1 / 5
         
         view.addSubview(navigationHeader)
-        view.addSubview(firstNameTextField)
-        view.addSubview(lastNameTextField)
+        view.addSubview(emailTextField)
+        view.addSubview(updateResultLabel)
         view.addSubview(updateButton)
         
         setupLayout()
@@ -92,16 +93,15 @@ class SettingsNameViewController: UIViewController {
             navigationHeader.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             navigationHeader.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.11),
             
-            firstNameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            firstNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            firstNameTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.2),
-            firstNameTextField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.08),
-
-            lastNameTextField.leadingAnchor.constraint(equalTo: firstNameTextField.leadingAnchor),
-            lastNameTextField.trailingAnchor.constraint(equalTo: firstNameTextField.trailingAnchor),
-            lastNameTextField.topAnchor.constraint(equalTo: firstNameTextField.bottomAnchor, constant: 32),
-            lastNameTextField.heightAnchor.constraint(equalTo: firstNameTextField.heightAnchor),
-
+            emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            emailTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.2),
+            emailTextField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.08),
+            
+            updateResultLabel.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
+            updateResultLabel.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor),
+            updateResultLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 5),
+            
             updateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             updateButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
             updateButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
@@ -109,11 +109,11 @@ class SettingsNameViewController: UIViewController {
         ])
     }
     
-    @objc func finishUpdatingName() {
-        guard let firstName = firstNameTextField.textField.text else { return }
-        guard let lastName = lastNameTextField.textField.text else { return }
+    @objc func finishUpdatingEmail() {
+        guard let email = emailTextField.textField.text else { return }
+        updateResultLabel.text = ""
         
-        coordinator?.finishEditingUserName(firstName: firstName, lastName: lastName)
+        coordinator?.finishEditingEmail(email: email)
     }
     
     @objc func cancelUpdate() {

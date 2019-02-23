@@ -41,6 +41,8 @@ extension SettingsViewController: UITableViewDelegate {
             coordinator?.startEditingUserName()
         case "Last Name":
             coordinator?.startEditingUserName()
+        case "Email":
+            coordinator?.startEditingEmail()
         default:
             break
         }

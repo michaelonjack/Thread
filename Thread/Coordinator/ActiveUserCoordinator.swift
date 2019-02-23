@@ -56,6 +56,42 @@ class ActiveUserCoordinator: Coordinator {
         pop()
     }
     
+    func startEditingEmail() {
+        let settingsEmailController = SettingsEmailViewController()
+        settingsEmailController.coordinator = self
+        
+        navigationController.pushViewController(settingsEmailController, animated: true)
+    }
+    
+    func finishEditingEmail(email: String) {
+        let navControllers = navigationController.viewControllers
+        
+        guard let settingsEmailController = navControllers[navControllers.count - 1] as? SettingsEmailViewController else { return }
+        guard let settingsController = navControllers[navControllers.count - 2] as? SettingsViewController else { return }
+        
+        DispatchQueue.main.async {
+            settingsEmailController.updateResultLabel.text = "Checking..."
+        }
+        
+        Auth.auth().currentUser?.updateEmail(to: email, completion: { (error) in
+            if error == nil {
+                configuration.currentUser?.email = email
+                configuration.currentUser?.save()
+                
+                settingsController.settingsTableView.rowData[0][2].1 = email
+                settingsController.settingsTableView.reloadData()
+                
+                self.pop()
+            }
+            
+            else {
+                DispatchQueue.main.async {
+                    settingsEmailController.updateResultLabel.text = error?.localizedDescription
+                }
+            }
+        })
+    }
+    
     func viewUserProfile(userId: String) {
         let profileController = UserProfileViewController.instantiate()
         profileController.coordinator = self

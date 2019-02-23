@@ -76,6 +76,7 @@ extension SettingsTableView: UITableViewDataSource {
         let currentRowData = rowData[indexPath.section][indexPath.row]
         settingsCell.nameLabel.text = currentRowData.0
         settingsCell.valueLabel.text = currentRowData.1
+        settingsCell.selectionStyle = .none
         
         return settingsCell
     }

@@ -34,6 +34,7 @@
 		B1701B182220CA36009B1788 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B172220CA36009B1788 /* SettingsTableViewCell.swift */; };
 		B1701B1A22216E00009B1788 /* SettingsNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B1922216E00009B1788 /* SettingsNameViewController.swift */; };
 		B1701B1C222174BA009B1788 /* NavigationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B1B222174BA009B1788 /* NavigationHeaderView.swift */; };
+		B1701B1E2221C17C009B1788 /* SettingsEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B1D2221C17C009B1788 /* SettingsEmailViewController.swift */; };
 		B174D0261E36C8E900218590 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B174D0251E36C8E900218590 /* APIKeys.plist */; };
 		B174D0281E36CAC700218590 /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0271E36CAC700218590 /* APIHelper.swift */; };
 		B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0291E36D2A300218590 /* ClothingItem.swift */; };
@@ -134,6 +135,7 @@
 		B1701B172220CA36009B1788 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		B1701B1922216E00009B1788 /* SettingsNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNameViewController.swift; sourceTree = "<group>"; };
 		B1701B1B222174BA009B1788 /* NavigationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHeaderView.swift; sourceTree = "<group>"; };
+		B1701B1D2221C17C009B1788 /* SettingsEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEmailViewController.swift; sourceTree = "<group>"; };
 		B174D0251E36C8E900218590 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		B174D0271E36CAC700218590 /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		B174D0291E36D2A300218590 /* ClothingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 			children = (
 				B1701B122220C522009B1788 /* SettingsViewController.swift */,
 				B1701B1922216E00009B1788 /* SettingsNameViewController.swift */,
+				B1701B1D2221C17C009B1788 /* SettingsEmailViewController.swift */,
 				B1DC82782219B7670005278D /* UserTableViewController.swift */,
 				B1FE8220220947DA006AFD43 /* CoordinatorNavigationController.swift */,
 				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
@@ -777,6 +780,7 @@
 				B1FE8219220939D9006AFD43 /* Coordinator.swift in Sources */,
 				B1DC8192220E8CDF0005278D /* ClothingItemEditViewController.swift in Sources */,
 				B1701B182220CA36009B1788 /* SettingsTableViewCell.swift in Sources */,
+				B1701B1E2221C17C009B1788 /* SettingsEmailViewController.swift in Sources */,
 				B1DC826D22188DB30005278D /* HomeViewController.swift in Sources */,
 				B1701B0B221E45A2009B1788 /* UserMapAnnotation.swift in Sources */,
 				B1701B04221B9D6D009B1788 /* Place.swift in Sources */,
