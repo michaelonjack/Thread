@@ -193,10 +193,10 @@ class ActiveUserCoordinator: Coordinator {
         }
     }
     
-    func viewFollowedUsers(users: [User]) {
+    func viewFollowedUsers(for user: User) {
         let userTableController = UserTableViewController.instantiate()
         userTableController.coordinator = self
-        userTableController.users = users
+        userTableController.userIds = user.followingUserIds
         userTableController.navigationText = "Home"
         userTableController.titleText = "Following"
         

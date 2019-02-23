@@ -19,19 +19,32 @@ class UserTableViewController: UIViewController, Storyboarded {
     var navigationText: String!
     var titleText: String!
     
-    var users: [User] = []
+    var userIds: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationLabel.text = navigationText
         titleLabel.text = titleText
-
-        usersTableView.users = users
-        usersTableView.reloadData()
+        
+        loadUsers()
     }
     
     @IBAction func dismiss(_ sender: Any) {
         coordinator?.pop()
+    }
+    
+    fileprivate func loadUsers() {
+        for (i, userId) in userIds.enumerated() {
+            getUser(withId: userId) { (user) in
+                self.usersTableView.users.append(user)
+                
+                if i+1 == self.userIds.count {
+                    DispatchQueue.main.async {
+                        self.usersTableView.reloadData()
+                    }
+                }
+            }
+        }
     }
 }

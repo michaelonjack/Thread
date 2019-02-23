@@ -13,6 +13,8 @@ class UserTableViewCell: UITableViewCell {
     var userPictureImageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.clipsToBounds = true
+        iv.contentMode = .scaleAspectFill
         
         return iv
     }()
@@ -76,7 +78,6 @@ class UserTableViewCell: UITableViewCell {
         super.layoutSubviews()
         
         userPictureImageView.layer.cornerRadius = userPictureImageView.frame.height / 2
-        userPictureImageView.clipsToBounds = true
     }
     
     fileprivate func setupView() {
