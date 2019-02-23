@@ -32,6 +32,8 @@
 		B1701B132220C522009B1788 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B122220C522009B1788 /* SettingsViewController.swift */; };
 		B1701B162220C5F6009B1788 /* SettingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B152220C5F6009B1788 /* SettingsTableView.swift */; };
 		B1701B182220CA36009B1788 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B172220CA36009B1788 /* SettingsTableViewCell.swift */; };
+		B1701B1A22216E00009B1788 /* SettingsNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B1922216E00009B1788 /* SettingsNameViewController.swift */; };
+		B1701B1C222174BA009B1788 /* NavigationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B1B222174BA009B1788 /* NavigationHeaderView.swift */; };
 		B174D0261E36C8E900218590 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B174D0251E36C8E900218590 /* APIKeys.plist */; };
 		B174D0281E36CAC700218590 /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0271E36CAC700218590 /* APIHelper.swift */; };
 		B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0291E36D2A300218590 /* ClothingItem.swift */; };
@@ -130,6 +132,8 @@
 		B1701B122220C522009B1788 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B1701B152220C5F6009B1788 /* SettingsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableView.swift; sourceTree = "<group>"; };
 		B1701B172220CA36009B1788 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		B1701B1922216E00009B1788 /* SettingsNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNameViewController.swift; sourceTree = "<group>"; };
+		B1701B1B222174BA009B1788 /* NavigationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHeaderView.swift; sourceTree = "<group>"; };
 		B174D0251E36C8E900218590 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		B174D0271E36CAC700218590 /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		B174D0291E36D2A300218590 /* ClothingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
@@ -256,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				B1701B122220C522009B1788 /* SettingsViewController.swift */,
+				B1701B1922216E00009B1788 /* SettingsNameViewController.swift */,
 				B1DC82782219B7670005278D /* UserTableViewController.swift */,
 				B1FE8220220947DA006AFD43 /* CoordinatorNavigationController.swift */,
 				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
@@ -497,6 +502,7 @@
 				B1C8161B220F853D00B35B43 /* SearchBarView.swift */,
 				B1FE822A220CC7C9006AFD43 /* UnderlinedTextFieldView.swift */,
 				B1DC8226221787030005278D /* SlideOutMenuView.swift */,
+				B1701B1B222174BA009B1788 /* NavigationHeaderView.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -783,6 +789,7 @@
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
 				B1DC8277221999B60005278D /* UserTableView.swift in Sources */,
 				B1FE8227220A1CA4006AFD43 /* ActiveUserCoordinator.swift in Sources */,
+				B1701B1A22216E00009B1788 /* SettingsNameViewController.swift in Sources */,
 				B1701B09221E3D89009B1788 /* AroundMeView.swift in Sources */,
 				B1701B162220C5F6009B1788 /* SettingsTableView.swift in Sources */,
 				B174D0281E36CAC700218590 /* APIHelper.swift in Sources */,
@@ -804,6 +811,7 @@
 				B1DC82732218932C0005278D /* SlideOutMenuViewController.swift in Sources */,
 				B1701AFC221B100A009B1788 /* ExploreLocationCollectionViewCell.swift in Sources */,
 				B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */,
+				B1701B1C222174BA009B1788 /* NavigationHeaderView.swift in Sources */,
 				B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */,
 				B1FE822F220D000A006AFD43 /* LoginAboutCollectionViewCell.swift in Sources */,
 				B1C81620220F960E00B35B43 /* ClothingItemTableView.swift in Sources */,

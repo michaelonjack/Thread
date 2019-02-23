@@ -14,9 +14,9 @@ import SDWebImage
 
 class User {
     let uid: String
-    let firstName: String
-    let lastName: String
-    let email: String
+    var firstName: String
+    var lastName: String
+    var email: String
     var lastCheckIn: Date?
     var status: String?
     var location: CLLocation? {

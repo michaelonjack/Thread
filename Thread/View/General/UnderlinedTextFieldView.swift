@@ -56,6 +56,8 @@ class UnderlinedTextFieldView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        textField.delegate = self
+        
         setupView()
     }
     

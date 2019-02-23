@@ -33,6 +33,29 @@ class ActiveUserCoordinator: Coordinator {
         navigationController.pushViewController(settingsController, animated: true)
     }
     
+    func startEditingUserName() {
+        let settingsNameController = SettingsNameViewController()
+        settingsNameController.coordinator = self
+        
+        navigationController.pushViewController(settingsNameController, animated: true)
+    }
+    
+    func finishEditingUserName(firstName: String, lastName: String) {
+        configuration.currentUser?.firstName = firstName
+        configuration.currentUser?.lastName = lastName
+        configuration.currentUser?.save()
+        
+        let navControllers = navigationController.viewControllers
+        
+        guard let settingsController = navControllers[navControllers.count - 2] as? SettingsViewController else { return }
+        
+        settingsController.settingsTableView.rowData[0][0].1 = firstName
+        settingsController.settingsTableView.rowData[0][1].1 = lastName
+        settingsController.settingsTableView.reloadData()
+        
+        pop()
+    }
+    
     func viewUserProfile(userId: String) {
         let profileController = UserProfileViewController.instantiate()
         profileController.coordinator = self

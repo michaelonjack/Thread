@@ -33,6 +33,19 @@ class SettingsViewController: UIViewController, Storyboarded {
 
 
 extension SettingsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedRowName = settingsTableView.rowData[indexPath.section][indexPath.row].0
+        
+        switch selectedRowName {
+        case "First Name":
+            coordinator?.startEditingUserName()
+        case "Last Name":
+            coordinator?.startEditingUserName()
+        default:
+            break
+        }
+    }
+    
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
             headerView.textLabel?.textColor = .white
