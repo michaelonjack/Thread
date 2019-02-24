@@ -47,6 +47,10 @@ extension SettingsViewController: UITableViewDelegate {
             coordinator?.logout()
         case "Change Password":
             coordinator?.startEditingPassword()
+        case "Terms of Service":
+            coordinator?.viewTermsOfService()
+        case "Privacy Policy":
+            coordinator?.viewPrivacyPolicy()
         default:
             break
         }

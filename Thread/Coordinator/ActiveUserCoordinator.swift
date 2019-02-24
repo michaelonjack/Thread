@@ -139,6 +139,20 @@ class ActiveUserCoordinator: Coordinator {
         navigationController.pushViewController(settingsPasswordController, animated: true)
     }
     
+    func viewPrivacyPolicy() {
+        let policyController = SettingsPolicyViewController()
+        policyController.coordinator = self
+        
+        navigationController.pushViewController(policyController, animated: true)
+    }
+    
+    func viewTermsOfService() {
+        let termsController = SettingsTermsViewController()
+        termsController.coordinator = self
+        
+        navigationController.pushViewController(termsController, animated: true)
+    }
+    
     func viewUserProfile(userId: String) {
         let profileController = UserProfileViewController.instantiate()
         profileController.coordinator = self
