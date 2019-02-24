@@ -24,6 +24,19 @@ class SlideOutMenuViewController: UIViewController {
         view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
     }
     
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
+        // Hide the slide out menu
+        if let firstTouch = touches.first, slideOutMenu.isOpen {
+            let tappedView = view.hitTest(firstTouch.location(in: view), with: event)
+            
+            if tappedView != slideOutMenu {
+                closeMenu()
+            }
+        }
+    }
+    
     fileprivate func setupSlideOutMenu() {
         let menuWidth = min(400, view.frame.width * 0.75)
         slideOutMenu = SlideOutMenuView(ofWidth: menuWidth)
