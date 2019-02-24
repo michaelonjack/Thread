@@ -26,19 +26,12 @@ class UserTableView: UITableView {
     
     fileprivate func setupView() {
         
-        delegate = self
         dataSource = self
         
         clipsToBounds = true
         rowHeight = frame.height * 0.6
         register(UserTableViewCell.self, forCellReuseIdentifier: "UserTableCell")
     }
-}
-
-
-
-extension UserTableView: UITableViewDelegate {
-    
 }
 
 

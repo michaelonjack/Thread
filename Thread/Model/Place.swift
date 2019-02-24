@@ -47,6 +47,7 @@ class Place {
                 return
             }
             
+            self.image = image
             completion(image)
             return
         }

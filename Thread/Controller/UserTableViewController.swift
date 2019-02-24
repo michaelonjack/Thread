@@ -26,6 +26,7 @@ class UserTableViewController: UIViewController, Storyboarded {
         
         navigationLabel.text = navigationText
         titleLabel.text = titleText
+        usersTableView.delegate = self
         
         loadUsers()
     }
@@ -46,5 +47,14 @@ class UserTableViewController: UIViewController, Storyboarded {
                 }
             }
         }
+    }
+}
+
+
+
+extension UserTableViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedUser = usersTableView.users[indexPath.row]
+        coordinator?.viewUserProfile(userId: selectedUser.uid)
     }
 }

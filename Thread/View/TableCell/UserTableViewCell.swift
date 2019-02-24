@@ -50,6 +50,7 @@ class UserTableViewCell: UITableViewCell {
     var userClothingItemsView: UserProfileFeedView = {
         let feedView = UserProfileFeedView()
         feedView.translatesAutoresizingMaskIntoConstraints = false
+        feedView.viewButton.isHidden = true
         
         return feedView
     }()
