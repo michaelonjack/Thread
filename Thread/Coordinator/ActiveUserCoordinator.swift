@@ -103,6 +103,42 @@ class ActiveUserCoordinator: Coordinator {
         })
     }
     
+    func finishEditingPassword(currentPassword: String, newPassword: String, confirmPassword: String) {
+        let navControllers = navigationController.viewControllers
+        
+        guard let settingsPasswordController = navControllers[navControllers.count - 1] as? SettingsPasswordViewController else { return }
+        guard let firebaseUser = Auth.auth().currentUser else { return }
+        
+        let credential = EmailAuthProvider.credential(withEmail: firebaseUser.email!, password: currentPassword)
+        
+        firebaseUser.reauthenticateAndRetrieveData(with: credential) { (result, error) in
+            if error != nil {
+                DispatchQueue.main.async {
+                    settingsPasswordController.updateResultLabel.text = error?.localizedDescription
+                }
+                return
+            }
+            
+            firebaseUser.updatePassword(to: newPassword, completion: { (error) in
+                if error != nil {
+                    DispatchQueue.main.async {
+                        settingsPasswordController.updateResultLabel.text = error?.localizedDescription
+                    }
+                    return
+                }
+                
+                self.pop()
+            })
+        }
+    }
+    
+    func startEditingPassword() {
+        let settingsPasswordController = SettingsPasswordViewController()
+        settingsPasswordController.coordinator = self
+        
+        navigationController.pushViewController(settingsPasswordController, animated: true)
+    }
+    
     func viewUserProfile(userId: String) {
         let profileController = UserProfileViewController.instantiate()
         profileController.coordinator = self
