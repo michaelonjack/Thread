@@ -159,6 +159,10 @@
                                         <rect key="frame" x="264" y="37" width="87" height="31.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5e6-3j-sen" customClass="CollapsibleButton" customModule="Thread" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="37" width="87" height="31.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -168,15 +172,19 @@
                                     <constraint firstItem="BE2-iU-WWK" firstAttribute="centerX" secondItem="XEw-46-9eX" secondAttribute="centerX" id="DHi-gq-RrY"/>
                                     <constraint firstAttribute="trailing" secondItem="QLY-oP-FTJ" secondAttribute="trailing" id="Dbf-mH-yCO"/>
                                     <constraint firstItem="qee-BT-Er4" firstAttribute="centerY" secondItem="rJB-yi-gze" secondAttribute="centerY" id="GtH-In-sFU"/>
+                                    <constraint firstItem="5e6-3j-sen" firstAttribute="height" secondItem="rJB-yi-gze" secondAttribute="height" multiplier="0.3" id="MDp-5T-wxr"/>
                                     <constraint firstItem="VNR-hd-kpo" firstAttribute="height" secondItem="XEw-46-9eX" secondAttribute="height" multiplier="0.27" id="MHn-f0-le2"/>
                                     <constraint firstItem="qee-BT-Er4" firstAttribute="height" secondItem="rJB-yi-gze" secondAttribute="height" multiplier="0.3" id="MIm-1N-qI1"/>
+                                    <constraint firstItem="5e6-3j-sen" firstAttribute="centerY" secondItem="rJB-yi-gze" secondAttribute="centerY" id="PqN-pl-iqw"/>
                                     <constraint firstItem="BE2-iU-WWK" firstAttribute="top" secondItem="XEw-46-9eX" secondAttribute="top" id="ZXM-TV-QhO"/>
                                     <constraint firstItem="qee-BT-Er4" firstAttribute="leading" secondItem="rJB-yi-gze" secondAttribute="trailing" constant="24" id="dF2-Yi-TD4"/>
                                     <constraint firstItem="VNR-hd-kpo" firstAttribute="top" secondItem="QLY-oP-FTJ" secondAttribute="bottom" id="fWV-o1-lBJ"/>
                                     <constraint firstAttribute="trailing" secondItem="qee-BT-Er4" secondAttribute="trailing" constant="24" id="jDl-eB-tbz"/>
                                     <constraint firstItem="QLY-oP-FTJ" firstAttribute="leading" secondItem="XEw-46-9eX" secondAttribute="leading" id="ock-RZ-NWC"/>
+                                    <constraint firstItem="rJB-yi-gze" firstAttribute="leading" secondItem="5e6-3j-sen" secondAttribute="trailing" constant="24" id="uQP-aP-seu"/>
                                     <constraint firstAttribute="bottom" secondItem="VNR-hd-kpo" secondAttribute="bottom" id="vqh-m4-1tT"/>
                                     <constraint firstItem="VNR-hd-kpo" firstAttribute="leading" secondItem="XEw-46-9eX" secondAttribute="leading" id="vrv-Mb-aSl"/>
+                                    <constraint firstItem="5e6-3j-sen" firstAttribute="leading" secondItem="XEw-46-9eX" secondAttribute="leading" constant="24" id="xAn-IS-cfB"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cgq-38-2ha" userLabel="BottomView">
@@ -222,6 +230,7 @@
                         <viewLayoutGuide key="safeArea" id="Qkc-SX-7y4"/>
                     </view>
                     <connections>
+                        <outlet property="blockButton" destination="5e6-3j-sen" id="l5Y-Rp-IId"/>
                         <outlet property="followButton" destination="qee-BT-Er4" id="klZ-Cr-e5c"/>
                         <outlet property="nameLabel" destination="G2U-Ai-LEk" id="xNZ-G2-ZRX"/>
                         <outlet property="profilePictureButton" destination="rJB-yi-gze" id="bzy-Dk-iEz"/>

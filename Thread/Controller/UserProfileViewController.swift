@@ -22,6 +22,7 @@ class UserProfileViewController: UIViewController, Storyboarded {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var followButton: CollapsibleButton!
+    @IBOutlet weak var blockButton: CollapsibleButton!
     
     var userId: String!
     var user: User?
@@ -44,6 +45,7 @@ class UserProfileViewController: UIViewController, Storyboarded {
         
         setupProfilePictureButton()
         setupFollowButton()
+        setupBlockButton()
     }
     
     fileprivate func setupProfilePictureButton() {
@@ -63,13 +65,26 @@ class UserProfileViewController: UIViewController, Storyboarded {
     
     fileprivate func setupFollowButton() {
         followButton.deselectedTitle = "Follow"
-        followButton.button.setTitle(followButton.deselectedTitle, for: .normal)
+        followButton.button.setTitle("Follow", for: .normal)
         followButton.selectedIcon = UIImage(named: "Check")!
         followButton.selectAction = {
             print("selected")
         }
         
         followButton.deselectAction = {
+            print("deselected")
+        }
+    }
+    
+    fileprivate func setupBlockButton() {
+        blockButton.deselectedTitle = "Block"
+        blockButton.button.setTitle("Block", for: .normal)
+        blockButton.selectedIcon = UIImage(named: "Block")!
+        blockButton.selectAction = {
+            print("selected")
+        }
+        
+        blockButton.deselectAction = {
             print("deselected")
         }
     }
