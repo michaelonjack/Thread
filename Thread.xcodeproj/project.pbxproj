@@ -38,6 +38,7 @@
 		B1701B202222ACFD009B1788 /* SettingsPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B1F2222ACFD009B1788 /* SettingsPasswordViewController.swift */; };
 		B1701B222222D36D009B1788 /* SettingsTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B212222D36D009B1788 /* SettingsTermsViewController.swift */; };
 		B1701B242222DA59009B1788 /* SettingsPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B232222DA59009B1788 /* SettingsPolicyViewController.swift */; };
+		B1701B2622236368009B1788 /* CollapsibleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B2522236367009B1788 /* CollapsibleButton.swift */; };
 		B174D0261E36C8E900218590 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B174D0251E36C8E900218590 /* APIKeys.plist */; };
 		B174D0281E36CAC700218590 /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0271E36CAC700218590 /* APIHelper.swift */; };
 		B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0291E36D2A300218590 /* ClothingItem.swift */; };
@@ -142,6 +143,7 @@
 		B1701B1F2222ACFD009B1788 /* SettingsPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPasswordViewController.swift; sourceTree = "<group>"; };
 		B1701B212222D36D009B1788 /* SettingsTermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTermsViewController.swift; sourceTree = "<group>"; };
 		B1701B232222DA59009B1788 /* SettingsPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPolicyViewController.swift; sourceTree = "<group>"; };
+		B1701B2522236367009B1788 /* CollapsibleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsibleButton.swift; sourceTree = "<group>"; };
 		B174D0251E36C8E900218590 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		B174D0271E36CAC700218590 /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		B174D0291E36D2A300218590 /* ClothingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
@@ -515,6 +517,7 @@
 				B1FE822A220CC7C9006AFD43 /* UnderlinedTextFieldView.swift */,
 				B1DC8226221787030005278D /* SlideOutMenuView.swift */,
 				B1701B1B222174BA009B1788 /* NavigationHeaderView.swift */,
+				B1701B2522236367009B1788 /* CollapsibleButton.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -825,6 +828,7 @@
 				B1DC82732218932C0005278D /* SlideOutMenuViewController.swift in Sources */,
 				B1701AFC221B100A009B1788 /* ExploreLocationCollectionViewCell.swift in Sources */,
 				B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */,
+				B1701B2622236368009B1788 /* CollapsibleButton.swift in Sources */,
 				B1701B1C222174BA009B1788 /* NavigationHeaderView.swift in Sources */,
 				B1C96A8F1E2C66730036E559 /* AppDelegate.swift in Sources */,
 				B1FE822F220D000A006AFD43 /* LoginAboutCollectionViewCell.swift in Sources */,

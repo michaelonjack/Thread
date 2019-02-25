@@ -21,6 +21,7 @@ class UserProfileViewController: UIViewController, Storyboarded {
     @IBOutlet weak var profilePictureButtonShadowView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var followButton: CollapsibleButton!
     
     var userId: String!
     var user: User?
@@ -42,11 +43,7 @@ class UserProfileViewController: UIViewController, Storyboarded {
         userFeedView.viewButton.addTarget(self, action: #selector(viewPressed), for: .touchUpInside)
         
         setupProfilePictureButton()
-        setupLayout()
-    }
-    
-    fileprivate func setupLayout() {
-        
+        setupFollowButton()
     }
     
     fileprivate func setupProfilePictureButton() {
@@ -62,6 +59,19 @@ class UserProfileViewController: UIViewController, Storyboarded {
         profilePictureButtonShadowView.layer.shadowOffset = CGSize(width: 10, height: 8)
         profilePictureButtonShadowView.layer.shadowOpacity = 0.1
         profilePictureButtonShadowView.layer.shadowPath = UIBezierPath(roundedRect: profilePictureButton.bounds, cornerRadius: cornerRadius).cgPath
+    }
+    
+    fileprivate func setupFollowButton() {
+        followButton.deselectedTitle = "Follow"
+        followButton.button.setTitle(followButton.deselectedTitle, for: .normal)
+        followButton.selectedIcon = UIImage(named: "Check")!
+        followButton.selectAction = {
+            print("selected")
+        }
+        
+        followButton.deselectAction = {
+            print("deselected")
+        }
     }
     
     fileprivate func setUserInfo() {

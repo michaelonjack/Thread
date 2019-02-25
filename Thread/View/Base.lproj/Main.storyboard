@@ -155,6 +155,10 @@
                                             <action selector="dismissProfile:" destination="Uo4-cb-L0J" eventType="touchUpInside" id="PeN-rQ-epr"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qee-BT-Er4" customClass="CollapsibleButton" customModule="Thread" customModuleProvider="target">
+                                        <rect key="frame" x="264" y="37" width="87" height="31.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -163,9 +167,13 @@
                                     <constraint firstItem="QLY-oP-FTJ" firstAttribute="top" secondItem="BE2-iU-WWK" secondAttribute="bottom" id="39w-va-h1Q"/>
                                     <constraint firstItem="BE2-iU-WWK" firstAttribute="centerX" secondItem="XEw-46-9eX" secondAttribute="centerX" id="DHi-gq-RrY"/>
                                     <constraint firstAttribute="trailing" secondItem="QLY-oP-FTJ" secondAttribute="trailing" id="Dbf-mH-yCO"/>
+                                    <constraint firstItem="qee-BT-Er4" firstAttribute="centerY" secondItem="rJB-yi-gze" secondAttribute="centerY" id="GtH-In-sFU"/>
                                     <constraint firstItem="VNR-hd-kpo" firstAttribute="height" secondItem="XEw-46-9eX" secondAttribute="height" multiplier="0.27" id="MHn-f0-le2"/>
+                                    <constraint firstItem="qee-BT-Er4" firstAttribute="height" secondItem="rJB-yi-gze" secondAttribute="height" multiplier="0.3" id="MIm-1N-qI1"/>
                                     <constraint firstItem="BE2-iU-WWK" firstAttribute="top" secondItem="XEw-46-9eX" secondAttribute="top" id="ZXM-TV-QhO"/>
+                                    <constraint firstItem="qee-BT-Er4" firstAttribute="leading" secondItem="rJB-yi-gze" secondAttribute="trailing" constant="24" id="dF2-Yi-TD4"/>
                                     <constraint firstItem="VNR-hd-kpo" firstAttribute="top" secondItem="QLY-oP-FTJ" secondAttribute="bottom" id="fWV-o1-lBJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="qee-BT-Er4" secondAttribute="trailing" constant="24" id="jDl-eB-tbz"/>
                                     <constraint firstItem="QLY-oP-FTJ" firstAttribute="leading" secondItem="XEw-46-9eX" secondAttribute="leading" id="ock-RZ-NWC"/>
                                     <constraint firstAttribute="bottom" secondItem="VNR-hd-kpo" secondAttribute="bottom" id="vqh-m4-1tT"/>
                                     <constraint firstItem="VNR-hd-kpo" firstAttribute="leading" secondItem="XEw-46-9eX" secondAttribute="leading" id="vrv-Mb-aSl"/>
@@ -214,6 +222,7 @@
                         <viewLayoutGuide key="safeArea" id="Qkc-SX-7y4"/>
                     </view>
                     <connections>
+                        <outlet property="followButton" destination="qee-BT-Er4" id="klZ-Cr-e5c"/>
                         <outlet property="nameLabel" destination="G2U-Ai-LEk" id="xNZ-G2-ZRX"/>
                         <outlet property="profilePictureButton" destination="rJB-yi-gze" id="bzy-Dk-iEz"/>
                         <outlet property="profilePictureButtonShadowView" destination="BE2-iU-WWK" id="Cxg-HH-VJi"/>
@@ -225,7 +234,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xpp-yv-j6d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="102" y="139"/>
+            <point key="canvasLocation" x="101.59999999999999" y="138.98050974512745"/>
         </scene>
         <!--User Table View Controller-->
         <scene sceneID="LLm-mM-53C">
