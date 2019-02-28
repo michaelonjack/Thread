@@ -137,12 +137,14 @@ class ClosetViewController: UIViewController, Storyboarded {
         guard let currentItem = user?.clothingItems[currentClothingType] else { return }
         guard let currentUser = configuration.currentUser else { return }
         
+        // User currently has the item in their favorites so they're un-favoriting the item
         if currentUser.favoritedItems.contains(currentItem) {
             currentUser.favoritedItems.removeAll(where: { $0 == currentItem })
             
             favoriteButton.setImage(UIImage(named: "Favorite"), for: .normal)
         }
         
+        // User is requesting to add the item to their favorites
         else {
             currentUser.favoritedItems.append(currentItem)
             
@@ -208,23 +210,25 @@ extension ClosetViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "closetItemCell", for: indexPath)
         
         guard let closetItemCell = cell as? ClosetItemCollectionViewCell else { return cell }
+        guard let clothingType = ClothingType(rawValue: indexPath.row) else { return cell }
         
-        var priceStr: String = "No Price"
-        var itemImageUrl: URL?
+        // Set default values
+        closetItemCell.imageView.image = UIImage(named: clothingType.description)
+        closetItemCell.label.text = "No Price"
+        closetItemCell.imageView.contentMode = .scaleAspectFit
         
-        if let type = ClothingType(rawValue: indexPath.row), let item = user?.clothingItems[type] {
+        if let item = user?.clothingItems[clothingType] {
+            
             if let price = item.price {
                 let formatter = NumberFormatter()
                 formatter.numberStyle = .currency
-                priceStr = formatter.string(from: price as NSNumber) ?? "No Price"
+                let priceStr = formatter.string(from: price as NSNumber) ?? "No Price"
+                
+                closetItemCell.label.text = priceStr
             }
             
-            itemImageUrl = item.itemImageUrl
+            closetItemCell.imageView.sd_setImage(with: item.itemImageUrl, completed: nil)
         }
-        
-        closetItemCell.label.text = priceStr
-        closetItemCell.imageView.sd_setImage(with: itemImageUrl, completed: nil)
-        closetItemCell.imageView.contentMode = .scaleAspectFit
         
         return closetItemCell
     }
