@@ -11,6 +11,7 @@ import UIKit
 class UserTableView: UITableView {
     
     var users: [User] = []
+    var defaultItemImages: [UIImage?] = [UIImage(named: "Top"), UIImage(named: "Bottom"), UIImage(named: "Shoes"), UIImage(named: "Accessories")]
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -50,7 +51,7 @@ extension UserTableView: UITableViewDataSource {
         userCell.userPictureImageView.image = nil
         userCell.userNameLabel.text = ""
         userCell.userStatusLabel.text = ""
-        userCell.itemImages = [nil, nil, nil, nil]
+        userCell.itemImages = defaultItemImages
         
         let user = users[indexPath.row]
         
@@ -62,6 +63,7 @@ extension UserTableView: UITableViewDataSource {
         
         if let userTop = user.clothingItems[.top] {
             userTop.getImage(ofPreferredSize: .small) { (image) in
+                guard let image = image else { return }
                 user.clothingItems[.top]?.smallItemImage = image
                 userCell.itemImages[ClothingType.top.rawValue] = image
                 userCell.userClothingItemsView.feedCollectionView.reloadItems(at: [IndexPath(row: ClothingType.top.rawValue, section: 0)])
@@ -70,6 +72,7 @@ extension UserTableView: UITableViewDataSource {
         
         if let userBottom = user.clothingItems[.bottom] {
             userBottom.getImage(ofPreferredSize: .small) { (image) in
+                guard let image = image else { return }
                 user.clothingItems[.bottom]?.smallItemImage = image
                 userCell.itemImages[ClothingType.bottom.rawValue] = image
                 userCell.userClothingItemsView.feedCollectionView.reloadItems(at: [IndexPath(row: ClothingType.bottom.rawValue, section: 0)])
@@ -78,6 +81,7 @@ extension UserTableView: UITableViewDataSource {
         
         if let userShoes = user.clothingItems[.shoes] {
             userShoes.getImage(ofPreferredSize: .small) { (image) in
+                guard let image = image else { return }
                 user.clothingItems[.shoes]?.smallItemImage = image
                 userCell.itemImages[ClothingType.shoes.rawValue] = image
                 userCell.userClothingItemsView.feedCollectionView.reloadItems(at: [IndexPath(row: ClothingType.shoes.rawValue, section: 0)])
@@ -86,6 +90,7 @@ extension UserTableView: UITableViewDataSource {
         
         if let userAccessories = user.clothingItems[.accessories] {
             userAccessories.getImage(ofPreferredSize: .small) { (image) in
+                guard let image = image else { return }
                 user.clothingItems[.accessories]?.smallItemImage = image
                 userCell.itemImages[ClothingType.accessories.rawValue] = image
                 userCell.userClothingItemsView.feedCollectionView.reloadItems(at: [IndexPath(row: ClothingType.accessories.rawValue, section: 0)])
