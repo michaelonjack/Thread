@@ -13,7 +13,7 @@ class UserMapAnnotationCallOutView: UIView {
     var profilePictureImageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         
         return iv

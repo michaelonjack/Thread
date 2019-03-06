@@ -15,6 +15,7 @@ class UserMapAnnotationView: MKAnnotationView {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.clipsToBounds = true
+        iv.contentMode = .scaleAspectFill
         iv.layer.borderColor = UIColor.white.cgColor
         iv.layer.borderWidth = 3
         

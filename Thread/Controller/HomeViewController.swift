@@ -16,6 +16,7 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
 
     @IBOutlet weak var tabbedPageView: TabbedPageView!
     @IBOutlet var exploreView: ExploreMainView!
+    @IBOutlet var homeView: HomeView!
     @IBOutlet var aroundMeView: AroundMeView!
     
     let locationManager = CLLocationManager()
@@ -29,6 +30,7 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         
         setupTabbedPageView()
         setupAroundMeView()
+        setupHomeView()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -51,11 +53,41 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         aroundMeView.refreshButton.addTarget(self, action: #selector(refreshAroundMeMap), for: .touchUpInside)
     }
     
+    fileprivate func setupHomeView() {
+        homeView.showMenuButton.addTarget(self, action: #selector(showSlideOutMenu), for: .touchUpInside)
+        homeView.closetButton.addTarget(self, action: #selector(revealHomeBackgroundView), for: .touchUpInside)
+        homeView.revealView.doneButton.addTarget(self, action: #selector(hideHomeBackgroundView), for: .touchUpInside)
+        
+        getCurrentUser { (currentUser) in
+            self.homeView.topView.nameLabel.text = currentUser.name
+            
+            currentUser.getProfilePicture(completion: { (profilePicture) in
+                self.homeView.topView.profilePictureButton.setImage(profilePicture, for: .normal)
+            })
+            
+            currentUser.getLocationStr(completion: { (locationStr) in
+                self.homeView.topView.locationLabel.text = locationStr
+            })
+        }
+    }
+    
     fileprivate func updateUserLocation() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
+    }
+    
+    @objc func showSlideOutMenu() {
+        openMenu()
+    }
+    
+    @objc func revealHomeBackgroundView() {
+        homeView.revealBackgroundView()
+    }
+    
+    @objc func hideHomeBackgroundView() {
+        homeView.hideBackgroundView()
     }
     
     @objc func refreshAroundMeMap() {
@@ -174,12 +206,9 @@ extension HomeViewController: TabbedPageViewDataSource {
             NSAttributedString.Key.font: UIFont(name: "AvenirNext-Medium", size: 14)!
         ]
         
-        let blueView = UIView()
-        blueView.backgroundColor = .ultraLightBlue
-        
         return [
             Tab(view: exploreView, type: .attributedText(NSAttributedString(string: "EXPLORE", attributes: tabAttributes))),
-            Tab(view: blueView, type: .attributedText(NSAttributedString(string: "HOME", attributes: tabAttributes))),
+            Tab(view: homeView, type: .attributedText(NSAttributedString(string: "HOME", attributes: tabAttributes))),
             Tab(view: aroundMeView, type: .attributedText(NSAttributedString(string: "AROUND ME", attributes: tabAttributes)))
         ]
     }

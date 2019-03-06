@@ -345,6 +345,7 @@
                     <connections>
                         <outlet property="aroundMeView" destination="Abp-ce-00n" id="Fzz-kr-1HG"/>
                         <outlet property="exploreView" destination="ETu-Yd-gvN" id="JBH-EY-O7p"/>
+                        <outlet property="homeView" destination="6YF-iE-etm" id="yPY-lw-3cF"/>
                         <outlet property="tabbedPageView" destination="RXJ-Sb-0em" id="r1G-bV-dbb"/>
                     </connections>
                 </viewController>
@@ -360,6 +361,12 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <viewLayoutGuide key="safeArea" id="Nkq-Gg-ttH"/>
+                </view>
+                <view contentMode="scaleToFill" id="6YF-iE-etm" customClass="HomeView" customModule="Thread" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="iTJ-0B-L8M"/>
                 </view>
             </objects>
             <point key="canvasLocation" x="101.59999999999999" y="-563.56821589205401"/>
