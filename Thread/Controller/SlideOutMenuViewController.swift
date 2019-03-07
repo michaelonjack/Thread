@@ -15,13 +15,23 @@ class SlideOutMenuViewController: UIViewController {
     var darkCoverView: UIView!
     var slideOutMenu: SlideOutMenuView!
     var slideOutMenuTrailingAnchor: NSLayoutConstraint!
+    var openMenuPanGesture: UIScreenEdgePanGestureRecognizer!
+    var closeMenuPanGesture: UIPanGestureRecognizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupDarkCoverView()
         setupSlideOutMenu()
-        view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
+        
+        openMenuPanGesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handlePan))
+        openMenuPanGesture.edges = .left
+        openMenuPanGesture.delegate = self
+        view.addGestureRecognizer(openMenuPanGesture)
+        
+        closeMenuPanGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        closeMenuPanGesture.delegate = self
+        view.addGestureRecognizer(closeMenuPanGesture)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -131,6 +141,26 @@ class SlideOutMenuViewController: UIViewController {
             self.view.layoutIfNeeded()
             self.darkCoverView.alpha = self.slideOutMenu.isOpen ? 1 : 0
         })
+    }
+}
+
+
+
+extension SlideOutMenuViewController: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        // Only concerned with coordinating between the different existing pan gestures
+        if !(gestureRecognizer is UIPanGestureRecognizer) || !(otherGestureRecognizer is UIPanGestureRecognizer) {
+            return false
+        }
+        
+        // If the gesture is the openMenuPanGesture (screen edge pan gesture) or if the slide out menu is already open, the slide out menu pan gestures should receive priority
+        if gestureRecognizer == openMenuPanGesture || slideOutMenu.isOpen {
+            return true
+        }
+        
+        return false
     }
 }
 

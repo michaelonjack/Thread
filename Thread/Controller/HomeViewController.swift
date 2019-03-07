@@ -38,7 +38,6 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
     }
     
     fileprivate func setupTabbedPageView() {
-        tabbedPageView.isManualScrollingEnabled = false
         tabbedPageView.tabBar.position = .bottom
         tabbedPageView.tabBar.sliderColor = .black
         tabbedPageView.tabBar.transitionStyle = .sticky
