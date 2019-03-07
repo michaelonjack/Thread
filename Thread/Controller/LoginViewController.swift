@@ -94,6 +94,11 @@ class LoginViewController: UIViewController, Storyboarded {
             self.loginViewTopAnchor.isActive = false
             self.loginViewCenterYAnchor.isActive = true
             self.view.layoutSubviews()
+        }, completion: { (_) in
+            // If the user's email/pass is saved in the keychain, request their biometric info for login
+            if BiometricAuthenticationHelper.canEvaluatePolicy() && UserDefaults.standard.bool(forKey: "loginSaved") {
+                self.requestBiometricLogin()
+            }
         })
     }
     
@@ -162,6 +167,7 @@ class LoginViewController: UIViewController, Storyboarded {
 
                 // Check if user has already verified their email address
                 if user.isEmailVerified {
+                    BiometricAuthenticationHelper.updateKeychainCredentials(email: email, password: password)
                     self.coordinator?.login()
                 }
 
@@ -174,8 +180,7 @@ class LoginViewController: UIViewController, Storyboarded {
 
                     // Verify action sends the user another verification email
                     let verifyAction = UIAlertAction(title: "Resend", style: .default) { action in
-                        user.sendEmailVerification(completion: {
-                            (error) in
+                        user.sendEmailVerification(completion: { (error) in
                             if let error = error {
                                 print(error.localizedDescription)
                             }
@@ -275,6 +280,31 @@ class LoginViewController: UIViewController, Storyboarded {
                     errorAlert.addAction(closeAction)
                     self.present(errorAlert, animated: true, completion:nil)
                 }
+            }
+        }
+    }
+    
+    
+    
+    fileprivate func requestBiometricLogin() {
+        BiometricAuthenticationHelper.authenticateUser { (error) in
+            if let error = error {
+                print(BiometricAuthenticationHelper.getMessageForError(error: error))
+                return
+            }
+            
+            do {
+                let email: String = UserDefaults.standard.value(forKey: "email") as? String ?? ""
+                let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: email, accessGroup: KeychainConfiguration.accessGroup)
+                let password: String = try passwordItem.readPassword()
+                
+                Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+                    if let _ = Auth.auth().currentUser {
+                        self.coordinator?.login()
+                    }
+                }
+            } catch {
+                fatalError("Error reading password from keychain - \(error)")
             }
         }
     }

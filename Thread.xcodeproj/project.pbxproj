@@ -43,6 +43,8 @@
 		B1701B2B222DF977009B1788 /* HomeTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B2A222DF977009B1788 /* HomeTopView.swift */; };
 		B1701B2D222E05B4009B1788 /* HomeBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B2C222E05B4009B1788 /* HomeBottomView.swift */; };
 		B1701B2F222E129D009B1788 /* HomeRevealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B2E222E129D009B1788 /* HomeRevealView.swift */; };
+		B1701B31222FEDB9009B1788 /* BiometricAuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B30222FEDB9009B1788 /* BiometricAuthenticationHelper.swift */; };
+		B1701B3322300712009B1788 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B3222300712009B1788 /* KeychainPasswordItem.swift */; };
 		B174D0261E36C8E900218590 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B174D0251E36C8E900218590 /* APIKeys.plist */; };
 		B174D0281E36CAC700218590 /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0271E36CAC700218590 /* APIHelper.swift */; };
 		B174D02A1E36D2A300218590 /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B174D0291E36D2A300218590 /* ClothingItem.swift */; };
@@ -152,6 +154,8 @@
 		B1701B2A222DF977009B1788 /* HomeTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopView.swift; sourceTree = "<group>"; };
 		B1701B2C222E05B4009B1788 /* HomeBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomView.swift; sourceTree = "<group>"; };
 		B1701B2E222E129D009B1788 /* HomeRevealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRevealView.swift; sourceTree = "<group>"; };
+		B1701B30222FEDB9009B1788 /* BiometricAuthenticationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthenticationHelper.swift; sourceTree = "<group>"; };
+		B1701B3222300712009B1788 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		B174D0251E36C8E900218590 /* APIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		B174D0271E36CAC700218590 /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		B174D0291E36D2A300218590 /* ClothingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
@@ -331,6 +335,7 @@
 			children = (
 				B174D0271E36CAC700218590 /* APIHelper.swift */,
 				B1A11D401EFEC4AB00E16169 /* DatabaseHelper.swift */,
+				B1701B30222FEDB9009B1788 /* BiometricAuthenticationHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -393,6 +398,7 @@
 			isa = PBXGroup;
 			children = (
 				B1C96A8E1E2C66730036E559 /* AppDelegate.swift */,
+				B1701B3222300712009B1788 /* KeychainPasswordItem.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -815,6 +821,7 @@
 				B1701B1E2221C17C009B1788 /* SettingsEmailViewController.swift in Sources */,
 				B1DC826D22188DB30005278D /* HomeViewController.swift in Sources */,
 				B1701B0B221E45A2009B1788 /* UserMapAnnotation.swift in Sources */,
+				B1701B3322300712009B1788 /* KeychainPasswordItem.swift in Sources */,
 				B1701B04221B9D6D009B1788 /* Place.swift in Sources */,
 				B1FE8221220947DA006AFD43 /* CoordinatorNavigationController.swift in Sources */,
 				B1DC8227221787030005278D /* SlideOutMenuView.swift in Sources */,
@@ -859,6 +866,7 @@
 				B1DC8198220F1FB50005278D /* ClosetDetailsTextView.swift in Sources */,
 				B1DC819B2210D24B0005278D /* ClothingItemTableCellDelegate.swift in Sources */,
 				B183EE19220BCE800065A9F1 /* LoginView.swift in Sources */,
+				B1701B31222FEDB9009B1788 /* BiometricAuthenticationHelper.swift in Sources */,
 				B1701B02221B2D81009B1788 /* ExploreLocationDetailsView.swift in Sources */,
 				B1701B242222DA59009B1788 /* SettingsPolicyViewController.swift in Sources */,
 				B157D4A42206147D00D83CDB /* UserProfileViewController.swift in Sources */,
