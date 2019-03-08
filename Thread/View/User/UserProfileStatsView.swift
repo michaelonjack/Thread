@@ -10,7 +10,13 @@ import UIKit
 
 class UserProfileStatsView: UIView {
     
-    var followersCount: Int = 0
+    var followersCount: Int = 0 {
+        didSet {
+            DispatchQueue.main.async {
+                self.followersLabel.attributedText = self.createStatsLabel(title: String(self.followersCount), subtitle: "Followers")
+            }
+        }
+    }
     var favoritesCount: Int = 0 {
         didSet {
             DispatchQueue.main.async {
