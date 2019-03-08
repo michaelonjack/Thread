@@ -118,4 +118,17 @@ class CollapsibleButton: UIView {
         
         isCollapsed = !isCollapsed
     }
+    
+    func collapse() {
+        buttonWidthAnchor.isActive = false
+        buttonWidthAnchor = button.widthAnchor.constraint(equalTo: button.heightAnchor)
+        buttonWidthAnchor.isActive = true
+        
+        button.backgroundColor = .black
+        button.setTitle(nil, for: .normal)
+        button.setImage(self.selectedIcon, for: .normal)
+        layoutIfNeeded()
+        
+        isCollapsed = true
+    }
 }

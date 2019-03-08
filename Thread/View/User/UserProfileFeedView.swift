@@ -25,7 +25,7 @@ class UserProfileFeedView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: 14.0)
-        button.setTitle("view  >", for: .normal)
+        button.setTitle("view", for: .normal)
         button.setTitleColor(.lightGray, for: .normal)
         
         return button

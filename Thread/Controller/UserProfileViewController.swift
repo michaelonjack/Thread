@@ -68,11 +68,11 @@ class UserProfileViewController: UIViewController, Storyboarded {
         followButton.button.setTitle("Follow", for: .normal)
         followButton.selectedIcon = UIImage(named: "Check")!
         followButton.selectAction = {
-            print("selected")
+            configuration.currentUser?.follow(userId: self.userId)
         }
         
         followButton.deselectAction = {
-            print("deselected")
+            configuration.currentUser?.unfollow(userId: self.userId)
         }
     }
     
@@ -93,11 +93,21 @@ class UserProfileViewController: UIViewController, Storyboarded {
         getUser(withId: userId) { (user) in
             self.user = user
             
-            // Allow the user to update the profile picture if they're viewing their own profile
             if user == configuration.currentUser {
+                // Allow the user to update the profile picture if they're viewing their own profile
                 self.profilePictureButton.isUserInteractionEnabled = true
+                
+                // Hide the Block and Follow buttons if the current user is viewing their own profile
+                self.followButton.isHidden = true
+                self.blockButton.isHidden = true
             }
             
+            // If the current user is already following this user, mark the Follow button as selected
+            if configuration.currentUser?.followingUserIds.contains(user.uid) ?? false {
+                self.followButton.collapse()
+            }
+            
+            // Update profile picture
             user.getProfilePicture(completion: { (profilePicture) in
                 self.profilePictureButton.setImage(profilePicture, for: .normal)
             })

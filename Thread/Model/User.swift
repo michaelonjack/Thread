@@ -232,6 +232,32 @@ class User {
         return userLocation.distance(from: otherUserLocation)
     }
     
+    func follow(userId: String) {
+        followingUserIds.append(userId)
+        
+        // Update the current user's following list for the new user
+        let currentUserFollowingReference = Database.database().reference(withPath: "users/" + self.uid + "/following")
+        currentUserFollowingReference.updateChildValues([userId:true])
+        
+        // Update the other user's followers list for the current user
+        let otherUserFollowersReference = Database.database().reference(withPath: "users/" + userId + "/followers")
+        otherUserFollowersReference.updateChildValues([self.uid : true])
+    }
+    
+    func unfollow(userId: String) {
+        followingUserIds.removeAll { (uid) -> Bool in
+            return userId == uid
+        }
+        
+        // Remove the user from the current user's list of followed users
+        let currentUserFollowingReference = Database.database().reference(withPath: "users/" + self.uid + "/following/" + userId)
+        currentUserFollowingReference.removeValue()
+        
+        // Remove the current user from the other user's list of followed by users
+        let otherUserFollowersReference = Database.database().reference(withPath: "users/" + userId + "/followers/" + self.uid)
+        otherUserFollowersReference.removeValue()
+    }
+    
     func save() {
         let userReference = Database.database().reference(withPath: "users/")
         userReference.updateChildValues([uid : toAnyObject()])
