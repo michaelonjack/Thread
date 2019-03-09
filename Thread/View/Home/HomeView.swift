@@ -99,7 +99,7 @@ class HomeView: UIView {
             topView.topAnchor.constraint(equalTo: showMenuButton.bottomAnchor, constant: 5),
             
             bottomViewLeadingAnchor,
-            bottomView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 20),
+            bottomView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 8),
             bottomView.widthAnchor.constraint(equalTo: topView.widthAnchor),
             bottomView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
         ])

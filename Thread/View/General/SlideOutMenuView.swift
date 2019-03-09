@@ -101,12 +101,8 @@ class SlideOutMenuView: UIView {
         
         backgroundColor = .white
         
-        if let currentUser = configuration.currentUser {
-            setDetails(forUser: currentUser)
-        } else {
-            getCurrentUser { (currentUser) in
-                self.setDetails(forUser: currentUser)
-            }
+        getCurrentUser { (currentUser) in
+            self.setDetails(forUser: currentUser)
         }
         
         optionsTableView.delegate = self

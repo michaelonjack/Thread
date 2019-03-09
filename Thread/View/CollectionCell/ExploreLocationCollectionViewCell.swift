@@ -32,7 +32,7 @@ class ExploreLocationCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        layer.cornerRadius = frame.height / 5.0
+        layer.cornerRadius = frame.height / 10.0
     }
     
     fileprivate func setupView() {

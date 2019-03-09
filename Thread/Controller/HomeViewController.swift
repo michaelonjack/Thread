@@ -41,7 +41,7 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         tabbedPageView.tabBar.position = .bottom
         tabbedPageView.tabBar.sliderColor = .black
         tabbedPageView.tabBar.transitionStyle = .sticky
-        tabbedPageView.tabBar.height = 60
+        tabbedPageView.tabBar.height = 50
         
         tabbedPageView.delegate = self
         tabbedPageView.dataSource = self
@@ -62,6 +62,11 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
             
             currentUser.getProfilePicture(completion: { (profilePicture) in
                 self.homeView.topView.profilePictureButton.setImage(profilePicture, for: .normal)
+                
+                // Cache the profile picture if it has not already been saved
+                if let profilePicture = profilePicture, UserDefaults.standard.data(forKey: currentUser.uid + "-profilePicture") == nil {
+                    UserDefaults.standard.setValue(profilePicture.jpegData(compressionQuality: 1), forKey: currentUser.uid + "-profilePicture")
+                }
             })
             
             currentUser.getLocationStr(completion: { (locationStr) in
@@ -114,7 +119,13 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         usersReference.observeSingleEvent(of: .value) { (snapshot) in
             for child in snapshot.children {
                 if let childSnapshot = child as? DataSnapshot {
-                    let user = User(snapshot: childSnapshot)
+                    
+                    var user: User!
+                    if let cachedUser = configuration.userCache[childSnapshot.key] {
+                        user = cachedUser
+                    } else {
+                        user = User(snapshot: childSnapshot)
+                    }
                     
                     // Make sure the user is close enough to the current user to show
                     if let distance = currentUser.getDistanceFrom(user: user) {

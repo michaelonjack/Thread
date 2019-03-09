@@ -17,10 +17,19 @@ let configuration = Configuration.shared()
 
 
 func getCurrentUser(completion: @escaping (User) -> Void) {
+    
     let userReference = Database.database().reference(withPath: "users/" + (Auth.auth().currentUser?.uid)!)
     userReference.keepSynced(true)
     userReference.observe(.value) { (snapshot) in
-        completion( User(snapshot: snapshot) )
+        
+        let currentUser = User(snapshot: snapshot)
+        
+        // Check if the user's profile picture has been cached to prevent unnecessary reloading
+        if let cachedProfilePictureData = UserDefaults.standard.data(forKey: currentUser.uid + "-profilePicture") {
+            currentUser.profilePicture = UIImage(data: cachedProfilePictureData)
+        }
+        
+        completion( currentUser )
     }
 }
 

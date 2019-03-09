@@ -160,6 +160,9 @@ class UserProfileViewController: UIViewController, Storyboarded {
                             currentUser.profilePictureUrl = url
                             self.profilePictureButton.setImage(photo.image, for: .normal)
                             currentUser.save()
+                            
+                            // Cache the profile picture
+                            UserDefaults.standard.setValue(photo.image.jpegData(compressionQuality: 1), forKey: currentUser.uid + "-profilePicture")
                         }
                     })
                 }

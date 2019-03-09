@@ -42,7 +42,7 @@ class ExploreLocationExpandedView: UIView {
         
         originalCellFrame = frame
         locationImageView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
-        locationImageView.layer.cornerRadius = frame.height / 5.0
+        locationImageView.layer.cornerRadius = frame.height / 10.0
         locationImageView.clipsToBounds = true
         
         setupView()
