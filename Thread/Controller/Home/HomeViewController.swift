@@ -54,11 +54,16 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
     
     fileprivate func setupHomeView() {
         homeView.showMenuButton.addTarget(self, action: #selector(showSlideOutMenu), for: .touchUpInside)
-        homeView.closetButton.addTarget(self, action: #selector(revealHomeBackgroundView), for: .touchUpInside)
+        homeView.closetButton.addTarget(self, action: #selector(closetButtonPressed), for: .touchUpInside)
         homeView.revealView.doneButton.addTarget(self, action: #selector(hideHomeBackgroundView), for: .touchUpInside)
+        
+        // Set up the collectionview for the revelead view
+        homeView.revealView.closetItemsCollectionView.delegate = self
+        homeView.revealView.closetItemsCollectionView.dataSource = self
         
         getCurrentUser { (currentUser) in
             self.homeView.topView.nameLabel.text = currentUser.name
+            self.homeView.revealView.closetItemsCollectionView.reloadData()
             
             currentUser.getProfilePicture(completion: { (profilePicture) in
                 self.homeView.topView.profilePictureButton.setImage(profilePicture, for: .normal)
@@ -86,8 +91,12 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         openMenu()
     }
     
-    @objc func revealHomeBackgroundView() {
-        homeView.revealBackgroundView()
+    @objc func closetButtonPressed() {
+        if homeView.topViewTrailingAnchor.constant < 1 {
+            homeView.revealBackgroundView()
+        } else {
+            homeView.hideBackgroundView()
+        }
     }
     
     @objc func hideHomeBackgroundView() {
@@ -201,33 +210,4 @@ extension HomeViewController: UserMapAnnotationDelegate {
 
 
 
-extension HomeViewController: TabbedPageViewDelegate {
-    
-}
 
-
-
-extension HomeViewController: TabbedPageViewDataSource {
-    
-    var tabs: [Tab] {
-        
-        let tabAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.black,
-            NSAttributedString.Key.font: UIFont(name: "AvenirNext-Medium", size: 14)!
-        ]
-        
-        return [
-            Tab(view: exploreView, type: .attributedText(NSAttributedString(string: "EXPLORE", attributes: tabAttributes))),
-            Tab(view: homeView, type: .attributedText(NSAttributedString(string: "HOME", attributes: tabAttributes))),
-            Tab(view: aroundMeView, type: .attributedText(NSAttributedString(string: "AROUND ME", attributes: tabAttributes)))
-        ]
-    }
-    
-    func tabbedPageView(_ tabbedPageView: TabbedPageView, tabForIndex index: Int) -> Tab {
-        return tabs[index]
-    }
-    
-    func numberOfTabs(in tabbedPageView: TabbedPageView) -> Int {
-        return tabs.count
-    }
-}

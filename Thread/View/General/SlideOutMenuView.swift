@@ -18,6 +18,7 @@ class SlideOutMenuView: UIView {
     var profilePictureView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFill
         
         return iv
     }()

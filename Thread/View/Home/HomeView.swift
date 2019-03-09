@@ -29,6 +29,7 @@ class HomeView: UIView {
     var revealView: HomeRevealView = {
         let v = HomeRevealView()
         v.translatesAutoresizingMaskIntoConstraints = false
+        v.alpha = 0
         
         return v
     }()
@@ -78,7 +79,7 @@ class HomeView: UIView {
         bottomViewLeadingAnchor = bottomView.leadingAnchor.constraint(equalTo: leadingAnchor)
         
         NSLayoutConstraint.activate([
-            revealView.topAnchor.constraint(equalTo: topAnchor),
+            revealView.topAnchor.constraint(equalTo: showMenuButton.bottomAnchor),
             revealView.bottomAnchor.constraint(equalTo: bottomAnchor),
             revealView.leadingAnchor.constraint(equalTo: leadingAnchor),
             revealView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -116,6 +117,7 @@ class HomeView: UIView {
         bottomViewLeadingAnchor.isActive = true
         
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+            self.revealView.alpha = 1
             self.layoutIfNeeded()
         })
     }
@@ -131,6 +133,7 @@ class HomeView: UIView {
         bottomViewLeadingAnchor.isActive = true
         
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.revealView.alpha = 0
             self.layoutIfNeeded()
         })
     }

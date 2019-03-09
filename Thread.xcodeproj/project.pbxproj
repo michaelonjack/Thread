@@ -58,6 +58,9 @@
 		B18430861E33B03A00EED632 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18430851E33B03A00EED632 /* User.swift */; };
 		B1A11D411EFEC4AB00E16169 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A11D401EFEC4AB00E16169 /* DatabaseHelper.swift */; };
 		B1C2D48C220D2B7D00AD36BA /* UIView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C2D48B220D2B7D00AD36BA /* UIView+Additions.swift */; };
+		B1C508672234102800534DB1 /* HomeViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C508662234102800534DB1 /* HomeViewController+UICollectionView.swift */; };
+		B1C50869223410BC00534DB1 /* HomeViewController+TabbedPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C50868223410BC00534DB1 /* HomeViewController+TabbedPageView.swift */; };
+		B1C5086B223412C100534DB1 /* HomeClosetItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C5086A223412C100534DB1 /* HomeClosetItemCollectionViewCell.swift */; };
 		B1C8161A220F836600B35B43 /* ClothingItemSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C81619220F836600B35B43 /* ClothingItemSearchViewController.swift */; };
 		B1C8161C220F853D00B35B43 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C8161B220F853D00B35B43 /* SearchBarView.swift */; };
 		B1C81620220F960E00B35B43 /* ClothingItemTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C8161F220F960E00B35B43 /* ClothingItemTableView.swift */; };
@@ -169,6 +172,9 @@
 		B18430851E33B03A00EED632 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B1A11D401EFEC4AB00E16169 /* DatabaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
 		B1C2D48B220D2B7D00AD36BA /* UIView+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Additions.swift"; sourceTree = "<group>"; };
+		B1C508662234102800534DB1 /* HomeViewController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+UICollectionView.swift"; sourceTree = "<group>"; };
+		B1C50868223410BC00534DB1 /* HomeViewController+TabbedPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+TabbedPageView.swift"; sourceTree = "<group>"; };
+		B1C5086A223412C100534DB1 /* HomeClosetItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeClosetItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1C81619220F836600B35B43 /* ClothingItemSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemSearchViewController.swift; sourceTree = "<group>"; };
 		B1C8161B220F853D00B35B43 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		B1C8161F220F960E00B35B43 /* ClothingItemTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemTableView.swift; sourceTree = "<group>"; };
@@ -281,6 +287,7 @@
 		B11CBD4B2205CF0C00D6620B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B1C508652234100000534DB1 /* Home */,
 				B1701B1F2222ACFD009B1788 /* SettingsPasswordViewController.swift */,
 				B1701B212222D36D009B1788 /* SettingsTermsViewController.swift */,
 				B1701B232222DA59009B1788 /* SettingsPolicyViewController.swift */,
@@ -295,7 +302,6 @@
 				B1377C56220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift */,
 				B1DC8191220E8CDF0005278D /* ClothingItemEditViewController.swift */,
 				B1C81619220F836600B35B43 /* ClothingItemSearchViewController.swift */,
-				B1DC826C22188DB30005278D /* HomeViewController.swift */,
 				B1DC82722218932C0005278D /* SlideOutMenuViewController.swift */,
 			);
 			path = Controller;
@@ -349,6 +355,7 @@
 				B1F7596022073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift */,
 				B1FE822E220D000A006AFD43 /* LoginAboutCollectionViewCell.swift */,
 				B1701AFB221B100A009B1788 /* ExploreLocationCollectionViewCell.swift */,
+				B1C5086A223412C100534DB1 /* HomeClosetItemCollectionViewCell.swift */,
 			);
 			path = CollectionCell;
 			sourceTree = "<group>";
@@ -444,6 +451,16 @@
 				B183EE16220BC5CF0065A9F1 /* LoginButtonsView.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		B1C508652234100000534DB1 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B1DC826C22188DB30005278D /* HomeViewController.swift */,
+				B1C508662234102800534DB1 /* HomeViewController+UICollectionView.swift */,
+				B1C50868223410BC00534DB1 /* HomeViewController+TabbedPageView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		B1C8161D220F884000B35B43 /* ClothingItem */ = {
@@ -808,11 +825,13 @@
 			files = (
 				B1FE822B220CC7C9006AFD43 /* UnderlinedTextFieldView.swift in Sources */,
 				B1FE822D220CFC88006AFD43 /* LoginAboutView.swift in Sources */,
+				B1C5086B223412C100534DB1 /* HomeClosetItemCollectionViewCell.swift in Sources */,
 				B1DC82792219B7670005278D /* UserTableViewController.swift in Sources */,
 				B1A11D411EFEC4AB00E16169 /* DatabaseHelper.swift in Sources */,
 				B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */,
 				B1DC82752218E1C80005278D /* SlideOutMenuDelegate.swift in Sources */,
 				B1DB7EF02206B99700F3C4D9 /* FeedCollectionViewCell.swift in Sources */,
+				B1C50869223410BC00534DB1 /* HomeViewController+TabbedPageView.swift in Sources */,
 				B1DB7EF42207220D00F3C4D9 /* ClosetItemCollectionViewCell.swift in Sources */,
 				B1DB7EF62207231300F3C4D9 /* ClosetClothingItemsView.swift in Sources */,
 				B1FE8219220939D9006AFD43 /* Coordinator.swift in Sources */,
@@ -876,6 +895,7 @@
 				B1DC8194220EF00A0005278D /* ClothingItemEditView.swift in Sources */,
 				B1701B202222ACFD009B1788 /* SettingsPasswordViewController.swift in Sources */,
 				B1701B29222DF8F5009B1788 /* HomeView.swift in Sources */,
+				B1C508672234102800534DB1 /* HomeViewController+UICollectionView.swift in Sources */,
 				B1DC826B221889AE0005278D /* SlideOutMenuTableViewCell.swift in Sources */,
 				B1C8161C220F853D00B35B43 /* SearchBarView.swift in Sources */,
 				B11CBD502205CFB200D6620B /* UIColor+Additions.swift in Sources */,

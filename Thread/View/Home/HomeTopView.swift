@@ -14,7 +14,7 @@ class HomeTopView: UIView {
         var b = UIButton()
         b.translatesAutoresizingMaskIntoConstraints = false
         b.clipsToBounds = true
-        b.contentMode = .scaleAspectFill
+        b.imageView?.contentMode = .scaleAspectFill
         b.layer.borderColor = UIColor.white.cgColor
         b.layer.borderWidth = 2.0
         

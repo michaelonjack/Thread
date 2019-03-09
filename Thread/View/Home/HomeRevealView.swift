@@ -7,8 +7,25 @@
 //
 
 import UIKit
+import AnimatedCollectionViewLayout
 
 class HomeRevealView: UIView {
+    
+    var closetItemsCollectionView: UICollectionView = {
+        let layout = AnimatedCollectionViewLayout()
+        layout.animator = RotateInOutAttributesAnimator()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0.0
+        
+        let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.backgroundColor = .white
+        cv.showsHorizontalScrollIndicator = false
+        cv.isPagingEnabled = true
+        cv.register(HomeClosetItemCollectionViewCell.self, forCellWithReuseIdentifier: "ClosetItemCell")
+        
+        return cv
+    }()
     
     var doneButton: UIButton = {
         let b = UIButton()
@@ -41,6 +58,7 @@ class HomeRevealView: UIView {
     
     fileprivate func setupView() {
         
+        addSubview(closetItemsCollectionView)
         addSubview(doneButton)
         
         setupLayout()
@@ -48,10 +66,15 @@ class HomeRevealView: UIView {
     
     fileprivate func setupLayout() {
         NSLayoutConstraint.activate([
+            closetItemsCollectionView.topAnchor.constraint(equalTo: topAnchor),
+            closetItemsCollectionView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.89),
+            closetItemsCollectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.87),
+            closetItemsCollectionView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            doneButton.topAnchor.constraint(equalTo: closetItemsCollectionView.bottomAnchor, constant: 16),
             doneButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
             doneButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            doneButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75),
-            doneButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.07)
+            doneButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75)
         ])
     }
 }
