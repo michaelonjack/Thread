@@ -27,15 +27,35 @@ class HomeRevealView: UIView {
         return cv
     }()
     
-    var doneButton: UIButton = {
+    var hideLocationButton: UIButton = {
         let b = UIButton()
-        b.translatesAutoresizingMaskIntoConstraints = false
         b.backgroundColor = .black
-        b.setTitle("Done", for: .normal)
+        b.setTitle("Hide Location", for: .normal)
         b.setTitleColor(.white, for: .normal)
         b.clipsToBounds = true
         
         return b
+    }()
+    
+    var checkInButton: UIButton = {
+        let b = UIButton()
+        b.backgroundColor = .black
+        b.setTitle("Check In", for: .normal)
+        b.setTitleColor(.white, for: .normal)
+        b.clipsToBounds = true
+        
+        return b
+    }()
+    
+    var buttonsStackView: UIStackView = {
+        let sv = UIStackView(frame: .zero)
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.alignment = .fill
+        sv.distribution = .fillEqually
+        sv.axis = .horizontal
+        sv.spacing = 8
+        
+        return sv
     }()
     
     override init(frame: CGRect) {
@@ -53,13 +73,17 @@ class HomeRevealView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        doneButton.layer.cornerRadius = doneButton.frame.height / 5.0
+        hideLocationButton.layer.cornerRadius = buttonsStackView.frame.height / 5.0
+        checkInButton.layer.cornerRadius = buttonsStackView.frame.height / 5.0
     }
     
     fileprivate func setupView() {
         
+        buttonsStackView.addArrangedSubview(hideLocationButton)
+        buttonsStackView.addArrangedSubview(checkInButton)
+        
         addSubview(closetItemsCollectionView)
-        addSubview(doneButton)
+        addSubview(buttonsStackView)
         
         setupLayout()
     }
@@ -71,10 +95,10 @@ class HomeRevealView: UIView {
             closetItemsCollectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.87),
             closetItemsCollectionView.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            doneButton.topAnchor.constraint(equalTo: closetItemsCollectionView.bottomAnchor, constant: 16),
-            doneButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
-            doneButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            doneButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75)
+            buttonsStackView.topAnchor.constraint(equalTo: closetItemsCollectionView.bottomAnchor, constant: 16),
+            buttonsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            buttonsStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            buttonsStackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8)
         ])
     }
 }

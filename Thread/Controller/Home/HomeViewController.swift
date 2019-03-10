@@ -55,7 +55,7 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
     fileprivate func setupHomeView() {
         homeView.showMenuButton.addTarget(self, action: #selector(showSlideOutMenu), for: .touchUpInside)
         homeView.closetButton.addTarget(self, action: #selector(closetButtonPressed), for: .touchUpInside)
-        homeView.revealView.doneButton.addTarget(self, action: #selector(hideHomeBackgroundView), for: .touchUpInside)
+        homeView.revealView.checkInButton.addTarget(self, action: #selector(checkInUser), for: .touchUpInside)
         
         // Set up the collectionview for the revelead view
         homeView.revealView.closetItemsCollectionView.delegate = self
@@ -99,8 +99,10 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         }
     }
     
-    @objc func hideHomeBackgroundView() {
-        homeView.hideBackgroundView()
+    @objc func checkInUser() {
+        guard let currentUser = configuration.currentUser else { return }
+        currentUser.lastCheckIn = Date()
+        updateUserLocation()
     }
     
     @objc func refreshAroundMeMap() {
@@ -113,15 +115,15 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
             self.aroundMeView.refreshButton.transform = self.aroundMeView.refreshButton.transform.rotated(by: .pi)
         })
         
-        // Remove all annotations
-        aroundMeView.mapView.removeAnnotations(aroundMeView.mapView.annotations)
-        
         // Re-add the annotations
         addAroundMeMapAnnotations()
     }
     
     func addAroundMeMapAnnotations() {
         guard let currentUser = configuration.currentUser else { return }
+        
+        // Remove all current annotations if any exist
+        aroundMeView.mapView.removeAnnotations(aroundMeView.mapView.annotations)
         
         // Get users near the current user and add a new map annotation for them (this will include the current user)
         let usersReference = Database.database().reference(withPath: "users")
