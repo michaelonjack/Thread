@@ -81,11 +81,11 @@ class UserProfileViewController: UIViewController, Storyboarded {
         blockButton.button.setTitle("Block", for: .normal)
         blockButton.selectedIcon = UIImage(named: "Block")!
         blockButton.selectAction = {
-            print("selected")
+            configuration.currentUser?.block(userId: self.userId)
         }
         
         blockButton.deselectAction = {
-            print("deselected")
+            configuration.currentUser?.unblock(userId: self.userId)
         }
     }
     
@@ -105,6 +105,11 @@ class UserProfileViewController: UIViewController, Storyboarded {
             // If the current user is already following this user, mark the Follow button as selected
             if configuration.currentUser?.followingUserIds.contains(user.uid) ?? false {
                 self.followButton.collapse()
+            }
+            
+            // IF the current user has already blocked this user, mark the Block button as selected
+            if configuration.currentUser?.blockedUserIds.contains(user.uid) ?? false {
+                self.blockButton.collapse()
             }
             
             // Update profile picture

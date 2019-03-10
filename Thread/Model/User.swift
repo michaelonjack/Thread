@@ -32,6 +32,8 @@ class User {
     var favoritedItems: [ClothingItem] = []
     var followingUserIds: [String] = []
     var followerUserIds: [String] = []
+    var blockedUserIds: [String] = []
+    var blockedByUserIds: [String] = []
     
     // Computed properties
     var name: String {
@@ -119,6 +121,20 @@ class User {
             if user.key == uid { return }
             followerUserIds.append(user.key)
         }
+        
+        let blockedSnapshot = snapshot.childSnapshot(forPath: "blocked")
+        for child in blockedSnapshot.children {
+            let user = child as! DataSnapshot
+            if user.key == uid { return }
+            blockedUserIds.append(user.key)
+        }
+        
+        let blockedBySnapshot = snapshot.childSnapshot(forPath: "blockedBy")
+        for child in blockedBySnapshot.children {
+            let user = child as! DataSnapshot
+            if user.key == uid { return }
+            blockedByUserIds.append(user.key)
+        }
     }
     
     func toAnyObject() -> Any {
@@ -142,6 +158,16 @@ class User {
             followersDict[userId] = true
         }
         
+        var blockedDict: [String:Any] = [:]
+        for userId in blockedUserIds {
+            blockedDict[userId] = true
+        }
+        
+        var blockedByDict: [String:Any] = [:]
+        for userId in blockedByUserIds {
+            blockedByDict[userId] = true
+        }
+        
         var dict: [String: Any] = [
             "firstName": firstName,
             "lastName": lastName,
@@ -151,7 +177,9 @@ class User {
             "items": clothingItemsDict,
             "favorites": favoritedItemsDict,
             "following": followingDict,
-            "followers": followersDict
+            "followers": followersDict,
+            "blocked": blockedDict,
+            "blockedBy": blockedByDict
         ]
         
         if let profilePictureUrl = profilePictureUrl {
@@ -270,6 +298,32 @@ class User {
         // Remove the current user from the other user's list of followed by users
         let otherUserFollowersReference = Database.database().reference(withPath: "users/" + userId + "/followers/" + self.uid)
         otherUserFollowersReference.removeValue()
+    }
+    
+    func block(userId: String) {
+        blockedUserIds.append(userId)
+        
+        // Update the current user's blocked list for the new user
+        let currentUserBlockedReference = Database.database().reference(withPath: "users/" + self.uid + "/blocked")
+        currentUserBlockedReference.updateChildValues([userId:true])
+        
+        // Update the other user's blocked by list for the current user
+        let otherUserBlockedByReference = Database.database().reference(withPath: "users/" + userId + "/blockedBy")
+        otherUserBlockedByReference.updateChildValues([self.uid : true])
+    }
+    
+    func unblock(userId: String) {
+        blockedUserIds.removeAll { (uid) -> Bool in
+            return userId == uid
+        }
+        
+        // Remove the user from the current user's list of blocked users
+        let currentUserBlockedReference = Database.database().reference(withPath: "users/" + self.uid + "/blocked/" + userId)
+        currentUserBlockedReference.removeValue()
+        
+        // Remove the current user from the other user's list of blocked by users
+        let otherUserBlockedByReference = Database.database().reference(withPath: "users/" + userId + "/blockedBy/" + self.uid)
+        otherUserBlockedByReference.removeValue()
     }
     
     func save() {
