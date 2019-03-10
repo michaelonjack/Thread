@@ -57,7 +57,7 @@ class ClosetUpdateOptionsViewController: UIViewController, Storyboarded {
     @IBAction func chooseEditOption(_ sender: Any) {
         guard let item = existingItem else { return }
         self.dismiss(animated: true, completion: nil)
-        coordinator?.startEditingDetails(forClothingItem: item)
+        coordinator?.startEditingDetails(forClothingItem: item, updateItemImage: false)
     }
     
     @IBAction func chooseSearchOption(_ sender: Any) {

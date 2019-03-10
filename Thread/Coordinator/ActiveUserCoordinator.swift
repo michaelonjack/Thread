@@ -210,10 +210,11 @@ class ActiveUserCoordinator: Coordinator {
         }
     }
     
-    func startEditingDetails(forClothingItem item: ClothingItem) {
+    func startEditingDetails(forClothingItem item: ClothingItem, updateItemImage: Bool = true) {
         let clothingItemEditController = ClothingItemEditViewController.instantiate()
         clothingItemEditController.coordinator = self
         clothingItemEditController.clothingItem = item
+        clothingItemEditController.itemImageUpdated = updateItemImage
         
         navigationController.pushViewController(clothingItemEditController, animated: true)
     }

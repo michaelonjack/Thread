@@ -18,6 +18,7 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
     @IBOutlet weak var updateButton: UIButton!
     
     var clothingItem: ClothingItem!
+    var itemImageUpdated: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,27 +73,41 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
     @IBAction func updateItem(_ sender: Any) {
         guard let currentUser = configuration.currentUser else { return }
         
-        if let itemImage = clothingItem.itemImage {
-            uploadImage(toLocation: "images/" + currentUser.uid + "/" + clothingItem.type.description, image: itemImage, completion: { (url, error) in
-                if error == nil {
-                    self.clothingItem.itemImageUrl = url
-                    self.clothingItem.details = self.editView.detailsField.text
-                    self.clothingItem.name = self.editView.nameField.textField.text ?? ""
-                    self.clothingItem.brand = self.editView.brandField.textField.text ?? ""
-                    self.clothingItem.price = Double(self.editView.priceField.textField.text ?? "")
-                    self.clothingItem.tags = self.editView.tagsField.textField.text?.components(separatedBy: ",") ?? []
-                    
-                    if let urlStr = self.editView.linkField.textField.text {
-                        self.clothingItem.itemUrl = URL(string: urlStr)
+        // If the clothing item's image was updated, then we'll need to save the image to storage
+        if itemImageUpdated {
+            if let itemImage = clothingItem.itemImage {
+                uploadImage(toLocation: "images/" + currentUser.uid + "/" + clothingItem.type.description, image: itemImage, completion: { (url, error) in
+                    if error == nil {
+                        self.clothingItem.itemImageUrl = url
+                        if self.clothingItem.smallItemImageUrl == nil {
+                            self.clothingItem.smallItemImageUrl = url
+                        }
+                        
+                        self.updateItemDetails()
+                        
+                        self.coordinator?.finishEditingDetails(forClothingItem: self.clothingItem)
                     }
-                    
-                    if self.clothingItem.smallItemImageUrl == nil {
-                        self.clothingItem.smallItemImageUrl = url
-                    }
-                    
-                    self.coordinator?.finishEditingDetails(forClothingItem: self.clothingItem)
-                }
-            })
+                })
+            }
+        }
+        
+        // If the clothing item image was NOT updated, then we can simply update the item's basic details and continue
+        else {
+            updateItemDetails()
+            
+            coordinator?.finishEditingDetails(forClothingItem: self.clothingItem)
+        }
+    }
+    
+    fileprivate func updateItemDetails() {
+        clothingItem.details = editView.detailsField.text
+        clothingItem.name = editView.nameField.textField.text ?? ""
+        clothingItem.brand = editView.brandField.textField.text ?? ""
+        clothingItem.price = Double(editView.priceField.textField.text ?? "")
+        clothingItem.tags = editView.tagsField.textField.text?.components(separatedBy: ",") ?? []
+        
+        if let urlStr = editView.linkField.textField.text {
+            clothingItem.itemUrl = URL(string: urlStr)
         }
     }
 }
