@@ -172,8 +172,6 @@ class User {
             "firstName": firstName,
             "lastName": lastName,
             "email": email,
-            "latitude": location?.coordinate.latitude ?? 0.0,
-            "longitude": location?.coordinate.longitude ?? 0.0,
             "items": clothingItemsDict,
             "favorites": favoritedItemsDict,
             "following": followingDict,
@@ -190,6 +188,14 @@ class User {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
             dict["lastCheckIn"] = dateFormatter.string(from: lastCheckIn)
+        }
+        
+        if let latitude = location?.coordinate.latitude {
+            dict["latitude"] = latitude
+        }
+        
+        if let longitude = location?.coordinate.longitude {
+            dict["longitude"] = longitude
         }
         
         if let status = status {
