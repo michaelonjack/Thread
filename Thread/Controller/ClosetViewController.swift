@@ -19,6 +19,7 @@ class ClosetViewController: UIViewController, Storyboarded {
     @IBOutlet weak var itemNameLabel: UILabel!
     @IBOutlet weak var buttonsStackView: UIStackView!
     @IBOutlet weak var updateButton: UIButton!
+    @IBOutlet weak var viewButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
     
     var userId: String!
@@ -69,6 +70,16 @@ class ClosetViewController: UIViewController, Storyboarded {
         
         revealDetailsAnimator = nil
         setupAnimator()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        updateButton.clipsToBounds = true
+        updateButton.layer.cornerRadius = updateButton.frame.height / 5.0
+        
+        viewButton.clipsToBounds = true
+        viewButton.layer.cornerRadius = viewButton.frame.height / 5.0
     }
     
     fileprivate func setUserData() {

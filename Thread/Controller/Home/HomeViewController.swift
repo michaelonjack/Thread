@@ -125,6 +125,7 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         
         // Get users near the current user and add a new map annotation for them (this will include the current user)
         let usersReference = Database.database().reference(withPath: "users")
+        usersReference.keepSynced(true)
         usersReference.observeSingleEvent(of: .value) { (snapshot) in
             for child in snapshot.children {
                 if let childSnapshot = child as? DataSnapshot {

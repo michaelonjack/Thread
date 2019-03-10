@@ -712,6 +712,7 @@
                         <outlet property="itemNameLabel" destination="xX2-yJ-4o4" id="jUJ-u0-ZKY"/>
                         <outlet property="ownerLabel" destination="mLX-hb-3Dn" id="IXh-7g-owW"/>
                         <outlet property="updateButton" destination="ttU-8v-CbY" id="GDR-eu-CwT"/>
+                        <outlet property="viewButton" destination="GEn-rw-glt" id="5zz-AB-I23"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gcv-sH-vKE" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -28,6 +28,8 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
     }
 
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         cancelButton.layer.cornerRadius = cancelButton.frame.height / 6.0
         cancelButton.clipsToBounds = true
         
