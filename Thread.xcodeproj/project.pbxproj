@@ -10,6 +10,9 @@
 		047A2A4DEADCCCC1006F080F /* Pods_ThreadUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE3BD1DB1BADDF10CDC9F8B /* Pods_ThreadUITests.framework */; };
 		0C6686D8773E8AE3E1E0D72A /* Pods_Thread.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9560FB66ADAA3C0318ED7771 /* Pods_Thread.framework */; };
 		3535199162A3752B698A930C /* Pods_ThreadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB2183E2AAEB7F63B3BAF82 /* Pods_ThreadTests.framework */; };
+		B1182E572234BAF8005DB4DB /* ClosetDetailsTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1182E562234BAF8005DB4DB /* ClosetDetailsTagsView.swift */; };
+		B1182E5A2234BF43005DB4DB /* ClosetViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1182E592234BF43005DB4DB /* ClosetViewController+UICollectionView.swift */; };
+		B1182E5C2234C251005DB4DB /* ClosetTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1182E5B2234C251005DB4DB /* ClosetTagCollectionViewCell.swift */; };
 		B11CBD502205CFB200D6620B /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11CBD4F2205CFB200D6620B /* UIColor+Additions.swift */; };
 		B1377C57220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1377C56220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift */; };
 		B157D4A12205E1BC00D83CDB /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157D4A02205E1BC00D83CDB /* Configuration.swift */; };
@@ -122,6 +125,9 @@
 		7D290579FCFE88FA818A8002 /* Pods-Thread.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thread.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thread/Pods-Thread.debug.xcconfig"; sourceTree = "<group>"; };
 		8976F182E6528772898954DF /* Pods-ThreadUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreadUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThreadUITests/Pods-ThreadUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9560FB66ADAA3C0318ED7771 /* Pods_Thread.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thread.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1182E562234BAF8005DB4DB /* ClosetDetailsTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetDetailsTagsView.swift; sourceTree = "<group>"; };
+		B1182E592234BF43005DB4DB /* ClosetViewController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClosetViewController+UICollectionView.swift"; sourceTree = "<group>"; };
+		B1182E5B2234C251005DB4DB /* ClosetTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		B11CBD462205CD8C00D6620B /* Thread.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Thread.entitlements; sourceTree = "<group>"; };
 		B11CBD4F2205CFB200D6620B /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		B1377C56220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetUpdateOptionsViewController.swift; sourceTree = "<group>"; };
@@ -192,7 +198,7 @@
 		B1C96AAE1E2C66730036E559 /* ThreadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadUITests.swift; sourceTree = "<group>"; };
 		B1C96AB01E2C66730036E559 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1DB7EEF2206B99700F3C4D9 /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
-		B1DB7EF122071A2C00F3C4D9 /* ClosetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClosetViewController.swift; path = Thread/Controller/ClosetViewController.swift; sourceTree = SOURCE_ROOT; };
+		B1DB7EF122071A2C00F3C4D9 /* ClosetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClosetViewController.swift; path = Thread/Controller/Closet/ClosetViewController.swift; sourceTree = SOURCE_ROOT; };
 		B1DB7EF32207220D00F3C4D9 /* ClosetItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1DB7EF52207231300F3C4D9 /* ClosetClothingItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClosetClothingItemsView.swift; path = Thread/View/Closet/ClosetClothingItemsView.swift; sourceTree = SOURCE_ROOT; };
 		B1DC8191220E8CDF0005278D /* ClothingItemEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemEditViewController.swift; sourceTree = "<group>"; };
@@ -272,6 +278,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B1182E582234BF05005DB4DB /* Closet */ = {
+			isa = PBXGroup;
+			children = (
+				B1DB7EF122071A2C00F3C4D9 /* ClosetViewController.swift */,
+				B1182E592234BF43005DB4DB /* ClosetViewController+UICollectionView.swift */,
+			);
+			path = Closet;
+			sourceTree = "<group>";
+		};
 		B11CBD4A2205CEF500D6620B /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				B1C508652234100000534DB1 /* Home */,
+				B1182E582234BF05005DB4DB /* Closet */,
 				B1701B1F2222ACFD009B1788 /* SettingsPasswordViewController.swift */,
 				B1701B212222D36D009B1788 /* SettingsTermsViewController.swift */,
 				B1701B232222DA59009B1788 /* SettingsPolicyViewController.swift */,
@@ -297,7 +313,6 @@
 				B1DC82782219B7670005278D /* UserTableViewController.swift */,
 				B1FE8220220947DA006AFD43 /* CoordinatorNavigationController.swift */,
 				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
-				B1DB7EF122071A2C00F3C4D9 /* ClosetViewController.swift */,
 				B157D4A32206147D00D83CDB /* UserProfileViewController.swift */,
 				B1377C56220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift */,
 				B1DC8191220E8CDF0005278D /* ClothingItemEditViewController.swift */,
@@ -351,6 +366,7 @@
 			children = (
 				B157D4A622061F0300D83CDB /* ImageCollectionViewCell.swift */,
 				B1DB7EEF2206B99700F3C4D9 /* FeedCollectionViewCell.swift */,
+				B1182E5B2234C251005DB4DB /* ClosetTagCollectionViewCell.swift */,
 				B1DB7EF32207220D00F3C4D9 /* ClosetItemCollectionViewCell.swift */,
 				B1F7596022073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift */,
 				B1FE822E220D000A006AFD43 /* LoginAboutCollectionViewCell.swift */,
@@ -438,6 +454,7 @@
 				B183EE142207A8A90065A9F1 /* ClosetDetailsView.swift */,
 				B1DC8197220F1FB50005278D /* ClosetDetailsTextView.swift */,
 				B1DB7EF52207231300F3C4D9 /* ClosetClothingItemsView.swift */,
+				B1182E562234BAF8005DB4DB /* ClosetDetailsTagsView.swift */,
 			);
 			path = Closet;
 			sourceTree = "<group>";
@@ -823,6 +840,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1182E572234BAF8005DB4DB /* ClosetDetailsTagsView.swift in Sources */,
 				B1FE822B220CC7C9006AFD43 /* UnderlinedTextFieldView.swift in Sources */,
 				B1FE822D220CFC88006AFD43 /* LoginAboutView.swift in Sources */,
 				B1C5086B223412C100534DB1 /* HomeClosetItemCollectionViewCell.swift in Sources */,
@@ -845,6 +863,7 @@
 				B1FE8221220947DA006AFD43 /* CoordinatorNavigationController.swift in Sources */,
 				B1DC8227221787030005278D /* SlideOutMenuView.swift in Sources */,
 				B1701B00221B1D5A009B1788 /* ExploreLocationExpandedView.swift in Sources */,
+				B1182E5C2234C251005DB4DB /* ClosetTagCollectionViewCell.swift in Sources */,
 				B157D4B122065B3900D83CDB /* UserProfileFeedView.swift in Sources */,
 				B1FE821B22093A49006AFD43 /* MainCoordinator.swift in Sources */,
 				B1701B0D221E49D6009B1788 /* UserMapAnnotationView.swift in Sources */,
@@ -898,6 +917,7 @@
 				B1C508672234102800534DB1 /* HomeViewController+UICollectionView.swift in Sources */,
 				B1DC826B221889AE0005278D /* SlideOutMenuTableViewCell.swift in Sources */,
 				B1C8161C220F853D00B35B43 /* SearchBarView.swift in Sources */,
+				B1182E5A2234BF43005DB4DB /* ClosetViewController+UICollectionView.swift in Sources */,
 				B11CBD502205CFB200D6620B /* UIColor+Additions.swift in Sources */,
 				B1FE821F22093C32006AFD43 /* Storyboarded.swift in Sources */,
 				B1377C57220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift in Sources */,

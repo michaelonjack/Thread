@@ -63,6 +63,16 @@ class ClothingItemEditView: UIView {
         return field
     }()
     
+    var tagsField: UnderlinedTextFieldView = {
+        let field = UnderlinedTextFieldView()
+        field.translatesAutoresizingMaskIntoConstraints = false
+        field.textField.placeholder = "comma-separated list of tags"
+        field.textField.textAlignment = .left
+        field.textField.autocapitalizationType = UITextAutocapitalizationType.none
+        
+        return field
+    }()
+    
     var detailsLabel: UILabel = {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
@@ -114,6 +124,7 @@ class ClothingItemEditView: UIView {
         mainScrollView.addSubview(brandField)
         mainScrollView.addSubview(priceField)
         mainScrollView.addSubview(linkField)
+        mainScrollView.addSubview(tagsField)
         mainScrollView.addSubview(detailsLabel)
         mainScrollView.addSubview(detailsField)
         
@@ -152,7 +163,12 @@ class ClothingItemEditView: UIView {
             linkField.widthAnchor.constraint(equalTo: nameField.widthAnchor),
             linkField.heightAnchor.constraint(equalTo: nameField.heightAnchor),
             
-            detailsLabel.topAnchor.constraint(equalTo: linkField.bottomAnchor, constant: 30),
+            tagsField.topAnchor.constraint(equalTo: linkField.bottomAnchor, constant: 30),
+            tagsField.leadingAnchor.constraint(equalTo: nameField.leadingAnchor),
+            tagsField.widthAnchor.constraint(equalTo: nameField.widthAnchor),
+            tagsField.heightAnchor.constraint(equalTo: nameField.heightAnchor),
+            
+            detailsLabel.topAnchor.constraint(equalTo: tagsField.bottomAnchor, constant: 30),
             detailsLabel.leadingAnchor.constraint(equalTo: nameField.leadingAnchor),
             detailsLabel.widthAnchor.constraint(equalTo: nameField.widthAnchor),
             detailsLabel.heightAnchor.constraint(equalTo: nameField.heightAnchor),

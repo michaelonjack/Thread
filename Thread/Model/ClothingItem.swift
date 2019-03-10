@@ -28,6 +28,7 @@ struct ClothingItem {
     var smallItemImageUrl: URL?
     var itemImage: UIImage?
     var smallItemImage: UIImage?
+    var tags: [String] = []
     
     init(snapshot: DataSnapshot, withIdAsKey: Bool = false) {
         let snapshotValue = snapshot.value as! [String: AnyObject]
@@ -36,6 +37,13 @@ struct ClothingItem {
         brand = snapshotValue["brand"] as? String ?? ""
         price = snapshotValue["price"] as? Double ?? nil
         details = snapshotValue["details"] as? String ?? nil
+        
+        let tagsSnapshot = snapshot.childSnapshot(forPath: "tags")
+        for child in tagsSnapshot.children {
+            let childSnapshot = child as! DataSnapshot
+            let tag = childSnapshot.value as? String ?? ""
+            tags.append(tag)
+        }
         
         if let itemUrlStr = snapshotValue["itemUrl"] as? String {
             itemUrl = URL(string: itemUrlStr)
@@ -90,11 +98,18 @@ struct ClothingItem {
     }
     
     func toAnyObject() -> Any {
+        
+        var tagsDict: [String:Any] = [:]
+        for tag in tags {
+            tagsDict[UUID().uuidString] = tag
+        }
+        
         var dict: [String:Any] = [
             "id": id,
             "type": type.description,
             "name": name,
-            "brand": brand
+            "brand": brand,
+            "tags": tagsDict
         ]
         
         if let price = price {

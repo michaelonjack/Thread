@@ -61,6 +61,7 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
         editView.brandField.textField.text = clothingItem.brand
         editView.priceField.textField.text = clothingItem.price == nil ? "" : String(format: "%.2f", clothingItem.price!)
         editView.linkField.textField.text = clothingItem.itemUrl?.absoluteString
+        editView.tagsField.textField.text = clothingItem.tags.joined(separator: ",")
         editView.detailsField.text = clothingItem.details ?? ""
     }
     
@@ -79,6 +80,7 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
                     self.clothingItem.name = self.editView.nameField.textField.text ?? ""
                     self.clothingItem.brand = self.editView.brandField.textField.text ?? ""
                     self.clothingItem.price = Double(self.editView.priceField.textField.text ?? "")
+                    self.clothingItem.tags = self.editView.tagsField.textField.text?.components(separatedBy: ",") ?? []
                     
                     if let urlStr = self.editView.linkField.textField.text {
                         self.clothingItem.itemUrl = URL(string: urlStr)

@@ -37,6 +37,9 @@ class ClosetViewController: UIViewController, Storyboarded {
         clothingItemsView.clothingItemCollectionView.delegate = self
         clothingItemsView.clothingItemCollectionView.dataSource = self
         
+        detailsView.tagsView.tagsCollectionView.delegate = self
+        detailsView.tagsView.tagsCollectionView.dataSource = self
+        
         if let user = user {
             setUserData()
             
@@ -55,8 +58,6 @@ class ClosetViewController: UIViewController, Storyboarded {
                 }
             }
         }
-        
-        setUserData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -95,6 +96,8 @@ class ClosetViewController: UIViewController, Storyboarded {
             self.clothingItemsView.clothingItemCollectionView.reloadData()
             self.clothingItemsView.clothingItemCollectionView.scrollToItem(at: IndexPath(row: self.currentItemIndex, section: 0), at: .centeredHorizontally, animated: false)
             
+            self.detailsView.tagsView.tagsCollectionView.reloadData()
+            
             if let currentUser = configuration.currentUser, let currentItem = currentItem {
                 if currentUser.favoritedItems.contains(currentItem) {
                     self.favoriteButton.setImage(UIImage(named: "FavoriteClicked"), for: .normal)
@@ -111,13 +114,13 @@ class ClosetViewController: UIViewController, Storyboarded {
             
             sself.itemNameLabel.alpha = 0
             sself.detailsView.detailsView.alpha = 0
-            sself.detailsView.reviewsView.alpha = 0
+            sself.detailsView.tagsView.alpha = 0
             sself.detailsView.otherView.alpha = 0
             sself.favoriteButton.alpha = 0.02
             
             sself.itemNameLabel.transform = sself.itemNameLabel.transform.translatedBy(x: 0, y: 30)
             sself.detailsView.detailsView.transform = sself.detailsView.detailsView.transform.translatedBy(x: 0, y: 30)
-            sself.detailsView.reviewsView.transform = sself.detailsView.reviewsView.transform.translatedBy(x: 0, y: 30)
+            sself.detailsView.tagsView.transform = sself.detailsView.tagsView.transform.translatedBy(x: 0, y: 30)
             sself.detailsView.otherView.transform = sself.detailsView.otherView.transform.translatedBy(x: 0, y: 30)
             sself.favoriteButton.transform = sself.favoriteButton.transform.translatedBy(x: 0, y: 30)
         })
@@ -132,6 +135,7 @@ class ClosetViewController: UIViewController, Storyboarded {
         DispatchQueue.main.async {
             self.itemNameLabel.text = currentItem?.name ?? clothingType.description
             self.detailsView.detailsView.detailsTextView.text = currentItem?.details
+            self.detailsView.tagsView.tagsCollectionView.reloadData()
             
             if let currentUser = configuration.currentUser, let currentItem = currentItem {
                 if currentUser.favoritedItems.contains(currentItem) {
@@ -201,60 +205,6 @@ class ClosetViewController: UIViewController, Storyboarded {
     
     @IBAction func dismissCloset(_ sender: Any) {
         coordinator?.pop()
-    }
-}
-
-
-
-extension ClosetViewController: UICollectionViewDelegate {
-    
-}
-
-
-
-extension ClosetViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "closetItemCell", for: indexPath)
-        
-        guard let closetItemCell = cell as? ClosetItemCollectionViewCell else { return cell }
-        guard let clothingType = ClothingType(rawValue: indexPath.row) else { return cell }
-        
-        // Set default values
-        closetItemCell.imageView.image = UIImage(named: clothingType.description)
-        closetItemCell.label.text = "No Price"
-        closetItemCell.imageView.contentMode = .scaleAspectFit
-        
-        if let item = user?.clothingItems[clothingType] {
-            
-            if let price = item.price {
-                let formatter = NumberFormatter()
-                formatter.numberStyle = .currency
-                let priceStr = formatter.string(from: price as NSNumber) ?? "No Price"
-                
-                closetItemCell.label.text = priceStr
-            }
-            
-            closetItemCell.imageView.sd_setImage(with: item.itemImageUrl, completed: nil)
-        }
-        
-        return closetItemCell
-    }
-    
-}
-
-
-
-extension ClosetViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 }
 

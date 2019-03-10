@@ -17,10 +17,9 @@ class ClosetDetailsView: UIView {
         return view
     }()
     
-    var reviewsView: UIView = {
-        let view = UIView()
+    var tagsView: ClosetDetailsTagsView = {
+        let view = ClosetDetailsTagsView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
         
         return view
     }()
@@ -56,7 +55,7 @@ class ClosetDetailsView: UIView {
         
         tabs = [
             Tab(view: detailsView, type: .attributedText(NSAttributedString(string: "DETAILS", attributes: tabAttributes))),
-            Tab(view: reviewsView, type: .attributedText(NSAttributedString(string: "REVIEWS", attributes: tabAttributes))),
+            Tab(view: tagsView, type: .attributedText(NSAttributedString(string: "TAGS", attributes: tabAttributes))),
             Tab(view: otherView, type: .attributedText(NSAttributedString(string: "OTHER", attributes: tabAttributes))),
         ]
         
