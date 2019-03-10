@@ -138,7 +138,7 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
                     }
                     
                     // Make sure the user is close enough to the current user to show
-                    if let distance = currentUser.getDistanceFrom(user: user) {
+                    if let distance = currentUser.getDistanceFrom(user: user), let _ = user.lastCheckIn {
                         if distance <= configuration.maximumUserDistance {
                             let userAnnotation = UserMapAnnotation(user: user)
                             self.aroundMeView.mapView.addAnnotation(userAnnotation)
