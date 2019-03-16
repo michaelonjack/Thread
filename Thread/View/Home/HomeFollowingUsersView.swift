@@ -58,6 +58,9 @@ class HomeFollowingUsersView: UIView {
     var pullIndicatorHeightConstraint: NSLayoutConstraint!
     var pullIndicatorTopConstraint: NSLayoutConstraint!
     var pullIndicatorBottomConstraint: NSLayoutConstraint!
+    var pullIndicatorHeightConstant: CGFloat = 8
+    var pullIndicatorTopConstant: CGFloat = 16
+    var pullIndicatorBottomConstant: CGFloat = 8
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -92,9 +95,9 @@ class HomeFollowingUsersView: UIView {
     
     fileprivate func setupLayout() {
         
-        pullIndicatorTopConstraint = pullIndicator.topAnchor.constraint(equalTo: topAnchor, constant: 16)
-        pullIndicatorBottomConstraint = followingLabel.topAnchor.constraint(equalTo: pullIndicator.bottomAnchor, constant: 8)
-        pullIndicatorHeightConstraint = pullIndicator.heightAnchor.constraint(equalToConstant: 8)
+        pullIndicatorTopConstraint = pullIndicator.topAnchor.constraint(equalTo: topAnchor, constant: pullIndicatorTopConstant)
+        pullIndicatorBottomConstraint = followingLabel.topAnchor.constraint(equalTo: pullIndicator.bottomAnchor, constant: pullIndicatorBottomConstant)
+        pullIndicatorHeightConstraint = pullIndicator.heightAnchor.constraint(equalToConstant: pullIndicatorHeightConstant)
         
         NSLayoutConstraint.activate([
             pullIndicatorTopConstraint,

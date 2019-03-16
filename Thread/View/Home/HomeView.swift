@@ -206,26 +206,17 @@ class HomeView: UIView {
             sself.profileButtonHeightConstraint.isActive = false
             sself.profileButtonWidthConstraint.isActive = false
             
-            sself.followingUsersView.pullIndicatorTopConstraint.isActive = false
-            sself.followingUsersView.pullIndicatorBottomConstraint.isActive = false
-            sself.followingUsersView.pullIndicatorHeightConstraint.isActive = false
-            
             // Activate the end position constraints
             NSLayoutConstraint.activate([
                 sself.profileButton.topAnchor.constraint(equalTo: sself.showMenuButton.topAnchor),
                 sself.profileButton.bottomAnchor.constraint(equalTo: sself.showMenuButton.bottomAnchor),
                 sself.profileButton.widthAnchor.constraint(equalTo: sself.profileButton.heightAnchor),
                 sself.profileButton.trailingAnchor.constraint(equalTo: sself.trailingAnchor, constant: -8),
-                
-                sself.followingUsersView.pullIndicator.heightAnchor.constraint(equalToConstant: 0),
-                sself.followingUsersView.followingLabel.topAnchor.constraint(equalTo: sself.followingUsersView.pullIndicator.bottomAnchor, constant: 0),
-                sself.followingUsersView.pullIndicator.topAnchor.constraint(equalTo: sself.followingUsersView.topAnchor, constant: 0)
             ])
             
             sself.followingUsersView.backgroundColor = .white
             
             // Make the constraint changes take effect
-            sself.followingUsersView.followingUsersCollectionView.collectionViewLayout.invalidateLayout()
             sself.layoutIfNeeded()
         })
         profilePictureButtonAnimator.pausesOnCompletion = true
@@ -266,8 +257,13 @@ class HomeView: UIView {
             
             // Animate the position change of the profile picture button
             let percentComplete = (animationStartY - followingUsersView.frame.minY) / (animationStartY - animationEndY)
-            if percentComplete >= 0 {
+            if percentComplete >= 0 && percentComplete <= 1 {
                 profilePictureButtonAnimator.fractionComplete = percentComplete
+                
+                followingUsersView.pullIndicatorTopConstraint.constant = followingUsersView.pullIndicatorTopConstant - (followingUsersView.pullIndicatorTopConstant * percentComplete)
+                followingUsersView.pullIndicatorHeightConstraint.constant = followingUsersView.pullIndicatorHeightConstant - (followingUsersView.pullIndicatorHeightConstant * percentComplete)
+                followingUsersView.pullIndicatorBottomConstraint.constant =  followingUsersView.pullIndicatorBottomConstant - (followingUsersView.pullIndicatorBottomConstant * percentComplete)
+                followingUsersView.followingUsersCollectionView.collectionViewLayout.invalidateLayout()
             }
         default:
             break
