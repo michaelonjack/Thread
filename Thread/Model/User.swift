@@ -332,6 +332,45 @@ class User {
         otherUserBlockedByReference.removeValue()
     }
     
+    func getFollowedItems(completion:@escaping ([(User,ClothingItem)]) -> Void) {
+        
+        var followedItems: [(User,ClothingItem)] = []
+        
+        // If the user has no followers, return
+        let numberOfFollowedUsers = followingUserIds.count
+        if numberOfFollowedUsers == 0 {
+            completion(followedItems)
+            return
+        }
+        
+        for (index, userId) in followingUserIds.enumerated() {
+            getUser(withId: userId) { (user) in
+                if let top = user.clothingItems[.top] {
+                    followedItems.append( (user, top) )
+                }
+                
+                if let bottom = user.clothingItems[.bottom] {
+                    followedItems.append( (user, bottom) )
+                }
+                
+                if let shoes = user.clothingItems[.shoes] {
+                    followedItems.append( (user, shoes) )
+                }
+                
+                if let accessories = user.clothingItems[.accessories] {
+                    followedItems.append( (user, accessories) )
+                }
+                
+                DispatchQueue.main.async {
+                    // Check if all of the followed users have been accounted for
+                    if index + 1 == numberOfFollowedUsers {
+                        completion(followedItems)
+                    }
+                }
+            }
+        }
+    }
+    
     func save() {
         let userReference = Database.database().reference(withPath: "users/")
         userReference.updateChildValues([uid : toAnyObject()])

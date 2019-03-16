@@ -76,8 +76,13 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
             self.homeView.followingUsersView.followingUsersCollectionView.reloadData()
             
             // Reload the following items collection view
-            self.getFollowedItems(for: currentUser, completion: { (followedItems) in
-                self.followedItems = followedItems
+            currentUser.getFollowedItems(completion: { (followedItems) in
+                // Only use items with images in the table view
+                var followedItemsWithImages = followedItems.filter { $0.1.itemImageUrl != nil }
+                // Randomize the results
+                followedItemsWithImages.shuffle()
+                
+                self.followedItems = followedItemsWithImages
                 self.homeView.followingItemsView.followingItemsTableView.reloadData()
                 
             })
@@ -95,47 +100,6 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
                     UserDefaults.standard.setValue(profilePicture.jpegData(compressionQuality: 1), forKey: currentUser.uid + "-profilePicture")
                 }
             })
-        }
-    }
-    
-    fileprivate func getFollowedItems(for user: User, completion:@escaping ([(User,ClothingItem)]) -> Void) {
-        
-        var followedItems: [(User,ClothingItem)] = []
-        
-        // If the user has no followers, return
-        let numberOfFollowedUsers = user.followingUserIds.count
-        if numberOfFollowedUsers == 0 {
-            completion(followedItems)
-            return
-        }
-        
-        for (index, userId) in user.followingUserIds.enumerated() {
-            getUser(withId: userId) { (user) in
-                if let top = user.clothingItems[.top], let _ = top.itemImageUrl {
-                    followedItems.append( (user, top) )
-                }
-                
-                if let bottom = user.clothingItems[.bottom], let _ = bottom.itemImageUrl {
-                    followedItems.append( (user, bottom) )
-                }
-                
-                if let shoes = user.clothingItems[.shoes], let _ = shoes.itemImageUrl {
-                    followedItems.append( (user, shoes) )
-                }
-                
-                if let accessories = user.clothingItems[.accessories], let _ = accessories.itemImageUrl {
-                    followedItems.append( (user, accessories) )
-                }
-                
-                DispatchQueue.main.async {
-                    // Check if all of the followed users have been accounted for
-                    if index + 1 == numberOfFollowedUsers {
-                        followedItems.shuffle()
-                        
-                        completion(followedItems)
-                    }
-                }
-            }
         }
     }
     

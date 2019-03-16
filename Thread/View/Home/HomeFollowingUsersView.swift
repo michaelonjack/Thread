@@ -13,7 +13,7 @@ class HomeFollowingUsersView: UIView {
     var pullIndicator: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
-        v.backgroundColor = .lighterGray
+        v.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
         v.clipsToBounds = true
         v.layer.cornerRadius = 4
         
