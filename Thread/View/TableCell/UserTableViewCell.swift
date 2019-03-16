@@ -101,7 +101,7 @@ class UserTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             userPictureImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             userPictureImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            userPictureImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2),
+            userPictureImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.15),
             userPictureImageView.widthAnchor.constraint(equalTo: userPictureImageView.heightAnchor),
             
             userNameLabel.topAnchor.constraint(equalTo: userPictureImageView.topAnchor),

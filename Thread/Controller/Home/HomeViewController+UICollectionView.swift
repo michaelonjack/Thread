@@ -10,9 +10,11 @@ import UIKit
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == homeView.revealView.closetItemsCollectionView {
+        if collectionView == homeView.followingUsersView.followingUsersCollectionView {
             guard let currentUser = configuration.currentUser else { return }
-            coordinator?.viewCloset(forUser: currentUser, initialIndex: indexPath.row)
+            
+            let selectedUserId = currentUser.followingUserIds[indexPath.row]
+            coordinator?.viewUserProfile(userId: selectedUserId)
         }
     }
 }
@@ -21,8 +23,8 @@ extension HomeViewController: UICollectionViewDelegate {
 
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == homeView.revealView.closetItemsCollectionView {
-            return 4
+        if collectionView == homeView.followingUsersView.followingUsersCollectionView {
+            return followingUserIds.count
         }
         
         return 0
@@ -30,26 +32,19 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if collectionView == homeView.revealView.closetItemsCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClosetItemCell", for: indexPath)
+        if collectionView == homeView.followingUsersView.followingUsersCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeFollowingUserCell", for: indexPath)
             
-            guard let imageCell = cell as? HomeClosetItemCollectionViewCell else { return cell }
-            guard let clothingType = ClothingType(rawValue: indexPath.row) else { return cell }
+            guard let imageCell = cell as? RoundedImageCollectionViewCell else { return cell }
             
-            // Set default values
-            imageCell.label.text = clothingType.description
-            imageCell.imageView.image = UIImage(named: clothingType.description)
-            imageCell.imageView.contentMode = .scaleAspectFit
+            imageCell.imageView.contentMode = .scaleAspectFill
+            imageCell.imageView.image = UIImage(named: "Avatar")
             
-            // Set the item data
-            if let item = configuration.currentUser?.clothingItems[clothingType] {
-                imageCell.label.text = item.name
-                item.getImage(ofPreferredSize: .normal) { (clothingItemImage) in
-                    if let itemImage = clothingItemImage {
-                        configuration.currentUser?.clothingItems[clothingType]?.itemImage = itemImage
-                        imageCell.imageView.image = itemImage
-                    }
-                }
+            let userId = followingUserIds[indexPath.row]
+            getUser(withId: userId) { (user) in
+                user.getProfilePicture(completion: { (profilePicture) in
+                    imageCell.imageView.image = profilePicture
+                })
             }
             
             return imageCell
@@ -65,10 +60,18 @@ extension HomeViewController: UICollectionViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == homeView.followingUsersView.followingUsersCollectionView {
+            return CGSize(width: collectionView.frame.height * 0.85, height: collectionView.frame.height * 0.85)
+        }
+        
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if collectionView == homeView.followingUsersView.followingUsersCollectionView {
+            return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        }
+        
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 }

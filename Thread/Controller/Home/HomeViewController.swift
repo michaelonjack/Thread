@@ -19,6 +19,8 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
     @IBOutlet var homeView: HomeView!
     @IBOutlet var aroundMeView: AroundMeView!
     
+    var followingUserIds: [String] = []
+    var followedItems: [(User, ClothingItem)] = []
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -54,30 +56,86 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
     
     fileprivate func setupHomeView() {
         homeView.showMenuButton.addTarget(self, action: #selector(showSlideOutMenu), for: .touchUpInside)
-        homeView.closetButton.addTarget(self, action: #selector(closetButtonPressed), for: .touchUpInside)
-        homeView.revealView.checkInButton.addTarget(self, action: #selector(checkInUser), for: .touchUpInside)
-        homeView.revealView.hideLocationButton.addTarget(self, action: #selector(hideUserLocation), for: .touchUpInside)
+        homeView.profileButton.addTarget(self, action: #selector(viewCurrentUserProfile), for: .touchUpInside)
+        homeView.checkInButton.addTarget(self, action: #selector(checkInUser), for: .touchUpInside)
+        homeView.hideLocationButton.addTarget(self, action: #selector(hideUserLocation), for: .touchUpInside)
         
-        // Set up the collectionview for the revelead view
-        homeView.revealView.closetItemsCollectionView.delegate = self
-        homeView.revealView.closetItemsCollectionView.dataSource = self
+        // Set up the collection views for the followed users view
+        homeView.followingUsersView.followingUsersCollectionView.delegate = self
+        homeView.followingUsersView.followingUsersCollectionView.dataSource = self
         
+        // Set up the table view for the followed items
+        homeView.followingItemsView.followingItemsTableView.delegate = self
+        homeView.followingItemsView.followingItemsTableView.dataSource = self
+        
+        // Set the user-specific information
         getCurrentUser { (currentUser) in
-            self.homeView.topView.nameLabel.text = currentUser.name
-            self.homeView.revealView.closetItemsCollectionView.reloadData()
+            
+            // Reload the following users table view
+            self.followingUserIds = currentUser.followingUserIds
+            self.homeView.followingUsersView.followingUsersCollectionView.reloadData()
+            
+            // Reload the following items collection view
+            self.getFollowedItems(for: currentUser, completion: { (followedItems) in
+                self.followedItems = followedItems
+                self.homeView.followingItemsView.followingItemsTableView.reloadData()
+                
+            })
+            
+            self.homeView.nameLabel.text = currentUser.name
+            currentUser.getLocationStr(completion: { (locationStr) in
+                self.homeView.locationLabel.text = locationStr
+            })
             
             currentUser.getProfilePicture(completion: { (profilePicture) in
-                self.homeView.topView.profilePictureButton.setImage(profilePicture, for: .normal)
+                self.homeView.profileButton.setImage(profilePicture, for: .normal)
                 
                 // Cache the profile picture if it has not already been saved
                 if let profilePicture = profilePicture, UserDefaults.standard.data(forKey: currentUser.uid + "-profilePicture") == nil {
                     UserDefaults.standard.setValue(profilePicture.jpegData(compressionQuality: 1), forKey: currentUser.uid + "-profilePicture")
                 }
             })
-            
-            currentUser.getLocationStr(completion: { (locationStr) in
-                self.homeView.topView.locationLabel.text = locationStr
-            })
+        }
+    }
+    
+    fileprivate func getFollowedItems(for user: User, completion:@escaping ([(User,ClothingItem)]) -> Void) {
+        
+        var followedItems: [(User,ClothingItem)] = []
+        
+        // If the user has no followers, return
+        let numberOfFollowedUsers = user.followingUserIds.count
+        if numberOfFollowedUsers == 0 {
+            completion(followedItems)
+            return
+        }
+        
+        for (index, userId) in user.followingUserIds.enumerated() {
+            getUser(withId: userId) { (user) in
+                if let top = user.clothingItems[.top], let _ = top.itemImageUrl {
+                    followedItems.append( (user, top) )
+                }
+                
+                if let bottom = user.clothingItems[.bottom], let _ = bottom.itemImageUrl {
+                    followedItems.append( (user, bottom) )
+                }
+                
+                if let shoes = user.clothingItems[.shoes], let _ = shoes.itemImageUrl {
+                    followedItems.append( (user, shoes) )
+                }
+                
+                if let accessories = user.clothingItems[.accessories], let _ = accessories.itemImageUrl {
+                    followedItems.append( (user, accessories) )
+                }
+                
+                DispatchQueue.main.async {
+                    // Check if all of the followed users have been accounted for
+                    if index + 1 == numberOfFollowedUsers {
+                        followedItems.shuffle()
+                        
+                        completion(followedItems)
+                    }
+                }
+            }
         }
     }
     
@@ -92,12 +150,10 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         openMenu()
     }
     
-    @objc func closetButtonPressed() {
-        if homeView.topViewTrailingAnchor.constant < 1 {
-            homeView.revealBackgroundView()
-        } else {
-            homeView.hideBackgroundView()
-        }
+    @objc func viewCurrentUserProfile() {
+        guard let currentUser = configuration.currentUser else { return }
+        
+        coordinator?.viewUserProfile(userId: currentUser.uid)
     }
     
     @objc func checkInUser() {
