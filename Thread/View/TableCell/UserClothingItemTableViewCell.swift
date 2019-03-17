@@ -53,6 +53,7 @@ class UserClothingItemTableViewCell: UITableViewCell {
     var favoriteButton: UIButton = {
         let b = UIButton()
         b.setImage(UIImage(named: "Favorite"), for: .normal)
+        b.setImage(UIImage(named: "FavoriteClicked"), for: UIControl.State.selected)
         b.imageView?.contentMode = .scaleAspectFit
         
         return b

@@ -32,6 +32,13 @@ extension HomeViewController: UITableViewDataSource {
             userItemCell.userProfilePictureImageView.image = profilePicture
         }
         
+        // Determine if the current user has favorited the item
+        if configuration.currentUser?.favoritedItems.contains(currentItem) ?? false {
+            userItemCell.favoriteButton.isSelected = true
+        } else {
+            userItemCell.favoriteButton.isSelected = false
+        }
+        
         if let itemImage = currentItem.itemImage {
             userItemCell.setClothingItemImage(image: itemImage)
         } else {
