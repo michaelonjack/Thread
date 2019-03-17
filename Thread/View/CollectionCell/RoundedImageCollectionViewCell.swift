@@ -23,7 +23,7 @@ class RoundedImageCollectionViewCell: UICollectionViewCell {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
         v.layer.masksToBounds = true
-        v.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
+        v.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1)
         
         return v
     }()

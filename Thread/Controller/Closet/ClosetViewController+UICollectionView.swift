@@ -52,7 +52,9 @@ extension ClosetViewController: UICollectionViewDataSource {
                     closetItemCell.label.text = priceStr
                 }
                 
-                closetItemCell.imageView.sd_setImage(with: item.itemImageUrl, completed: nil)
+                item.getImage(ofPreferredSize: .normal) { (itemImage) in
+                    closetItemCell.imageView.image = itemImage
+                }
             }
             
             return closetItemCell

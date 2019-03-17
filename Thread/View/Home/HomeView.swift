@@ -24,6 +24,7 @@ class HomeView: UIView {
         b.setImage(UIImage(named: "Avatar"), for: .normal)
         b.backgroundColor = .lightGray
         b.clipsToBounds = true
+        b.imageView?.contentMode = .scaleAspectFill
         
         return b
     }()
@@ -182,7 +183,7 @@ class HomeView: UIView {
             buttonsStackView.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 16),
             buttonsStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             buttonsStackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
-            buttonsStackView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.05),
+            buttonsStackView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.07),
             
             followingUsersView.bottomAnchor.constraint(equalTo: bottomAnchor),
             followingUsersView.leadingAnchor.constraint(equalTo: leadingAnchor),

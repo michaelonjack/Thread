@@ -209,9 +209,11 @@ extension UserProfileViewController: UICollectionViewDataSource {
         feedCell.imageView.contentMode = .scaleAspectFit
         feedCell.imageView.image = nil
         
-        if let clothingType = ClothingType(rawValue: indexPath.row), let clothingItemImageUrl = user?.clothingItems[clothingType]?.itemImageUrl {
-            let clothingItemImageUrl = clothingItemImageUrl
-            feedCell.imageView.sd_setImage(with: clothingItemImageUrl, completed: nil)
+        if let clothingType = ClothingType(rawValue: indexPath.row), let clothingItem = user?.clothingItems[clothingType] {
+            
+            clothingItem.getImage(ofPreferredSize: .small) { (itemImage) in
+                feedCell.imageView.image = itemImage
+            }
         }
         
         return feedCell

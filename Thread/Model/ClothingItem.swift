@@ -16,7 +16,7 @@ enum ImageSize {
     case normal
 }
 
-struct ClothingItem {
+class ClothingItem {
     var id: String
     var type: ClothingType
     var name: String
@@ -150,6 +150,7 @@ struct ClothingItem {
                         return
                     }
                     
+                    self.smallItemImage = image
                     completion(image)
                     return
                 }
@@ -167,6 +168,7 @@ struct ClothingItem {
                         return
                     }
                     
+                    self.itemImage = image
                     completion(image)
                     return
                 }

@@ -37,7 +37,6 @@ extension HomeViewController: UITableViewDataSource {
         } else {
             currentItem.getImage(ofPreferredSize: .normal, completion: { (itemImage) in
                 if let itemImage = itemImage {
-                    self.followedItems[indexPath.row].1.itemImage = itemImage
                     userItemCell.setClothingItemImage(image: itemImage)
                     tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
                 }

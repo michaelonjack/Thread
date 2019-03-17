@@ -47,14 +47,9 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
         
         if let itemImage = clothingItem.itemImage {
             itemImageView.image = itemImage
-        } else if let url = clothingItem.itemImageUrl {
-            itemImageView.sd_setImage(with: url) { (image, error, _, _) in
-                if error != nil {
-                    print(error.debugDescription)
-                    return
-                }
-                
-                self.clothingItem.itemImage = image
+        } else if let _ = clothingItem.itemImageUrl {
+            clothingItem.getImage(ofPreferredSize: .normal) { (itemImage) in
+                self.itemImageView.image = itemImage
             }
         }
         
