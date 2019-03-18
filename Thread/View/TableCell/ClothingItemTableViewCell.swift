@@ -12,76 +12,56 @@ class ClothingItemTableViewCell: UITableViewCell {
     
     weak var delegate: ClothingItemTableCellDelegate?
     
-    var itemImageView: UIImageView = {
+    var clothingItemImageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFit
+        iv.clipsToBounds = true
         
         return iv
     }()
     
-    var blurDetailView: UIVisualEffectView = {
-        let v = UIVisualEffectView()
-        v.translatesAutoresizingMaskIntoConstraints = false
-        v.effect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-        v.alpha = 0
-        
-        return v
-    }()
-    
-    var detailStackView: UIStackView = {
-        let sv = UIStackView()
-        sv.translatesAutoresizingMaskIntoConstraints = false
-        sv.alignment = .fill
-        sv.axis = .vertical
-        sv.distribution = .fillEqually
-        sv.spacing = 16
-        sv.backgroundColor = .clear
-        sv.alpha = 0
-        
-        return sv
-    }()
-    
     var itemNameLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.textColor = .white
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.textAlignment = .left
+        l.adjustsFontSizeToFitWidth = true
+        l.textColor = .black
+        l.font = UIFont(name: "AvenirNext-Medium", size: 17.0)
+        l.numberOfLines = 0
         
-        return label
+        return l
     }()
     
     var buttonsStackView: UIStackView = {
         let sv = UIStackView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
         sv.alignment = .fill
-        sv.axis = .horizontal
         sv.distribution = .fillEqually
-        sv.backgroundColor = .clear
-        sv.spacing = 16
+        sv.axis = .horizontal
+        sv.spacing = 8
         
         return sv
     }()
     
-    var viewButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(.white, for: .normal)
-        button.setTitle("View", for: .normal)
-        button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 1
+    var favoriteButton: UIButton = {
+        let b = UIButton()
+        b.setImage(UIImage(named: "Favorite"), for: .normal)
+        b.setImage(UIImage(named: "FavoriteClicked"), for: UIControl.State.selected)
+        b.imageView?.contentMode = .scaleAspectFit
         
-        return button
+        return b
     }()
     
-    var selectButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(.white, for: .normal)
-        button.setTitle("Select", for: .normal)
-        button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 1
+    var viewInBrowserButton: UIButton = {
+        let b = UIButton()
+        b.setImage(UIImage(named: "Browser"), for: .normal)
+        b.imageView?.contentMode = .scaleAspectFit
         
-        return button
+        return b
     }()
+    
+    var clothingItemImageHeightConstraint: NSLayoutConstraint?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -95,66 +75,64 @@ class ClothingItemTableViewCell: UITableViewCell {
         setupView()
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        setupView()
-    }
-
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        viewButton.layer.cornerRadius = viewButton.frame.height / 6.0
-        viewButton.clipsToBounds = true
-        
-        selectButton.layer.cornerRadius = selectButton.frame.height / 6.0
-        selectButton.clipsToBounds = true
     }
-
+    
     fileprivate func setupView() {
-        
         selectionStyle = .none
         
-        viewButton.addTarget(self, action: #selector(viewItem), for: .touchUpInside)
-        selectButton.addTarget(self, action: #selector(selectItem), for: .touchUpInside)
+        viewInBrowserButton.addTarget(self, action: #selector(viewItem), for: .touchUpInside)
         
-        buttonsStackView.addArrangedSubview(viewButton)
-        buttonsStackView.addArrangedSubview(selectButton)
+        buttonsStackView.addArrangedSubview(favoriteButton)
+        buttonsStackView.addArrangedSubview(viewInBrowserButton)
         
-        detailStackView.addArrangedSubview(itemNameLabel)
-        detailStackView.addArrangedSubview(buttonsStackView)
-        
-        addSubview(itemImageView)
-        addSubview(blurDetailView)
-        addSubview(detailStackView)
+        addSubview(clothingItemImageView)
+        addSubview(itemNameLabel)
+        addSubview(buttonsStackView)
         
         setupLayout()
     }
     
     fileprivate func setupLayout() {
+        
+        // Lower the priority of the top constraint to prevent the logger from whining during layout
+        let buttonsStackViewBottomConstraint = buttonsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+        buttonsStackViewBottomConstraint.priority = UILayoutPriority(999)
+        
         NSLayoutConstraint.activate([
-            itemImageView.topAnchor.constraint(equalTo: topAnchor),
-            itemImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            itemImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            itemImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            clothingItemImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            clothingItemImageView.bottomAnchor.constraint(equalTo: itemNameLabel.topAnchor, constant: -16),
+            clothingItemImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            clothingItemImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            blurDetailView.topAnchor.constraint(equalTo: topAnchor),
-            blurDetailView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            blurDetailView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            blurDetailView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            itemNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            itemNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            itemNameLabel.bottomAnchor.constraint(equalTo: buttonsStackView.topAnchor, constant: -10),
             
-            detailStackView.centerXAnchor.constraint(equalTo: blurDetailView.centerXAnchor),
-            detailStackView.centerYAnchor.constraint(equalTo: blurDetailView.centerYAnchor),
-            detailStackView.heightAnchor.constraint(equalTo: blurDetailView.heightAnchor, multiplier: 0.4),
-            detailStackView.widthAnchor.constraint(equalTo: blurDetailView.widthAnchor, multiplier: 0.7)
+            buttonsStackView.leadingAnchor.constraint(equalTo: itemNameLabel.leadingAnchor),
+            buttonsStackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.2),
+            buttonsStackView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.05),
+            buttonsStackViewBottomConstraint
         ])
+    }
+    
+    func setClothingItemImage(image: UIImage) {
+        if let imageHeightConstraint = clothingItemImageHeightConstraint {
+            imageHeightConstraint.isActive = false
+        }
+        
+        let aspectRatio = image.size.height / image.size.width
+        
+        clothingItemImageHeightConstraint = clothingItemImageView.heightAnchor.constraint(equalTo: clothingItemImageView.widthAnchor, multiplier: aspectRatio)
+        clothingItemImageHeightConstraint?.priority = UILayoutPriority(rawValue: 999)
+        clothingItemImageHeightConstraint?.isActive = true
+        layoutIfNeeded()
+        
+        clothingItemImageView.image = image
     }
     
     @objc func viewItem() {
         delegate?.viewClothingItem(at: self)
-    }
-    
-    @objc func selectItem() {
-        delegate?.selectClothingItem(at: self)
     }
 }

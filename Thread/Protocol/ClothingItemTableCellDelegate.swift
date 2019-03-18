@@ -10,5 +10,15 @@ import Foundation
 
 protocol ClothingItemTableCellDelegate: AnyObject {
     func viewClothingItem(at cell: ClothingItemTableViewCell)
-    func selectClothingItem(at cell: ClothingItemTableViewCell)
+    func favoriteItem(at cell: ClothingItemTableCellDelegate)
+}
+
+extension ClothingItemTableCellDelegate {
+    func viewClothingItem(at cell: ClothingItemTableViewCell) {
+        
+    }
+    
+    func favoriteItem(at cell: ClothingItemTableCellDelegate) {
+        
+    }
 }

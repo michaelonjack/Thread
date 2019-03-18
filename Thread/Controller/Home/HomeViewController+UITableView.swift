@@ -28,6 +28,7 @@ extension HomeViewController: UITableViewDataSource {
         let currentItem = followedItems[indexPath.row].1
         
         userItemCell.userNameLabel.text = itemOwner.name
+        userItemCell.itemNameLabel.text = currentItem.name
         itemOwner.getProfilePicture { (profilePicture) in
             userItemCell.userProfilePictureImageView.image = profilePicture
         }

@@ -53,19 +53,8 @@ extension ClothingItemTableView: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? ClothingItemTableViewCell else { return }
-        
-        if cell.blurDetailView.alpha == 0 {
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                cell.blurDetailView.alpha = 1
-                cell.detailStackView.alpha = 1
-            })
-        } else {
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                cell.blurDetailView.alpha = 0
-                cell.detailStackView.alpha = 0
-            })
-        }
+        let currentItem = clothingItems[indexPath.row]
+        self.coordinator?.startEditingDetails(forClothingItem: currentItem)
     }
 }
 
@@ -84,18 +73,17 @@ extension ClothingItemTableView: UITableViewDataSource {
         let clothingItem = clothingItems[indexPath.row]
         
         clothingItemCell.delegate = self
-        clothingItemCell.itemImageView.image = nil
+        clothingItemCell.clothingItemImageView.image = nil
         clothingItemCell.itemNameLabel.text = clothingItem.name
-        clothingItemCell.blurDetailView.alpha = 0
-        clothingItemCell.detailStackView.alpha = 0
-        clothingItemCell.itemImageView.contentMode = .scaleAspectFit
         
-        if let itemImage = clothingItem.smallItemImage {
-            clothingItemCell.itemImageView.image = itemImage
-        } else if let itemImageUrl = clothingItem.smallItemImageUrl {
-            clothingItemCell.itemImageView.sd_setImage(with: itemImageUrl) { (image, error, _, _) in
-                self.clothingItems[indexPath.row].smallItemImage = image
-                tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+        if let itemImage = clothingItem.itemImage {
+            clothingItemCell.setClothingItemImage(image: itemImage)
+        } else {
+            clothingItem.getImage(ofPreferredSize: .normal) { (image) in
+                if let itemImage = image {
+                    clothingItemCell.setClothingItemImage(image: itemImage)
+                    tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+                }
             }
         }
         
@@ -116,12 +104,5 @@ extension ClothingItemTableView: ClothingItemTableCellDelegate {
                 UIApplication.shared.open(url, options: [:])
             }
         }
-    }
-    
-    func selectClothingItem(at cell: ClothingItemTableViewCell) {
-        guard let indexPath = self.indexPath(for: cell) else { return }
-        
-        let currentItem = clothingItems[indexPath.row]
-        self.coordinator?.startEditingDetails(forClothingItem: currentItem)
     }
 }

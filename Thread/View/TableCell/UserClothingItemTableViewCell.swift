@@ -39,6 +39,17 @@ class UserClothingItemTableViewCell: UITableViewCell {
         return iv
     }()
     
+    var itemNameLabel: UILabel = {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.textAlignment = .left
+        l.adjustsFontSizeToFitWidth = true
+        l.textColor = .black
+        l.font = UIFont(name: "AvenirNext-Medium", size: 17.0)
+        
+        return l
+    }()
+    
     var buttonsStackView: UIStackView = {
         let sv = UIStackView()
         sv.translatesAutoresizingMaskIntoConstraints = false
@@ -96,6 +107,7 @@ class UserClothingItemTableViewCell: UITableViewCell {
         addSubview(userProfilePictureImageView)
         addSubview(userNameLabel)
         addSubview(clothingItemImageView)
+        addSubview(itemNameLabel)
         addSubview(buttonsStackView)
         
         setupLayout()
@@ -118,9 +130,13 @@ class UserClothingItemTableViewCell: UITableViewCell {
             userNameLabel.centerYAnchor.constraint(equalTo: userProfilePictureImageView.centerYAnchor),
             
             clothingItemImageViewTopConstraint,
-            clothingItemImageView.bottomAnchor.constraint(equalTo: buttonsStackView.topAnchor, constant: -16),
+            clothingItemImageView.bottomAnchor.constraint(equalTo: itemNameLabel.topAnchor, constant: -16),
             clothingItemImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             clothingItemImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            itemNameLabel.leadingAnchor.constraint(equalTo: userProfilePictureImageView.leadingAnchor),
+            itemNameLabel.trailingAnchor.constraint(equalTo: userNameLabel.trailingAnchor),
+            itemNameLabel.bottomAnchor.constraint(equalTo: buttonsStackView.topAnchor, constant: -10),
             
             buttonsStackView.leadingAnchor.constraint(equalTo: userProfilePictureImageView.leadingAnchor),
             buttonsStackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.2),

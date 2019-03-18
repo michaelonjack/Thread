@@ -19,15 +19,6 @@ class RoundedImageCollectionViewCell: UICollectionViewCell {
         return iv
     }()
     
-    let shadowView: UIView = {
-        let v = UIView()
-        v.translatesAutoresizingMaskIntoConstraints = false
-        v.layer.masksToBounds = true
-        v.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1)
-        
-        return v
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -43,15 +34,16 @@ class RoundedImageCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        shadowView.layer.cornerRadius = shadowView.frame.height / 2.0
+        layer.shadowPath = UIBezierPath(roundedRect: imageView.frame, cornerRadius: imageView.frame.height / 2).cgPath
         imageView.layer.cornerRadius = imageView.frame.height / 2.0
     }
     
     fileprivate func setupView() {
         
-        clipsToBounds = true
+        layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        layer.shadowOffset = CGSize(width: 5, height: 4)
+        layer.shadowOpacity = 0.2
         
-        addSubview(shadowView)
         addSubview(imageView)
         
         setupLayout()
@@ -59,11 +51,6 @@ class RoundedImageCollectionViewCell: UICollectionViewCell {
     
     fileprivate func setupLayout() {
         NSLayoutConstraint.activate([
-            shadowView.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-            shadowView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            shadowView.widthAnchor.constraint(equalTo: imageView.widthAnchor),
-            shadowView.heightAnchor.constraint(equalTo: imageView.heightAnchor),
-            
             imageView.topAnchor.constraint(equalTo: topAnchor),
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
