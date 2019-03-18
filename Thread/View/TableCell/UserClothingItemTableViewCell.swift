@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserClothingItemTableViewCell: UITableViewCell {
+class UserClothingItemTableViewCell: ClothingItemTableViewCell {
     
     var userProfilePictureImageView: UIImageView = {
         let iv = UIImageView()
@@ -29,91 +29,21 @@ class UserClothingItemTableViewCell: UITableViewCell {
         return l
     }()
     
-    var clothingItemImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.contentMode = .scaleAspectFit
-        iv.clipsToBounds = true
-        iv.backgroundColor = .blue
-        
-        return iv
-    }()
-    
-    var itemNameLabel: UILabel = {
-        let l = UILabel()
-        l.translatesAutoresizingMaskIntoConstraints = false
-        l.textAlignment = .left
-        l.adjustsFontSizeToFitWidth = true
-        l.textColor = .black
-        l.font = UIFont(name: "AvenirNext-Medium", size: 17.0)
-        
-        return l
-    }()
-    
-    var buttonsStackView: UIStackView = {
-        let sv = UIStackView()
-        sv.translatesAutoresizingMaskIntoConstraints = false
-        sv.alignment = .fill
-        sv.distribution = .fillEqually
-        sv.axis = .horizontal
-        sv.spacing = 8
-        
-        return sv
-    }()
-    
-    var favoriteButton: UIButton = {
-        let b = UIButton()
-        b.setImage(UIImage(named: "Favorite"), for: .normal)
-        b.setImage(UIImage(named: "FavoriteClicked"), for: UIControl.State.selected)
-        b.imageView?.contentMode = .scaleAspectFit
-        
-        return b
-    }()
-    
-    var viewInBrowserButton: UIButton = {
-        let b = UIButton()
-        b.setImage(UIImage(named: "Browser"), for: .normal)
-        b.imageView?.contentMode = .scaleAspectFit
-        
-        return b
-    }()
-    
-    var clothingItemImageHeightConstraint: NSLayoutConstraint?
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setupView()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        setupView()
-    }
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         
         userProfilePictureImageView.layer.cornerRadius = userProfilePictureImageView.frame.height / 2
     }
     
-    fileprivate func setupView() {
-        selectionStyle = .none
-        
-        buttonsStackView.addArrangedSubview(favoriteButton)
-        buttonsStackView.addArrangedSubview(viewInBrowserButton)
+    override func setupView() {
         
         addSubview(userProfilePictureImageView)
         addSubview(userNameLabel)
-        addSubview(clothingItemImageView)
-        addSubview(itemNameLabel)
-        addSubview(buttonsStackView)
         
-        setupLayout()
+        super.setupView()
     }
     
-    fileprivate func setupLayout() {
+    override func setupLayout() {
         
         // Lower the priority of the top constraint to prevent the logger from whining during layout
         let clothingItemImageViewTopConstraint = clothingItemImageView.topAnchor.constraint(equalTo: userProfilePictureImageView.bottomAnchor, constant: 16)
@@ -143,20 +73,5 @@ class UserClothingItemTableViewCell: UITableViewCell {
             buttonsStackView.heightAnchor.constraint(equalTo: userProfilePictureImageView.heightAnchor, multiplier: 0.5),
             buttonsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
-    }
-    
-    func setClothingItemImage(image: UIImage) {
-        if let imageHeightConstraint = clothingItemImageHeightConstraint {
-            imageHeightConstraint.isActive = false
-        }
-        
-        let aspectRatio = image.size.height / image.size.width
-        
-        clothingItemImageHeightConstraint = clothingItemImageView.heightAnchor.constraint(equalTo: clothingItemImageView.widthAnchor, multiplier: aspectRatio)
-        clothingItemImageHeightConstraint?.priority = UILayoutPriority(rawValue: 999)
-        clothingItemImageHeightConstraint?.isActive = true
-        layoutIfNeeded()
-        
-        clothingItemImageView.image = image
     }
 }

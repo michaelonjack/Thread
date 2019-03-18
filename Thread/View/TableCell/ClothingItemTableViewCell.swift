@@ -75,11 +75,7 @@ class ClothingItemTableViewCell: UITableViewCell {
         setupView()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
-    fileprivate func setupView() {
+    func setupView() {
         selectionStyle = .none
         
         viewInBrowserButton.addTarget(self, action: #selector(viewItem), for: .touchUpInside)
@@ -94,14 +90,14 @@ class ClothingItemTableViewCell: UITableViewCell {
         setupLayout()
     }
     
-    fileprivate func setupLayout() {
+    func setupLayout() {
         
         // Lower the priority of the top constraint to prevent the logger from whining during layout
         let buttonsStackViewBottomConstraint = buttonsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         buttonsStackViewBottomConstraint.priority = UILayoutPriority(999)
         
         NSLayoutConstraint.activate([
-            clothingItemImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            clothingItemImageView.topAnchor.constraint(equalTo: topAnchor),
             clothingItemImageView.bottomAnchor.constraint(equalTo: itemNameLabel.topAnchor, constant: -16),
             clothingItemImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             clothingItemImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
