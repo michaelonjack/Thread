@@ -795,6 +795,33 @@
             </objects>
             <point key="canvasLocation" x="1736.8" y="138.98050974512745"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="GdM-go-I41">
+            <objects>
+                <viewController id="X9b-Mr-SDd" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bdP-X5-U7H">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPZ-Ng-8rJ" customClass="NavigationHeaderView" customModule="Thread" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="73.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="IPZ-Ng-8rJ" firstAttribute="leading" secondItem="3ol-2M-2ML" secondAttribute="leading" id="18S-o7-ov8"/>
+                            <constraint firstItem="3ol-2M-2ML" firstAttribute="trailing" secondItem="IPZ-Ng-8rJ" secondAttribute="trailing" id="Mnz-6W-tcY"/>
+                            <constraint firstItem="IPZ-Ng-8rJ" firstAttribute="top" secondItem="3ol-2M-2ML" secondAttribute="top" id="XKq-lK-IMu"/>
+                            <constraint firstItem="IPZ-Ng-8rJ" firstAttribute="height" secondItem="bdP-X5-U7H" secondAttribute="height" multiplier="0.11" id="vfj-iu-54z"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3ol-2M-2ML"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rIe-Wi-bPZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="985" y="859"/>
+        </scene>
         <!--Clothing Item Edit View Controller-->
         <scene sceneID="Hbd-A9-h6X">
             <objects>
@@ -872,7 +899,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PCt-vV-lcN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="985" y="859"/>
+            <point key="canvasLocation" x="1737" y="859"/>
         </scene>
     </scenes>
     <resources>
