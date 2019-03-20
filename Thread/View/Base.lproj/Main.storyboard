@@ -795,10 +795,10 @@
             </objects>
             <point key="canvasLocation" x="1736.8" y="138.98050974512745"/>
         </scene>
-        <!--View Controller-->
+        <!--Clothing Item Table View Controller-->
         <scene sceneID="GdM-go-I41">
             <objects>
-                <viewController id="X9b-Mr-SDd" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ClothingItemTableViewController" id="X9b-Mr-SDd" customClass="ClothingItemTableViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bdP-X5-U7H">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -807,16 +807,28 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="73.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0lj-xl-amU" customClass="ClothingItemTableView" customModule="Thread" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="93.5" width="375" height="573.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="IPZ-Ng-8rJ" firstAttribute="leading" secondItem="3ol-2M-2ML" secondAttribute="leading" id="18S-o7-ov8"/>
+                            <constraint firstItem="0lj-xl-amU" firstAttribute="leading" secondItem="3ol-2M-2ML" secondAttribute="leading" id="McO-hH-7ZN"/>
                             <constraint firstItem="3ol-2M-2ML" firstAttribute="trailing" secondItem="IPZ-Ng-8rJ" secondAttribute="trailing" id="Mnz-6W-tcY"/>
                             <constraint firstItem="IPZ-Ng-8rJ" firstAttribute="top" secondItem="3ol-2M-2ML" secondAttribute="top" id="XKq-lK-IMu"/>
+                            <constraint firstItem="3ol-2M-2ML" firstAttribute="trailing" secondItem="0lj-xl-amU" secondAttribute="trailing" id="nhC-OZ-V5c"/>
+                            <constraint firstItem="0lj-xl-amU" firstAttribute="top" secondItem="IPZ-Ng-8rJ" secondAttribute="bottom" id="riB-dt-xv8"/>
+                            <constraint firstItem="3ol-2M-2ML" firstAttribute="bottom" secondItem="0lj-xl-amU" secondAttribute="bottom" id="sxe-eQ-imZ"/>
                             <constraint firstItem="IPZ-Ng-8rJ" firstAttribute="height" secondItem="bdP-X5-U7H" secondAttribute="height" multiplier="0.11" id="vfj-iu-54z"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3ol-2M-2ML"/>
                     </view>
+                    <connections>
+                        <outlet property="clothingItemTableView" destination="0lj-xl-amU" id="Zvs-74-R6l"/>
+                        <outlet property="navigationHeader" destination="IPZ-Ng-8rJ" id="rVK-Ef-HMg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rIe-Wi-bPZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

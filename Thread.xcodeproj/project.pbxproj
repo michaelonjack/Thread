@@ -66,6 +66,7 @@
 		B1C508712235CD8100534DB1 /* RoundedImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C508702235CD8100534DB1 /* RoundedImageCollectionViewCell.swift */; };
 		B1C50873223AA97000534DB1 /* UserClothingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C50872223AA97000534DB1 /* UserClothingItemTableViewCell.swift */; };
 		B1C50875223AAED500534DB1 /* HomeViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C50874223AAED500534DB1 /* HomeViewController+UITableView.swift */; };
+		B1C508772241D53A00534DB1 /* ClothingItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C508762241D53A00534DB1 /* ClothingItemTableViewController.swift */; };
 		B1C8161A220F836600B35B43 /* ClothingItemSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C81619220F836600B35B43 /* ClothingItemSearchViewController.swift */; };
 		B1C8161C220F853D00B35B43 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C8161B220F853D00B35B43 /* SearchBarView.swift */; };
 		B1C81620220F960E00B35B43 /* ClothingItemTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C8161F220F960E00B35B43 /* ClothingItemTableView.swift */; };
@@ -185,6 +186,7 @@
 		B1C508702235CD8100534DB1 /* RoundedImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1C50872223AA97000534DB1 /* UserClothingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClothingItemTableViewCell.swift; sourceTree = "<group>"; };
 		B1C50874223AAED500534DB1 /* HomeViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+UITableView.swift"; sourceTree = "<group>"; };
+		B1C508762241D53A00534DB1 /* ClothingItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemTableViewController.swift; sourceTree = "<group>"; };
 		B1C81619220F836600B35B43 /* ClothingItemSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemSearchViewController.swift; sourceTree = "<group>"; };
 		B1C8161B220F853D00B35B43 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		B1C8161F220F960E00B35B43 /* ClothingItemTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemTableView.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				B1701B1922216E00009B1788 /* SettingsNameViewController.swift */,
 				B1701B1D2221C17C009B1788 /* SettingsEmailViewController.swift */,
 				B1DC82782219B7670005278D /* UserTableViewController.swift */,
+				B1C508762241D53A00534DB1 /* ClothingItemTableViewController.swift */,
 				B1FE8220220947DA006AFD43 /* CoordinatorNavigationController.swift */,
 				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
 				B157D4A32206147D00D83CDB /* UserProfileViewController.swift */,
@@ -877,6 +880,7 @@
 				B1701B0D221E49D6009B1788 /* UserMapAnnotationView.swift in Sources */,
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
 				B1DC8277221999B60005278D /* UserTableView.swift in Sources */,
+				B1C508772241D53A00534DB1 /* ClothingItemTableViewController.swift in Sources */,
 				B1FE8227220A1CA4006AFD43 /* ActiveUserCoordinator.swift in Sources */,
 				B1C508712235CD8100534DB1 /* RoundedImageCollectionViewCell.swift in Sources */,
 				B1701B222222D36D009B1788 /* SettingsTermsViewController.swift in Sources */,

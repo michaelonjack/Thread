@@ -254,6 +254,16 @@ class ActiveUserCoordinator: Coordinator {
         navigationController.pushViewController(userTableController, animated: true)
     }
     
+    func viewFavoritedItems(for user: User) {
+        let itemsTableController = ClothingItemTableViewController.instantiate()
+        itemsTableController.coordinator = self
+        itemsTableController.clothingItems = user.favoritedItems
+        itemsTableController.navigationText = "Home"
+        itemsTableController.titleText = "Favorites"
+        
+        navigationController.pushViewController(itemsTableController, animated: true)
+    }
+    
     func cancelEditingClothingItem() {
         pop()
     }

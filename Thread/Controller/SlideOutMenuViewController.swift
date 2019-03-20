@@ -168,7 +168,9 @@ extension SlideOutMenuViewController: UIGestureRecognizerDelegate {
 
 extension SlideOutMenuViewController: SlideOutMenuDelegate {
     func didSelectProfileOption() {
-        coordinator?.viewUserProfile(userId: (Auth.auth().currentUser?.uid)!)
+        guard let currentUser = configuration.currentUser else { return }
+        
+        coordinator?.viewUserProfile(userId: currentUser.uid)
     }
     
     func didSelectFollowingOption() {
@@ -178,7 +180,9 @@ extension SlideOutMenuViewController: SlideOutMenuDelegate {
     }
     
     func didSelectFavoritesOption() {
+        guard let currentUser = configuration.currentUser else { return }
         
+        coordinator?.viewFavoritedItems(for: currentUser)
     }
     
     func didSelectSettingsOption() {
