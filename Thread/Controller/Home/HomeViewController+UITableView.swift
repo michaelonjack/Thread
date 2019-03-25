@@ -9,7 +9,12 @@
 import UIKit
 
 extension HomeViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let itemOwner = followedItems[indexPath.row].0
+        let currentItem = followedItems[indexPath.row].1
+        
+        coordinator?.viewCloset(forUser: itemOwner, initialIndex: currentItem.type.rawValue)
+    }
 }
 
 
