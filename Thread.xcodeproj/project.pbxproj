@@ -21,6 +21,7 @@
 		B157D4AB2206452100D83CDB /* UserProfileStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157D4AA2206452100D83CDB /* UserProfileStatsView.swift */; };
 		B157D4AF22065ADD00D83CDB /* UserProfileSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157D4AE22065ADD00D83CDB /* UserProfileSummaryView.swift */; };
 		B157D4B122065B3900D83CDB /* UserProfileFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157D4B022065B3900D83CDB /* UserProfileFeedView.swift */; };
+		B159E0DD22498DB700BCA83A /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B159E0DC22498DB700BCA83A /* NotificationView.swift */; };
 		B1701AF8221B0023009B1788 /* ExploreMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AF7221B0023009B1788 /* ExploreMainView.swift */; };
 		B1701AFA221B01E2009B1788 /* ExploreLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AF9221B01E2009B1788 /* ExploreLocationsView.swift */; };
 		B1701AFC221B100A009B1788 /* ExploreLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AFB221B100A009B1788 /* ExploreLocationCollectionViewCell.swift */; };
@@ -141,6 +142,7 @@
 		B157D4AA2206452100D83CDB /* UserProfileStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileStatsView.swift; sourceTree = "<group>"; };
 		B157D4AE22065ADD00D83CDB /* UserProfileSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileSummaryView.swift; sourceTree = "<group>"; };
 		B157D4B022065B3900D83CDB /* UserProfileFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileFeedView.swift; sourceTree = "<group>"; };
+		B159E0DC22498DB700BCA83A /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		B1701AF7221B0023009B1788 /* ExploreMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreMainView.swift; sourceTree = "<group>"; };
 		B1701AF9221B01E2009B1788 /* ExploreLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationsView.swift; sourceTree = "<group>"; };
 		B1701AFB221B100A009B1788 /* ExploreLocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -583,6 +585,7 @@
 			isa = PBXGroup;
 			children = (
 				B1C8161B220F853D00B35B43 /* SearchBarView.swift */,
+				B159E0DC22498DB700BCA83A /* NotificationView.swift */,
 				B1FE822A220CC7C9006AFD43 /* UnderlinedTextFieldView.swift */,
 				B1DC8226221787030005278D /* SlideOutMenuView.swift */,
 				B1701B1B222174BA009B1788 /* NavigationHeaderView.swift */,
@@ -890,6 +893,7 @@
 				B174D0281E36CAC700218590 /* APIHelper.swift in Sources */,
 				B1C2D48C220D2B7D00AD36BA /* UIView+Additions.swift in Sources */,
 				B18430861E33B03A00EED632 /* User.swift in Sources */,
+				B159E0DD22498DB700BCA83A /* NotificationView.swift in Sources */,
 				B1701B0F221F78B6009B1788 /* UserMapAnnotationCallOutView.swift in Sources */,
 				B1C5086D2235BD0100534DB1 /* HomeFollowingUsersView.swift in Sources */,
 				B1701B132220C522009B1788 /* SettingsViewController.swift in Sources */,
