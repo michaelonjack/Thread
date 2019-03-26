@@ -79,6 +79,7 @@ class ClothingItemTableViewCell: UITableViewCell {
         selectionStyle = .none
         
         viewInBrowserButton.addTarget(self, action: #selector(viewItem), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(favoriteItem), for: .touchUpInside)
         
         buttonsStackView.addArrangedSubview(favoriteButton)
         buttonsStackView.addArrangedSubview(viewInBrowserButton)
@@ -130,5 +131,9 @@ class ClothingItemTableViewCell: UITableViewCell {
     
     @objc func viewItem() {
         delegate?.viewClothingItem(at: self)
+    }
+    
+    @objc func favoriteItem() {
+        delegate?.favoriteItem(at: self)
     }
 }

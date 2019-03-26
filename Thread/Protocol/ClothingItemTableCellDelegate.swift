@@ -10,7 +10,7 @@ import Foundation
 
 protocol ClothingItemTableCellDelegate: AnyObject {
     func viewClothingItem(at cell: ClothingItemTableViewCell)
-    func favoriteItem(at cell: ClothingItemTableCellDelegate)
+    func favoriteItem(at cell: ClothingItemTableViewCell)
 }
 
 extension ClothingItemTableCellDelegate {
@@ -18,7 +18,7 @@ extension ClothingItemTableCellDelegate {
         
     }
     
-    func favoriteItem(at cell: ClothingItemTableCellDelegate) {
+    func favoriteItem(at cell: ClothingItemTableViewCell) {
         
     }
 }

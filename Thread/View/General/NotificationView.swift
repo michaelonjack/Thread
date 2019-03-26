@@ -38,6 +38,8 @@ class NotificationView: UIView {
         return l
     }()
     
+    var isShowing: Bool = false
+    
     init(message: String) {
         super.init(frame: .zero)
         
@@ -62,7 +64,7 @@ class NotificationView: UIView {
         layer.shadowOffset = CGSize(width: 8, height: 8)
         layer.shadowOpacity = 0.4
         backgroundColor = .white
-        //alpha = 0
+        alpha = 0
         
         addSubview(leadingBorder)
         addSubview(imageView)
@@ -93,14 +95,14 @@ class NotificationView: UIView {
     func show() {
         guard let superview = superview else { return }
         
-        let translateY = (frame.maxY - superview.frame.maxY) + frame.height
+        isShowing = true
+        
+        let translateY = (frame.maxY - superview.frame.maxY) + (frame.height * 2)
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.alpha = 1
             self.transform = self.transform.translatedBy(x: 0, y: -translateY)
         }) { (_) in
-            print(superview.frame)
-            print(self.frame)
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
                 self.dismiss()
             })
@@ -111,6 +113,8 @@ class NotificationView: UIView {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.alpha = 0
             self.transform = CGAffineTransform.identity
-        })
+        }) { (_) in
+            self.isShowing = false
+        }
     }
 }
