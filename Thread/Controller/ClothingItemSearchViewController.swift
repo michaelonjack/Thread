@@ -94,6 +94,13 @@ extension ClothingItemSearchViewController: UITableViewDataSource {
         clothingItemCell.clothingItemImageView.image = nil
         clothingItemCell.itemNameLabel.text = clothingItem.name
         
+        // Determine if the current user has favorited the item
+        if configuration.currentUser?.favoritedItems.contains(clothingItem) ?? false {
+            clothingItemCell.favoriteButton.isSelected = true
+        } else {
+            clothingItemCell.favoriteButton.isSelected = false
+        }
+        
         if let itemImage = clothingItem.itemImage {
             clothingItemCell.setClothingItemImage(image: itemImage)
         } else {
@@ -120,6 +127,35 @@ extension ClothingItemSearchViewController: ClothingItemTableCellDelegate {
         if let url = currentItem.itemUrl {
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:])
+            }
+        }
+    }
+    
+    func favoriteItem(at cell: ClothingItemTableViewCell) {
+        guard let indexPath = resultsTable.indexPath(for: cell) else { return }
+        guard let currentUser = configuration.currentUser else { return }
+        
+        let currentItem = searchResults[indexPath.row]
+        
+        // User currently has the item in their favorites so they're un-favoriting the item
+        if currentUser.favoritedItems.contains(currentItem) {
+            currentUser.favoritedItems.removeAll(where: { $0 == currentItem })
+            
+            cell.favoriteButton.isSelected = false
+        }
+            
+        // User is requesting to add the item to their favorites
+        else {
+            currentUser.favoritedItems.append(currentItem)
+            
+            cell.favoriteButton.isSelected = true
+            
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+                cell.favoriteButton.transform = cell.favoriteButton.transform.scaledBy(x: 2, y: 2)
+            }) { (_) in
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    cell.favoriteButton.transform = cell.favoriteButton.transform.scaledBy(x: 0.5, y: 0.5)
+                })
             }
         }
     }
