@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController {
     
-    func showInfoNotification(message: String) {
+    func showNotification(message: String) {
         
         if notificationView.isShowing {
             return
@@ -26,6 +26,18 @@ extension UIViewController {
         
         view.addSubview(notificationView)
         notificationView.show()
+    }
+    
+    func showInfoNotification(message: String) {
+        notificationView.leadingBorder.backgroundColor = .black
+        
+        showNotification(message: message)
+    }
+    
+    func showErrorNotification(message: String) {
+        notificationView.leadingBorder.backgroundColor = .red
+        
+        showNotification(message: message)
     }
     
 }

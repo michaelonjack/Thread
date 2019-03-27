@@ -68,6 +68,18 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
     @IBAction func updateItem(_ sender: Any) {
         guard let currentUser = configuration.currentUser else { return }
         
+        // Require that a name be entered before updating the item
+        if editView.nameField.textField.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? true {
+            showErrorNotification(message: "Please enter an item name before updating.")
+            return
+        }
+        
+        // Require a valid number in the price field
+        if let priceStr = editView.priceField.textField.text, !priceStr.isEmpty, Double(priceStr) == nil {
+            showErrorNotification(message: "Please enter a valid number in the price field before updating.")
+            return
+        }
+        
         // If the clothing item's image was updated, then we'll need to save the image to storage
         if itemImageUpdated {
             if let itemImage = clothingItem.itemImage {
