@@ -100,6 +100,7 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
         clothingItem.brand = editView.brandField.textField.text ?? ""
         clothingItem.price = Double(editView.priceField.textField.text ?? "")
         clothingItem.tags = editView.tagsField.textField.text?.components(separatedBy: ",") ?? []
+        clothingItem.tags = clothingItem.tags.filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
         
         if let urlStr = editView.linkField.textField.text {
             clothingItem.itemUrl = URL(string: urlStr)
