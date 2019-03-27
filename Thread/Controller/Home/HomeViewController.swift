@@ -138,6 +138,8 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
                 aroundMeView.mapView.removeAnnotation(annotation)
             }
         }
+        
+        showInfoNotification(message: "Location successfully hidden! You'll no longer appear on the map.")
     }
     
     @objc func refreshAroundMeMap() {

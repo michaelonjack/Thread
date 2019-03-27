@@ -13,8 +13,7 @@ import FirebaseAuth
 import CoreLocation
 
 let configuration = Configuration.shared()
-
-
+let notificationView = NotificationView()
 
 func getCurrentUser(completion: @escaping (User) -> Void) {
     

@@ -78,7 +78,7 @@ class NotificationView: UIView {
             leadingBorder.leadingAnchor.constraint(equalTo: leadingAnchor),
             leadingBorder.topAnchor.constraint(equalTo: topAnchor),
             leadingBorder.bottomAnchor.constraint(equalTo: bottomAnchor),
-            leadingBorder.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.05),
+            leadingBorder.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.03),
             
             imageView.leadingAnchor.constraint(equalTo: leadingBorder.trailingAnchor),
             imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -99,7 +99,7 @@ class NotificationView: UIView {
         
         let translateY = (frame.maxY - superview.frame.maxY) + (frame.height * 2)
         
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.alpha = 1
             self.transform = self.transform.translatedBy(x: 0, y: -translateY)
         }) { (_) in
@@ -110,11 +110,12 @@ class NotificationView: UIView {
     }
     
     func dismiss() {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.alpha = 0
             self.transform = CGAffineTransform.identity
         }) { (_) in
             self.isShowing = false
+            self.removeFromSuperview()
         }
     }
 }
