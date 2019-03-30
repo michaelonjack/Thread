@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum NotificationType {
+    case error
+    case info
+}
+
 class NotificationView: UIView {
     
     var leadingBorder: UIView = {
@@ -39,11 +44,16 @@ class NotificationView: UIView {
     }()
     
     var isShowing: Bool = false
+    var type: NotificationType = .info
+    let notificationQueue: NotificationQueue = NotificationQueue.shared
     
-    init(message: String) {
+    init(type: NotificationType, message: String) {
         super.init(frame: .zero)
         
+        self.type = type
         messageLabel.text = message
+        
+        setupView()
     }
     
     override init(frame: CGRect) {
@@ -59,6 +69,14 @@ class NotificationView: UIView {
     }
     
     fileprivate func setupView() {
+        
+        switch type {
+        case .error:
+            leadingBorder.backgroundColor = .red
+            
+        case .info:
+            leadingBorder.backgroundColor = .black
+        }
         
         layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
         layer.shadowOffset = CGSize(width: 8, height: 8)
@@ -92,12 +110,26 @@ class NotificationView: UIView {
         ])
     }
     
-    func show() {
-        guard let superview = superview else { return }
+    func show(addToQueue:Bool = true) {
+        
+        if addToQueue {
+            notificationQueue.addNotification(self)
+            return
+        }
+        
+        guard let appWindow = UIApplication.shared.keyWindow else { return }
+        
+        let width: CGFloat = appWindow.frame.width * 0.9
+        let height: CGFloat = appWindow.frame.height * 0.08
+        let x = (appWindow.frame.width - width) / 2
+        let y = appWindow.frame.maxY
+        frame = CGRect(x: x, y: y, width: width, height: height)
+        
+        appWindow.addSubview(self)
         
         isShowing = true
         
-        let translateY = (frame.maxY - superview.frame.maxY) + (frame.height * 2)
+        let translateY = (frame.maxY - appWindow.frame.maxY) + (frame.height * 2)
         
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.alpha = 1
@@ -110,12 +142,16 @@ class NotificationView: UIView {
     }
     
     func dismiss() {
+        
+        guard isShowing else { return }
+        
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.alpha = 0
             self.transform = CGAffineTransform.identity
         }) { (_) in
             self.isShowing = false
             self.removeFromSuperview()
+            self.notificationQueue.showNext()
         }
     }
 }

@@ -139,7 +139,8 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
             }
         }
         
-        showInfoNotification(message: "Location successfully hidden! You'll no longer appear on the map.")
+        let notification = NotificationView(type: .info, message: "Location successfully hidden! You'll no longer appear on the map.")
+        notification.show()
     }
     
     @objc func refreshAroundMeMap() {

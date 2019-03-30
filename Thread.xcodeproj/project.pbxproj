@@ -22,7 +22,7 @@
 		B157D4AF22065ADD00D83CDB /* UserProfileSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157D4AE22065ADD00D83CDB /* UserProfileSummaryView.swift */; };
 		B157D4B122065B3900D83CDB /* UserProfileFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157D4B022065B3900D83CDB /* UserProfileFeedView.swift */; };
 		B159E0DD22498DB700BCA83A /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B159E0DC22498DB700BCA83A /* NotificationView.swift */; };
-		B159E0DF224AFA1C00BCA83A /* UIViewController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B159E0DE224AFA1C00BCA83A /* UIViewController+Additions.swift */; };
+		B159E0E1224F8BC800BCA83A /* NotificationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B159E0E0224F8BC800BCA83A /* NotificationQueue.swift */; };
 		B1701AF8221B0023009B1788 /* ExploreMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AF7221B0023009B1788 /* ExploreMainView.swift */; };
 		B1701AFA221B01E2009B1788 /* ExploreLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AF9221B01E2009B1788 /* ExploreLocationsView.swift */; };
 		B1701AFC221B100A009B1788 /* ExploreLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AFB221B100A009B1788 /* ExploreLocationCollectionViewCell.swift */; };
@@ -144,7 +144,7 @@
 		B157D4AE22065ADD00D83CDB /* UserProfileSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileSummaryView.swift; sourceTree = "<group>"; };
 		B157D4B022065B3900D83CDB /* UserProfileFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileFeedView.swift; sourceTree = "<group>"; };
 		B159E0DC22498DB700BCA83A /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
-		B159E0DE224AFA1C00BCA83A /* UIViewController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Additions.swift"; sourceTree = "<group>"; };
+		B159E0E0224F8BC800BCA83A /* NotificationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationQueue.swift; sourceTree = "<group>"; };
 		B1701AF7221B0023009B1788 /* ExploreMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreMainView.swift; sourceTree = "<group>"; };
 		B1701AF9221B01E2009B1788 /* ExploreLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationsView.swift; sourceTree = "<group>"; };
 		B1701AFB221B100A009B1788 /* ExploreLocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -293,6 +293,7 @@
 			children = (
 				B1DB7EF122071A2C00F3C4D9 /* ClosetViewController.swift */,
 				B1182E592234BF43005DB4DB /* ClosetViewController+UICollectionView.swift */,
+				B1377C56220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift */,
 			);
 			path = Closet;
 			sourceTree = "<group>";
@@ -300,6 +301,7 @@
 		B11CBD4A2205CEF500D6620B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B159E0E0224F8BC800BCA83A /* NotificationQueue.swift */,
 				B157D4A02205E1BC00D83CDB /* Configuration.swift */,
 				B18430851E33B03A00EED632 /* User.swift */,
 				B1701B03221B9D6D009B1788 /* Place.swift */,
@@ -325,7 +327,6 @@
 				B1FE8220220947DA006AFD43 /* CoordinatorNavigationController.swift */,
 				B1C96A901E2C66730036E559 /* LoginViewController.swift */,
 				B157D4A32206147D00D83CDB /* UserProfileViewController.swift */,
-				B1377C56220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift */,
 				B1DC8191220E8CDF0005278D /* ClothingItemEditViewController.swift */,
 				B1C81619220F836600B35B43 /* ClothingItemSearchViewController.swift */,
 				B1DC82722218932C0005278D /* SlideOutMenuViewController.swift */,
@@ -358,7 +359,6 @@
 			children = (
 				B11CBD4F2205CFB200D6620B /* UIColor+Additions.swift */,
 				B1C2D48B220D2B7D00AD36BA /* UIView+Additions.swift */,
-				B159E0DE224AFA1C00BCA83A /* UIViewController+Additions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -885,6 +885,7 @@
 				B1C5086F2235C2F500534DB1 /* HomeFollowingItemsView.swift in Sources */,
 				B1701B0D221E49D6009B1788 /* UserMapAnnotationView.swift in Sources */,
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
+				B159E0E1224F8BC800BCA83A /* NotificationQueue.swift in Sources */,
 				B1DC8277221999B60005278D /* UserTableView.swift in Sources */,
 				B1C508772241D53A00534DB1 /* ClothingItemTableViewController.swift in Sources */,
 				B1FE8227220A1CA4006AFD43 /* ActiveUserCoordinator.swift in Sources */,
@@ -932,7 +933,6 @@
 				B1DC8194220EF00A0005278D /* ClothingItemEditView.swift in Sources */,
 				B1701B202222ACFD009B1788 /* SettingsPasswordViewController.swift in Sources */,
 				B1C50873223AA97000534DB1 /* UserClothingItemTableViewCell.swift in Sources */,
-				B159E0DF224AFA1C00BCA83A /* UIViewController+Additions.swift in Sources */,
 				B1701B29222DF8F5009B1788 /* HomeView.swift in Sources */,
 				B1C508672234102800534DB1 /* HomeViewController+UICollectionView.swift in Sources */,
 				B1DC826B221889AE0005278D /* SlideOutMenuTableViewCell.swift in Sources */,

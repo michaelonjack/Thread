@@ -70,13 +70,15 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
         
         // Require that a name be entered before updating the item
         if editView.nameField.textField.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? true {
-            showErrorNotification(message: "Please enter an item name before updating.")
+            let errorNotification = NotificationView(type: .error, message: "Please enter an item name before updating.")
+            errorNotification.show()
             return
         }
         
         // Require a valid number in the price field
         if let priceStr = editView.priceField.textField.text, !priceStr.isEmpty, Double(priceStr) == nil {
-            showErrorNotification(message: "Please enter a valid number in the price field before updating.")
+            let errorNotification = NotificationView(type: .error, message: "Please enter a valid number in the price field before updating.")
+            errorNotification.show()
             return
         }
         
