@@ -89,6 +89,10 @@ class NotificationView: UIView {
         addSubview(messageLabel)
         
         setupLayout()
+        
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
+        swipeGesture.direction = .down
+        addGestureRecognizer(swipeGesture)
     }
     
     fileprivate func setupLayout() {
@@ -153,5 +157,9 @@ class NotificationView: UIView {
             self.removeFromSuperview()
             self.notificationQueue.showNext()
         }
+    }
+    
+    @objc func handleSwipe() {
+        dismiss()
     }
 }
