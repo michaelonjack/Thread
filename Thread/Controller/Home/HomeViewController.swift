@@ -21,6 +21,7 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
     
     var followingUserIds: [String] = []
     var followedItems: [(User, ClothingItem)] = []
+    var isCheckingIn = false
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -123,6 +124,14 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
     @objc func checkInUser() {
         guard let currentUser = configuration.currentUser else { return }
         currentUser.lastCheckIn = Date()
+        
+        DispatchQueue.main.async {
+            self.isCheckingIn = true
+            
+            let notification = NotificationView(type: .info, message: "Checking in...")
+            notification.show()
+        }
+        
         updateUserLocation()
     }
     
@@ -207,6 +216,15 @@ extension HomeViewController: CLLocationManagerDelegate {
         let mapRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 0.025, longitudinalMeters: 0.025)
         aroundMeView.mapView.setRegion(mapRegion, animated: true)
         addAroundMeMapAnnotations()
+        
+        if isCheckingIn {
+            DispatchQueue.main.async {
+                self.isCheckingIn = false
+                
+                let notification = NotificationView(type: .success, message: "Check in successful! You will now be visible to other users on the map.")
+                notification.show()
+            }
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

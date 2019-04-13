@@ -10,6 +10,7 @@ import UIKit
 
 enum NotificationType {
     case error
+    case success
     case info
 }
 
@@ -73,6 +74,9 @@ class NotificationView: UIView {
         switch type {
         case .error:
             leadingBorder.backgroundColor = .red
+            
+        case .success:
+            leadingBorder.backgroundColor = .green
             
         case .info:
             leadingBorder.backgroundColor = .black
