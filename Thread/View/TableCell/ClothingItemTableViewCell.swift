@@ -114,14 +114,19 @@ class ClothingItemTableViewCell: UITableViewCell {
         ])
     }
     
-    func setClothingItemImage(image: UIImage) {
+    func setClothingItemImage(image: UIImage?) {
         if let imageHeightConstraint = clothingItemImageHeightConstraint {
             imageHeightConstraint.isActive = false
         }
         
-        let aspectRatio = image.size.height / image.size.width
+        if let image = image {
+            let aspectRatio = image.size.height / image.size.width
+            
+            clothingItemImageHeightConstraint = clothingItemImageView.heightAnchor.constraint(equalTo: clothingItemImageView.widthAnchor, multiplier: aspectRatio)
+        } else {
+            clothingItemImageHeightConstraint = clothingItemImageView.heightAnchor.constraint(equalToConstant: 0)
+        }
         
-        clothingItemImageHeightConstraint = clothingItemImageView.heightAnchor.constraint(equalTo: clothingItemImageView.widthAnchor, multiplier: aspectRatio)
         clothingItemImageHeightConstraint?.priority = UILayoutPriority(rawValue: 999)
         clothingItemImageHeightConstraint?.isActive = true
         layoutIfNeeded()

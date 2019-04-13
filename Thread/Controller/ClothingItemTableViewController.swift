@@ -72,11 +72,9 @@ extension ClothingItemTableViewController: UITableViewDataSource {
         if let itemImage = clothingItem.itemImage {
             clothingItemCell.setClothingItemImage(image: itemImage)
         } else {
-            clothingItem.getImage(ofPreferredSize: .normal) { (image) in
-                if let itemImage = image {
-                    clothingItemCell.setClothingItemImage(image: itemImage)
-                    tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
-                }
+            clothingItem.getImage(ofPreferredSize: .normal) { (itemImage) in
+                clothingItemCell.setClothingItemImage(image: itemImage)
+                tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
             }
         }
         

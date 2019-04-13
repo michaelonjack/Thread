@@ -50,10 +50,8 @@ extension HomeViewController: UITableViewDataSource {
             userItemCell.setClothingItemImage(image: itemImage)
         } else {
             currentItem.getImage(ofPreferredSize: .normal, completion: { (itemImage) in
-                if let itemImage = itemImage {
-                    userItemCell.setClothingItemImage(image: itemImage)
-                    tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
-                }
+                userItemCell.setClothingItemImage(image: itemImage)
+                tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
             })
         }
         
