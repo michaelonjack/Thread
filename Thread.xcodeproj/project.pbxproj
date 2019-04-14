@@ -23,6 +23,7 @@
 		B157D4B122065B3900D83CDB /* UserProfileFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157D4B022065B3900D83CDB /* UserProfileFeedView.swift */; };
 		B159E0DD22498DB700BCA83A /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B159E0DC22498DB700BCA83A /* NotificationView.swift */; };
 		B159E0E1224F8BC800BCA83A /* NotificationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B159E0E0224F8BC800BCA83A /* NotificationQueue.swift */; };
+		B159E0E522635DEA00BCA83A /* ClothingItemTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B159E0E422635DEA00BCA83A /* ClothingItemTag.swift */; };
 		B1701AF8221B0023009B1788 /* ExploreMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AF7221B0023009B1788 /* ExploreMainView.swift */; };
 		B1701AFA221B01E2009B1788 /* ExploreLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AF9221B01E2009B1788 /* ExploreLocationsView.swift */; };
 		B1701AFC221B100A009B1788 /* ExploreLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AFB221B100A009B1788 /* ExploreLocationCollectionViewCell.swift */; };
@@ -145,6 +146,7 @@
 		B157D4B022065B3900D83CDB /* UserProfileFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileFeedView.swift; sourceTree = "<group>"; };
 		B159E0DC22498DB700BCA83A /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		B159E0E0224F8BC800BCA83A /* NotificationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationQueue.swift; sourceTree = "<group>"; };
+		B159E0E422635DEA00BCA83A /* ClothingItemTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemTag.swift; sourceTree = "<group>"; };
 		B1701AF7221B0023009B1788 /* ExploreMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreMainView.swift; sourceTree = "<group>"; };
 		B1701AF9221B01E2009B1788 /* ExploreLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationsView.swift; sourceTree = "<group>"; };
 		B1701AFB221B100A009B1788 /* ExploreLocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				B1701B03221B9D6D009B1788 /* Place.swift */,
 				B174D0291E36D2A300218590 /* ClothingItem.swift */,
 				B174D02D1E36DE0B00218590 /* ClothingType.swift */,
+				B159E0E422635DEA00BCA83A /* ClothingItemTag.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -922,6 +925,7 @@
 				B1C81620220F960E00B35B43 /* ClothingItemTableView.swift in Sources */,
 				B1DC8198220F1FB50005278D /* ClosetDetailsTextView.swift in Sources */,
 				B1DC819B2210D24B0005278D /* ClothingItemTableCellDelegate.swift in Sources */,
+				B159E0E522635DEA00BCA83A /* ClothingItemTag.swift in Sources */,
 				B183EE19220BCE800065A9F1 /* LoginView.swift in Sources */,
 				B1701B31222FEDB9009B1788 /* BiometricAuthenticationHelper.swift in Sources */,
 				B1701B02221B2D81009B1788 /* ExploreLocationDetailsView.swift in Sources */,

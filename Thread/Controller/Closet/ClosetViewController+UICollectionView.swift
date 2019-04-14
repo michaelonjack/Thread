@@ -68,7 +68,7 @@ extension ClosetViewController: UICollectionViewDataSource {
             tagCell.label.text = ""
             
             if let clothingType = ClothingType(rawValue: currentItemIndex), let clothingItem = user?.clothingItems[clothingType] {
-                tagCell.label.text = clothingItem.tags[indexPath.row]
+                tagCell.label.text = clothingItem.tags[indexPath.row].name
             }
             
             return tagCell

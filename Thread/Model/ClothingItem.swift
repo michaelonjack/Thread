@@ -28,7 +28,7 @@ class ClothingItem {
     var smallItemImageUrl: URL?
     var itemImage: UIImage?
     var smallItemImage: UIImage?
-    var tags: [String] = []
+    var tags: [ClothingItemTag] = []
     
     init(snapshot: DataSnapshot, withIdAsKey: Bool = false) {
         let snapshotValue = snapshot.value as! [String: AnyObject]
@@ -41,7 +41,7 @@ class ClothingItem {
         let tagsSnapshot = snapshot.childSnapshot(forPath: "tags")
         for child in tagsSnapshot.children {
             let childSnapshot = child as! DataSnapshot
-            let tag = childSnapshot.value as? String ?? ""
+            let tag = ClothingItemTag(snapshot: childSnapshot)
             tags.append(tag)
         }
         
@@ -101,7 +101,7 @@ class ClothingItem {
         
         var tagsDict: [String:Any] = [:]
         for tag in tags {
-            tagsDict[UUID().uuidString] = tag
+            tagsDict[tag.id] = tag.toAnyObject()
         }
         
         var dict: [String:Any] = [

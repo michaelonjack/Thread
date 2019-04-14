@@ -57,7 +57,7 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
         editView.brandField.textField.text = clothingItem.brand
         editView.priceField.textField.text = clothingItem.price == nil ? "" : String(format: "%.2f", clothingItem.price!)
         editView.linkField.textField.text = clothingItem.itemUrl?.absoluteString
-        editView.tagsField.textField.text = clothingItem.tags.joined(separator: ",")
+        editView.tagsField.textField.text = clothingItem.tags.map { $0.name }.joined(separator: ",")
         editView.detailsField.text = clothingItem.details ?? ""
     }
     
@@ -113,11 +113,17 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
         clothingItem.name = editView.nameField.textField.text ?? ""
         clothingItem.brand = editView.brandField.textField.text ?? ""
         clothingItem.price = Double(editView.priceField.textField.text ?? "")
-        clothingItem.tags = editView.tagsField.textField.text?.components(separatedBy: ",") ?? []
-        clothingItem.tags = clothingItem.tags.filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+        clothingItem.tags = getClothingItemTags()
         
         if let urlStr = editView.linkField.textField.text {
             clothingItem.itemUrl = URL(string: urlStr)
         }
+    }
+    
+    fileprivate func getClothingItemTags() -> [ClothingItemTag] {
+        var tagNames:[String] = editView.tagsField.textField.text?.components(separatedBy: ",") ?? []
+        tagNames = tagNames.filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+        
+        return tagNames.map { ClothingItemTag(name: $0) }
     }
 }
