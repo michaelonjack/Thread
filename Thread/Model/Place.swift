@@ -55,7 +55,7 @@ class Place {
             return
         }
         
-        SDWebImageDownloader.shared().downloadImage(with: imageUrls[0], options: .init(rawValue: 0), progress: nil) { (image, _, error, _) in
+        SDWebImageDownloader.shared.downloadImage(with: imageUrls[0], options: .init(rawValue: 0), progress: nil) { (image, _, error, _) in
             if error != nil {
                 completion(nil)
                 return

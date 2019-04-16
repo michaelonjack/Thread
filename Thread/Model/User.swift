@@ -256,7 +256,7 @@ class User {
         }
         
         else if let imageUrl = profilePictureUrl {
-            SDWebImageDownloader.shared().downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
+            SDWebImageDownloader.shared.downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
                 
                 if error != nil {
                     completion(nil)
@@ -385,7 +385,7 @@ extension User: Equatable {
 
 
 extension User: Hashable {
-    var hashValue: Int {
-        return self.uid.hashValue
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.uid.hashValue)
     }
 }

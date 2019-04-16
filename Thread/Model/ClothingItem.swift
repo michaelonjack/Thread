@@ -144,7 +144,7 @@ class ClothingItem {
             }
             
             else if let imageUrl = smallItemImageUrl {
-                SDWebImageDownloader.shared().downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
+                SDWebImageDownloader.shared.downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
                     if error != nil {
                         completion(nil)
                         return
@@ -162,7 +162,7 @@ class ClothingItem {
             }
             
             else if let imageUrl = itemImageUrl {
-                SDWebImageDownloader.shared().downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
+                SDWebImageDownloader.shared.downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
                     if error != nil {
                         completion(nil)
                         return
@@ -189,7 +189,7 @@ extension ClothingItem: Equatable {
 
 
 extension ClothingItem: Hashable {
-    var hashValue: Int {
-        return self.id.hashValue
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id.hashValue)
     }
 }
