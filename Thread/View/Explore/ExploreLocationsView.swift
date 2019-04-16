@@ -48,6 +48,21 @@ class ExploreLocationsView: UIView {
             configuration.places = places
             self.places = places
             
+            for place in places {
+                
+                // Update the place's weather data if it's over 20 minutes since the last update
+                if place.minutesSinceLastUpdate > 20 {
+                    APIHelper.getCurrentWeather(for: place, completion: { (result) in
+                        switch result {
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        case .success(let weatherData):
+                            place.updateWeather(using: weatherData)
+                        }
+                    })
+                }
+            }
+            
             DispatchQueue.main.async {
                 self.locationsCollectionView.reloadData()
             }

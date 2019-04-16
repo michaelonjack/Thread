@@ -49,7 +49,7 @@ enum WeatherType {
             self = .rain(description: description)
         case 600...699:
             self = .snow(description: description)
-        case 801...899:
+        case 802...899:
             self = .clouds(description: description)
         default:
             self = .clear(description: description)

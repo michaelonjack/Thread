@@ -20,9 +20,19 @@ class Place {
     var temperature: Double
     var humidity: Double
     var windSpeed: Double
+    var lastUpdated: Date?
     var location: CLLocation?
     var image: UIImage?
     var imageUrls: [URL] = []
+    
+    var minutesSinceLastUpdate: Int {
+        guard let lastUpdated = lastUpdated else { return Int.max }
+        
+        let secondsSince = Int(Date().timeIntervalSince(lastUpdated))
+        let minutesSince = secondsSince / 60
+        
+        return minutesSince
+    }
     
     init(snapshot: DataSnapshot) {
         let snapshotValue = snapshot.value as! [String: AnyObject]
@@ -46,6 +56,12 @@ class Place {
             if let imageUrlStr = imageUrlSnapshot.value as? String, let imageUrl = URL(string: imageUrlStr) {
                 imageUrls.append(imageUrl)
             }
+        }
+        
+        if let lastUpdatedStr = snapshotValue["lastUpdated"] as? String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
+            self.lastUpdated = dateFormatter.date(from: lastUpdatedStr)
         }
     }
     
@@ -77,12 +93,16 @@ class Place {
         
         self.weather = WeatherType(openWeatherMapId: weatherTypeId, description: description)
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
+        
         let updatedValuesMap: [String:Any] = [
             "temperature": temperature,
             "humidity": humidity,
             "windSpeed": windSpeed,
             "weather": weather.name,
-            "weatherDescription": description
+            "weatherDescription": description,
+            "lastUpdated": dateFormatter.string(from: Date())
         ]
         
         let placeReference = Database.database().reference(withPath: "places/" + id)
