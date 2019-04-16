@@ -45,12 +45,16 @@ class ClothingItemSearchViewController: UIViewController, Storyboarded {
         
         let searchQuery = searchBar.searchBarView.textField.text ?? ""
         
-        APIHelper.searchShopStyle(query: searchQuery, limit: 30) { (items, error) in
-            if error != nil {
-                print(error.debugDescription)
-            }
+        APIHelper.searchShopStyle(query: searchQuery, limit: 30) { (result) in
             
-            self.searchResults = items.map { ClothingItem(shopStyleItem: $0, clothingType: self.clothingType) }
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+                self.searchResults = []
+                break
+            case .success(let items):
+                self.searchResults = items.map { ClothingItem(shopStyleItem: $0, clothingType: self.clothingType) }
+            }
             
             DispatchQueue.main.async {
                 self.resultsTable.reloadData()

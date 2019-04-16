@@ -78,6 +78,11 @@ struct OpenWeatherWindData: Decodable {
     let speed: Double
 }
 
+enum APIError: Error {
+    case invalidUrl
+    case noDataReturned
+}
+
 struct APIHelper {
     
     static func valueForAPIKey(keyname:String) -> String? {
@@ -90,7 +95,7 @@ struct APIHelper {
     
     
     
-    static func searchShopStyle(query: String, limit: Int = 40, completion: @escaping (([ShopStyleClothingItem], Error?) -> Void)) {
+    static func searchShopStyle(query: String, limit: Int = 40, completion: @escaping (Result<[ShopStyleClothingItem], Error>) -> Void) {
         
         guard let shopStyleAPIKey = valueForAPIKey(keyname: "ShopStyle") else { return }
         guard let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
@@ -103,61 +108,61 @@ struct APIHelper {
         if let url = URL(string: urlStr) {
             URLSession.shared.dataTask(with: url) { (data, response, error) in
                 
-                if error != nil {
-                    completion([ShopStyleClothingItem](), error)
+                if let error = error {
+                    completion(.failure(error))
                     return
                 }
                 
                 guard let data = data else {
-                    completion([ShopStyleClothingItem](), nil)
+                    completion(.failure(APIError.noDataReturned))
                     return
                 }
                 
                 do {
                     let jsonData = try JSONDecoder().decode(ShopStyleRoot.self, from: data)
-                    
-                    completion(jsonData.products, nil)
+                    completion(.success(jsonData.products))
                     
                 } catch let jsonError {
-                    completion([ShopStyleClothingItem](), jsonError)
+                    completion(.failure(jsonError))
                     return
                 }
             }.resume()
         } else {
-            completion([ShopStyleClothingItem](), nil)
+            completion(.failure(APIError.invalidUrl))
             return
         }
     }
     
     
     
-    static func getCurrentWeather(for place: Place, completion: @escaping ((OpenWeatherMapData?, Error?) -> Void)) {
+    static func getCurrentWeather(for place: Place, completion: @escaping (Result<OpenWeatherMapData, Error>) -> Void) {
         guard let openWeatherMapAPIKey = valueForAPIKey(keyname: "OpenWeatherMap") else { return }
         
         let urlStr = "https://api.openweathermap.org/data/2.5/weather?appid=" + openWeatherMapAPIKey + "&zip=" + place.zip + "&units=imperial"
         
         guard let url = URL(string: urlStr) else {
-            print("invalid url!!!!")
+            completion(.failure(APIError.invalidUrl))
             return
         }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if(error != nil) {
-                completion(nil, error)
+            if let error = error {
+                completion(.failure(error))
                 return
             }
             
             guard let data = data else {
-                print("data is nil")
+                completion(.failure(APIError.noDataReturned))
                 return
             }
             
             do {
                 let jsonData = try JSONDecoder().decode(OpenWeatherMapData.self, from: data)
-                completion(jsonData, nil)
+                completion(.success(jsonData))
                 return
             } catch let jsonError {
-                print(jsonError)
+                completion(.failure(jsonError))
+                return
             }
         }.resume()
     }
