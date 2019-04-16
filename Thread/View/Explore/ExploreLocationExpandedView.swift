@@ -144,8 +144,8 @@ class ExploreLocationExpandedView: UIView {
             
             UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: { [weak self] in
                 let viewHeight = self?.frame.height ?? 600
-                let blurLabelMaxY = self?.detailsView.blurbLabel.frame.maxY ?? viewHeight * 0.5
-                let translationY = blurLabelMaxY + viewHeight * 0.1
+                let weatherViewMaxY = self?.detailsView.weatherView.frame.maxY ?? viewHeight * 0.5
+                let translationY = weatherViewMaxY + viewHeight * 0.05
                 
                 self?.detailsView.transform = CGAffineTransform(translationX: 0, y: -translationY)
                 self?.locationImageView.transform = CGAffineTransform(translationX: 0, y: -translationY / 2)

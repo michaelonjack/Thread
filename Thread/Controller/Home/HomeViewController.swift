@@ -32,6 +32,7 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         updateUserLocation()
         
         setupTabbedPageView()
+        setupExploreView()
         setupAroundMeView()
         setupHomeView()
     }
@@ -49,6 +50,10 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         tabbedPageView.delegate = self
         tabbedPageView.dataSource = self
         tabbedPageView.reloadData()
+    }
+    
+    fileprivate func setupExploreView() {
+        
     }
     
     fileprivate func setupAroundMeView() {

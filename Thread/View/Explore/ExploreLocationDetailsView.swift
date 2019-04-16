@@ -29,14 +29,11 @@ class ExploreLocationDetailsView: UIView {
         return l
     }()
     
-    var blurbLabel: UILabel = {
-        let l = UILabel()
-        l.translatesAutoresizingMaskIntoConstraints = false
-        l.adjustsFontSizeToFitWidth = true
-        l.numberOfLines = 0
-        l.font = UIFont(name: "AvenirNext-Regular", size: 15.0)
+    var weatherView: ExploreLocationWeatherView = {
+        let wv = ExploreLocationWeatherView()
+        wv.translatesAutoresizingMaskIntoConstraints = false
         
-        return l
+        return wv
     }()
     
     var itemsLabel: UILabel = {
@@ -84,7 +81,7 @@ class ExploreLocationDetailsView: UIView {
         
         layer.cornerRadius = frame.height / 20.0
         minimumYTranslation = frame.height - itemsCollectionView.frame.maxY
-        maximumYTranslation = frame.height - (blurbLabel.frame.maxY + frame.height * 0.1)
+        maximumYTranslation = frame.height - (weatherView.frame.maxY + frame.height * 0.05)
     }
     
     fileprivate func setupView() {
@@ -97,7 +94,7 @@ class ExploreLocationDetailsView: UIView {
         
         addSubview(pullIndicator)
         addSubview(nameLabel)
-        addSubview(blurbLabel)
+        addSubview(weatherView)
         addSubview(itemsLabel)
         addSubview(itemsCollectionView)
         
@@ -115,18 +112,18 @@ class ExploreLocationDetailsView: UIView {
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             nameLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
             
-            blurbLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 16),
-            blurbLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            blurbLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            blurbLabel.heightAnchor.constraint(lessThanOrEqualTo: heightAnchor, multiplier: 0.18),
+            weatherView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 0),
+            weatherView.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            weatherView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            weatherView.heightAnchor.constraint(lessThanOrEqualTo: heightAnchor, multiplier: 0.28),
             
-            itemsLabel.topAnchor.constraint(equalTo: blurbLabel.bottomAnchor, constant: 32),
+            itemsLabel.topAnchor.constraint(equalTo: weatherView.bottomAnchor, constant: 16),
             itemsLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            itemsLabel.trailingAnchor.constraint(equalTo: blurbLabel.trailingAnchor),
+            itemsLabel.trailingAnchor.constraint(equalTo: weatherView.trailingAnchor),
             
             itemsCollectionView.topAnchor.constraint(equalTo: itemsLabel.bottomAnchor, constant: 16),
             itemsCollectionView.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            itemsCollectionView.trailingAnchor.constraint(equalTo: blurbLabel.trailingAnchor),
+            itemsCollectionView.trailingAnchor.constraint(equalTo: weatherView.trailingAnchor),
             itemsCollectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.40)
         ])
     }

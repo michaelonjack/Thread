@@ -14,6 +14,8 @@
 		B1182E5A2234BF43005DB4DB /* ClosetViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1182E592234BF43005DB4DB /* ClosetViewController+UICollectionView.swift */; };
 		B1182E5C2234C251005DB4DB /* ClosetTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1182E5B2234C251005DB4DB /* ClosetTagCollectionViewCell.swift */; };
 		B11CBD502205CFB200D6620B /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11CBD4F2205CFB200D6620B /* UIColor+Additions.swift */; };
+		B1369CEC22652B9A0074CBFD /* ExploreLocationWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1369CEB22652B9A0074CBFD /* ExploreLocationWeatherView.swift */; };
+		B1369CEE226564480074CBFD /* ExploreLocationWeatherItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1369CED226564480074CBFD /* ExploreLocationWeatherItemView.swift */; };
 		B1377C57220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1377C56220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift */; };
 		B157D4A12205E1BC00D83CDB /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157D4A02205E1BC00D83CDB /* Configuration.swift */; };
 		B157D4A42206147D00D83CDB /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B157D4A32206147D00D83CDB /* UserProfileViewController.swift */; };
@@ -24,6 +26,7 @@
 		B159E0DD22498DB700BCA83A /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B159E0DC22498DB700BCA83A /* NotificationView.swift */; };
 		B159E0E1224F8BC800BCA83A /* NotificationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B159E0E0224F8BC800BCA83A /* NotificationQueue.swift */; };
 		B159E0E522635DEA00BCA83A /* ClothingItemTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B159E0E422635DEA00BCA83A /* ClothingItemTag.swift */; };
+		B159E0E72263D30A00BCA83A /* WeatherType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B159E0E62263D30A00BCA83A /* WeatherType.swift */; };
 		B1701AF8221B0023009B1788 /* ExploreMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AF7221B0023009B1788 /* ExploreMainView.swift */; };
 		B1701AFA221B01E2009B1788 /* ExploreLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AF9221B01E2009B1788 /* ExploreLocationsView.swift */; };
 		B1701AFC221B100A009B1788 /* ExploreLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AFB221B100A009B1788 /* ExploreLocationCollectionViewCell.swift */; };
@@ -136,6 +139,8 @@
 		B1182E5B2234C251005DB4DB /* ClosetTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		B11CBD462205CD8C00D6620B /* Thread.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Thread.entitlements; sourceTree = "<group>"; };
 		B11CBD4F2205CFB200D6620B /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
+		B1369CEB22652B9A0074CBFD /* ExploreLocationWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationWeatherView.swift; sourceTree = "<group>"; };
+		B1369CED226564480074CBFD /* ExploreLocationWeatherItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationWeatherItemView.swift; sourceTree = "<group>"; };
 		B1377C56220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetUpdateOptionsViewController.swift; sourceTree = "<group>"; };
 		B157D49F2205E18100D83CDB /* Thread-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Thread-Bridging-Header.h"; sourceTree = "<group>"; };
 		B157D4A02205E1BC00D83CDB /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
@@ -147,6 +152,7 @@
 		B159E0DC22498DB700BCA83A /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		B159E0E0224F8BC800BCA83A /* NotificationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationQueue.swift; sourceTree = "<group>"; };
 		B159E0E422635DEA00BCA83A /* ClothingItemTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemTag.swift; sourceTree = "<group>"; };
+		B159E0E62263D30A00BCA83A /* WeatherType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherType.swift; sourceTree = "<group>"; };
 		B1701AF7221B0023009B1788 /* ExploreMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreMainView.swift; sourceTree = "<group>"; };
 		B1701AF9221B01E2009B1788 /* ExploreLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationsView.swift; sourceTree = "<group>"; };
 		B1701AFB221B100A009B1788 /* ExploreLocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -308,8 +314,9 @@
 				B18430851E33B03A00EED632 /* User.swift */,
 				B1701B03221B9D6D009B1788 /* Place.swift */,
 				B174D0291E36D2A300218590 /* ClothingItem.swift */,
-				B174D02D1E36DE0B00218590 /* ClothingType.swift */,
 				B159E0E422635DEA00BCA83A /* ClothingItemTag.swift */,
+				B174D02D1E36DE0B00218590 /* ClothingType.swift */,
+				B159E0E62263D30A00BCA83A /* WeatherType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -399,6 +406,8 @@
 				B1701AF9221B01E2009B1788 /* ExploreLocationsView.swift */,
 				B1701AFF221B1D5A009B1788 /* ExploreLocationExpandedView.swift */,
 				B1701B01221B2D81009B1788 /* ExploreLocationDetailsView.swift */,
+				B1369CEB22652B9A0074CBFD /* ExploreLocationWeatherView.swift */,
+				B1369CED226564480074CBFD /* ExploreLocationWeatherItemView.swift */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -676,7 +685,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Michael Onjack";
 				TargetAttributes = {
 					B1C96A8A1E2C66730036E559 = {
@@ -711,7 +720,7 @@
 			};
 			buildConfigurationList = B1C96A861E2C66730036E559 /* Build configuration list for PBXProject "Thread" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -906,10 +915,12 @@
 				B1701B132220C522009B1788 /* SettingsViewController.swift in Sources */,
 				B1DC82252215E6E20005278D /* UserTableViewCell.swift in Sources */,
 				B1C81622220F96CE00B35B43 /* ClothingItemTableViewCell.swift in Sources */,
+				B1369CEC22652B9A0074CBFD /* ExploreLocationWeatherView.swift in Sources */,
 				B1C8161A220F836600B35B43 /* ClothingItemSearchViewController.swift in Sources */,
 				B157D4A722061F0300D83CDB /* ImageCollectionViewCell.swift in Sources */,
 				B157D4A12205E1BC00D83CDB /* Configuration.swift in Sources */,
 				B1701B11221F8A5D009B1788 /* UserMapAnnotationDelegate.swift in Sources */,
+				B1369CEE226564480074CBFD /* ExploreLocationWeatherItemView.swift in Sources */,
 				B1DB7EF222071A2C00F3C4D9 /* ClosetViewController.swift in Sources */,
 				B1F7596122073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift in Sources */,
 				B1701AF8221B0023009B1788 /* ExploreMainView.swift in Sources */,
@@ -929,6 +940,7 @@
 				B183EE19220BCE800065A9F1 /* LoginView.swift in Sources */,
 				B1701B31222FEDB9009B1788 /* BiometricAuthenticationHelper.swift in Sources */,
 				B1701B02221B2D81009B1788 /* ExploreLocationDetailsView.swift in Sources */,
+				B159E0E72263D30A00BCA83A /* WeatherType.swift in Sources */,
 				B1701B242222DA59009B1788 /* SettingsPolicyViewController.swift in Sources */,
 				B157D4A42206147D00D83CDB /* UserProfileViewController.swift in Sources */,
 				B183EE152207A8A90065A9F1 /* ClosetDetailsView.swift in Sources */,
@@ -1004,6 +1016,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1062,6 +1075,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

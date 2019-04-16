@@ -84,7 +84,12 @@ extension ExploreLocationsView: UICollectionViewDelegate {
         locationExpandedView.translatesAutoresizingMaskIntoConstraints = false
         locationExpandedView.locationImageView.image = selectedCell.imageView.image
         locationExpandedView.detailsView.nameLabel.text = location.name
-        locationExpandedView.detailsView.blurbLabel.text = location.blurb
+        
+        locationExpandedView.detailsView.weatherView.weatherImageView.image = location.weather.image
+        locationExpandedView.detailsView.weatherView.weatherDescriptionLabel.text = location.weather.description
+        locationExpandedView.detailsView.weatherView.temperatureView.itemLabel.text = "Temperature:\n" + String(location.temperature) + "° F"
+        locationExpandedView.detailsView.weatherView.humidityView.itemLabel.text = "Humidity:\n" + String(location.humidity) + "%"
+        locationExpandedView.detailsView.weatherView.windSpeedView.itemLabel.text = "Wind Speed:\n" + String(location.windSpeed) + " mph"
         
         rootView.addSubview(locationExpandedView)
         locationExpandedView.animateOpening()
