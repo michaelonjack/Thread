@@ -43,21 +43,21 @@ class ExploreLocationWeatherView: UIView {
     
     var temperatureView: ExploreLocationWeatherItemView = {
         let v = ExploreLocationWeatherItemView()
-        v.itemImageView.image = UIImage(named: "Thermometer")
+        v.itemImageView.image = UIImage(named: "Weather_Thermometer")
         
         return v
     }()
     
     var humidityView: ExploreLocationWeatherItemView = {
         let v = ExploreLocationWeatherItemView()
-        v.itemImageView.image = UIImage(named: "Humidity")
+        v.itemImageView.image = UIImage(named: "Weather_Humidity")
         
         return v
     }()
     
     var windSpeedView: ExploreLocationWeatherItemView = {
         let v = ExploreLocationWeatherItemView()
-        v.itemImageView.image = UIImage(named: "Wind")
+        v.itemImageView.image = UIImage(named: "Weather_Wind")
         
         return v
     }()
@@ -95,7 +95,7 @@ class ExploreLocationWeatherView: UIView {
             weatherImageView.widthAnchor.constraint(equalTo: weatherImageView.heightAnchor),
             
             weatherDescriptionLabel.centerYAnchor.constraint(equalTo: weatherImageView.centerYAnchor),
-            weatherDescriptionLabel.leadingAnchor.constraint(equalTo: weatherImageView.trailingAnchor, constant: 16),
+            weatherDescriptionLabel.leadingAnchor.constraint(equalTo: weatherImageView.trailingAnchor, constant: 32),
             weatherDescriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             
             weatherDetailsStackView.topAnchor.constraint(equalTo: weatherImageView.bottomAnchor, constant: 16),

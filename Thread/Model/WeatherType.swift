@@ -15,7 +15,7 @@ enum WeatherType {
     case rain(description: String)
     case snow(description: String)
     case thunder(description: String)
-    case wind(description: String)
+    case other(description: String)
     
     init(name: String, description: String) {
         switch name {
@@ -31,8 +31,8 @@ enum WeatherType {
             self = .snow(description: description)
         case WeatherType.thunder(description: "").name:
             self = .thunder(description: description)
-        case WeatherType.wind(description: "").name:
-            self = .wind(description: description)
+        case WeatherType.other(description: "").name:
+            self = .other(description: description)
         default:
             self = .clear(description: "")
         }
@@ -49,6 +49,8 @@ enum WeatherType {
             self = .rain(description: description)
         case 600...699:
             self = .snow(description: description)
+        case 700...799:
+            self = .other(description: description)
         case 802...899:
             self = .clouds(description: description)
         default:
@@ -70,8 +72,8 @@ enum WeatherType {
             return "Snowing"
         case .thunder:
             return "Thunderstorms"
-        case .wind:
-            return "Windy"
+        case .other:
+            return "Other"
         }
     }
     
@@ -89,7 +91,7 @@ enum WeatherType {
             return description
         case .thunder(let description):
             return description
-        case .wind(let description):
+        case .other(let description):
             return description
         }
     }
@@ -97,19 +99,19 @@ enum WeatherType {
     var image: UIImage? {
         switch self {
         case .clear:
-            return UIImage(named: "Sun")
+            return UIImage(named: "Weather_Sun")
         case .clouds:
-            return UIImage(named: "Clouds")
+            return UIImage(named: "Weather_Clouds")
         case .drizzle:
-            return UIImage(named: "Drizzle")
+            return UIImage(named: "Weather_Drizzle")
         case .rain:
-            return UIImage(named: "Rain")
+            return UIImage(named: "Weather_Rain")
         case .snow:
-            return UIImage(named: "Snow")
+            return UIImage(named: "Weather_Snow")
         case .thunder:
-            return UIImage(named: "Thunder")
-        case .wind:
-            return UIImage(named: "Wind")
+            return UIImage(named: "Weather_Thunder")
+        case .other:
+            return UIImage(named: "Weather_Fog")
         }
     }
 }
