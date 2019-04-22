@@ -273,11 +273,11 @@ class User {
         }
     }
     
-    func getDistanceFrom(user: User) -> CLLocationDistance? {
-        guard let otherUserLocation = user.location else { return nil }
-        guard let userLocation = location else { return nil }
+    func getDistanceFrom(location: CLLocation?) -> CLLocationDistance? {
+        guard let otherLocation = location else { return nil }
+        guard let userLocation = self.location else { return nil }
         
-        return userLocation.distance(from: otherUserLocation)
+        return userLocation.distance(from: otherLocation)
     }
     
     func follow(userId: String) {

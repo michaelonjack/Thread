@@ -13,7 +13,10 @@ import FirebaseDatabase
 final class Configuration {
     private static let sharedConfiguration: Configuration = Configuration()
     
+    // The maximum number of meters away from the current user another user can be in order to show on the map
     var maximumUserDistance: Double
+    // The maximum number of meters away from a place another user can be in order to show in the Nearby Items section
+    var maximumItemDistance: Double
     var currentUser: User?
     var places: [Place] = []
     var userCache: [String:User] = [:]
@@ -21,6 +24,7 @@ final class Configuration {
     private init() {
         // Check for cached values
         maximumUserDistance = UserDefaults.standard.value(forKey: "maxUserDistance") as? Double ?? 0
+        maximumItemDistance = UserDefaults.standard.value(forKey: "maxItemDistance") as? Double ?? 0
         
         Auth.auth().addStateDidChangeListener { (auth, newUser) in
             // Set the current user
@@ -36,12 +40,15 @@ final class Configuration {
         configurationReference.keepSynced(true)
         configurationReference.observeSingleEvent(of: .value) { (snapshot) in
             if let configDict = snapshot.value as? [String:AnyObject] {
-                let maxDistance = configDict["maxUserDistance"] as? Double ?? 0
+                let maxUserDistance = configDict["maxUserDistance"] as? Double ?? 0
+                let maxItemDistance = configDict["maxItemDistance"] as? Double ?? 0
                 
-                self.maximumUserDistance = maxDistance
+                self.maximumUserDistance = maxUserDistance
+                self.maximumItemDistance = maxItemDistance
                 
                 // Cache basic properties
-                UserDefaults.standard.setValue(maxDistance, forKey: "maxUserDistance")
+                UserDefaults.standard.setValue(maxUserDistance, forKey: "maxUserDistance")
+                UserDefaults.standard.setValue(maxItemDistance, forKey: "maxItemDistance")
             }
         }
     }

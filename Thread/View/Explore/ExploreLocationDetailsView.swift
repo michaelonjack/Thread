@@ -63,6 +63,8 @@ class ExploreLocationDetailsView: UIView {
         return cv
     }()
     
+    var nearbyItems: [(User, ClothingItem)] = []
+    
     var minimumYTranslation: CGFloat!
     var maximumYTranslation: CGFloat!
     
@@ -87,6 +89,8 @@ class ExploreLocationDetailsView: UIView {
     fileprivate func setupView() {
         backgroundColor = .white
         clipsToBounds = true
+        
+        nearbyItems.shuffle()
         
         addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
         itemsCollectionView.delegate = self
@@ -172,17 +176,32 @@ extension ExploreLocationDetailsView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath)
         
-        switch indexPath.row % 4 {
-        case 0:
-            cell.backgroundColor = .blue
-        case 1:
-            cell.backgroundColor = .red
-        case 2:
-            cell.backgroundColor = .yellow
-        case 3:
-            cell.backgroundColor = .green
-        default:
-            break
+        guard let imageCell = cell as? ImageCollectionViewCell else { return cell }
+        
+        imageCell.imageView.contentMode = .scaleAspectFit
+        imageCell.imageView.image = nil
+        
+        if indexPath.row < nearbyItems.count {
+            let item = nearbyItems[indexPath.row]
+            item.1.getImage(ofPreferredSize: .small) { (itemImage) in
+                imageCell.backgroundColor = .white
+                imageCell.imageView.image = itemImage
+            }
+        }
+        
+        else {
+            switch indexPath.row % 4 {
+            case 0:
+                cell.backgroundColor = .ultraLightBlue
+            case 1:
+                cell.backgroundColor = .ultraLightRed
+            case 2:
+                cell.backgroundColor = .cream
+            case 3:
+                cell.backgroundColor = .ultraLightGreen
+            default:
+                break
+            }
         }
         
         return cell

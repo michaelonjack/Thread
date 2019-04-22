@@ -54,6 +54,31 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
     
     fileprivate func setupExploreView() {
         
+        exploreView.locationsCollectionView.delegate = self
+        exploreView.locationsCollectionView.dataSource = self
+        
+        getPlaces { (places) in
+            configuration.places = places
+            
+            for place in places {
+                
+                // Update the place's weather data if it's been over 20 minutes since the last update
+                if place.minutesSinceLastUpdate > 20 {
+                    APIHelper.getCurrentWeather(for: place, completion: { (result) in
+                        switch result {
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        case .success(let weatherData):
+                            place.updateWeather(using: weatherData)
+                        }
+                    })
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.exploreView.locationsCollectionView.reloadData()
+            }
+        }
     }
     
     fileprivate func setupAroundMeView() {
@@ -192,7 +217,7 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
                     }
                     
                     // Make sure the user is close enough to the current user to show
-                    if let distance = currentUser.getDistanceFrom(user: user), let _ = user.lastCheckIn {
+                    if let distance = currentUser.getDistanceFrom(location: user.location), let _ = user.lastCheckIn {
                         if distance <= configuration.maximumUserDistance {
                             let userAnnotation = UserMapAnnotation(user: user)
                             self.aroundMeView.mapView.addAnnotation(userAnnotation)

@@ -28,7 +28,6 @@
 		B159E0E522635DEA00BCA83A /* ClothingItemTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B159E0E422635DEA00BCA83A /* ClothingItemTag.swift */; };
 		B159E0E72263D30A00BCA83A /* WeatherType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B159E0E62263D30A00BCA83A /* WeatherType.swift */; };
 		B1701AF8221B0023009B1788 /* ExploreMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AF7221B0023009B1788 /* ExploreMainView.swift */; };
-		B1701AFA221B01E2009B1788 /* ExploreLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AF9221B01E2009B1788 /* ExploreLocationsView.swift */; };
 		B1701AFC221B100A009B1788 /* ExploreLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AFB221B100A009B1788 /* ExploreLocationCollectionViewCell.swift */; };
 		B1701B00221B1D5A009B1788 /* ExploreLocationExpandedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701AFF221B1D5A009B1788 /* ExploreLocationExpandedView.swift */; };
 		B1701B02221B2D81009B1788 /* ExploreLocationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1701B01221B2D81009B1788 /* ExploreLocationDetailsView.swift */; };
@@ -154,7 +153,6 @@
 		B159E0E422635DEA00BCA83A /* ClothingItemTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItemTag.swift; sourceTree = "<group>"; };
 		B159E0E62263D30A00BCA83A /* WeatherType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherType.swift; sourceTree = "<group>"; };
 		B1701AF7221B0023009B1788 /* ExploreMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreMainView.swift; sourceTree = "<group>"; };
-		B1701AF9221B01E2009B1788 /* ExploreLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationsView.swift; sourceTree = "<group>"; };
 		B1701AFB221B100A009B1788 /* ExploreLocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1701AFF221B1D5A009B1788 /* ExploreLocationExpandedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationExpandedView.swift; sourceTree = "<group>"; };
 		B1701B01221B2D81009B1788 /* ExploreLocationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationDetailsView.swift; sourceTree = "<group>"; };
@@ -403,7 +401,6 @@
 			isa = PBXGroup;
 			children = (
 				B1701AF7221B0023009B1788 /* ExploreMainView.swift */,
-				B1701AF9221B01E2009B1788 /* ExploreLocationsView.swift */,
 				B1701AFF221B1D5A009B1788 /* ExploreLocationExpandedView.swift */,
 				B1701B01221B2D81009B1788 /* ExploreLocationDetailsView.swift */,
 				B1369CEB22652B9A0074CBFD /* ExploreLocationWeatherView.swift */,
@@ -957,7 +954,6 @@
 				B11CBD502205CFB200D6620B /* UIColor+Additions.swift in Sources */,
 				B1FE821F22093C32006AFD43 /* Storyboarded.swift in Sources */,
 				B1377C57220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift in Sources */,
-				B1701AFA221B01E2009B1788 /* ExploreLocationsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,11 +17,19 @@ class ExploreMainView: UIView {
         return searchView
     }()
     
-    var locationsView: ExploreLocationsView = {
-        let locationsView = ExploreLocationsView(frame: .zero)
-        locationsView.translatesAutoresizingMaskIntoConstraints = false
+    var locationsCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        flowLayout.minimumLineSpacing = 10
         
-        return locationsView
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.showsVerticalScrollIndicator = false
+        cv.isPagingEnabled = false
+        cv.backgroundColor = .clear
+        cv.register(ExploreLocationCollectionViewCell.self, forCellWithReuseIdentifier: "LocationCell")
+        
+        return cv
     }()
     
     override init(frame: CGRect) {
@@ -41,7 +49,7 @@ class ExploreMainView: UIView {
         zipCodeSearchBarView.searchBarView.textField.placeholder = "search zip code"
         
         addSubview(zipCodeSearchBarView)
-        addSubview(locationsView)
+        addSubview(locationsCollectionView)
         
         setupLayout()
         
@@ -54,10 +62,10 @@ class ExploreMainView: UIView {
             zipCodeSearchBarView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             zipCodeSearchBarView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
             
-            locationsView.topAnchor.constraint(equalTo: zipCodeSearchBarView.bottomAnchor),
-            locationsView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            locationsView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            locationsView.trailingAnchor.constraint(equalTo: trailingAnchor)
+            locationsCollectionView.topAnchor.constraint(equalTo: zipCodeSearchBarView.bottomAnchor),
+            locationsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            locationsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            locationsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
 }

@@ -20,10 +20,11 @@ class Place {
     var temperature: Double
     var humidity: Double
     var windSpeed: Double
+    var location: CLLocation
     var lastUpdated: Date?
-    var location: CLLocation?
     var image: UIImage?
     var imageUrls: [URL] = []
+    var nearbyItems: [(User, ClothingItem)] = []
     
     var minutesSinceLastUpdate: Int {
         guard let lastUpdated = lastUpdated else { return Int.max }
@@ -45,6 +46,10 @@ class Place {
         humidity = snapshotValue["humidity"] as? Double ?? 0.0
         windSpeed = snapshotValue["windSpeed"] as? Double ?? 0.0
         
+        let latitude = snapshotValue["latitude"] as? Double ?? 0.0
+        let longitude = snapshotValue["longitude"] as? Double ?? 0.0
+        location = CLLocation(latitude: latitude, longitude: longitude)
+        
         let weatherType: String = snapshotValue["weather"] as? String ?? ""
         let weatherDescription = snapshotValue["weatherDescription"] as? String ?? ""
         
@@ -63,6 +68,8 @@ class Place {
             dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
             self.lastUpdated = dateFormatter.date(from: lastUpdatedStr)
         }
+        
+        getNearbyItems()
     }
     
     func getImage(completion: @escaping (UIImage?) -> Void) {
@@ -107,5 +114,46 @@ class Place {
         
         let placeReference = Database.database().reference(withPath: "places/" + id)
         placeReference.updateChildValues( updatedValuesMap )
+    }
+    
+    func getNearbyItems() {
+        
+        let usersReference = Database.database().reference(withPath: "users")
+        usersReference.keepSynced(true)
+        usersReference.observeSingleEvent(of: .value) { (snapshot) in
+            for child in snapshot.children {
+                if let childSnapshot = child as? DataSnapshot {
+                    
+                    var user: User!
+                    if let cachedUser = configuration.userCache[childSnapshot.key] {
+                        user = cachedUser
+                    } else {
+                        user = User(snapshot: childSnapshot)
+                    }
+                    
+                    // Make sure the user is close enough to the current place to display
+                    if let distance = user.getDistanceFrom(location: self.location) {
+                        if distance <= configuration.maximumItemDistance {
+                            
+                            if let top = user.clothingItems[.top] {
+                                self.nearbyItems.append( (user, top) )
+                            }
+                            
+                            if let bottom = user.clothingItems[.bottom] {
+                                self.nearbyItems.append( (user, bottom) )
+                            }
+                            
+                            if let shoes = user.clothingItems[.shoes] {
+                                self.nearbyItems.append( (user, shoes) )
+                            }
+                            
+                            if let accessories = user.clothingItems[.accessories] {
+                                self.nearbyItems.append( (user, accessories) )
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
