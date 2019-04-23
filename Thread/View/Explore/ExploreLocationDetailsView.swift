@@ -90,8 +90,6 @@ class ExploreLocationDetailsView: UIView {
         backgroundColor = .white
         clipsToBounds = true
         
-        nearbyItems.shuffle()
-        
         addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
         itemsCollectionView.delegate = self
         itemsCollectionView.dataSource = self
@@ -163,7 +161,15 @@ class ExploreLocationDetailsView: UIView {
 
 
 extension ExploreLocationDetailsView: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedItem = nearbyItems[indexPath.row].1
+        
+        if let itemUrl = selectedItem.itemUrl {
+            if UIApplication.shared.canOpenURL(itemUrl) {
+                UIApplication.shared.open(itemUrl, options: [:])
+            }
+        }
+    }
 }
 
 
