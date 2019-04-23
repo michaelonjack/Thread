@@ -30,7 +30,7 @@ extension HomeViewController: UICollectionViewDelegate {
             let location = configuration.places[indexPath.row]
             let locationExpandedView = ExploreLocationExpandedView(frame: frameInRootView)
             locationExpandedView.translatesAutoresizingMaskIntoConstraints = false
-            locationExpandedView.detailsView.nearbyItems = location.nearbyItems
+            locationExpandedView.detailsView.nearbyItems = location.nearbyItems.filter { $0.1.itemImageUrl != nil || $0.1.smallItemImageUrl != nil }
             locationExpandedView.locationImageView.image = selectedCell.imageView.image
             locationExpandedView.detailsView.nameLabel.text = location.name
             
