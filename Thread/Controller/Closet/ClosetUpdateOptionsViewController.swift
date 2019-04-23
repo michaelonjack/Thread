@@ -49,9 +49,20 @@ class ClosetUpdateOptionsViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func chooseDeleteOption(_ sender: Any) {
-        guard let item = existingItem else { return }
-        coordinator?.removeClosetItem(ofType: item.type)
-        self.dismiss(animated: true, completion: nil)
+        
+        let deleteConfirmationAlert = UIAlertController(title: "Confirm", message: "Are you sure you want to remove this item from your closet?", preferredStyle: .alert)
+        
+        let deleteAction = UIAlertAction(title: "Remove", style: .destructive) { [weak self] (_) in
+            guard let item = self?.existingItem else { return }
+            self?.coordinator?.removeClosetItem(ofType: item.type)
+            self?.dismiss(animated: true, completion: nil)
+        }
+        deleteConfirmationAlert.addAction(deleteAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        deleteConfirmationAlert.addAction(cancelAction)
+        
+        self.present(deleteConfirmationAlert, animated: true, completion: nil)
     }
     
     @IBAction func chooseEditOption(_ sender: Any) {
