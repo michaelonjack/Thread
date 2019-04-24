@@ -15,7 +15,6 @@ class Place {
     let id: String
     let name: String
     let blurb: String
-    let zip: String
     var weather: WeatherType
     var temperature: Double
     var humidity: Double
@@ -41,7 +40,6 @@ class Place {
         id = snapshot.key
         name = snapshotValue["name"] as? String ?? ""
         blurb = snapshotValue["blurb"] as? String ?? ""
-        zip = snapshotValue["zip"] as? String ?? ""
         temperature = snapshotValue["temperature"] as? Double ?? 0.0
         humidity = snapshotValue["humidity"] as? Double ?? 0.0
         windSpeed = snapshotValue["windSpeed"] as? Double ?? 0.0

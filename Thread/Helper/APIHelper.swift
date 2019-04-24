@@ -138,7 +138,7 @@ struct APIHelper {
     static func getCurrentWeather(for place: Place, completion: @escaping (Result<OpenWeatherMapData, Error>) -> Void) {
         guard let openWeatherMapAPIKey = valueForAPIKey(keyname: "OpenWeatherMap") else { return }
         
-        let urlStr = "https://api.openweathermap.org/data/2.5/weather?appid=" + openWeatherMapAPIKey + "&zip=" + place.zip + "&units=imperial"
+        let urlStr = "https://api.openweathermap.org/data/2.5/weather?appid=" + openWeatherMapAPIKey + "&lat=" + String(place.location.coordinate.latitude) + "&lon=" + String(place.location.coordinate.longitude) + "&units=imperial"
         
         guard let url = URL(string: urlStr) else {
             completion(.failure(APIError.invalidUrl))
