@@ -206,19 +206,25 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         let usersReference = Database.database().reference(withPath: "users")
         usersReference.keepSynced(true)
         usersReference.observeSingleEvent(of: .value) { (snapshot) in
+            
             for child in snapshot.children {
+                
                 if let childSnapshot = child as? DataSnapshot {
-                    
                     var user: User!
+                    
                     if let cachedUser = configuration.userCache[childSnapshot.key] {
                         user = cachedUser
                     } else {
                         user = User(snapshot: childSnapshot)
                     }
                     
-                    // Make sure the user is close enough to the current user to show
                     if let distance = currentUser.getDistanceFrom(location: user.location), let _ = user.lastCheckIn {
-                        if distance <= configuration.maximumUserDistance {
+                        
+                        // Make sure the user is close enough to the current user to show
+                        // and make sure the user isn't blocked or blocking this user
+                        if distance <= configuration.maximumUserDistance
+                            && !currentUser.blockedByUserIds.contains(user.uid)
+                            && !currentUser.blockedUserIds.contains(user.uid) {
                             let userAnnotation = UserMapAnnotation(user: user)
                             self.aroundMeView.mapView.addAnnotation(userAnnotation)
                         }
