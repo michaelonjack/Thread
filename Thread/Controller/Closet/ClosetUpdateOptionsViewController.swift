@@ -81,7 +81,7 @@ class ClosetUpdateOptionsViewController: UIViewController, Storyboarded {
             var ypConfig = YPImagePickerConfiguration()
             ypConfig.onlySquareImagesFromCamera = false
             ypConfig.library.onlySquare = false
-            ypConfig.showsFilters = true
+            ypConfig.showsPhotoFilters = true
             ypConfig.library.mediaType = .photo
             ypConfig.usesFrontCamera = false
             ypConfig.shouldSaveNewPicturesToAlbum = false

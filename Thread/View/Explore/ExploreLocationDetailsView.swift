@@ -41,7 +41,7 @@ class ExploreLocationDetailsView: UIView {
         l.translatesAutoresizingMaskIntoConstraints = false
         l.adjustsFontSizeToFitWidth = true
         l.font = UIFont(name: "AvenirNext-Medium", size: 25.0)
-        l.text = "Items in this Area"
+        l.text = "Items in this area"
         l.alpha = 0
         
         return l
