@@ -13,7 +13,7 @@ class UserProfileFeedView: UIView {
     var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.init(name: "AvenirNext-Medium", size: 16.0)
+        label.font = UIFont.init(name: "AvenirNext-Medium", size: 18.0)
         label.textColor = .black
         label.textAlignment = .left
         label.text = "Closet"

@@ -64,6 +64,8 @@ class UnderlinedTextFieldView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        textField.delegate = self
+        
         setupView()
     }
     

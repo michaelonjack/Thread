@@ -21,6 +21,7 @@ class UserProfileViewController: UIViewController, Storyboarded {
     @IBOutlet weak var profilePictureButtonShadowView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var statusTextField: UITextField!
     @IBOutlet weak var followButton: CollapsibleButton!
     @IBOutlet weak var blockButton: CollapsibleButton!
     
@@ -29,6 +30,8 @@ class UserProfileViewController: UIViewController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        statusTextField.delegate = self
         
         userFeedView.feedCollectionView.delegate = self
         userFeedView.feedCollectionView.dataSource = self
@@ -42,6 +45,13 @@ class UserProfileViewController: UIViewController, Storyboarded {
     fileprivate func setupView() {
         
         userFeedView.viewButton.addTarget(self, action: #selector(viewPressed), for: .touchUpInside)
+        
+        // If the current user is viewing their own profile, allow them to update their status
+        if userId == configuration.currentUser?.uid {
+            subtitleLabel.isHidden = true
+        } else {
+            statusTextField.isHidden = true
+        }
         
         setupProfilePictureButton()
         setupFollowButton()
@@ -120,7 +130,6 @@ class UserProfileViewController: UIViewController, Storyboarded {
             self.userStatisticsView.favoritesCount = user.favoritedItems.count
             self.userStatisticsView.followingCount = user.followingUserIds.count
             self.userStatisticsView.followersCount = user.followerUserIds.count
-            self.userSummaryView.status = user.status ?? ""
             self.userSummaryView.lastCheckIn = user.lastCheckInStr
             user.getLocationStr(completion: { (locationStr) in
                 self.userSummaryView.location = locationStr ?? ""
@@ -128,7 +137,8 @@ class UserProfileViewController: UIViewController, Storyboarded {
             
             DispatchQueue.main.async {
                 self.nameLabel.text = user.name
-                self.subtitleLabel.text = "Lebron is GOAT"
+                self.subtitleLabel.text = user.status ?? ""
+                self.statusTextField.text = user.status ?? ""
                 self.userFeedView.feedCollectionView.reloadData()
             }
         }
@@ -180,6 +190,31 @@ class UserProfileViewController: UIViewController, Storyboarded {
     
     @IBAction func dismissProfile(_ sender: Any) {
         coordinator?.pop()
+    }
+    
+    
+    
+    /////////////////////////////////////////////////////
+    //
+    //  touchesBegan
+    //
+    //  Hides the keyboard when the user selects a non-textfield area
+    //
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+}
+
+
+
+extension UserProfileViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let currentUser = configuration.currentUser else { return }
+        guard currentUser.uid == userId else { return }
+        guard let updatedStatus = textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) else { return }
+        
+        currentUser.status = updatedStatus
+        updateDataForUser(userid: currentUser.uid, key: "status", value: updatedStatus as AnyObject)
     }
 }
 
