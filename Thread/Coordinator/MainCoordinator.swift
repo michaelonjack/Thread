@@ -34,7 +34,7 @@ class MainCoordinator: Coordinator {
     }
     
     func attemptAutoLogin() {
-        if let currentUser = Auth.auth().currentUser {
+        if let currentUser = Auth.auth().currentUser, currentUser.isEmailVerified {
             let activeUserCoordinator = ActiveUserCoordinator(userId: currentUser.uid)
             childCoordinators.append(activeUserCoordinator)
             activeUserCoordinator.start()

@@ -131,6 +131,9 @@ class LoginViewController: UIViewController, Storyboarded {
             self.loginViewCenterYAnchor.isActive = false
             self.loginViewTopAnchor.isActive = true
             self.view.layoutSubviews()
+        }, completion: { (_) in
+            self.loginView.emailField.textField.text = ""
+            self.loginView.passwordField.textField.text = ""
         })
     }
     
@@ -147,6 +150,12 @@ class LoginViewController: UIViewController, Storyboarded {
             self.signUpViewCenterYAnchor.isActive = false
             self.signUpViewTopAnchor.isActive = true
             self.view.layoutSubviews()
+        }, completion: { (_) in
+            self.signUpView.firstNameField.textField.text = ""
+            self.signUpView.lastNameField.textField.text = ""
+            self.signUpView.emailField.textField.text = ""
+            self.signUpView.passwordField.textField.text = ""
+            self.signUpView.confirmPasswordField.textField.text = ""
         })
     }
     
@@ -169,6 +178,11 @@ class LoginViewController: UIViewController, Storyboarded {
                 if user.isEmailVerified {
                     BiometricAuthenticationHelper.updateKeychainCredentials(email: email, password: password)
                     self.coordinator?.login()
+                    
+                    // Hide the login view after a successful login
+                    DispatchQueue.main.async {
+                        self.cancelLogIn()
+                    }
                 }
 
 
@@ -248,15 +262,22 @@ class LoginViewController: UIViewController, Storyboarded {
                 
                 if error == nil {
                     
-                    let user = authResult?.user
+                    guard let user = authResult?.user else { return }
                     
-                    let newUser = User(uid: (user?.uid)!, firstName: firstName, lastName: lastName, email: email)
+                    let newUser = User(uid: user.uid, firstName: firstName, lastName: lastName, email: email)
                     let newUserRef = self.usersRef.child( newUser.uid )
                     newUserRef.setValue(newUser.toAnyObject())
                     
                     
                     // If no errors occurred when creating the user, send them a verification email
-                    user?.sendEmailVerification(completion: nil)
+                    user.sendEmailVerification(completion: { (error) in
+                        if error == nil {
+                            // Hide the sign up view after a successful sign up
+                            DispatchQueue.main.async {
+                                self.cancelSignUp()
+                            }
+                        }
+                    })
                     
                     // Create a new pop-up action notifying the user that their registration was successful and a verification email has been sent
                     let verifyEmailAlert = UIAlertController(title: "Verify Email",
