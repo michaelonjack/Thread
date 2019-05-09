@@ -324,12 +324,7 @@
 			children = (
 				B1C508652234100000534DB1 /* Home */,
 				B1182E582234BF05005DB4DB /* Closet */,
-				B1701B1F2222ACFD009B1788 /* SettingsPasswordViewController.swift */,
-				B1701B212222D36D009B1788 /* SettingsTermsViewController.swift */,
-				B1701B232222DA59009B1788 /* SettingsPolicyViewController.swift */,
-				B1701B122220C522009B1788 /* SettingsViewController.swift */,
-				B1701B1922216E00009B1788 /* SettingsNameViewController.swift */,
-				B1701B1D2221C17C009B1788 /* SettingsEmailViewController.swift */,
+				B150A9F02283A29700F1F4E8 /* Settings */,
 				B1DC82782219B7670005278D /* UserTableViewController.swift */,
 				B1C508762241D53A00534DB1 /* ClothingItemTableViewController.swift */,
 				B1FE8220220947DA006AFD43 /* CoordinatorNavigationController.swift */,
@@ -369,6 +364,19 @@
 				B1C2D48B220D2B7D00AD36BA /* UIView+Additions.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		B150A9F02283A29700F1F4E8 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B1701B122220C522009B1788 /* SettingsViewController.swift */,
+				B1701B232222DA59009B1788 /* SettingsPolicyViewController.swift */,
+				B1701B1922216E00009B1788 /* SettingsNameViewController.swift */,
+				B1701B1D2221C17C009B1788 /* SettingsEmailViewController.swift */,
+				B1701B212222D36D009B1788 /* SettingsTermsViewController.swift */,
+				B1701B1F2222ACFD009B1788 /* SettingsPasswordViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		B157D4A22205E20B00D83CDB /* Helper */ = {

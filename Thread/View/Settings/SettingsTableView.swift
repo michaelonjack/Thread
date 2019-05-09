@@ -12,7 +12,7 @@ class SettingsTableView: UITableView {
     
     let sectionTitles = ["ACCOUNT", "ACCOUNT ACTIONS", "INFORMATION"]
     var rowData = [
-        [("First Name", ""), ("Last Name", ""), ("Email", "")],
+        [("First Name", ""), ("Last Name", ""), ("Email", ""), ("Profile Picture", "")],
         [("Logout", ""), ("Change Password", "")],
         [("Terms of Service", ""), ("Privacy Policy", ""),("Contact", "")]
     ]

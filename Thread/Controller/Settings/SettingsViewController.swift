@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YPImagePicker
 
 class SettingsViewController: UIViewController, Storyboarded {
     
@@ -28,6 +29,37 @@ class SettingsViewController: UIViewController, Storyboarded {
     @IBAction func dismissSettings(_ sender: Any) {
         coordinator?.pop()
     }
+    
+    func updateProfilePicture() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) || UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            var ypConfig = YPImagePickerConfiguration()
+            ypConfig.onlySquareImagesFromCamera = true
+            ypConfig.library.onlySquare = true
+            ypConfig.showsPhotoFilters = true
+            ypConfig.library.mediaType = .photo
+            ypConfig.usesFrontCamera = false
+            ypConfig.shouldSaveNewPicturesToAlbum = false
+            
+            let picker = YPImagePicker(configuration: ypConfig)
+            picker.didFinishPicking { (items, _) in
+                if let photo = items.singlePhoto, let currentUser = configuration.currentUser {
+                    uploadImage(toLocation: "images/" + currentUser.uid + "/ProfilePicture", image: photo.image, completion: { (url, error) in
+                        if error == nil {
+                            currentUser.profilePicture = photo.image
+                            currentUser.profilePictureUrl = url
+                            currentUser.save()
+                            
+                            // Cache the profile picture
+                            UserDefaults.standard.setValue(photo.image.jpegData(compressionQuality: 1), forKey: currentUser.uid + "-profilePicture")
+                        }
+                    })
+                }
+                
+                picker.dismiss(animated: true, completion: nil)
+            }
+            present(picker, animated: true, completion: nil)
+        }
+    }
 }
 
 
@@ -43,6 +75,8 @@ extension SettingsViewController: UITableViewDelegate {
             coordinator?.startEditingUserName()
         case "Email":
             coordinator?.startEditingEmail()
+        case "Profile Picture":
+            updateProfilePicture()
         case "Logout":
             coordinator?.logout()
         case "Change Password":
