@@ -39,14 +39,6 @@ class UserTableViewCell: UITableViewCell {
         return label
     }()
     
-    var followButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "Follow"), for: .normal)
-        
-        return button
-    }()
-    
     var userClothingItemsView: UserProfileFeedView = {
         let feedView = UserProfileFeedView()
         feedView.translatesAutoresizingMaskIntoConstraints = false
@@ -91,7 +83,6 @@ class UserTableViewCell: UITableViewCell {
         addSubview(userPictureImageView)
         addSubview(userNameLabel)
         addSubview(userStatusLabel)
-        addSubview(followButton)
         addSubview(userClothingItemsView)
         
         setupLayout()
@@ -107,17 +98,12 @@ class UserTableViewCell: UITableViewCell {
             userNameLabel.topAnchor.constraint(equalTo: userPictureImageView.topAnchor),
             userNameLabel.heightAnchor.constraint(equalTo: userPictureImageView.heightAnchor, multiplier: 0.5),
             userNameLabel.leadingAnchor.constraint(equalTo: userPictureImageView.trailingAnchor, constant: 16),
-            userNameLabel.trailingAnchor.constraint(equalTo: followButton.leadingAnchor, constant: -8),
+            userNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             
             userStatusLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor),
             userStatusLabel.bottomAnchor.constraint(equalTo: userPictureImageView.bottomAnchor),
             userStatusLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
             userStatusLabel.trailingAnchor.constraint(equalTo: userNameLabel.trailingAnchor),
-            
-            followButton.centerYAnchor.constraint(equalTo: userPictureImageView.centerYAnchor),
-            followButton.heightAnchor.constraint(equalTo: userPictureImageView.heightAnchor, multiplier: 0.5),
-            followButton.widthAnchor.constraint(equalTo: followButton.heightAnchor),
-            followButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             
             userClothingItemsView.leadingAnchor.constraint(equalTo: userPictureImageView.leadingAnchor),
             userClothingItemsView.trailingAnchor.constraint(equalTo: trailingAnchor),

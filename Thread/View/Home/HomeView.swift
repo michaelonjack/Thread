@@ -261,6 +261,7 @@ class HomeView: UIView {
             if percentComplete >= 0 && percentComplete <= 1 {
                 profilePictureButtonAnimator.fractionComplete = percentComplete
                 
+                // Animate the shrinking of the pull indicator
                 followingUsersView.pullIndicatorTopConstraint.constant = followingUsersView.pullIndicatorTopConstant - (followingUsersView.pullIndicatorTopConstant * percentComplete)
                 followingUsersView.pullIndicatorHeightConstraint.constant = followingUsersView.pullIndicatorHeightConstant - (followingUsersView.pullIndicatorHeightConstant * percentComplete)
                 followingUsersView.pullIndicatorBottomConstraint.constant =  followingUsersView.pullIndicatorBottomConstant - (followingUsersView.pullIndicatorBottomConstant * percentComplete)
