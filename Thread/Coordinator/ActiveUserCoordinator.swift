@@ -264,6 +264,14 @@ class ActiveUserCoordinator: Coordinator {
         navigationController.pushViewController(itemsTableController, animated: true)
     }
     
+    func viewLocation(location: Place) {
+        let locationController = LocationViewController.instantiate()
+        locationController.coordinator = self
+        locationController.location = location
+        
+        navigationController.pushViewController(locationController, animated: true)
+    }
+    
     func cancelEditingClothingItem() {
         pop()
     }

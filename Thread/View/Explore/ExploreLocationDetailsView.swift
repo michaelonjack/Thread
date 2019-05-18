@@ -162,6 +162,8 @@ class ExploreLocationDetailsView: UIView {
 
 extension ExploreLocationDetailsView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard nearbyItems.count > indexPath.row else { return }
+        
         let selectedItem = nearbyItems[indexPath.row].1
         
         if let itemUrl = selectedItem.itemUrl {

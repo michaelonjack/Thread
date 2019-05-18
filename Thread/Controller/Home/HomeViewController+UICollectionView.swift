@@ -21,27 +21,14 @@ extension HomeViewController: UICollectionViewDelegate {
             
         else if collectionView == exploreView.locationsCollectionView {
             guard let selectedCell = collectionView.cellForItem(at: indexPath) as? ExploreLocationCollectionViewCell else { return }
-            guard let rootView = selectedCell.window?.subviews[0] else { return }
+            guard let cvAttributes = collectionView.layoutAttributesForItem(at: indexPath) else { return }
             
+            let selectedFrame = collectionView.convert(cvAttributes.frame, to: collectionView.superview)
             
-            let originInParent = selectedCell.convert(CGPoint(x: 0, y: 0), to: rootView)
-            let frameInRootView = CGRect(x: originInParent.x, y: originInParent.y, width: selectedCell.frame.width, height: selectedCell.frame.height)
+            showLocationAnimationController = ShowLocationAnimationController(originFrame: selectedFrame, locationImage: selectedCell.imageView.image)
+            hideLocationAnimationController = HideLocationAnimationController(originFrame: selectedFrame)
             
-            let location = configuration.places[indexPath.row]
-            let locationExpandedView = ExploreLocationExpandedView(frame: frameInRootView)
-            locationExpandedView.translatesAutoresizingMaskIntoConstraints = false
-            locationExpandedView.detailsView.nearbyItems = location.nearbyItems.filter { $0.1.itemImageUrl != nil || $0.1.smallItemImageUrl != nil }.shuffled()
-            locationExpandedView.locationImageView.image = selectedCell.imageView.image
-            locationExpandedView.detailsView.nameLabel.text = location.name
-            
-            locationExpandedView.detailsView.weatherView.weatherImageView.image = location.weather.image
-            locationExpandedView.detailsView.weatherView.weatherDescriptionLabel.text = location.weather.description
-            locationExpandedView.detailsView.weatherView.temperatureView.itemLabel.text = "Temperature:\n" + String(location.temperature) + "° F"
-            locationExpandedView.detailsView.weatherView.humidityView.itemLabel.text = "Humidity:\n" + String(location.humidity) + "%"
-            locationExpandedView.detailsView.weatherView.windSpeedView.itemLabel.text = "Wind Speed:\n" + String(location.windSpeed) + " mph"
-            
-            rootView.addSubview(locationExpandedView)
-            locationExpandedView.animateOpening()
+            coordinator?.viewLocation(location: configuration.places[indexPath.row])
         }
     }
 }

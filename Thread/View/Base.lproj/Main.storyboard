@@ -332,6 +332,57 @@
             </objects>
             <point key="canvasLocation" x="102" y="859"/>
         </scene>
+        <!--Location View Controller-->
+        <scene sceneID="hDJ-pw-azV">
+            <objects>
+                <viewController storyboardIdentifier="LocationViewController" id="EEX-x9-agY" customClass="LocationViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CU8-9d-AHF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XTJ-Qo-MoX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="534-Pb-mmh" customClass="ExploreLocationDetailsView" customModule="Thread" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="667" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JX5-vj-CKr">
+                                <rect key="frame" x="16" y="28" width="33.5" height="33.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="JX5-vj-CKr" secondAttribute="height" multiplier="1:1" id="3CI-73-jNf"/>
+                                </constraints>
+                                <state key="normal" image="X"/>
+                                <connections>
+                                    <action selector="close:" destination="EEX-x9-agY" eventType="touchUpInside" id="u09-E1-xNb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="JX5-vj-CKr" firstAttribute="height" secondItem="CU8-9d-AHF" secondAttribute="height" multiplier="0.05" id="Mua-34-p9G"/>
+                            <constraint firstItem="JX5-vj-CKr" firstAttribute="leading" secondItem="uk3-DI-K43" secondAttribute="leading" constant="16" id="S6G-9K-wTu"/>
+                            <constraint firstItem="534-Pb-mmh" firstAttribute="height" secondItem="XTJ-Qo-MoX" secondAttribute="height" id="VJf-F2-xhg"/>
+                            <constraint firstItem="uk3-DI-K43" firstAttribute="trailing" secondItem="XTJ-Qo-MoX" secondAttribute="trailing" id="XCJ-aA-4ro"/>
+                            <constraint firstItem="XTJ-Qo-MoX" firstAttribute="leading" secondItem="uk3-DI-K43" secondAttribute="leading" id="ekR-3v-dX5"/>
+                            <constraint firstItem="JX5-vj-CKr" firstAttribute="top" secondItem="uk3-DI-K43" secondAttribute="top" constant="8" id="fcB-BB-IaG"/>
+                            <constraint firstItem="534-Pb-mmh" firstAttribute="leading" secondItem="uk3-DI-K43" secondAttribute="leading" id="fxH-DU-yHw"/>
+                            <constraint firstItem="uk3-DI-K43" firstAttribute="trailing" secondItem="534-Pb-mmh" secondAttribute="trailing" id="gK0-df-d2D"/>
+                            <constraint firstItem="534-Pb-mmh" firstAttribute="top" secondItem="XTJ-Qo-MoX" secondAttribute="bottom" id="jay-v6-63f"/>
+                            <constraint firstItem="uk3-DI-K43" firstAttribute="bottom" secondItem="XTJ-Qo-MoX" secondAttribute="bottom" id="kVT-kC-xwT"/>
+                            <constraint firstItem="XTJ-Qo-MoX" firstAttribute="top" secondItem="CU8-9d-AHF" secondAttribute="top" id="maQ-cf-Q9i"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="uk3-DI-K43"/>
+                    </view>
+                    <connections>
+                        <outlet property="locationDetailsView" destination="534-Pb-mmh" id="YVx-pa-Pih"/>
+                        <outlet property="locationImageView" destination="XTJ-Qo-MoX" id="rnU-fN-gqb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aXo-qe-JXI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="101.59999999999999" y="-1456.8215892053975"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="WXP-cb-84d">
             <objects>
@@ -934,6 +985,7 @@
         <image name="Edit" width="219" height="219"/>
         <image name="Favorite" width="256" height="256"/>
         <image name="Search" width="256" height="256"/>
+        <image name="X" width="128" height="128"/>
     </resources>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

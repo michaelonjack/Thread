@@ -22,12 +22,15 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
     var followingUserIds: [String] = []
     var followedItems: [(User, ClothingItem)] = []
     var isCheckingIn = false
+    var showLocationAnimationController: UIViewControllerAnimatedTransitioning?
+    var hideLocationAnimationController: UIViewControllerAnimatedTransitioning?
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         aroundMeView.mapView.delegate = self
+        navigationController?.delegate = self
         
         updateUserLocation()
         
@@ -231,6 +234,26 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
                     }
                 }
             }
+        }
+    }
+}
+
+
+
+extension HomeViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        if let _ = toVC as? LocationViewController { /* good - the toVC is a LocationViewController */ }
+        else if let _ = fromVC as? LocationViewController { /* good - the fromVC is a LocationViewController */ }
+        else { return nil }
+        
+        switch operation {
+        case .push:
+            return showLocationAnimationController
+        case .pop:
+            return hideLocationAnimationController
+        default:
+            return nil
         }
     }
 }
