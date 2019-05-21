@@ -126,10 +126,21 @@ open class TabbedPageView: UIView {
     }
     
     private func initializeTabContents() {
+        let parentViewController = getViewController(for: self)
+        
         var views:[UIView] = []
         for index in 0..<dataSource!.numberOfTabs(in: self) {
             let tab = dataSource!.tabbedPageView(self, tabForIndex: index)
-            views.append(tab.view)
+            
+            switch tab.source {
+            case .view(let view):
+                views.append(view)
+            case .viewController(let viewController):
+                parentViewController?.addChild(viewController)
+                viewController.didMove(toParent: parentViewController)
+                
+                views.append(viewController.view)
+            }
         }
         
         tabContentView.views = views
@@ -149,6 +160,16 @@ open class TabbedPageView: UIView {
         
         // Add constraints
         setupLayout()
+    }
+    
+    private func getViewController(for view: UIView) -> UIViewController? {
+        if let nextResponder = view.next as? UIViewController {
+            return nextResponder
+        } else if let nextResponder = view.next as? UIView {
+            return getViewController(for: nextResponder)
+        } else {
+            return nil
+        }
     }
 }
 

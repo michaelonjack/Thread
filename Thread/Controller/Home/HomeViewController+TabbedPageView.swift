@@ -25,9 +25,9 @@ extension HomeViewController: TabbedPageViewDataSource {
         ]
         
         return [
-            Tab(view: exploreView, type: .attributedText(NSAttributedString(string: "EXPLORE", attributes: tabAttributes))),
-            Tab(view: homeView, type: .attributedText(NSAttributedString(string: "HOME", attributes: tabAttributes))),
-            Tab(view: aroundMeView, type: .attributedText(NSAttributedString(string: "AROUND ME", attributes: tabAttributes)))
+            Tab(contentSource: .view(exploreView), type: .attributedText(NSAttributedString(string: "EXPLORE", attributes: tabAttributes))),
+            Tab(contentSource: .view(homeView), type: .attributedText(NSAttributedString(string: "HOME", attributes: tabAttributes))),
+            Tab(contentSource: .view(aroundMeView), type: .attributedText(NSAttributedString(string: "AROUND ME", attributes: tabAttributes)))
         ]
     }
     

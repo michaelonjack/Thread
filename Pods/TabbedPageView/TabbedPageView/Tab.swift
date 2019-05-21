@@ -10,15 +10,10 @@ import UIKit
 
 public struct Tab {
     var type: TabType
-    var view: UIView!
+    var source: TabSource
     
-    public init(view: UIView, type: TabType) {
+    public init(contentSource: TabSource, type: TabType) {
         self.type = type
-        self.view = view
-    }
-    
-    public init(viewController: UIViewController, type: TabType) {
-        self.type = type
-        self.view = viewController.view
+        self.source = contentSource
     }
 }

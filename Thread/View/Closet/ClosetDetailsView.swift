@@ -54,9 +54,9 @@ class ClosetDetailsView: UIView {
         ]
         
         tabs = [
-            Tab(view: detailsView, type: .attributedText(NSAttributedString(string: "DETAILS", attributes: tabAttributes))),
-            Tab(view: tagsView, type: .attributedText(NSAttributedString(string: "TAGS", attributes: tabAttributes))),
-            Tab(view: otherView, type: .attributedText(NSAttributedString(string: "OTHER", attributes: tabAttributes))),
+            Tab(contentSource: .view(detailsView), type: .attributedText(NSAttributedString(string: "DETAILS", attributes: tabAttributes))),
+            Tab(contentSource: .view(tagsView), type: .attributedText(NSAttributedString(string: "TAGS", attributes: tabAttributes))),
+            Tab(contentSource: .view(otherView), type: .attributedText(NSAttributedString(string: "OTHER", attributes: tabAttributes))),
         ]
         
         tabbedView = TabbedPageView(frame: CGRect.zero)

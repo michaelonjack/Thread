@@ -111,7 +111,7 @@ class ActiveUserCoordinator: Coordinator {
         
         let credential = EmailAuthProvider.credential(withEmail: firebaseUser.email!, password: currentPassword)
         
-        firebaseUser.reauthenticateAndRetrieveData(with: credential) { (result, error) in
+        firebaseUser.reauthenticate(with: credential) { (result, error) in
             if error != nil {
                 DispatchQueue.main.async {
                     settingsPasswordController.updateResultLabel.text = error?.localizedDescription

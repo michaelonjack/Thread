@@ -23,7 +23,7 @@ class TabContentView: UIView {
         cv.showsHorizontalScrollIndicator = false
         cv.backgroundColor = .clear
         cv.isPagingEnabled = true
-        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
+        cv.register(TabContentCollectionViewCell.self, forCellWithReuseIdentifier: TabContentCollectionViewCell.reuseIdentifier)
         
         if #available(iOS 11.0, *) {
             cv.contentInsetAdjustmentBehavior = .never
@@ -84,20 +84,13 @@ extension TabContentView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = tabContentCollectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
+        let cell = tabContentCollectionView.dequeueReusableCell(withReuseIdentifier: TabContentCollectionViewCell.reuseIdentifier, for: indexPath)
         
-        let view = views[indexPath.row]
-        view.translatesAutoresizingMaskIntoConstraints = false
-        cell.addSubview(view)
+        guard let tabContentCell = cell as? TabContentCollectionViewCell else { return cell }
         
-        NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: cell.topAnchor),
-            view.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
-            view.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
-            view.trailingAnchor.constraint(equalTo: cell.trailingAnchor)
-        ])
+        tabContentCell.hostedView = views[indexPath.row]
         
-        return cell
+        return tabContentCell
     }
 }
 
