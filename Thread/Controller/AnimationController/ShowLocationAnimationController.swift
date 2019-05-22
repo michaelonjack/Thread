@@ -53,6 +53,7 @@ class ShowLocationAnimationController: NSObject, UIViewControllerAnimatedTransit
                 let weatherViewMaxY = toController.locationDetailsView.weatherView.frame.maxY
                 let translationY = weatherViewMaxY + viewHeight * 0.05
                 
+                toController.closeButton.alpha = 1
                 toController.locationDetailsView.transform = CGAffineTransform(translationX: 0, y: -translationY)
                 toController.locationImageView.transform = CGAffineTransform(translationX: 0, y: -translationY / 2)
             })

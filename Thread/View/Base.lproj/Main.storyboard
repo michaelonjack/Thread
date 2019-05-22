@@ -375,6 +375,7 @@
                         <viewLayoutGuide key="safeArea" id="uk3-DI-K43"/>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="JX5-vj-CKr" id="ODm-4g-sBv"/>
                         <outlet property="locationDetailsView" destination="534-Pb-mmh" id="YVx-pa-Pih"/>
                         <outlet property="locationImageView" destination="XTJ-Qo-MoX" id="rnU-fN-gqb"/>
                     </connections>

@@ -16,9 +16,12 @@ class LocationViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var locationImageView: UIImageView!
     @IBOutlet weak var locationDetailsView: ExploreLocationDetailsView!
+    @IBOutlet weak var closeButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        closeButton.alpha = 0
         
         location.getImage { (image) in
             self.locationImageView.image = image
