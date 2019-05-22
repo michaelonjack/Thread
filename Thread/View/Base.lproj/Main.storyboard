@@ -332,6 +332,36 @@
             </objects>
             <point key="canvasLocation" x="102" y="859"/>
         </scene>
+        <!--Around Me View Controller-->
+        <scene sceneID="o3K-D8-tLo">
+            <objects>
+                <viewController storyboardIdentifier="AroundMeViewController" id="UXe-Zw-7xJ" customClass="AroundMeViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="38o-ck-IaG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="so7-5q-vz9" customClass="AroundMeView" customModule="Thread" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="so7-5q-vz9" firstAttribute="leading" secondItem="Zw8-Kn-qxH" secondAttribute="leading" id="FVM-1i-zHJ"/>
+                            <constraint firstItem="Zw8-Kn-qxH" firstAttribute="bottom" secondItem="so7-5q-vz9" secondAttribute="bottom" id="OxK-WD-RFJ"/>
+                            <constraint firstItem="Zw8-Kn-qxH" firstAttribute="trailing" secondItem="so7-5q-vz9" secondAttribute="trailing" id="YOU-yj-epl"/>
+                            <constraint firstItem="so7-5q-vz9" firstAttribute="top" secondItem="38o-ck-IaG" secondAttribute="top" id="ltj-1m-WuQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Zw8-Kn-qxH"/>
+                    </view>
+                    <connections>
+                        <outlet property="aroundMeView" destination="so7-5q-vz9" id="Pln-9M-Sgf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qcX-Yf-VPu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="102" y="-2160"/>
+        </scene>
         <!--Location View Controller-->
         <scene sceneID="hDJ-pw-azV">
             <objects>
@@ -407,19 +437,12 @@
                         <viewLayoutGuide key="safeArea" id="Uhz-1L-ZaP"/>
                     </view>
                     <connections>
-                        <outlet property="aroundMeView" destination="Abp-ce-00n" id="Fzz-kr-1HG"/>
                         <outlet property="exploreView" destination="ETu-Yd-gvN" id="JBH-EY-O7p"/>
                         <outlet property="homeView" destination="6YF-iE-etm" id="yPY-lw-3cF"/>
                         <outlet property="tabbedPageView" destination="RXJ-Sb-0em" id="r1G-bV-dbb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPZ-8l-nk4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="Abp-ce-00n" customClass="AroundMeView" customModule="Thread" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <viewLayoutGuide key="safeArea" id="64r-3P-Cm1"/>
-                </view>
                 <view contentMode="scaleToFill" id="ETu-Yd-gvN" customClass="ExploreMainView" customModule="Thread" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

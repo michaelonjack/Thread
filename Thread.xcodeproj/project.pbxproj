@@ -100,6 +100,7 @@
 		B1F6B967228F8BDD00E58CFD /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F6B966228F8BDD00E58CFD /* LocationViewController.swift */; };
 		B1F6B96A228F8DFE00E58CFD /* ShowLocationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F6B969228F8DFE00E58CFD /* ShowLocationAnimationController.swift */; };
 		B1F6B96C22902FE500E58CFD /* HideLocationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F6B96B22902FE500E58CFD /* HideLocationAnimationController.swift */; };
+		B1F6B97A2295BF8B00E58CFD /* AroundMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F6B9792295BF8B00E58CFD /* AroundMeViewController.swift */; };
 		B1F7596122073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F7596022073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift */; };
 		B1FE8219220939D9006AFD43 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FE8218220939D9006AFD43 /* Coordinator.swift */; };
 		B1FE821B22093A49006AFD43 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FE821A22093A49006AFD43 /* MainCoordinator.swift */; };
@@ -233,6 +234,7 @@
 		B1F6B966228F8BDD00E58CFD /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		B1F6B969228F8DFE00E58CFD /* ShowLocationAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLocationAnimationController.swift; sourceTree = "<group>"; };
 		B1F6B96B22902FE500E58CFD /* HideLocationAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideLocationAnimationController.swift; sourceTree = "<group>"; };
+		B1F6B9792295BF8B00E58CFD /* AroundMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundMeViewController.swift; sourceTree = "<group>"; };
 		B1F7596022073B6600CC3412 /* ClosetSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1FE8218220939D9006AFD43 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		B1FE821A22093A49006AFD43 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 		B1C508652234100000534DB1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				B1F6B9792295BF8B00E58CFD /* AroundMeViewController.swift */,
 				B1DC826C22188DB30005278D /* HomeViewController.swift */,
 				B1C508662234102800534DB1 /* HomeViewController+UICollectionView.swift */,
 				B1C50874223AAED500534DB1 /* HomeViewController+UITableView.swift */,
@@ -923,6 +926,7 @@
 				B1FE8227220A1CA4006AFD43 /* ActiveUserCoordinator.swift in Sources */,
 				B1C508712235CD8100534DB1 /* RoundedImageCollectionViewCell.swift in Sources */,
 				B1701B222222D36D009B1788 /* SettingsTermsViewController.swift in Sources */,
+				B1F6B97A2295BF8B00E58CFD /* AroundMeViewController.swift in Sources */,
 				B1701B1A22216E00009B1788 /* SettingsNameViewController.swift in Sources */,
 				B1701B09221E3D89009B1788 /* AroundMeView.swift in Sources */,
 				B1701B162220C5F6009B1788 /* SettingsTableView.swift in Sources */,

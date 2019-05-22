@@ -17,7 +17,8 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
     @IBOutlet weak var tabbedPageView: TabbedPageView!
     @IBOutlet var exploreView: ExploreMainView!
     @IBOutlet var homeView: HomeView!
-    @IBOutlet var aroundMeView: AroundMeView!
+    
+    var aroundMeController: AroundMeViewController!
     
     var followingUserIds: [String] = []
     var followedItems: [(User, ClothingItem)] = []
@@ -29,15 +30,23 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        aroundMeView.mapView.delegate = self
+        aroundMeController = AroundMeViewController.instantiate()
+        aroundMeController.coordinator = coordinator
+        
         navigationController?.delegate = self
         
         updateUserLocation()
         
         setupTabbedPageView()
         setupExploreView()
-        setupAroundMeView()
         setupHomeView()
+    }
+    
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        
+        // Update the child controllers to inherit the parent's safe area
+        aroundMeController.additionalSafeAreaInsets = view.safeAreaInsets
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -82,10 +91,6 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
                 self.exploreView.locationsCollectionView.reloadData()
             }
         }
-    }
-    
-    fileprivate func setupAroundMeView() {
-        aroundMeView.refreshButton.addTarget(self, action: #selector(refreshAroundMeMap), for: .touchUpInside)
     }
     
     fileprivate func setupHomeView() {
@@ -175,66 +180,14 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         currentUser.save()
         
         // Remove the current user's annotation from the map
-        for annotation in aroundMeView.mapView.annotations {
+        for annotation in aroundMeController.aroundMeView.mapView.annotations {
             if let userAnnotation = annotation as? UserMapAnnotation, userAnnotation.user == currentUser {
-                aroundMeView.mapView.removeAnnotation(annotation)
+                aroundMeController.aroundMeView.mapView.removeAnnotation(annotation)
             }
         }
         
         let notification = NotificationView(type: .info, message: "Location successfully hidden! You'll no longer appear on the map.")
         notification.show()
-    }
-    
-    @objc func refreshAroundMeMap() {
-        // Animate the button spin
-        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear, animations: {
-            self.aroundMeView.refreshButton.transform = self.aroundMeView.refreshButton.transform.rotated(by: .pi)
-        })
-        
-        UIView.animate(withDuration: 0.25, delay: 0.15, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear, animations: {
-            self.aroundMeView.refreshButton.transform = self.aroundMeView.refreshButton.transform.rotated(by: .pi)
-        })
-        
-        // Re-add the annotations
-        addAroundMeMapAnnotations()
-    }
-    
-    func addAroundMeMapAnnotations() {
-        guard let currentUser = configuration.currentUser else { return }
-        
-        // Remove all current annotations if any exist
-        aroundMeView.mapView.removeAnnotations(aroundMeView.mapView.annotations)
-        
-        // Get users near the current user and add a new map annotation for them (this will include the current user)
-        let usersReference = Database.database().reference(withPath: "users")
-        usersReference.keepSynced(true)
-        usersReference.observeSingleEvent(of: .value) { (snapshot) in
-            
-            for child in snapshot.children {
-                
-                if let childSnapshot = child as? DataSnapshot {
-                    var user: User!
-                    
-                    if let cachedUser = configuration.userCache[childSnapshot.key] {
-                        user = cachedUser
-                    } else {
-                        user = User(snapshot: childSnapshot)
-                    }
-                    
-                    if let distance = currentUser.getDistanceFrom(location: user.location), let _ = user.lastCheckIn {
-                        
-                        // Make sure the user is close enough to the current user to show
-                        // and make sure the user isn't blocked or blocking this user
-                        if distance <= configuration.maximumUserDistance
-                            && !currentUser.blockedByUserIds.contains(user.uid)
-                            && !currentUser.blockedUserIds.contains(user.uid) {
-                            let userAnnotation = UserMapAnnotation(user: user)
-                            self.aroundMeView.mapView.addAnnotation(userAnnotation)
-                        }
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -273,8 +226,8 @@ extension HomeViewController: CLLocationManagerDelegate {
         
         // Set the initial map region
         let mapRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 0.025, longitudinalMeters: 0.025)
-        aroundMeView.mapView.setRegion(mapRegion, animated: true)
-        addAroundMeMapAnnotations()
+        aroundMeController.aroundMeView.mapView.setRegion(mapRegion, animated: true)
+        aroundMeController.addAroundMeMapAnnotations()
         
         if isCheckingIn {
             DispatchQueue.main.async {
@@ -290,42 +243,3 @@ extension HomeViewController: CLLocationManagerDelegate {
         print(error)
     }
 }
-
-
-
-extension HomeViewController: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard let userAnnotation = annotation as? UserMapAnnotation else { return nil }
-        guard let annotationView = aroundMeView.mapView.dequeueReusableAnnotationView(withIdentifier: "UserAnnotation") as? UserMapAnnotationView else { return nil }
-        
-        let callOutView = UserMapAnnotationCallOutView()
-        callOutView.nameLabel.text = userAnnotation.user.name
-        callOutView.lastCheckedInLabel.text = "Last checked in: " + userAnnotation.user.lastCheckInStr
-        callOutView.userId = userAnnotation.user.uid
-        callOutView.delegate = self
-        
-        userAnnotation.user.getProfilePicture { (profilePicture) in
-            DispatchQueue.main.async {
-                annotationView.profilePictureImageView.image = profilePicture
-                callOutView.profilePictureImageView.image = profilePicture
-            }
-        }
-        
-        annotationView.canShowCallout = true
-        annotationView.detailCalloutAccessoryView = callOutView
-        
-        return annotationView
-    }
-}
-
-
-
-extension HomeViewController: UserMapAnnotationDelegate {
-    func viewButtonPressed(userId: String) {
-        coordinator?.viewUserProfile(userId: userId)
-    }
-}
-
-
-
-
