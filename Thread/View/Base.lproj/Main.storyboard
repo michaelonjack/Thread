@@ -332,6 +332,36 @@
             </objects>
             <point key="canvasLocation" x="102" y="859"/>
         </scene>
+        <!--Explore View Controller-->
+        <scene sceneID="EQ2-Cc-dAD">
+            <objects>
+                <viewController storyboardIdentifier="ExploreViewController" id="7rU-lb-5eO" customClass="ExploreViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zzl-1J-ha7" customClass="ExploreV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nHI-BK-tzb" customClass="ExploreMainView" customModule="Thread" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="wCm-5v-yeo" firstAttribute="trailing" secondItem="nHI-BK-tzb" secondAttribute="trailing" id="5Bp-JY-WRt"/>
+                            <constraint firstItem="wCm-5v-yeo" firstAttribute="bottom" secondItem="nHI-BK-tzb" secondAttribute="bottom" id="J6z-8B-wyc"/>
+                            <constraint firstItem="nHI-BK-tzb" firstAttribute="top" secondItem="zzl-1J-ha7" secondAttribute="top" id="Qul-pc-lHK"/>
+                            <constraint firstItem="nHI-BK-tzb" firstAttribute="leading" secondItem="wCm-5v-yeo" secondAttribute="leading" id="XvP-F8-U13"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wCm-5v-yeo"/>
+                    </view>
+                    <connections>
+                        <outlet property="exploreView" destination="nHI-BK-tzb" id="9Sq-sh-YDC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ILv-bB-xGd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-780" y="-1452"/>
+        </scene>
         <!--Around Me View Controller-->
         <scene sceneID="o3K-D8-tLo">
             <objects>
@@ -360,7 +390,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qcX-Yf-VPu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="102" y="-2160"/>
+            <point key="canvasLocation" x="102" y="-1452"/>
         </scene>
         <!--Location View Controller-->
         <scene sceneID="hDJ-pw-azV">
@@ -399,7 +429,7 @@
                             <constraint firstItem="534-Pb-mmh" firstAttribute="leading" secondItem="uk3-DI-K43" secondAttribute="leading" id="fxH-DU-yHw"/>
                             <constraint firstItem="uk3-DI-K43" firstAttribute="trailing" secondItem="534-Pb-mmh" secondAttribute="trailing" id="gK0-df-d2D"/>
                             <constraint firstItem="534-Pb-mmh" firstAttribute="top" secondItem="XTJ-Qo-MoX" secondAttribute="bottom" id="jay-v6-63f"/>
-                            <constraint firstItem="uk3-DI-K43" firstAttribute="bottom" secondItem="XTJ-Qo-MoX" secondAttribute="bottom" id="kVT-kC-xwT"/>
+                            <constraint firstAttribute="bottom" secondItem="XTJ-Qo-MoX" secondAttribute="bottom" id="kVT-kC-xwT"/>
                             <constraint firstItem="XTJ-Qo-MoX" firstAttribute="top" secondItem="CU8-9d-AHF" secondAttribute="top" id="maQ-cf-Q9i"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uk3-DI-K43"/>
@@ -412,7 +442,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aXo-qe-JXI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="101.59999999999999" y="-1456.8215892053975"/>
+            <point key="canvasLocation" x="-780" y="-2187"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="WXP-cb-84d">
@@ -437,18 +467,11 @@
                         <viewLayoutGuide key="safeArea" id="Uhz-1L-ZaP"/>
                     </view>
                     <connections>
-                        <outlet property="exploreView" destination="ETu-Yd-gvN" id="JBH-EY-O7p"/>
                         <outlet property="homeView" destination="6YF-iE-etm" id="yPY-lw-3cF"/>
                         <outlet property="tabbedPageView" destination="RXJ-Sb-0em" id="r1G-bV-dbb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPZ-8l-nk4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="ETu-Yd-gvN" customClass="ExploreMainView" customModule="Thread" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <viewLayoutGuide key="safeArea" id="Nkq-Gg-ttH"/>
-                </view>
                 <view contentMode="scaleToFill" id="6YF-iE-etm" customClass="HomeView" customModule="Thread" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

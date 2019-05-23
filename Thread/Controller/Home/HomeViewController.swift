@@ -15,16 +15,14 @@ import FirebaseDatabase
 class HomeViewController: SlideOutMenuViewController, Storyboarded {
 
     @IBOutlet weak var tabbedPageView: TabbedPageView!
-    @IBOutlet var exploreView: ExploreMainView!
     @IBOutlet var homeView: HomeView!
     
     var aroundMeController: AroundMeViewController!
+    var exploreController: ExploreViewController!
     
     var followingUserIds: [String] = []
     var followedItems: [(User, ClothingItem)] = []
     var isCheckingIn = false
-    var showLocationAnimationController: UIViewControllerAnimatedTransitioning?
-    var hideLocationAnimationController: UIViewControllerAnimatedTransitioning?
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -33,12 +31,12 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         aroundMeController = AroundMeViewController.instantiate()
         aroundMeController.coordinator = coordinator
         
-        navigationController?.delegate = self
+        exploreController = ExploreViewController.instantiate()
+        exploreController.coordinator = coordinator
         
         updateUserLocation()
         
         setupTabbedPageView()
-        setupExploreView()
         setupHomeView()
     }
     
@@ -62,35 +60,6 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         tabbedPageView.delegate = self
         tabbedPageView.dataSource = self
         tabbedPageView.reloadData()
-    }
-    
-    fileprivate func setupExploreView() {
-        
-        exploreView.locationsCollectionView.delegate = self
-        exploreView.locationsCollectionView.dataSource = self
-        
-        getPlaces { (places) in
-            configuration.places = places
-            
-            for place in places {
-                
-                // Update the place's weather data if it's been over 20 minutes since the last update
-                if place.minutesSinceLastUpdate > 20 {
-                    APIHelper.getCurrentWeather(for: place, completion: { (result) in
-                        switch result {
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                        case .success(let weatherData):
-                            place.updateWeather(using: weatherData)
-                        }
-                    })
-                }
-            }
-            
-            DispatchQueue.main.async {
-                self.exploreView.locationsCollectionView.reloadData()
-            }
-        }
     }
     
     fileprivate func setupHomeView() {
@@ -188,26 +157,6 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         
         let notification = NotificationView(type: .info, message: "Location successfully hidden! You'll no longer appear on the map.")
         notification.show()
-    }
-}
-
-
-
-extension HomeViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        if let _ = toVC as? LocationViewController { /* good - the toVC is a LocationViewController */ }
-        else if let _ = fromVC as? LocationViewController { /* good - the fromVC is a LocationViewController */ }
-        else { return nil }
-        
-        switch operation {
-        case .push:
-            return showLocationAnimationController
-        case .pop:
-            return hideLocationAnimationController
-        default:
-            return nil
-        }
     }
 }
 
