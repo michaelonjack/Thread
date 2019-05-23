@@ -17,11 +17,15 @@ class ExploreViewController: UIViewController, Storyboarded {
     var showLocationAnimationController: UIViewControllerAnimatedTransitioning?
     var hideLocationAnimationController: UIViewControllerAnimatedTransitioning?
     
+    var searchResults: [Place] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         exploreView.locationsCollectionView.delegate = self
         exploreView.locationsCollectionView.dataSource = self
+        
+        exploreView.searchBarView.searchBarView.textField.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
         
         navigationController?.delegate = self
         
@@ -31,6 +35,7 @@ class ExploreViewController: UIViewController, Storyboarded {
     fileprivate func loadPlaces() {
         getPlaces { (places) in
             configuration.places = places
+            self.searchResults = places
             
             for place in places {
                 
@@ -47,6 +52,32 @@ class ExploreViewController: UIViewController, Storyboarded {
                 }
             }
             
+            DispatchQueue.main.async {
+                self.exploreView.locationsCollectionView.reloadData()
+            }
+        }
+    }
+    
+    @objc func searchTextChanged(_ textField: UITextField) {
+        let searchText = textField.text ?? ""
+        var newSearchResults: [Place] = []
+        
+        // Require at least 3 characters to be entered
+        if searchText.count < 3 {
+            newSearchResults = configuration.places
+        }
+        
+        else {
+            newSearchResults = configuration.places.filter {
+                $0.name.lowercased().range(of: searchText.lowercased()) != nil
+            }
+        }
+        
+        let difference = Set(searchResults).symmetricDifference( Set(newSearchResults) )
+        
+        // Only reload the collection if the results have actually changed
+        if !difference.isEmpty {
+            searchResults = newSearchResults
             DispatchQueue.main.async {
                 self.exploreView.locationsCollectionView.reloadData()
             }
@@ -86,7 +117,7 @@ extension ExploreViewController: UICollectionViewDelegate {
         showLocationAnimationController = ShowLocationAnimationController(originFrame: selectedFrame, locationImage: selectedCell.imageView.image)
         hideLocationAnimationController = HideLocationAnimationController(originFrame: selectedFrame)
         
-        coordinator?.viewLocation(location: configuration.places[indexPath.row])
+        coordinator?.viewLocation(location: searchResults[indexPath.row])
     }
 }
 
@@ -94,7 +125,7 @@ extension ExploreViewController: UICollectionViewDelegate {
 
 extension ExploreViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return configuration.places.count
+        return searchResults.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -102,7 +133,7 @@ extension ExploreViewController: UICollectionViewDataSource {
         
         guard let imageCell = cell as? ExploreLocationCollectionViewCell else { return cell }
         
-        let location = configuration.places[indexPath.row]
+        let location = searchResults[indexPath.row]
         imageCell.imageView.contentMode = .scaleAspectFill
         
         location.getImage { (image) in

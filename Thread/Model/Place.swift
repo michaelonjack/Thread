@@ -155,3 +155,16 @@ class Place {
         }
     }
 }
+
+extension Place: Equatable {
+    static func == (lhs: Place, rhs: Place) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+
+extension Place: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id.hashValue)
+    }
+}

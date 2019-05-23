@@ -336,7 +336,7 @@
         <scene sceneID="EQ2-Cc-dAD">
             <objects>
                 <viewController storyboardIdentifier="ExploreViewController" id="7rU-lb-5eO" customClass="ExploreViewController" customModule="Thread" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="zzl-1J-ha7" customClass="ExploreV">
+                    <view key="view" contentMode="scaleToFill" id="zzl-1J-ha7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -378,7 +378,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="so7-5q-vz9" firstAttribute="leading" secondItem="Zw8-Kn-qxH" secondAttribute="leading" id="FVM-1i-zHJ"/>
-                            <constraint firstItem="Zw8-Kn-qxH" firstAttribute="bottom" secondItem="so7-5q-vz9" secondAttribute="bottom" id="OxK-WD-RFJ"/>
+                            <constraint firstAttribute="bottom" secondItem="so7-5q-vz9" secondAttribute="bottom" id="OxK-WD-RFJ"/>
                             <constraint firstItem="Zw8-Kn-qxH" firstAttribute="trailing" secondItem="so7-5q-vz9" secondAttribute="trailing" id="YOU-yj-epl"/>
                             <constraint firstItem="so7-5q-vz9" firstAttribute="top" secondItem="38o-ck-IaG" secondAttribute="top" id="ltj-1m-WuQ"/>
                         </constraints>

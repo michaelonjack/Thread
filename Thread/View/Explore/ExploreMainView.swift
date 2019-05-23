@@ -10,7 +10,7 @@ import UIKit
 
 class ExploreMainView: UIView {
     
-    var zipCodeSearchBarView: SearchBarView = {
+    var searchBarView: SearchBarView = {
         let searchView = SearchBarView(frame: .zero)
         searchView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -46,9 +46,7 @@ class ExploreMainView: UIView {
     
     fileprivate func setupView() {
         
-        zipCodeSearchBarView.searchBarView.textField.placeholder = "search zip code"
-        
-        addSubview(zipCodeSearchBarView)
+        addSubview(searchBarView)
         addSubview(locationsCollectionView)
         
         setupLayout()
@@ -57,12 +55,12 @@ class ExploreMainView: UIView {
     
     fileprivate func setupLayout() {
         NSLayoutConstraint.activate([
-            zipCodeSearchBarView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            zipCodeSearchBarView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            zipCodeSearchBarView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            zipCodeSearchBarView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
+            searchBarView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            searchBarView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            searchBarView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            searchBarView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
             
-            locationsCollectionView.topAnchor.constraint(equalTo: zipCodeSearchBarView.bottomAnchor),
+            locationsCollectionView.topAnchor.constraint(equalTo: searchBarView.bottomAnchor),
             locationsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
             locationsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             locationsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
