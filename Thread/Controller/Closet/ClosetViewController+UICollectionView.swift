@@ -24,6 +24,8 @@ extension ClosetViewController: UICollectionViewDataSource {
             guard let clothingType = ClothingType(rawValue: currentItemIndex) else { return 0 }
             guard let clothingItem = user?.clothingItems[clothingType] else { return 0 }
             
+            clothingItem.tags.sort { $0.name.count < $1.name.count }
+            
             return clothingItem.tags.count
         }
         

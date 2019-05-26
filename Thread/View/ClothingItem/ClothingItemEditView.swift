@@ -63,14 +63,54 @@ class ClothingItemEditView: UIView {
         return field
     }()
     
+    var tagsLabel: UILabel = {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.textAlignment = .left
+        l.adjustsFontSizeToFitWidth = true
+        l.textColor = .black
+        l.text = "Tags"
+        l.font = UIFont(name: "AvenirNext-Regular", size: 19.0)
+        
+        return l
+    }()
+    
     var tagsField: UnderlinedTextFieldView = {
         let field = UnderlinedTextFieldView()
         field.translatesAutoresizingMaskIntoConstraints = false
-        field.textField.placeholder = "comma-separated list of tags"
+        field.textField.placeholder = "tag name"
         field.textField.textAlignment = .left
         field.textField.autocapitalizationType = UITextAutocapitalizationType.none
         
         return field
+    }()
+    
+    var addTagButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 8
+        button.setTitle("Add", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .black
+        button.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: 14.0)
+        
+        return button
+    }()
+    
+    var tagsCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        flowLayout.minimumLineSpacing = 8
+        flowLayout.minimumInteritemSpacing = 8
+        
+        var cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.isPagingEnabled = false
+        cv.backgroundColor = .white
+        cv.register(ClosetTagCollectionViewCell.self, forCellWithReuseIdentifier: "TagCell")
+        
+        return cv
     }()
     
     var detailsLabel: UILabel = {
@@ -98,6 +138,8 @@ class ClothingItemEditView: UIView {
         return field
     }()
     
+    var tags: [ClothingItemTag] = []
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -113,7 +155,7 @@ class ClothingItemEditView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        mainScrollView.contentSize = CGSize(width: mainScrollView.frame.width, height: mainScrollView.frame.height * 2)
+        mainScrollView.contentSize = CGSize(width: mainScrollView.frame.width, height: mainScrollView.frame.height * 3)
     }
     
     fileprivate func setupView() {
@@ -124,7 +166,10 @@ class ClothingItemEditView: UIView {
         mainScrollView.addSubview(brandField)
         mainScrollView.addSubview(priceField)
         mainScrollView.addSubview(linkField)
+        mainScrollView.addSubview(tagsLabel)
         mainScrollView.addSubview(tagsField)
+        mainScrollView.addSubview(addTagButton)
+        mainScrollView.addSubview(tagsCollectionView)
         mainScrollView.addSubview(detailsLabel)
         mainScrollView.addSubview(detailsField)
         
@@ -163,12 +208,27 @@ class ClothingItemEditView: UIView {
             linkField.widthAnchor.constraint(equalTo: nameField.widthAnchor),
             linkField.heightAnchor.constraint(equalTo: nameField.heightAnchor),
             
-            tagsField.topAnchor.constraint(equalTo: linkField.bottomAnchor, constant: 30),
+            tagsLabel.topAnchor.constraint(equalTo: linkField.bottomAnchor, constant: 30),
+            tagsLabel.leadingAnchor.constraint(equalTo: nameField.leadingAnchor),
+            tagsLabel.trailingAnchor.constraint(equalTo: nameField.trailingAnchor),
+            tagsLabel.heightAnchor.constraint(equalTo: nameField.heightAnchor),
+            
+            tagsField.topAnchor.constraint(equalTo: tagsLabel.bottomAnchor, constant: 10),
             tagsField.leadingAnchor.constraint(equalTo: nameField.leadingAnchor),
-            tagsField.widthAnchor.constraint(equalTo: nameField.widthAnchor),
+            tagsField.trailingAnchor.constraint(equalTo: nameField.trailingAnchor),
             tagsField.heightAnchor.constraint(equalTo: nameField.heightAnchor),
             
-            detailsLabel.topAnchor.constraint(equalTo: tagsField.bottomAnchor, constant: 30),
+            addTagButton.centerYAnchor.constraint(equalTo: tagsField.centerYAnchor),
+            addTagButton.heightAnchor.constraint(equalTo: tagsField.heightAnchor, multiplier: 0.7),
+            addTagButton.widthAnchor.constraint(equalToConstant: frame.width * 0.15),
+            addTagButton.leadingAnchor.constraint(equalTo: tagsField.trailingAnchor, constant: 8),
+            
+            tagsCollectionView.topAnchor.constraint(equalTo: tagsField.bottomAnchor, constant: 10),
+            tagsCollectionView.leadingAnchor.constraint(equalTo: nameField.leadingAnchor),
+            tagsCollectionView.trailingAnchor.constraint(equalTo: nameField.trailingAnchor),
+            tagsCollectionView.heightAnchor.constraint(equalToConstant: 100),
+            
+            detailsLabel.topAnchor.constraint(equalTo: tagsCollectionView.bottomAnchor, constant: 30),
             detailsLabel.leadingAnchor.constraint(equalTo: nameField.leadingAnchor),
             detailsLabel.widthAnchor.constraint(equalTo: nameField.widthAnchor),
             detailsLabel.heightAnchor.constraint(equalTo: nameField.heightAnchor),

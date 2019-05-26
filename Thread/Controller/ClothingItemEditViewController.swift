@@ -23,6 +23,11 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        editView.addTagButton.addTarget(self, action: #selector(addClothingItemTag), for: .touchUpInside)
+        
+        editView.tagsCollectionView.delegate = self
+        editView.tagsCollectionView.dataSource = self
+        
         itemImageView.clipsToBounds = true
         
         setInitialData()
@@ -57,7 +62,7 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
         editView.brandField.textField.text = clothingItem.brand
         editView.priceField.textField.text = clothingItem.price == nil ? "" : String(format: "%.2f", clothingItem.price!)
         editView.linkField.textField.text = clothingItem.itemUrl?.absoluteString
-        editView.tagsField.textField.text = clothingItem.tags.map { $0.name }.joined(separator: ",")
+        editView.tags = clothingItem.tags
         editView.detailsField.text = clothingItem.details ?? ""
     }
     
@@ -113,17 +118,74 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
         clothingItem.name = editView.nameField.textField.text ?? ""
         clothingItem.brand = editView.brandField.textField.text ?? ""
         clothingItem.price = Double(editView.priceField.textField.text ?? "")
-        clothingItem.tags = getClothingItemTags()
+        clothingItem.tags = editView.tags
         
         if let urlStr = editView.linkField.textField.text {
             clothingItem.itemUrl = URL(string: urlStr)
         }
     }
     
-    fileprivate func getClothingItemTags() -> [ClothingItemTag] {
-        var tagNames:[String] = editView.tagsField.textField.text?.components(separatedBy: ",") ?? []
-        tagNames = tagNames.filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+    @objc func addClothingItemTag() {
+        var tagText = editView.tagsField.textField.text ?? ""
+        tagText = tagText.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        return tagNames.map { ClothingItemTag(name: $0) }
+        guard tagText != "" else { return }
+        
+        editView.tags.append( ClothingItemTag(name: tagText) )
+        editView.tagsField.textField.text = ""
+        editView.tagsCollectionView.reloadData()
+        
+        view.endEditing(true)
+    }
+}
+
+
+
+extension ClothingItemEditViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let tagText = editView.tags[indexPath.row].name
+        
+        let deleteConfirmationAlert = UIAlertController(title: "Delete Tag", message: "Are you sure you would like to delete the \"\(tagText)\" tag?", preferredStyle: .alert)
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] (_) in
+            self?.editView.tags.remove(at: indexPath.row)
+            self?.editView.tagsCollectionView.reloadData()
+        }
+        deleteConfirmationAlert.addAction(deleteAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        deleteConfirmationAlert.addAction(cancelAction)
+        
+        self.present(deleteConfirmationAlert, animated: true)
+    }
+}
+
+
+
+extension ClothingItemEditViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return editView.tags.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath)
+        
+        guard let tagCell = cell as? ClosetTagCollectionViewCell else { return cell }
+        tagCell.backgroundColor = .black
+        tagCell.label.text = editView.tags[indexPath.row].name
+        tagCell.label.font = UIFont(name: "AvenirNext-Medium", size: 16.0)
+        
+        return tagCell
+    }
+}
+
+
+
+extension ClothingItemEditViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let tagText = editView.tags[indexPath.row].name as NSString
+        let textSize = tagText.size(withAttributes: [.font: UIFont(name: "AvenirNext-Medium", size: 16.0)!])
+        
+        return CGSize(width: textSize.width + 24, height: textSize.height + 4)
     }
 }
