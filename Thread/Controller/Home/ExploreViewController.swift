@@ -24,6 +24,7 @@ class ExploreViewController: UIViewController, Storyboarded {
 
         exploreView.locationsCollectionView.delegate = self
         exploreView.locationsCollectionView.dataSource = self
+        exploreView.locationsCollectionView.keyboardDismissMode = .onDrag
         
         exploreView.searchBarView.searchBarView.textField.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
         
@@ -111,6 +112,8 @@ extension ExploreViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let selectedCell = collectionView.cellForItem(at: indexPath) as? ExploreLocationCollectionViewCell else { return }
         guard let cvAttributes = collectionView.layoutAttributesForItem(at: indexPath) else { return }
+        
+        view.endEditing(true)
         
         let selectedFrame = collectionView.convert(cvAttributes.frame, to: collectionView.superview)
         

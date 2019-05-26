@@ -191,7 +191,7 @@ class HomeView: UIView {
             followingUsersView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2),
             
             followingItemsView.topAnchor.constraint(equalTo: followingUsersView.bottomAnchor),
-            followingItemsView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.70),
+            followingItemsView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.685),
             followingItemsView.leadingAnchor.constraint(equalTo: leadingAnchor),
             followingItemsView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])

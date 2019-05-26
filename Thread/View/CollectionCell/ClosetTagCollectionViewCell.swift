@@ -10,10 +10,12 @@ import UIKit
 
 class ClosetTagCollectionViewCell: UICollectionViewCell {
     
+    static let cellFont = UIFont(name: "AvenirNext-Medium", size: 25.0)
+    
     var label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "AvenirNext-Medium", size: 25.0)
+        label.font = cellFont
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .white
         label.textAlignment = .center

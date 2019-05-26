@@ -212,13 +212,17 @@ class ClosetViewController: UIViewController, Storyboarded {
 
 extension ClosetViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        guard scrollView == clothingItemsView.clothingItemCollectionView else { return }
+        
         let contentOffsetX = abs(scrollView.contentOffset.x)
         let currentPageOffsetX = contentOffsetX.truncatingRemainder(dividingBy: scrollView.frame.width)
         
+        // Animate the hiding of the current item details as the user begins to transition to the next item
         if currentPageOffsetX < scrollView.frame.width / 2 {
             revealDetailsAnimator.fractionComplete = currentPageOffsetX / (scrollView.frame.width / 2)
         } else {
-            // Reverse the animation by counting down from 1 to 0
+            // Reverse the animation by counting down from 1 to 0 to animate the reveal of the next item's details
             revealDetailsAnimator.fractionComplete = 1 - ((currentPageOffsetX - (scrollView.frame.width / 2)) / (scrollView.frame.width / 2))
         }
         

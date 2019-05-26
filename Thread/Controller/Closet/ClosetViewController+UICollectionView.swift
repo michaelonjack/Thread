@@ -64,7 +64,7 @@ extension ClosetViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath)
             
             guard let tagCell = cell as? ClosetTagCollectionViewCell else { return cell }
-            tagCell.backgroundColor = [.blue, .magenta, .green, .purple, .red].randomElement()
+            tagCell.backgroundColor = .black
             tagCell.label.text = ""
             
             if let clothingType = ClothingType(rawValue: currentItemIndex), let clothingItem = user?.clothingItems[clothingType] {
@@ -88,7 +88,18 @@ extension ClosetViewController: UICollectionViewDelegateFlowLayout {
         }
         
         else if collectionView == detailsView.tagsView.tagsCollectionView {
-            return CGSize(width: collectionView.frame.width * 0.90, height: collectionView.frame.height * 0.333)
+            
+            if let clothingType = ClothingType(rawValue: currentItemIndex), let clothingItem = user?.clothingItems[clothingType] {
+                // Calculate the width necessary to fit the current text
+                let tagText = clothingItem.tags[indexPath.row].name as NSString
+                let textSize = tagText.size(withAttributes: [.font: ClosetTagCollectionViewCell.cellFont!])
+                
+                return CGSize(width: textSize.width + 32, height: textSize.height + 10)
+            }
+            
+            else {
+                return CGSize(width: collectionView.frame.width * 0.90, height: collectionView.frame.height * 0.333)
+            }
         }
         
         return CGSize.zero
@@ -100,7 +111,7 @@ extension ClosetViewController: UICollectionViewDelegateFlowLayout {
         }
         
         else if collectionView == detailsView.tagsView.tagsCollectionView {
-            return UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+            return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         }
         
         return UIEdgeInsets.zero

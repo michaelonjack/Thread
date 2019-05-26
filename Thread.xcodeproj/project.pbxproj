@@ -615,12 +615,12 @@
 		B1DC81DF221502790005278D /* General */ = {
 			isa = PBXGroup;
 			children = (
-				B1C8161B220F853D00B35B43 /* SearchBarView.swift */,
-				B159E0DC22498DB700BCA83A /* NotificationView.swift */,
-				B1FE822A220CC7C9006AFD43 /* UnderlinedTextFieldView.swift */,
-				B1DC8226221787030005278D /* SlideOutMenuView.swift */,
-				B1701B1B222174BA009B1788 /* NavigationHeaderView.swift */,
 				B1701B2522236367009B1788 /* CollapsibleButton.swift */,
+				B1701B1B222174BA009B1788 /* NavigationHeaderView.swift */,
+				B159E0DC22498DB700BCA83A /* NotificationView.swift */,
+				B1C8161B220F853D00B35B43 /* SearchBarView.swift */,
+				B1DC8226221787030005278D /* SlideOutMenuView.swift */,
+				B1FE822A220CC7C9006AFD43 /* UnderlinedTextFieldView.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
