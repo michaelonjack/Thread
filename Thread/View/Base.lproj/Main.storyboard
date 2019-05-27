@@ -670,7 +670,7 @@
                     <connections>
                         <outlet property="cancelButton" destination="i3M-rR-I7E" id="pyQ-bR-eO4"/>
                         <outlet property="resultsTable" destination="8IH-Lx-G32" id="Uxr-AW-8Kf"/>
-                        <outlet property="searchBar" destination="WQj-pb-pga" id="SOm-0e-FAh"/>
+                        <outlet property="searchBarView" destination="WQj-pb-pga" id="kQM-Q7-dC1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4wR-k5-sgp" userLabel="First Responder" sceneMemberID="firstResponder"/>

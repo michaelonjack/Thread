@@ -26,7 +26,7 @@ class ExploreViewController: UIViewController, Storyboarded {
         exploreView.locationsCollectionView.dataSource = self
         exploreView.locationsCollectionView.keyboardDismissMode = .onDrag
         
-        exploreView.searchBarView.searchBarView.textField.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
+        exploreView.searchBar.textField.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
         
         navigationController?.delegate = self
         

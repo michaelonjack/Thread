@@ -10,11 +10,12 @@ import UIKit
 
 class ExploreMainView: UIView {
     
-    var searchBarView: SearchBarView = {
-        let searchView = SearchBarView(frame: .zero)
-        searchView.translatesAutoresizingMaskIntoConstraints = false
+    var searchBar: UnderlinedTextFieldView = {
+        let field = UnderlinedTextFieldView(contentType: .location, placeHolder: "search")
+        field.translatesAutoresizingMaskIntoConstraints = false
+        field.textField.textAlignment = .left
         
-        return searchView
+        return field
     }()
     
     var locationsCollectionView: UICollectionView = {
@@ -46,7 +47,7 @@ class ExploreMainView: UIView {
     
     fileprivate func setupView() {
         
-        addSubview(searchBarView)
+        addSubview(searchBar)
         addSubview(locationsCollectionView)
         
         setupLayout()
@@ -55,12 +56,12 @@ class ExploreMainView: UIView {
     
     fileprivate func setupLayout() {
         NSLayoutConstraint.activate([
-            searchBarView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            searchBarView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            searchBarView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            searchBarView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
+            searchBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
+            searchBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
+            searchBar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
+            searchBar.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.07),
             
-            locationsCollectionView.topAnchor.constraint(equalTo: searchBarView.bottomAnchor),
+            locationsCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 8),
             locationsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
             locationsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             locationsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor)

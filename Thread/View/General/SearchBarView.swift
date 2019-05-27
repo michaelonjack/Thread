@@ -10,7 +10,7 @@ import UIKit
 
 class SearchBarView: UIView {
     
-    var searchBarView: UnderlinedTextFieldView = {
+    var searchBar: UnderlinedTextFieldView = {
         let field = UnderlinedTextFieldView(contentType: UITextContentType.name, placeHolder: "search")
         field.translatesAutoresizingMaskIntoConstraints = false
         field.textField.autocapitalizationType = UITextAutocapitalizationType.none
@@ -52,7 +52,7 @@ class SearchBarView: UIView {
     
     fileprivate func setupView() {
         
-        addSubview(searchBarView)
+        addSubview(searchBar)
         addSubview(searchButton)
         
         setupLayout()
@@ -60,14 +60,14 @@ class SearchBarView: UIView {
     
     fileprivate func setupLayout() {
         NSLayoutConstraint.activate([
-            searchBarView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            searchBarView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.60),
-            searchBarView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            searchBarView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.65),
+            searchBar.centerYAnchor.constraint(equalTo: centerYAnchor),
+            searchBar.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.60),
+            searchBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            searchBar.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.65),
             
-            searchButton.centerYAnchor.constraint(equalTo: searchBarView.centerYAnchor),
-            searchButton.heightAnchor.constraint(equalTo: searchBarView.heightAnchor, multiplier: 0.70),
-            searchButton.leadingAnchor.constraint(equalTo: searchBarView.trailingAnchor, constant: 16),
+            searchButton.centerYAnchor.constraint(equalTo: searchBar.centerYAnchor),
+            searchButton.heightAnchor.constraint(equalTo: searchBar.heightAnchor, multiplier: 0.70),
+            searchButton.leadingAnchor.constraint(equalTo: searchBar.trailingAnchor, constant: 16),
             searchButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ])
     }

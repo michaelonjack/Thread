@@ -12,7 +12,7 @@ class ClothingItemSearchViewController: UIViewController, Storyboarded {
     
     weak var coordinator: ActiveUserCoordinator?
 
-    @IBOutlet weak var searchBar: SearchBarView!
+    @IBOutlet weak var searchBarView: SearchBarView!
     @IBOutlet weak var resultsTable: ClothingItemTableView!
     @IBOutlet weak var cancelButton: UIButton!
     
@@ -25,7 +25,7 @@ class ClothingItemSearchViewController: UIViewController, Storyboarded {
         resultsTable.delegate = self
         resultsTable.dataSource = self
         
-        searchBar.searchButton.addTarget(self, action: #selector(performSearch), for: .touchUpInside)
+        searchBarView.searchButton.addTarget(self, action: #selector(performSearch), for: .touchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
@@ -43,7 +43,7 @@ class ClothingItemSearchViewController: UIViewController, Storyboarded {
         
         searchResults = []
         
-        let searchQuery = searchBar.searchBarView.textField.text ?? ""
+        let searchQuery = searchBarView.searchBar.textField.text ?? ""
         
         APIHelper.searchShopStyle(query: searchQuery, limit: 30) { (result) in
             
