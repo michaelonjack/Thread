@@ -16,12 +16,15 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
     @IBOutlet weak var editView: ClothingItemEditView!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var updateButton: UIButton!
+    @IBOutlet weak var updateButtonActivityIndicator: UIActivityIndicatorView!
     
     var clothingItem: ClothingItem!
     var itemImageUpdated: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        updateButton.setTitleColor(updateButton.backgroundColor, for: .disabled)
         
         editView.addTagButton.addTarget(self, action: #selector(addClothingItemTag), for: .touchUpInside)
         
@@ -73,10 +76,15 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
     @IBAction func updateItem(_ sender: Any) {
         guard let currentUser = configuration.currentUser else { return }
         
+        updateButtonActivityIndicator.startAnimating()
+        updateButton.isEnabled = false
+        
         // Require that a name be entered before updating the item
         if editView.nameField.textField.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? true {
             let errorNotification = NotificationView(type: .error, message: "Please enter an item name before updating.")
             errorNotification.show()
+            updateButtonActivityIndicator.stopAnimating()
+            updateButton.isEnabled = true
             return
         }
         
@@ -84,6 +92,8 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
         if let priceStr = editView.priceField.textField.text, !priceStr.isEmpty, Double(priceStr) == nil {
             let errorNotification = NotificationView(type: .error, message: "Please enter a valid number in the price field before updating.")
             errorNotification.show()
+            updateButtonActivityIndicator.stopAnimating()
+            updateButton.isEnabled = true
             return
         }
         

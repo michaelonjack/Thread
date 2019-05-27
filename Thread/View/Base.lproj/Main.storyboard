@@ -978,13 +978,19 @@
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="sHS-pw-3iw">
+                                        <rect key="frame" x="257" y="14.5" width="37" height="37"/>
+                                        <color key="color" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Kxj-cE-3BZ" firstAttribute="height" secondItem="luF-u9-OuN" secondAttribute="height" multiplier="0.7" id="QHp-CU-Pl2"/>
+                                    <constraint firstItem="sHS-pw-3iw" firstAttribute="centerX" secondItem="1iA-7I-Ugn" secondAttribute="centerX" id="RKi-mP-7jr"/>
                                     <constraint firstItem="Kxj-cE-3BZ" firstAttribute="centerX" secondItem="luF-u9-OuN" secondAttribute="centerX" id="Wls-ni-naq"/>
                                     <constraint firstItem="Kxj-cE-3BZ" firstAttribute="width" secondItem="luF-u9-OuN" secondAttribute="width" multiplier="0.9" id="ayj-Sm-dHY"/>
                                     <constraint firstItem="Kxj-cE-3BZ" firstAttribute="centerY" secondItem="luF-u9-OuN" secondAttribute="centerY" id="bdi-0d-la9"/>
+                                    <constraint firstItem="sHS-pw-3iw" firstAttribute="centerY" secondItem="1iA-7I-Ugn" secondAttribute="centerY" id="hnf-ph-zgn"/>
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DOr-rZ-BqA">
@@ -1017,6 +1023,7 @@
                         <outlet property="editView" destination="jwN-Ix-LhF" id="Gg1-ZD-dQS"/>
                         <outlet property="itemImageView" destination="DOr-rZ-BqA" id="kwK-1d-ZXu"/>
                         <outlet property="updateButton" destination="1iA-7I-Ugn" id="PQj-dn-49P"/>
+                        <outlet property="updateButtonActivityIndicator" destination="sHS-pw-3iw" id="xfL-py-XYi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PCt-vV-lcN" userLabel="First Responder" sceneMemberID="firstResponder"/>
