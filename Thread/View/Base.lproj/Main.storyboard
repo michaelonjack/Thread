@@ -993,7 +993,7 @@
                                     <constraint firstItem="sHS-pw-3iw" firstAttribute="centerY" secondItem="1iA-7I-Ugn" secondAttribute="centerY" id="hnf-ph-zgn"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DOr-rZ-BqA">
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DOr-rZ-BqA">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="267"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jwN-Ix-LhF" customClass="ClothingItemEditView" customModule="Thread" customModuleProvider="target">

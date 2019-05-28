@@ -31,7 +31,7 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
         editView.tagsCollectionView.delegate = self
         editView.tagsCollectionView.dataSource = self
         
-        itemImageView.clipsToBounds = true
+        itemImageView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleImageViewPan)))
         
         setInitialData()
     }
@@ -49,6 +49,21 @@ class ClothingItemEditViewController: UIViewController, Storyboarded {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.view.endEditing(true)
+    }
+    
+    @objc func handleImageViewPan(gesture: UIPanGestureRecognizer) {
+        
+        switch gesture.state {
+        case .changed:
+            let translation = gesture.translation(in: nil)
+            itemImageView.transform = CGAffineTransform(translationX: translation.x / 2.5, y: translation.y / 2.5)
+        case .ended:
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
+                self.itemImageView.transform = .identity
+            })
+        default:
+            break
+        }
     }
     
     fileprivate func setInitialData() {
