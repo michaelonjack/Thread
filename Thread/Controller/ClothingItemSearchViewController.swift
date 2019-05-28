@@ -17,6 +17,7 @@ class ClothingItemSearchViewController: UIViewController, Storyboarded {
     @IBOutlet weak var cancelButton: UIButton!
     
     var searchResults: [ClothingItem] = []
+    var cellsUpdatedForImage: [Bool] = []
     var clothingType: ClothingType!
     
     override func viewDidLoad() {
@@ -55,6 +56,11 @@ class ClothingItemSearchViewController: UIViewController, Storyboarded {
             case .success(let items):
                 self.searchResults = items.map { ClothingItem(shopStyleItem: $0, clothingType: self.clothingType) }
             }
+            
+            self.cellsUpdatedForImage = []
+            (0..<self.searchResults.count).forEach({ (_) in
+                self.cellsUpdatedForImage.append(false)
+            })
             
             DispatchQueue.main.async {
                 self.resultsTable.reloadData()
@@ -108,8 +114,14 @@ extension ClothingItemSearchViewController: UITableViewDataSource {
         if let itemImage = clothingItem.itemImage {
             clothingItemCell.setClothingItemImage(image: itemImage)
         } else {
+            
+            guard cellsUpdatedForImage[indexPath.row] == false else { return clothingItemCell }
+            
+            cellsUpdatedForImage[indexPath.row] = true
+            
             clothingItem.getImage(ofPreferredSize: .normal) { (itemImage) in
                 clothingItemCell.setClothingItemImage(image: itemImage)
+                
                 tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
             }
         }
