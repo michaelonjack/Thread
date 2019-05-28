@@ -74,7 +74,9 @@ extension ClothingItemTableViewController: UITableViewDataSource {
         } else {
             clothingItem.getImage(ofPreferredSize: .normal) { (itemImage) in
                 clothingItemCell.setClothingItemImage(image: itemImage)
-                tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+                
+                tableView.beginUpdates()
+                tableView.endUpdates()
             }
         }
         

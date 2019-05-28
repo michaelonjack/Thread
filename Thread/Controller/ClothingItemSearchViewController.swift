@@ -122,7 +122,9 @@ extension ClothingItemSearchViewController: UITableViewDataSource {
             clothingItem.getImage(ofPreferredSize: .normal) { (itemImage) in
                 clothingItemCell.setClothingItemImage(image: itemImage)
                 
-                tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+                // Refreshes the row without reloading the data
+                tableView.beginUpdates()
+                tableView.endUpdates()
             }
         }
         
