@@ -30,6 +30,16 @@ final class Configuration {
             // Set the current user
             if (Auth.auth().currentUser != nil) {
                 getCurrentUser(completion: { (currentUser) in
+                    
+                    // Copy over any cached profile pictures
+                    if currentUser.profilePictureUrl2 == self.currentUser?.profilePictureUrl2 {
+                        currentUser.profilePicture2 = self.currentUser?.profilePicture2
+                    }
+                    
+                    if currentUser.profilePictureUrl3 == self.currentUser?.profilePictureUrl3 {
+                        currentUser.profilePicture3 = self.currentUser?.profilePicture3
+                    }
+                    
                     self.userCache[currentUser.uid] = currentUser
                     self.currentUser = currentUser
                 })

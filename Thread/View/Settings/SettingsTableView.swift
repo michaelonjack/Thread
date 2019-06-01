@@ -10,9 +10,10 @@ import UIKit
 
 class SettingsTableView: UITableView {
     
-    let sectionTitles = ["ACCOUNT", "ACCOUNT ACTIONS", "INFORMATION"]
+    let sectionTitles = ["PROFILE PICTURE", "ACCOUNT", "ACCOUNT ACTIONS", "INFORMATION"]
     var rowData = [
-        [("First Name", ""), ("Last Name", ""), ("Email", ""), ("Profile Picture", "")],
+        [],
+        [("First Name", ""), ("Last Name", ""), ("Email", "")],
         [("Logout", ""), ("Change Password", "")],
         [("Terms of Service", ""), ("Privacy Policy", ""),("Contact", "")]
     ]
@@ -36,16 +37,6 @@ class SettingsTableView: UITableView {
         rowHeight = UITableView.automaticDimension
         estimatedRowHeight = 44.0
         tintColor = .white
-        
-        loadInitialValues()
-    }
-    
-    fileprivate func loadInitialValues() {
-        guard let currentUser = configuration.currentUser else { return }
-        
-        rowData[0][0].1 = currentUser.firstName
-        rowData[0][1].1 = currentUser.lastName
-        rowData[0][2].1 = currentUser.email
     }
 }
 

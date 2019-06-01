@@ -26,8 +26,11 @@ class User {
     }
     var locationStr: String?
     var profilePicture: UIImage?
+    var profilePicture2: UIImage?
+    var profilePicture3: UIImage?
     var profilePictureUrl: URL?
-    var outfitPictureUrl: URL?
+    var profilePictureUrl2: URL?
+    var profilePictureUrl3: URL?
     var clothingItems: [ClothingType:ClothingItem] = [:]
     var favoritedItems: [ClothingItem] = []
     var followingUserIds: [String] = []
@@ -82,8 +85,12 @@ class User {
             profilePictureUrl = URL(string: profilePictureUrlStr)
         }
         
-        if let outfitPictureUrlStr = snapshotValue["outfitPictureUrl"] as? String {
-            outfitPictureUrl = URL(string: outfitPictureUrlStr)
+        if let profilePictureUrlStr = snapshotValue["profilePictureUrl2"] as? String {
+            profilePictureUrl2 = URL(string: profilePictureUrlStr)
+        }
+        
+        if let profilePictureUrlStr = snapshotValue["profilePictureUrl3"] as? String {
+            profilePictureUrl3 = URL(string: profilePictureUrlStr)
         }
         
         if let lastCheckInStr = snapshotValue["lastCheckIn"] as? String {
@@ -184,6 +191,14 @@ class User {
             dict["profilePictureUrl"] = profilePictureUrl.absoluteString
         }
         
+        if let profilePictureUrl = profilePictureUrl2 {
+            dict["profilePictureUrl2"] = profilePictureUrl.absoluteString
+        }
+        
+        if let profilePictureUrl = profilePictureUrl3 {
+            dict["profilePictureUrl3"] = profilePictureUrl.absoluteString
+        }
+        
         if let lastCheckIn = lastCheckIn {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
@@ -248,14 +263,18 @@ class User {
         }
     }
     
-    func getProfilePicture(completion: @escaping (UIImage?) -> Void) {
+    func getProfilePicture(index: Int = 0, completion: @escaping (UIImage?) -> Void) {
+        var profilePictureUrls: [URL?] = [profilePictureUrl, profilePictureUrl2, profilePictureUrl3]
+        var profilePictures: [UIImage?] = [profilePicture, profilePicture2, profilePicture3]
         
-        if let profilePicture = profilePicture {
+        if let profilePicture = profilePictures[index] {
+            print("index: \(index), cached")
             completion(profilePicture)
             return
         }
         
-        else if let imageUrl = profilePictureUrl {
+        else if let imageUrl = profilePictureUrls[index] {
+            print("index: \(index), not cached downloading...")
             SDWebImageDownloader.shared.downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
                 
                 if error != nil {
@@ -263,7 +282,17 @@ class User {
                     return
                 }
                 
-                self.profilePicture = image
+                switch index {
+                case 0:
+                    self.profilePicture = image
+                case 1:
+                    self.profilePicture2 = image
+                case 2:
+                    self.profilePicture3 = image
+                default:
+                    break
+                }
+                
                 completion(image)
                 return
             }
