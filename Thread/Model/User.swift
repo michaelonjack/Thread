@@ -275,7 +275,7 @@ class User {
         
         else if let imageUrl = profilePictureUrls[index] {
             print("index: \(index), not cached downloading...")
-            SDWebImageDownloader.shared.downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
+            SDWebImageManager.shared.loadImage(with: imageUrl, options: .continueInBackground, progress: nil) { (image, _, error, _, _, _) in
                 
                 if error != nil {
                     completion(nil)

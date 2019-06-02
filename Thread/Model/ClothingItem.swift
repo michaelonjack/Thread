@@ -144,7 +144,7 @@ class ClothingItem {
             }
             
             else if let imageUrl = smallItemImageUrl {
-                SDWebImageDownloader.shared.downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
+                SDWebImageManager.shared.loadImage(with: imageUrl, options: .continueInBackground, progress: nil) { (image, _, error, _, _, _) in
                     if error != nil {
                         completion(nil)
                         return
@@ -162,7 +162,7 @@ class ClothingItem {
             }
             
             else if let imageUrl = itemImageUrl {
-                SDWebImageDownloader.shared.downloadImage(with: imageUrl, options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: nil) { (image, _, error, _) in
+                SDWebImageManager.shared.loadImage(with: imageUrl, options: .continueInBackground, progress: nil) { (image, _, error, _, _, _) in
                     if error != nil {
                         completion(nil)
                         return
