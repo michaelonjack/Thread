@@ -114,12 +114,12 @@ class UserProfileStatsView: UIView {
     
     fileprivate func createStatsLabel(title: String, subtitle: String) -> NSAttributedString {
         let titleAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.black,
+            NSAttributedString.Key.foregroundColor: UIColor.white,
             NSAttributedString.Key.font: UIFont(name: "AvenirNext-Regular", size: 18)!
         ]
         
         let subtitleAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.lightGray,
+            NSAttributedString.Key.foregroundColor: UIColor.white,
             NSAttributedString.Key.font: UIFont(name: "AvenirNext-Regular", size: 13)!
         ]
         

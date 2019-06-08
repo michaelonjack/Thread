@@ -14,88 +14,64 @@ class UserProfileViewController: UIViewController, Storyboarded {
     
     weak var coordinator: ActiveUserCoordinator?
     
-    @IBOutlet weak var userStatisticsView: UserProfileStatsView!
-    @IBOutlet weak var userSummaryView: UserProfileSummaryView!
-    @IBOutlet weak var userFeedView: UserProfileFeedView!
-    @IBOutlet weak var profilePictureButton: UIButton!
-    @IBOutlet weak var profilePictureButtonShadowView: UIView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var subtitleLabel: UILabel!
-    @IBOutlet weak var statusTextField: UITextField!
-    @IBOutlet weak var followButton: CollapsibleButton!
-    @IBOutlet weak var blockButton: CollapsibleButton!
+    @IBOutlet weak var userProfileView: UserProfileView!
     
     var userId: String!
     var user: User?
     
+    var profilePictureUrls: [URL] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        statusTextField.delegate = self
+        //statusTextField.delegate = self
         
-        userFeedView.feedCollectionView.delegate = self
-        userFeedView.feedCollectionView.dataSource = self
+        userProfileView.picturesView.picturesCollectionView.delegate = self
+        userProfileView.picturesView.picturesCollectionView.dataSource = self
         
-        profilePictureButton.isUserInteractionEnabled = false
-
+        userProfileView.closetView.feedCollectionView.delegate = self
+        userProfileView.closetView.feedCollectionView.dataSource = self
+        
+        userProfileView.scrollView.delegate = self
+        
         setupView()
         setUserInfo()
     }
     
     fileprivate func setupView() {
         
-        userFeedView.viewButton.addTarget(self, action: #selector(viewPressed), for: .touchUpInside)
+        userProfileView.closetView.viewButton.addTarget(self, action: #selector(viewPressed), for: .touchUpInside)
         
         // If the current user is viewing their own profile, allow them to update their status
-        if userId == configuration.currentUser?.uid {
-            subtitleLabel.isHidden = true
-        } else {
-            statusTextField.isHidden = true
-        }
+//        if userId == configuration.currentUser?.uid {
+//            subtitleLabel.isHidden = true
+//        } else {
+//            statusTextField.isHidden = true
+//        }
         
-        setupProfilePictureButton()
         setupFollowButton()
         setupBlockButton()
     }
     
-    fileprivate func setupProfilePictureButton() {
-        let cornerRadius = view.frame.height * 0.45 * 0.35 / 2
-        
-        profilePictureButton.layer.cornerRadius = cornerRadius
-        profilePictureButton.layer.borderColor = UIColor.white.cgColor
-        profilePictureButton.layer.borderWidth = 1.5
-        profilePictureButton.clipsToBounds = true
-        profilePictureButton.imageView?.contentMode = .scaleAspectFill
-        
-        profilePictureButtonShadowView.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
-        profilePictureButtonShadowView.layer.shadowOffset = CGSize(width: 10, height: 8)
-        profilePictureButtonShadowView.layer.shadowOpacity = 0.1
-        profilePictureButtonShadowView.layer.shadowPath = UIBezierPath(roundedRect: profilePictureButton.bounds, cornerRadius: cornerRadius).cgPath
-    }
-    
     fileprivate func setupFollowButton() {
-        followButton.deselectedTitle = "Follow"
-        followButton.button.setTitle("Follow", for: .normal)
-        followButton.selectedIcon = UIImage(named: "Check")!
-        followButton.selectAction = {
+        userProfileView.followButton.selectAction = {
             configuration.currentUser?.follow(userId: self.userId)
         }
         
-        followButton.deselectAction = {
+        userProfileView.followButton.deselectAction = {
             configuration.currentUser?.unfollow(userId: self.userId)
         }
     }
     
     fileprivate func setupBlockButton() {
-        blockButton.deselectedTitle = "Block"
-        blockButton.button.setTitle("Block", for: .normal)
-        blockButton.selectedIcon = UIImage(named: "Block")!
-        blockButton.selectAction = {
-            configuration.currentUser?.block(userId: self.userId)
+        userProfileView.blockButton.selectAction = { [weak self] in
+            guard let sself = self else { return }
+            configuration.currentUser?.block(userId: sself.userId)
         }
         
-        blockButton.deselectAction = {
-            configuration.currentUser?.unblock(userId: self.userId)
+        userProfileView.blockButton.deselectAction = { [weak self] in
+            guard let sself = self else { return }
+            configuration.currentUser?.unblock(userId: sself.userId)
         }
     }
     
@@ -104,42 +80,37 @@ class UserProfileViewController: UIViewController, Storyboarded {
             self.user = user
             
             if user == configuration.currentUser {
-                // Allow the user to update the profile picture if they're viewing their own profile
-                self.profilePictureButton.isUserInteractionEnabled = true
                 
                 // Hide the Block and Follow buttons if the current user is viewing their own profile
-                self.followButton.isHidden = true
-                self.blockButton.isHidden = true
+                self.userProfileView.hideButtonsStackView()
+                
             }
             
             // If the current user is already following this user, mark the Follow button as selected
             if configuration.currentUser?.followingUserIds.contains(user.uid) ?? false {
-                self.followButton.collapse()
+                self.userProfileView.followButton.select()
             }
             
             // IF the current user has already blocked this user, mark the Block button as selected
             if configuration.currentUser?.blockedUserIds.contains(user.uid) ?? false {
-                self.blockButton.collapse()
+                self.userProfileView.blockButton.select()
             }
             
-            // Update profile picture
-            user.getProfilePicture(completion: { (profilePicture) in
-                self.profilePictureButton.setImage(profilePicture, for: .normal)
-            })
+            self.profilePictureUrls = [user.profilePictureUrl, user.profilePictureUrl2, user.profilePictureUrl3].compactMap { $0 }
             
-            self.userStatisticsView.favoritesCount = user.favoritedItems.count
-            self.userStatisticsView.followingCount = user.followingUserIds.count
-            self.userStatisticsView.followersCount = user.followerUserIds.count
-            self.userSummaryView.lastCheckIn = user.lastCheckInStr
+            self.userProfileView.statsView.favoritesCount = user.favoritedItems.count
+            self.userProfileView.statsView.followingCount = user.followingUserIds.count
+            self.userProfileView.statsView.followersCount = user.followerUserIds.count
+            self.userProfileView.summaryView.lastCheckIn = user.lastCheckInStr
+            self.userProfileView.summaryView.status = user.status ?? ""
             user.getLocationStr(completion: { (locationStr) in
-                self.userSummaryView.location = locationStr ?? ""
+                self.userProfileView.summaryView.location = locationStr ?? ""
             })
             
             DispatchQueue.main.async {
-                self.nameLabel.text = user.name
-                self.subtitleLabel.text = user.status ?? ""
-                self.statusTextField.text = user.status ?? ""
-                self.userFeedView.feedCollectionView.reloadData()
+                self.userProfileView.summaryView.nameLabel.text = user.name
+                //self.userProfileView.picturesView.picturesCollectionView.reloadData()
+                //self.userProfileView.closetView.feedCollectionView.reloadData()
             }
         }
     }
@@ -153,38 +124,6 @@ class UserProfileViewController: UIViewController, Storyboarded {
             coordinator?.viewCloset(forUser: user, initialIndex: initialIndex)
         } else {
             coordinator?.viewCloset(forUserId: userId, initialIndex: initialIndex)
-        }
-    }
-    
-    @IBAction func updateProfilePicture(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(.camera) || UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            var ypConfig = YPImagePickerConfiguration()
-            ypConfig.onlySquareImagesFromCamera = true
-            ypConfig.library.onlySquare = true
-            ypConfig.showsPhotoFilters = true
-            ypConfig.library.mediaType = .photo
-            ypConfig.usesFrontCamera = false
-            ypConfig.shouldSaveNewPicturesToAlbum = false
-            
-            let picker = YPImagePicker(configuration: ypConfig)
-            picker.didFinishPicking { (items, _) in
-                if let photo = items.singlePhoto, let currentUser = configuration.currentUser {
-                    uploadImage(toLocation: "images/" + currentUser.uid + "/ProfilePicture", image: photo.image, completion: { (url, error) in
-                        if error == nil {
-                            currentUser.profilePicture = photo.image
-                            currentUser.profilePictureUrl = url
-                            self.profilePictureButton.setImage(photo.image, for: .normal)
-                            currentUser.save()
-                            
-                            // Cache the profile picture
-                            UserDefaults.standard.setValue(photo.image.jpegData(compressionQuality: 1), forKey: currentUser.uid + "-profilePicture")
-                        }
-                    })
-                }
-                
-                picker.dismiss(animated: true, completion: nil)
-            }
-            present(picker, animated: true, completion: nil)
         }
     }
     
@@ -222,7 +161,9 @@ extension UserProfileViewController: UITextFieldDelegate {
 
 extension UserProfileViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewCloset(initialIndex: indexPath.row)
+        if collectionView == userProfileView.closetView.feedCollectionView {
+            viewCloset(initialIndex: indexPath.row)
+        }
     }
 }
 
@@ -230,44 +171,99 @@ extension UserProfileViewController: UICollectionViewDelegate {
 
 extension UserProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let user = user {
+        if collectionView == userProfileView.closetView.feedCollectionView {
+            guard let user = user else { return 0 }
+            
             return user.clothingItems.count
-        } else {
-            return 0
         }
+        
+        else if collectionView == userProfileView.picturesView.picturesCollectionView {
+            return profilePictureUrls.count
+        }
+        
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "feedCell", for: indexPath)
-        
-        guard let feedCell = cell as? FeedCollectionViewCell else { return cell }
-        feedCell.imageView.contentMode = .scaleAspectFit
-        feedCell.imageView.image = nil
-        
-        if let clothingType = ClothingType(rawValue: indexPath.row), let clothingItem = user?.clothingItems[clothingType] {
+        if collectionView == userProfileView.closetView.feedCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "feedCell", for: indexPath)
             
-            clothingItem.getImage(ofPreferredSize: .small) { (itemImage) in
-                feedCell.imageView.image = itemImage
+            guard let feedCell = cell as? FeedCollectionViewCell else { return cell }
+            feedCell.imageView.contentMode = .scaleAspectFit
+            feedCell.imageView.image = nil
+            
+            if let clothingType = ClothingType(rawValue: indexPath.row), let clothingItem = user?.clothingItems[clothingType] {
+                
+                clothingItem.getImage(ofPreferredSize: .small) { (itemImage) in
+                    feedCell.imageView.image = itemImage
+                }
             }
+            
+            return feedCell
         }
         
-        return feedCell
+        else if collectionView == userProfileView.picturesView.picturesCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfilePictureCell", for: indexPath)
+            
+            guard let imageCell = cell as? ImageCollectionViewCell else { return cell }
+            imageCell.imageView.contentMode = .scaleAspectFill
+            imageCell.imageView.clipsToBounds = true
+            imageCell.imageView.image = UIImage(named: "Avatar")
+            imageCell.imageView.sd_setImage(with: profilePictureUrls[indexPath.row])
+            
+            return imageCell
+        }
+        
+        fatalError("Collection view not accounter for: \(collectionView)")
     }
-    
 }
 
 
 
 extension UserProfileViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let ratio: CGFloat = 1.7 / 2.0
-        let height: CGFloat = collectionView.frame.height - 20
-        let width: CGFloat = height * ratio
         
-        return CGSize(width: width, height: height)
+        if collectionView == userProfileView.closetView.feedCollectionView {
+            let ratio: CGFloat = 1.7 / 2.0
+            let height: CGFloat = collectionView.frame.height - 20
+            let width: CGFloat = height * ratio
+            
+            return CGSize(width: width, height: height)
+        }
+        
+        else if collectionView == userProfileView.picturesView.picturesCollectionView {
+            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        }
+        
+        fatalError("Collection view not accounter for: \(collectionView)")
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        if collectionView == userProfileView.closetView.feedCollectionView {
+            return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        }
+        
+        else if collectionView == userProfileView.picturesView.picturesCollectionView {
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        }
+        
+        fatalError("Collection view not accounter for: \(collectionView)")
+    }
+}
+
+
+
+extension UserProfileViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView == userProfileView.scrollView else { return }
+        guard scrollView.contentOffset.y < 0 else { return }
+        
+        let profilePicturesView = userProfileView.picturesView
+        let contentOffsetY = scrollView.contentOffset.y
+        
+        // Determine how much the height of the pictures view will need to grow by
+        let scaleFactor: CGFloat = (profilePicturesView.frame.height + (-contentOffsetY * 2)) / profilePicturesView.frame.height
+        
+        profilePicturesView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: contentOffsetY / scaleFactor).scaledBy(x: scaleFactor, y: scaleFactor)
     }
 }

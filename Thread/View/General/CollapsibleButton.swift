@@ -12,10 +12,15 @@ class CollapsibleButton: UIView {
     
     var selectAction: (() -> Void) = {}
     var deselectAction: (() -> Void) = {}
+    var selectedTitle: String?
     var deselectedTitle: String?
-    var selectedIcon: UIImage?
+    var collapsedIcon: UIImage? {
+        didSet {
+            collapsedImageView.image = collapsedIcon
+        }
+    }
     
-    var isCollapsed: Bool = false
+    var isSelected: Bool = false
     var buttonWidthAnchor: NSLayoutConstraint!
     
     var button: UIButton = {
@@ -31,16 +36,16 @@ class CollapsibleButton: UIView {
         return b
     }()
     
-    init(deselectedTitle: String, selectedIcon: UIImage, selectAction: @escaping () -> Void, deselectAction: @escaping () -> Void) {
-        super.init(frame: CGRect.zero)
+    var collapsedImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFit
+        iv.backgroundColor = .black
+        iv.clipsToBounds = true
+        iv.alpha = 0
         
-        self.deselectedTitle = deselectedTitle
-        self.selectedIcon = selectedIcon
-        self.selectAction = selectAction
-        self.deselectAction = deselectAction
-        
-        setupView()
-    }
+        return iv
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,15 +63,17 @@ class CollapsibleButton: UIView {
         super.layoutSubviews()
         
         button.layer.cornerRadius = button.frame.height / 2
+        collapsedImageView.layer.cornerRadius = collapsedImageView.frame.height / 2
     }
     
     func setupView() {
         
         backgroundColor = .clear
-        button.setTitle(deselectedTitle, for: .normal)
+        
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         
         addSubview(button)
+        addSubview(collapsedImageView)
         
         setupLayout()
     }
@@ -79,22 +86,22 @@ class CollapsibleButton: UIView {
             button.centerXAnchor.constraint(equalTo: centerXAnchor),
             button.centerYAnchor.constraint(equalTo: centerYAnchor),
             button.heightAnchor.constraint(equalTo: heightAnchor),
-            buttonWidthAnchor
+            buttonWidthAnchor,
+            
+            collapsedImageView.heightAnchor.constraint(equalTo: button.heightAnchor),
+            collapsedImageView.widthAnchor.constraint(equalTo: collapsedImageView.heightAnchor),
+            collapsedImageView.centerYAnchor.constraint(equalTo: button.centerYAnchor),
+            collapsedImageView.centerXAnchor.constraint(equalTo: button.centerXAnchor)
         ])
     }
     
     @objc func buttonTapped() {
-        if isCollapsed {
-            buttonWidthAnchor.isActive = false
-            buttonWidthAnchor = button.widthAnchor.constraint(equalTo: widthAnchor)
-            buttonWidthAnchor.isActive = true
-            
-            button.setImage(nil, for: .normal)
+        if isSelected {
             button.setTitle(deselectedTitle, for: .normal)
+            button.setTitleColor(.black, for: .normal)
             
             UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.button.backgroundColor = .clear
-                self.layoutIfNeeded()
             })
             
             deselectAction()
@@ -105,30 +112,39 @@ class CollapsibleButton: UIView {
             buttonWidthAnchor = button.widthAnchor.constraint(equalTo: button.heightAnchor)
             buttonWidthAnchor.isActive = true
             
-            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.button.setTitle(nil, for: .normal)
+            
+            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.button.backgroundColor = .black
                 self.layoutIfNeeded()
             }, completion: { (_) in
-                self.button.setTitle(nil, for: .normal)
-                self.button.setImage(self.selectedIcon, for: .normal)
+                
+                self.collapsedImageView.alpha = 1
+                
+                self.buttonWidthAnchor.isActive = false
+                self.buttonWidthAnchor = self.button.widthAnchor.constraint(equalTo: self.widthAnchor)
+                self.buttonWidthAnchor.isActive = true
+                
+                UIView.animate(withDuration: 0.7, delay: 0.7, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    self.collapsedImageView.alpha = 0
+                    self.layoutIfNeeded()
+                }, completion: { (_) in
+                    self.button.setTitle(self.selectedTitle, for: .normal)
+                    self.button.setTitleColor(.white, for: .normal)
+                })
             })
             
             selectAction()
         }
         
-        isCollapsed = !isCollapsed
+        isSelected = !isSelected
     }
     
-    func collapse() {
-        buttonWidthAnchor.isActive = false
-        buttonWidthAnchor = button.widthAnchor.constraint(equalTo: button.heightAnchor)
-        buttonWidthAnchor.isActive = true
-        
+    func select() {
         button.backgroundColor = .black
-        button.setTitle(nil, for: .normal)
-        button.setImage(self.selectedIcon, for: .normal)
-        layoutIfNeeded()
+        button.setTitle(selectedTitle, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         
-        isCollapsed = true
+        isSelected = true
     }
 }

@@ -9,7 +9,18 @@ import UIKit
 
 class UserProfileSummaryView: UIView {
     
-    var lastCheckIn:String = "" {
+    var status: String = "" {
+        didSet {
+            if status.count == 0 {
+                labelStackView.removeArrangedSubview(statusLabel)
+            } else {
+                DispatchQueue.main.async {
+                    self.statusLabel.text = self.status
+                }
+            }
+        }
+    }
+    var lastCheckIn: String = "" {
         didSet {
             DispatchQueue.main.async {
                 self.checkInLabel.attributedText = self.createSummaryLabelString(title: "Last checked in ", subtitle: self.lastCheckIn)
@@ -23,6 +34,25 @@ class UserProfileSummaryView: UIView {
             }
         }
     }
+    
+    var nameLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name: "AvenirNext-Medium", size: 30.0)
+        
+        return label
+    }()
+    
+    var statusLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.textColor = .gray
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name: "AvenirNext-Regular", size: 14.0)
+        
+        return label
+    }()
     
     var checkInLabel: UILabel = {
         let label = UILabel()
@@ -59,7 +89,7 @@ class UserProfileSummaryView: UIView {
         checkInLabel.attributedText = createSummaryLabelString(title: "Last checked in ", subtitle: "")
         locationLabel.attributedText = createSummaryLabelString(title: "Location: ", subtitle: "")
         
-        labelStackView = UIStackView(arrangedSubviews: [checkInLabel, locationLabel])
+        labelStackView = UIStackView(arrangedSubviews: [nameLabel, statusLabel, checkInLabel, locationLabel])
         labelStackView.translatesAutoresizingMaskIntoConstraints = false
         labelStackView.axis = .vertical
         labelStackView.distribution = .fillEqually

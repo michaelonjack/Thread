@@ -14,6 +14,8 @@
 		B1182E5A2234BF43005DB4DB /* ClosetViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1182E592234BF43005DB4DB /* ClosetViewController+UICollectionView.swift */; };
 		B1182E5C2234C251005DB4DB /* ClosetTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1182E5B2234C251005DB4DB /* ClosetTagCollectionViewCell.swift */; };
 		B11CBD502205CFB200D6620B /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11CBD4F2205CFB200D6620B /* UIColor+Additions.swift */; };
+		B12B553922A73CDF004697D4 /* UserProfilePicturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12B553822A73CDF004697D4 /* UserProfilePicturesView.swift */; };
+		B12B553B22A749F3004697D4 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12B553A22A749F3004697D4 /* UserProfileView.swift */; };
 		B1369CEC22652B9A0074CBFD /* ExploreLocationWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1369CEB22652B9A0074CBFD /* ExploreLocationWeatherView.swift */; };
 		B1369CEE226564480074CBFD /* ExploreLocationWeatherItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1369CED226564480074CBFD /* ExploreLocationWeatherItemView.swift */; };
 		B1377C57220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1377C56220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift */; };
@@ -142,6 +144,8 @@
 		B1182E5B2234C251005DB4DB /* ClosetTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		B11CBD462205CD8C00D6620B /* Thread.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Thread.entitlements; sourceTree = "<group>"; };
 		B11CBD4F2205CFB200D6620B /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
+		B12B553822A73CDF004697D4 /* UserProfilePicturesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePicturesView.swift; sourceTree = "<group>"; };
+		B12B553A22A749F3004697D4 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		B1369CEB22652B9A0074CBFD /* ExploreLocationWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationWeatherView.swift; sourceTree = "<group>"; };
 		B1369CED226564480074CBFD /* ExploreLocationWeatherItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationWeatherItemView.swift; sourceTree = "<group>"; };
 		B1377C56220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetUpdateOptionsViewController.swift; sourceTree = "<group>"; };
@@ -481,6 +485,8 @@
 				B157D4AE22065ADD00D83CDB /* UserProfileSummaryView.swift */,
 				B157D4AA2206452100D83CDB /* UserProfileStatsView.swift */,
 				B1DC8276221999B60005278D /* UserTableView.swift */,
+				B12B553822A73CDF004697D4 /* UserProfilePicturesView.swift */,
+				B12B553A22A749F3004697D4 /* UserProfileView.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -899,6 +905,7 @@
 				B1C5086B223412C100534DB1 /* HomeClosetItemCollectionViewCell.swift in Sources */,
 				B1DC82792219B7670005278D /* UserTableViewController.swift in Sources */,
 				B1A11D411EFEC4AB00E16169 /* DatabaseHelper.swift in Sources */,
+				B12B553922A73CDF004697D4 /* UserProfilePicturesView.swift in Sources */,
 				B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */,
 				B1F6B967228F8BDD00E58CFD /* LocationViewController.swift in Sources */,
 				B1C50875223AAED500534DB1 /* HomeViewController+UITableView.swift in Sources */,
@@ -983,6 +990,7 @@
 				B1C508672234102800534DB1 /* HomeViewController+UICollectionView.swift in Sources */,
 				B1DC826B221889AE0005278D /* SlideOutMenuTableViewCell.swift in Sources */,
 				B1C8161C220F853D00B35B43 /* SearchBarView.swift in Sources */,
+				B12B553B22A749F3004697D4 /* UserProfileView.swift in Sources */,
 				B1182E5A2234BF43005DB4DB /* ClosetViewController+UICollectionView.swift in Sources */,
 				B11CBD502205CFB200D6620B /* UIColor+Additions.swift in Sources */,
 				B1FE821F22093C32006AFD43 /* Storyboarded.swift in Sources */,
