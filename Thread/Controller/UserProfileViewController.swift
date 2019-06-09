@@ -82,10 +82,8 @@ class UserProfileViewController: UIViewController, Storyboarded {
             self.user = user
             
             if user == configuration.currentUser {
-                
                 // Hide the Block and Follow buttons if the current user is viewing their own profile
                 self.userProfileView.hideButtonsStackView()
-                
             }
             
             // If the current user is already following this user, mark the Follow button as selected
@@ -99,6 +97,18 @@ class UserProfileViewController: UIViewController, Storyboarded {
             }
             
             self.profilePictureUrls = [user.profilePictureUrl, user.profilePictureUrl2, user.profilePictureUrl3].compactMap { $0 }
+            
+            // Adjust the picture indicator width using the number of pictures available
+            if var indicatorWidthConstraint = self.userProfileView.picturesView.indicatorWidthConstraint {
+                let numberOfPictures = CGFloat(self.profilePictureUrls.count)
+                let indicatorView = self.userProfileView.picturesView.indicatorView
+                let indicatorTrackView = self.userProfileView.picturesView.indicatorTrackView
+                
+                indicatorWidthConstraint.isActive = false
+                indicatorWidthConstraint = indicatorView.widthAnchor.constraint(equalTo: indicatorTrackView.widthAnchor, multiplier: 1.0 / max(1.0, numberOfPictures))
+                indicatorWidthConstraint.isActive = true
+                self.userProfileView.picturesView.layoutIfNeeded()
+            }
             
             self.userProfileView.statsView.favoritesCount = user.favoritedItems.count
             self.userProfileView.statsView.followingCount = user.followingUserIds.count
@@ -263,15 +273,25 @@ extension UserProfileViewController: UICollectionViewDelegateFlowLayout {
 
 extension UserProfileViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard scrollView == userProfileView.scrollView else { return }
-        guard scrollView.contentOffset.y < 0 else { return }
         
-        let profilePicturesView = userProfileView.picturesView
-        let contentOffsetY = scrollView.contentOffset.y
+        if scrollView == userProfileView.scrollView {
+            guard scrollView.contentOffset.y < 0 else { return }
+            
+            let profilePicturesView = userProfileView.picturesView
+            let contentOffsetY = scrollView.contentOffset.y
+            
+            // Determine how much the height of the pictures view will need to grow by
+            let scaleFactor: CGFloat = (profilePicturesView.frame.height + (-contentOffsetY * 2)) / profilePicturesView.frame.height
+            
+            profilePicturesView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: contentOffsetY / scaleFactor).scaledBy(x: scaleFactor, y: scaleFactor)
+        }
         
-        // Determine how much the height of the pictures view will need to grow by
-        let scaleFactor: CGFloat = (profilePicturesView.frame.height + (-contentOffsetY * 2)) / profilePicturesView.frame.height
-        
-        profilePicturesView.transform = CGAffineTransform.identity.translatedBy(x: 0, y: contentOffsetY / scaleFactor).scaledBy(x: scaleFactor, y: scaleFactor)
+        else if scrollView == userProfileView.picturesView.picturesCollectionView {
+            let contentOffsetX = scrollView.contentOffset.x
+            let indicatorView = userProfileView.picturesView.indicatorView
+            let indicatorOffsetX = (contentOffsetX / view.frame.width) * indicatorView.frame.width
+            
+            indicatorView.transform = CGAffineTransform(translationX: indicatorOffsetX, y: 0)
+        }
     }
 }

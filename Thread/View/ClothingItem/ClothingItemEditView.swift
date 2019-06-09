@@ -25,6 +25,7 @@ class ClothingItemEditView: UIView {
     var mainScrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.keyboardDismissMode = .onDrag
         
         return sv
     }()
