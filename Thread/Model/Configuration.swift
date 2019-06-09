@@ -19,7 +19,7 @@ final class Configuration {
     var maximumItemDistance: Double
     var currentUser: User?
     var places: [Place] = []
-    var userCache: [String:User] = [:]
+    var userCache = NSCache<NSString, User>()
     
     private init() {
         // Check for cached values
@@ -40,7 +40,7 @@ final class Configuration {
                         currentUser.profilePicture3 = self.currentUser?.profilePicture3
                     }
                     
-                    self.userCache[currentUser.uid] = currentUser
+                    self.userCache.setObject(currentUser, forKey: currentUser.uid as NSString)
                     self.currentUser = currentUser
                 })
             }

@@ -36,7 +36,7 @@ func getCurrentUser(completion: @escaping (User) -> Void) {
 func getUser(withId id: String, completion: @escaping (User) -> Void) {
     
     // Check if the user is cached first
-    if let user = configuration.userCache[id] {
+    if let user = configuration.userCache.object(forKey: id as NSString) {
         completion( user )
         return
     }
@@ -47,7 +47,7 @@ func getUser(withId id: String, completion: @escaping (User) -> Void) {
         let user = User(snapshot: snapshot)
         
         // Save the user to the cache
-        configuration.userCache[user.uid] = user
+        configuration.userCache.setObject(user, forKey: user.uid as NSString)
         
         completion( user )
     }

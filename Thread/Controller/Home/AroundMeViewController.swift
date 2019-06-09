@@ -53,7 +53,7 @@ class AroundMeViewController: UIViewController, Storyboarded {
                 if let childSnapshot = child as? DataSnapshot {
                     var user: User!
                     
-                    if let cachedUser = configuration.userCache[childSnapshot.key] {
+                    if let cachedUser = configuration.userCache.object(forKey: childSnapshot.key as NSString) {
                         user = cachedUser
                     } else {
                         user = User(snapshot: childSnapshot)
