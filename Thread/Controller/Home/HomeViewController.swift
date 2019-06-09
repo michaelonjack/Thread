@@ -101,10 +101,12 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
             })
             
             currentUser.getProfilePicture(completion: { (profilePicture) in
+                guard let profilePicture = profilePicture else { return }
+                
                 self.homeView.profileButton.setImage(profilePicture, for: .normal)
                 
                 // Cache the profile picture if it has not already been saved
-                if let profilePicture = profilePicture, UserDefaults.standard.data(forKey: currentUser.uid + "-profilePicture") == nil {
+                if UserDefaults.standard.data(forKey: currentUser.uid + "-profilePicture") == nil {
                     UserDefaults.standard.setValue(profilePicture.jpegData(compressionQuality: 1), forKey: currentUser.uid + "-profilePicture")
                 }
             })

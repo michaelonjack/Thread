@@ -54,12 +54,14 @@ class UserProfileViewController: UIViewController, Storyboarded {
     }
     
     fileprivate func setupFollowButton() {
-        userProfileView.followButton.selectAction = {
-            configuration.currentUser?.follow(userId: self.userId)
+        userProfileView.followButton.selectAction = { [weak self] in
+            guard let sself = self else { return }
+            configuration.currentUser?.follow(userId: sself.userId)
         }
         
-        userProfileView.followButton.deselectAction = {
-            configuration.currentUser?.unfollow(userId: self.userId)
+        userProfileView.followButton.deselectAction = { [weak self] in
+            guard let sself = self else { return }
+            configuration.currentUser?.unfollow(userId: sself.userId)
         }
     }
     
@@ -109,8 +111,8 @@ class UserProfileViewController: UIViewController, Storyboarded {
             
             DispatchQueue.main.async {
                 self.userProfileView.summaryView.nameLabel.text = user.name
-                //self.userProfileView.picturesView.picturesCollectionView.reloadData()
-                //self.userProfileView.closetView.feedCollectionView.reloadData()
+                self.userProfileView.picturesView.picturesCollectionView.reloadData()
+                self.userProfileView.closetView.feedCollectionView.reloadData()
             }
         }
     }
@@ -191,10 +193,16 @@ extension UserProfileViewController: UICollectionViewDataSource {
             guard let feedCell = cell as? FeedCollectionViewCell else { return cell }
             feedCell.imageView.contentMode = .scaleAspectFit
             feedCell.imageView.image = nil
+            feedCell.tag = indexPath.row
             
             if let clothingType = ClothingType(rawValue: indexPath.row), let clothingItem = user?.clothingItems[clothingType] {
                 
                 clothingItem.getImage(ofPreferredSize: .small) { (itemImage) in
+                    // It's possible that a cell was reused before its original image fetch task completed causing the wrong image to be loaded into the cell. Utilize the tag to make sure we're updating the correct cell
+                    // Scenario: Row 1 loads Cell A (fetches image 1)
+                    //           Row 2 reuses Cell A (fetches image 2)
+                    // Image 2 is fetched first and THEN image 1 is fetched causing it to overwrite image 2 (the correct image)
+                    guard feedCell.tag == indexPath.row else { return }
                     feedCell.imageView.image = itemImage
                 }
             }

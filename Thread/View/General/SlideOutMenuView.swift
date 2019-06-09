@@ -160,7 +160,7 @@ class SlideOutMenuView: UIView {
             self.statsLabel.attributedText = self.createStatsLabelString(favoritesCount: user.favoritedItems.count, followingCount: user.followingUserIds.count)
             
             user.getProfilePicture(completion: { (profilePicture) in
-                self.profilePictureView.image = profilePicture
+                self.profilePictureView.image = profilePicture ?? UIImage(named: "Avatar")
             })
         }
     }

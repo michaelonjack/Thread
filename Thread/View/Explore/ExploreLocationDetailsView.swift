@@ -187,12 +187,14 @@ extension ExploreLocationDetailsView: UICollectionViewDataSource {
         guard let imageCell = cell as? ImageCollectionViewCell else { return cell }
         
         imageCell.imageView.contentMode = .scaleAspectFit
+        imageCell.backgroundColor = .white
         imageCell.imageView.image = nil
+        imageCell.tag = indexPath.row
         
         if indexPath.row < nearbyItems.count {
             let item = nearbyItems[indexPath.row]
             item.1.getImage(ofPreferredSize: .small) { (itemImage) in
-                imageCell.backgroundColor = .white
+                guard imageCell.tag == indexPath.row else { return }
                 imageCell.imageView.image = itemImage
             }
         }

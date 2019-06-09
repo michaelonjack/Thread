@@ -43,6 +43,7 @@ extension ClosetViewController: UICollectionViewDataSource {
             closetItemCell.imageView.image = UIImage(named: clothingType.description)
             closetItemCell.label.text = "No Price"
             closetItemCell.imageView.contentMode = .scaleAspectFit
+            closetItemCell.tag = indexPath.row
             
             if let item = user?.clothingItems[clothingType] {
                 
@@ -55,6 +56,7 @@ extension ClosetViewController: UICollectionViewDataSource {
                 }
                 
                 item.getImage(ofPreferredSize: .normal) { (itemImage) in
+                    guard closetItemCell.tag == indexPath.row else { return }
                     closetItemCell.imageView.image = itemImage
                 }
             }

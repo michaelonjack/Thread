@@ -39,10 +39,12 @@ extension HomeViewController: UICollectionViewDataSource {
             
             imageCell.imageView.contentMode = .scaleAspectFill
             imageCell.imageView.image = UIImage(named: "Avatar")
+            imageCell.tag = indexPath.row
             
             let userId = followingUserIds[indexPath.row]
             getUser(withId: userId) { (user) in
                 user.getProfilePicture(completion: { (profilePicture) in
+                    guard imageCell.tag == indexPath.row else { return }
                     imageCell.imageView.image = profilePicture
                 })
             }
