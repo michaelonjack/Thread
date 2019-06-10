@@ -45,7 +45,7 @@ class ClosetViewController: UIViewController, Storyboarded {
             
             // If the owner of the item is not the current user, remove the ability to update
             if configuration.currentUser != user {
-                buttonsStackView.removeArrangedSubview(updateButton)
+                updateButton.removeFromSuperview()
             }
         } else {
             getUser(withId: userId) { (user) in
@@ -54,7 +54,7 @@ class ClosetViewController: UIViewController, Storyboarded {
                 
                 // If the owner of the item is not the current user, remove the ability to update
                 if configuration.currentUser != user {
-                    self.buttonsStackView.removeArrangedSubview(self.updateButton)
+                    self.updateButton.removeFromSuperview()
                 }
             }
         }
@@ -76,8 +76,10 @@ class ClosetViewController: UIViewController, Storyboarded {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        updateButton.clipsToBounds = true
-        updateButton.layer.cornerRadius = updateButton.frame.height / 5.0
+        if let updateButton = updateButton {
+            updateButton.clipsToBounds = true
+            updateButton.layer.cornerRadius = updateButton.frame.height / 5.0
+        }
         
         viewButton.clipsToBounds = true
         viewButton.layer.cornerRadius = viewButton.frame.height / 5.0

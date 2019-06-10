@@ -18,6 +18,7 @@ class UserProfileView: UIView {
         sv.isExclusiveTouch = false
         sv.delaysContentTouches = false
         sv.showsVerticalScrollIndicator = false
+        sv.keyboardDismissMode = .onDrag
         
         return sv
     }()

@@ -24,7 +24,7 @@ class UserProfileViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //statusTextField.delegate = self
+        userProfileView.summaryView.statusTextField.delegate = self
         
         userProfileView.picturesView.picturesCollectionView.delegate = self
         userProfileView.picturesView.picturesCollectionView.dataSource = self
@@ -43,11 +43,13 @@ class UserProfileViewController: UIViewController, Storyboarded {
         userProfileView.closetView.viewButton.addTarget(self, action: #selector(viewPressed), for: .touchUpInside)
         
         // If the current user is viewing their own profile, allow them to update their status
-//        if userId == configuration.currentUser?.uid {
-//            subtitleLabel.isHidden = true
-//        } else {
-//            statusTextField.isHidden = true
-//        }
+        if userId == configuration.currentUser?.uid {
+            // Hide the read only status label
+            userProfileView.summaryView.statusLabel.removeFromSuperview()
+        } else {
+            // Hide the editable text field
+            userProfileView.summaryView.statusTextField.removeFromSuperview()
+        }
         
         setupFollowButton()
         setupBlockButton()

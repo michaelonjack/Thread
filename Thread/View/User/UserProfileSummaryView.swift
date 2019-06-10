@@ -12,10 +12,11 @@ class UserProfileSummaryView: UIView {
     var status: String = "" {
         didSet {
             if status.count == 0 {
-                labelStackView.removeArrangedSubview(statusLabel)
+                statusLabel.removeFromSuperview()
             } else {
                 DispatchQueue.main.async {
                     self.statusLabel.text = self.status
+                    self.statusTextField.text = self.status
                 }
             }
         }
@@ -54,6 +55,19 @@ class UserProfileSummaryView: UIView {
         return label
     }()
     
+    var statusTextField: UITextField = {
+        let tf = UITextField()
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        tf.placeholder = "status"
+        tf.adjustsFontSizeToFitWidth = true
+        tf.borderStyle = .none
+        tf.font = UIFont(name: "AvenirNext-Regular", size: 14.0)
+        tf.textColor = .black
+        tf.tintColor = .black
+        
+        return tf
+    }()
+    
     var checkInLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
@@ -89,7 +103,7 @@ class UserProfileSummaryView: UIView {
         checkInLabel.attributedText = createSummaryLabelString(title: "Last checked in ", subtitle: "")
         locationLabel.attributedText = createSummaryLabelString(title: "Location: ", subtitle: "")
         
-        labelStackView = UIStackView(arrangedSubviews: [nameLabel, statusLabel, checkInLabel, locationLabel])
+        labelStackView = UIStackView(arrangedSubviews: [nameLabel, statusLabel, statusTextField, checkInLabel, locationLabel])
         labelStackView.translatesAutoresizingMaskIntoConstraints = false
         labelStackView.axis = .vertical
         labelStackView.distribution = .fillEqually

@@ -28,7 +28,7 @@ class ClosetUpdateOptionsViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         
         if existingItem == nil {
-            optionsStackView.removeArrangedSubview(updateOptionsStackView)
+            updateOptionsStackView.removeFromSuperview()
         }
     }
     
