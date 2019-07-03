@@ -15,6 +15,14 @@ extension HomeViewController: UITableViewDelegate {
         
         coordinator?.viewCloset(forUser: itemOwner, initialIndex: currentItem.type.rawValue)
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return homeView.followingView.usersHeaderView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 150
+    }
 }
 
 
@@ -59,8 +67,24 @@ extension HomeViewController: UITableViewDataSource {
         
         return userItemCell
     }
-    
-    
+}
+
+
+
+extension HomeViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView == homeView.followingView.itemsTableView else { return }
+        
+        // If we haven't yet reached the maximum Y value for the pannable view, don't allow the table view to scroll
+        if !homeView.maxYReached {
+            scrollView.contentOffset.y = 0.0
+        }
+        
+        // If the tableview is at the top and scrolling down, stop the scrolling because this means it's time pan the view down
+        else if scrollView.contentOffset.y < 0 {
+            scrollView.contentOffset.y = 0.0
+        }
+    }
 }
 
 
@@ -68,7 +92,7 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: ClothingItemTableCellDelegate {
     func viewClothingItem(at cell: ClothingItemTableViewCell) {
         
-        guard let indexPath = homeView.followingItemsView.followingItemsTableView.indexPath(for: cell) else { return }
+        guard let indexPath = homeView.followingView.itemsTableView.indexPath(for: cell) else { return }
         
         let currentItem = followedItems[indexPath.row].1
         
@@ -80,7 +104,7 @@ extension HomeViewController: ClothingItemTableCellDelegate {
     }
     
     func favoriteItem(at cell: ClothingItemTableViewCell) {
-        guard let indexPath = homeView.followingItemsView.followingItemsTableView.indexPath(for: cell) else { return }
+        guard let indexPath = homeView.followingView.itemsTableView.indexPath(for: cell) else { return }
         guard let currentUser = configuration.currentUser else { return }
         
         let currentItem = followedItems[indexPath.row].1

@@ -32,6 +32,9 @@ class UserClothingItemTableViewCell: ClothingItemTableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        // Attempt to remove the divider between the first cell and the header
+        self.subviews.filter { $0.frame.minY == 0 && $0 != contentView }.first?.isHidden = true
+        
         userProfilePictureImageView.layer.cornerRadius = userProfilePictureImageView.frame.height / 2
     }
     

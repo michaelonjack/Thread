@@ -268,13 +268,11 @@ class User {
         var profilePictures: [UIImage?] = [profilePicture, profilePicture2, profilePicture3]
         
         if let profilePicture = profilePictures[index] {
-            print("index: \(index), cached")
             completion(profilePicture)
             return
         }
         
         else if let imageUrl = profilePictureUrls[index] {
-            print("index: \(index), not cached downloading...")
             SDWebImageManager.shared.loadImage(with: imageUrl, options: .continueInBackground, progress: nil) { (image, _, error, _, _, _) in
                 
                 if error != nil {

@@ -84,18 +84,11 @@ class HomeView: UIView {
         return sv
     }()
     
-    var followingUsersView: HomeFollowingUsersView = {
-        let v = HomeFollowingUsersView()
-        v.translatesAutoresizingMaskIntoConstraints = false
+    var followingView: HomeFollowingView = {
+        let hfv = HomeFollowingView()
+        hfv.translatesAutoresizingMaskIntoConstraints = false
         
-        return v
-    }()
-    
-    var followingItemsView: HomeFollowingItemsView = {
-        let v = HomeFollowingItemsView()
-        v.translatesAutoresizingMaskIntoConstraints = false
-        
-        return v
+        return hfv
     }()
     
     var profileButtonBottomConstraint: NSLayoutConstraint!
@@ -107,6 +100,7 @@ class HomeView: UIView {
     var animationStartY: CGFloat!
     // Y position in the frame where the animator should stop
     var animationEndY: CGFloat!
+    var maxYReached = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -148,8 +142,7 @@ class HomeView: UIView {
         addSubview(nameLabel)
         addSubview(locationLabel)
         addSubview(buttonsStackView)
-        addSubview(followingUsersView)
-        addSubview(followingItemsView)
+        addSubview(followingView)
         
         setupLayout()
     }
@@ -185,15 +178,10 @@ class HomeView: UIView {
             buttonsStackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
             buttonsStackView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.07),
             
-            followingUsersView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            followingUsersView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            followingUsersView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            followingUsersView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2),
-            
-            followingItemsView.topAnchor.constraint(equalTo: followingUsersView.bottomAnchor),
-            followingItemsView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.685),
-            followingItemsView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            followingItemsView.trailingAnchor.constraint(equalTo: trailingAnchor)
+            followingView.topAnchor.constraint(equalTo: bottomAnchor, constant: -followingView.initialVisibleHeight),
+            followingView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            followingView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            followingView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.885)
         ])
     }
     
@@ -215,7 +203,9 @@ class HomeView: UIView {
                 sself.profileButton.trailingAnchor.constraint(equalTo: sself.trailingAnchor, constant: -8),
             ])
             
-            sself.followingUsersView.backgroundColor = .white
+            sself.followingView.layer.cornerRadius = 0
+            sself.followingView.backgroundColor = .white
+            sself.followingView.usersHeaderView.backgroundColor = .white
             
             // Make the constraint changes take effect
             sself.layoutIfNeeded()
@@ -225,14 +215,10 @@ class HomeView: UIView {
     
     fileprivate func setupGestureRecognizers() {
         
-        let usersViewPanGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        usersViewPanGesture.delegate = self
+        let followingViewPanGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        followingViewPanGesture.delegate = self
         
-        let itemsViewPanGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        itemsViewPanGesture.delegate = self
-        
-        followingUsersView.addGestureRecognizer(usersViewPanGesture)
-        followingItemsView.addGestureRecognizer(itemsViewPanGesture)
+        followingView.addGestureRecognizer(followingViewPanGesture)
     }
     
     @objc func handlePan(gesture: UIPanGestureRecognizer) {
@@ -243,29 +229,37 @@ class HomeView: UIView {
             break
         case .changed:
             // Don't allow the panned view to go lower than the view's bottom
-            if followingUsersView.frame.maxY + translation.y >= frame.maxY {
+            if followingView.frame.minY + followingView.initialVisibleHeight + translation.y >= frame.maxY {
                 return
             }
             
             // Don't allow the panned view to go above the top bar
-            else if followingUsersView.frame.minY + translation.y <= animationEndY {
+            else if followingView.frame.minY + translation.y <= animationEndY {
+                maxYReached = true
                 return
             }
             
+            // Don't allow the pan to occur if we're currently scrolling the table view
+            else if followingView.itemsTableView.contentOffset.y != 0.0 {
+                gesture.setTranslation(CGPoint.zero, in: self)
+                return
+            }
+            
+            maxYReached = false
+            
             // Move the pannable views with the pan gesture
-            followingUsersView.transform = followingUsersView.transform.translatedBy(x: 0, y: translation.y)
-            followingItemsView.transform = followingItemsView.transform.translatedBy(x: 0, y: translation.y)
+            followingView.transform = followingView.transform.translatedBy(x: 0, y: translation.y)
             
             // Animate the position change of the profile picture button
-            let percentComplete = (animationStartY - followingUsersView.frame.minY) / (animationStartY - animationEndY)
+            let percentComplete = (animationStartY - followingView.frame.minY) / (animationStartY - animationEndY)
             if percentComplete >= 0 && percentComplete <= 1 {
                 profilePictureButtonAnimator.fractionComplete = percentComplete
                 
                 // Animate the shrinking of the pull indicator
-                followingUsersView.pullIndicatorTopConstraint.constant = followingUsersView.pullIndicatorTopConstant - (followingUsersView.pullIndicatorTopConstant * percentComplete)
-                followingUsersView.pullIndicatorHeightConstraint.constant = followingUsersView.pullIndicatorHeightConstant - (followingUsersView.pullIndicatorHeightConstant * percentComplete)
-                followingUsersView.pullIndicatorBottomConstraint.constant =  followingUsersView.pullIndicatorBottomConstant - (followingUsersView.pullIndicatorBottomConstant * percentComplete)
-                followingUsersView.followingUsersCollectionView.collectionViewLayout.invalidateLayout()
+                followingView.pullIndicatorTopConstraint.constant = followingView.pullIndicatorTopConstant - (followingView.pullIndicatorTopConstant * percentComplete)
+                followingView.pullIndicatorHeightConstraint.constant = followingView.pullIndicatorHeightConstant - (followingView.pullIndicatorHeightConstant * percentComplete)
+                followingView.pullIndicatorBottomConstraint.constant =  followingView.pullIndicatorBottomConstant - (followingView.pullIndicatorBottomConstant * percentComplete)
+                followingView.usersHeaderView.followingUsersCollectionView.collectionViewLayout.invalidateLayout()
             }
         default:
             break
@@ -281,12 +275,24 @@ extension HomeView: UIGestureRecognizerDelegate {
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         guard let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer else { return true }
         
-        if gestureRecognizer.view != followingUsersView && gestureRecognizer.view != followingItemsView {
+        if gestureRecognizer.view != followingView {
             return true
         }
         
+        // If we're panning on the Following Users View or the Following Items View, then the gesture only matters if it's in the vertical direction. Otherwise we might be try to open the slide out menu or trying to perform some other gesture
         let velocity = panGestureRecognizer.velocity(in: panGestureRecognizer.view)
         
         return abs(velocity.y) > abs(velocity.x)
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        let itemsTableView = followingView.itemsTableView
+        
+        if (gestureRecognizer.view == itemsTableView && otherGestureRecognizer.view == followingView)
+            || (gestureRecognizer.view == followingView && otherGestureRecognizer.view == itemsTableView) {
+            return true
+        }
+        
+        return false
     }
 }

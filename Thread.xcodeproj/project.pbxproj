@@ -16,6 +16,7 @@
 		B11CBD502205CFB200D6620B /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11CBD4F2205CFB200D6620B /* UIColor+Additions.swift */; };
 		B12B553922A73CDF004697D4 /* UserProfilePicturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12B553822A73CDF004697D4 /* UserProfilePicturesView.swift */; };
 		B12B553B22A749F3004697D4 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12B553A22A749F3004697D4 /* UserProfileView.swift */; };
+		B12DF77122C98E09004EFC79 /* HomeFollowingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DF77022C98E09004EFC79 /* HomeFollowingView.swift */; };
 		B1369CEC22652B9A0074CBFD /* ExploreLocationWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1369CEB22652B9A0074CBFD /* ExploreLocationWeatherView.swift */; };
 		B1369CEE226564480074CBFD /* ExploreLocationWeatherItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1369CED226564480074CBFD /* ExploreLocationWeatherItemView.swift */; };
 		B1377C57220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1377C56220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift */; };
@@ -68,7 +69,6 @@
 		B1C50869223410BC00534DB1 /* HomeViewController+TabbedPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C50868223410BC00534DB1 /* HomeViewController+TabbedPageView.swift */; };
 		B1C5086B223412C100534DB1 /* HomeClosetItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C5086A223412C100534DB1 /* HomeClosetItemCollectionViewCell.swift */; };
 		B1C5086D2235BD0100534DB1 /* HomeFollowingUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C5086C2235BD0100534DB1 /* HomeFollowingUsersView.swift */; };
-		B1C5086F2235C2F500534DB1 /* HomeFollowingItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C5086E2235C2F500534DB1 /* HomeFollowingItemsView.swift */; };
 		B1C508712235CD8100534DB1 /* RoundedImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C508702235CD8100534DB1 /* RoundedImageCollectionViewCell.swift */; };
 		B1C50873223AA97000534DB1 /* UserClothingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C50872223AA97000534DB1 /* UserClothingItemTableViewCell.swift */; };
 		B1C50875223AAED500534DB1 /* HomeViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C50874223AAED500534DB1 /* HomeViewController+UITableView.swift */; };
@@ -146,6 +146,7 @@
 		B11CBD4F2205CFB200D6620B /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		B12B553822A73CDF004697D4 /* UserProfilePicturesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePicturesView.swift; sourceTree = "<group>"; };
 		B12B553A22A749F3004697D4 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		B12DF77022C98E09004EFC79 /* HomeFollowingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFollowingView.swift; sourceTree = "<group>"; };
 		B1369CEB22652B9A0074CBFD /* ExploreLocationWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationWeatherView.swift; sourceTree = "<group>"; };
 		B1369CED226564480074CBFD /* ExploreLocationWeatherItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocationWeatherItemView.swift; sourceTree = "<group>"; };
 		B1377C56220E66C900C06F46 /* ClosetUpdateOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetUpdateOptionsViewController.swift; sourceTree = "<group>"; };
@@ -199,7 +200,6 @@
 		B1C50868223410BC00534DB1 /* HomeViewController+TabbedPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+TabbedPageView.swift"; sourceTree = "<group>"; };
 		B1C5086A223412C100534DB1 /* HomeClosetItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeClosetItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1C5086C2235BD0100534DB1 /* HomeFollowingUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFollowingUsersView.swift; sourceTree = "<group>"; };
-		B1C5086E2235C2F500534DB1 /* HomeFollowingItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFollowingItemsView.swift; sourceTree = "<group>"; };
 		B1C508702235CD8100534DB1 /* RoundedImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1C50872223AA97000534DB1 /* UserClothingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClothingItemTableViewCell.swift; sourceTree = "<group>"; };
 		B1C50874223AAED500534DB1 /* HomeViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+UITableView.swift"; sourceTree = "<group>"; };
@@ -452,8 +452,8 @@
 			isa = PBXGroup;
 			children = (
 				B1701B28222DF8F5009B1788 /* HomeView.swift */,
+				B12DF77022C98E09004EFC79 /* HomeFollowingView.swift */,
 				B1C5086C2235BD0100534DB1 /* HomeFollowingUsersView.swift */,
-				B1C5086E2235C2F500534DB1 /* HomeFollowingItemsView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -907,6 +907,7 @@
 				B1A11D411EFEC4AB00E16169 /* DatabaseHelper.swift in Sources */,
 				B12B553922A73CDF004697D4 /* UserProfilePicturesView.swift in Sources */,
 				B174D02E1E36DE0B00218590 /* ClothingType.swift in Sources */,
+				B12DF77122C98E09004EFC79 /* HomeFollowingView.swift in Sources */,
 				B1F6B967228F8BDD00E58CFD /* LocationViewController.swift in Sources */,
 				B1C50875223AAED500534DB1 /* HomeViewController+UITableView.swift in Sources */,
 				B1DC82752218E1C80005278D /* SlideOutMenuDelegate.swift in Sources */,
@@ -927,7 +928,6 @@
 				B1182E5C2234C251005DB4DB /* ClosetTagCollectionViewCell.swift in Sources */,
 				B157D4B122065B3900D83CDB /* UserProfileFeedView.swift in Sources */,
 				B1FE821B22093A49006AFD43 /* MainCoordinator.swift in Sources */,
-				B1C5086F2235C2F500534DB1 /* HomeFollowingItemsView.swift in Sources */,
 				B1701B0D221E49D6009B1788 /* UserMapAnnotationView.swift in Sources */,
 				B1C96A911E2C66730036E559 /* LoginViewController.swift in Sources */,
 				B159E0E1224F8BC800BCA83A /* NotificationQueue.swift in Sources */,

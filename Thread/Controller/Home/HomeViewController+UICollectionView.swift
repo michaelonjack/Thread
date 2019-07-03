@@ -10,7 +10,7 @@ import UIKit
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == homeView.followingUsersView.followingUsersCollectionView {
+        if collectionView == homeView.followingView.usersHeaderView.followingUsersCollectionView {
             guard let currentUser = configuration.currentUser else { return }
             
             let selectedUserId = currentUser.followingUserIds[indexPath.row]
@@ -23,7 +23,7 @@ extension HomeViewController: UICollectionViewDelegate {
 
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == homeView.followingUsersView.followingUsersCollectionView {
+        if collectionView == homeView.followingView.usersHeaderView.followingUsersCollectionView {
             return followingUserIds.count
         }
         
@@ -32,7 +32,7 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if collectionView == homeView.followingUsersView.followingUsersCollectionView {
+        if collectionView == homeView.followingView.usersHeaderView.followingUsersCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeFollowingUserCell", for: indexPath)
             
             guard let imageCell = cell as? RoundedImageCollectionViewCell else { return cell }
@@ -62,7 +62,7 @@ extension HomeViewController: UICollectionViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == homeView.followingUsersView.followingUsersCollectionView {
+        if collectionView == homeView.followingView.usersHeaderView.followingUsersCollectionView {
             return CGSize(width: collectionView.frame.height * 0.85, height: collectionView.frame.height * 0.85)
         }
         
@@ -70,7 +70,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if collectionView == homeView.followingUsersView.followingUsersCollectionView {
+        if collectionView == homeView.followingView.usersHeaderView.followingUsersCollectionView {
             return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         }
         

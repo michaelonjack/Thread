@@ -33,6 +33,10 @@ class ExploreViewController: UIViewController, Storyboarded {
         loadPlaces()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     fileprivate func loadPlaces() {
         getPlaces { (places) in
             configuration.places = places

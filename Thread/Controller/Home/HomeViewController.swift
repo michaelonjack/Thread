@@ -69,19 +69,19 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
         homeView.hideLocationButton.addTarget(self, action: #selector(hideUserLocation), for: .touchUpInside)
         
         // Set up the collection views for the followed users view
-        homeView.followingUsersView.followingUsersCollectionView.delegate = self
-        homeView.followingUsersView.followingUsersCollectionView.dataSource = self
+        homeView.followingView.usersHeaderView.followingUsersCollectionView.delegate = self
+        homeView.followingView.usersHeaderView.followingUsersCollectionView.dataSource = self
         
         // Set up the table view for the followed items
-        homeView.followingItemsView.followingItemsTableView.delegate = self
-        homeView.followingItemsView.followingItemsTableView.dataSource = self
+        homeView.followingView.itemsTableView.delegate = self
+        homeView.followingView.itemsTableView.dataSource = self
         
         // Set the user-specific information
         getCurrentUser { (currentUser) in
             
             // Reload the following users table view
             self.followingUserIds = currentUser.followingUserIds
-            self.homeView.followingUsersView.followingUsersCollectionView.reloadData()
+            self.homeView.followingView.usersHeaderView.followingUsersCollectionView.reloadData()
             
             // Reload the following items collection view
             currentUser.getFollowedItems(completion: { (followedItems) in
@@ -91,7 +91,7 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
                 followedItemsWithImages.shuffle()
                 
                 self.followedItems = followedItemsWithImages
-                self.homeView.followingItemsView.followingItemsTableView.reloadData()
+                self.homeView.followingView.itemsTableView.reloadData()
                 
             })
             
