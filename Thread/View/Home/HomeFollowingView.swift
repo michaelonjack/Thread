@@ -10,16 +10,6 @@ import UIKit
 
 class HomeFollowingView: UIView {
     
-    var pullIndicator: UIView = {
-        let v = UIView()
-        v.translatesAutoresizingMaskIntoConstraints = false
-        v.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
-        v.clipsToBounds = true
-        v.layer.cornerRadius = 4
-        
-        return v
-    }()
-    
     var usersHeaderView: HomeFollowingUsersView = {
         let v = HomeFollowingUsersView()
         
@@ -39,12 +29,6 @@ class HomeFollowingView: UIView {
         return tv
     }()
     
-    var pullIndicatorHeightConstraint: NSLayoutConstraint!
-    var pullIndicatorTopConstraint: NSLayoutConstraint!
-    var pullIndicatorBottomConstraint: NSLayoutConstraint!
-    var pullIndicatorHeightConstant: CGFloat = 8
-    var pullIndicatorTopConstant: CGFloat = 16
-    var pullIndicatorBottomConstant: CGFloat = 8
     var cornerRadiusSet = false
     
     var initialVisibleHeight: CGFloat!
@@ -76,7 +60,8 @@ class HomeFollowingView: UIView {
         backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
         clipsToBounds = true
         
-        addSubview(pullIndicator)
+        itemsTableView.tableHeaderView = usersHeaderView
+        
         addSubview(itemsTableView)
         
         setupLayout()
@@ -88,22 +73,13 @@ class HomeFollowingView: UIView {
         let labelHeight: CGFloat =  boundingBox.height
         let labelTopSpacing: CGFloat = 8
         
-        initialVisibleHeight = pullIndicatorHeightConstant + pullIndicatorTopConstant + pullIndicatorBottomConstant + 150 - labelHeight - labelTopSpacing
+        initialVisibleHeight = usersHeaderView.height - labelHeight - labelTopSpacing
     }
     
     fileprivate func setupLayout() {
         
-        pullIndicatorHeightConstraint = pullIndicator.heightAnchor.constraint(equalToConstant: pullIndicatorHeightConstant)
-        pullIndicatorTopConstraint = pullIndicator.topAnchor.constraint(equalTo: topAnchor, constant: pullIndicatorTopConstant)
-        pullIndicatorBottomConstraint = itemsTableView.topAnchor.constraint(equalTo: pullIndicator.bottomAnchor, constant: pullIndicatorBottomConstant)
-        
         NSLayoutConstraint.activate([
-            pullIndicatorTopConstraint,
-            pullIndicatorHeightConstraint,
-            pullIndicator.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25),
-            pullIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-            
-            pullIndicatorBottomConstraint,
+            itemsTableView.topAnchor.constraint(equalTo: topAnchor),
             itemsTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             itemsTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             itemsTableView.bottomAnchor.constraint(equalTo: bottomAnchor)

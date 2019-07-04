@@ -256,10 +256,12 @@ class HomeView: UIView {
                 profilePictureButtonAnimator.fractionComplete = percentComplete
                 
                 // Animate the shrinking of the pull indicator
-                followingView.pullIndicatorTopConstraint.constant = followingView.pullIndicatorTopConstant - (followingView.pullIndicatorTopConstant * percentComplete)
-                followingView.pullIndicatorHeightConstraint.constant = followingView.pullIndicatorHeightConstant - (followingView.pullIndicatorHeightConstant * percentComplete)
-                followingView.pullIndicatorBottomConstraint.constant =  followingView.pullIndicatorBottomConstant - (followingView.pullIndicatorBottomConstant * percentComplete)
-                followingView.usersHeaderView.followingUsersCollectionView.collectionViewLayout.invalidateLayout()
+                if let followingTableHeaderView = followingView.itemsTableView.tableHeaderView as? HomeFollowingUsersView {
+                    followingTableHeaderView.pullIndicatorTopConstraint.constant = followingTableHeaderView.pullIndicatorTopConstant - (followingTableHeaderView.pullIndicatorTopConstant * percentComplete)
+                    followingTableHeaderView.pullIndicatorHeightConstraint.constant = followingTableHeaderView.pullIndicatorHeightConstant - (followingTableHeaderView.pullIndicatorHeightConstant * percentComplete)
+                    followingTableHeaderView.pullIndicatorBottomConstraint.constant =  followingTableHeaderView.pullIndicatorBottomConstant - (followingTableHeaderView.pullIndicatorBottomConstant * percentComplete)
+                    followingView.usersHeaderView.followingUsersCollectionView.collectionViewLayout.invalidateLayout()
+                }
             }
         default:
             break

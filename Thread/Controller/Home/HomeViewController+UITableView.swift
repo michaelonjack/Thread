@@ -15,14 +15,6 @@ extension HomeViewController: UITableViewDelegate {
         
         coordinator?.viewCloset(forUser: itemOwner, initialIndex: currentItem.type.rawValue)
     }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return homeView.followingView.usersHeaderView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 150
-    }
 }
 
 

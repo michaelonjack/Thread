@@ -10,6 +10,16 @@ import UIKit
 
 class HomeFollowingUsersView: UIView {
     
+    var pullIndicator: UIView = {
+        let v = UIView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
+        v.clipsToBounds = true
+        v.layer.cornerRadius = 4
+        
+        return v
+    }()
+    
     var followingLabel: UILabel = {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
@@ -65,6 +75,15 @@ class HomeFollowingUsersView: UIView {
         return l
     }()
     
+    var pullIndicatorHeightConstraint: NSLayoutConstraint!
+    var pullIndicatorTopConstraint: NSLayoutConstraint!
+    var pullIndicatorBottomConstraint: NSLayoutConstraint!
+    var pullIndicatorHeightConstant: CGFloat = 8
+    var pullIndicatorTopConstant: CGFloat = 16
+    var pullIndicatorBottomConstant: CGFloat = 8
+    lazy var pullIndicatorSpace: CGFloat = pullIndicatorHeightConstant + pullIndicatorTopConstant + pullIndicatorBottomConstant
+    lazy var height: CGFloat = 150 + pullIndicatorSpace
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -80,6 +99,9 @@ class HomeFollowingUsersView: UIView {
     fileprivate func setupView() {
         backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
         
+        frame = CGRect(x: 0, y: 0, width: frame.width, height: height)
+        
+        addSubview(pullIndicator)
         addSubview(followingLabel)
         addSubview(followingUsersCollectionView)
         addSubview(divider)
@@ -90,9 +112,19 @@ class HomeFollowingUsersView: UIView {
     }
     
     fileprivate func setupLayout() {
+        
+        pullIndicatorHeightConstraint = pullIndicator.heightAnchor.constraint(equalToConstant: pullIndicatorHeightConstant)
+        pullIndicatorTopConstraint = pullIndicator.topAnchor.constraint(equalTo: topAnchor, constant: pullIndicatorTopConstant)
+        pullIndicatorBottomConstraint = followingLabel.topAnchor.constraint(equalTo: pullIndicator.bottomAnchor, constant: pullIndicatorBottomConstant)
+        
         NSLayoutConstraint.activate([
-            followingLabel.topAnchor.constraint(equalTo: topAnchor),
-            followingLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            pullIndicatorTopConstraint,
+            pullIndicatorHeightConstraint,
+            pullIndicator.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25),
+            pullIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            pullIndicatorBottomConstraint,
+            followingLabel.leadingAnchor.constraint(lessThanOrEqualTo: leadingAnchor, constant: 16),
             followingLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             followingUsersCollectionView.topAnchor.constraint(equalTo: followingLabel.bottomAnchor),
