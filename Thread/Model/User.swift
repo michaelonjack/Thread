@@ -264,8 +264,8 @@ class User {
     }
     
     func getProfilePicture(index: Int = 0, completion: @escaping (UIImage?) -> Void) {
-        var profilePictureUrls: [URL?] = [profilePictureUrl, profilePictureUrl2, profilePictureUrl3]
-        var profilePictures: [UIImage?] = [profilePicture, profilePicture2, profilePicture3]
+        let profilePictureUrls: [URL?] = [profilePictureUrl, profilePictureUrl2, profilePictureUrl3]
+        let profilePictures: [UIImage?] = [profilePicture, profilePicture2, profilePicture3]
         
         if let profilePicture = profilePictures[index] {
             completion(profilePicture)
