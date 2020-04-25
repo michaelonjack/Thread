@@ -25,6 +25,10 @@ class HomeViewController: SlideOutMenuViewController, Storyboarded {
     var isCheckingIn = false
     let locationManager = CLLocationManager()
     
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

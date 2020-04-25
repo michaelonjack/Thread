@@ -51,7 +51,7 @@ class HomeFollowingView: UIView {
         if !cornerRadiusSet {
             cornerRadiusSet = true
             
-            layer.cornerRadius = frame.height / 10
+            layer.cornerRadius = frame.height / 16
             layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         }
     }

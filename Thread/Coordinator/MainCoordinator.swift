@@ -29,6 +29,7 @@ class MainCoordinator: Coordinator {
             childCoordinators.append(activeUserCoordinator)
             activeUserCoordinator.start()
             
+            activeUserCoordinator.navigationController.modalPresentationStyle = .fullScreen
             navigationController.present(activeUserCoordinator.navigationController, animated: true)
         }
     }
@@ -46,6 +47,7 @@ class MainCoordinator: Coordinator {
             
             DispatchQueue.global().async {
                 DispatchQueue.main.async {
+                    activeUserCoordinator.navigationController.modalPresentationStyle = .fullScreen
                     self.navigationController.present(activeUserCoordinator.navigationController, animated: false, completion: {
                         launchScreenView.removeFromSuperview()
                     })

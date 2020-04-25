@@ -19,6 +19,10 @@ class ExploreViewController: UIViewController, Storyboarded {
     
     var searchResults: [Place] = []
     
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

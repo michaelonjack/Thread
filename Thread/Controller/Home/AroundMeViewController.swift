@@ -15,6 +15,10 @@ class AroundMeViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var aroundMeView: AroundMeView!
     
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
