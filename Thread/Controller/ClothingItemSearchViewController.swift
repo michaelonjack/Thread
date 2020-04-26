@@ -64,6 +64,10 @@ class ClothingItemSearchViewController: UIViewController, Storyboarded {
             
             DispatchQueue.main.async {
                 self.resultsTable.reloadData()
+                
+                if self.searchResults.count > 0 {
+                    self.resultsTable.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                }
             }
         }
     }
